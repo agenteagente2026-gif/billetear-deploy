@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Noticias económicas Argentina hoy | Dólar, inflación, mercados – BilleteAR</title>
+  <meta name="description" content="Últimas noticias económicas de Argentina: dólar, inflación, mercados, política económica. Infobae, Ámbito y más fuentes actualizadas al minuto." />
+  <meta name="keywords" content="noticias economia argentina, noticias dolar hoy, inflacion argentina noticias, mercados argentina" />
+  <meta property="og:title" content="Noticias económicas Argentina hoy – BilleteAR" />
+  <meta property="og:description" content="Últimas noticias: dólar, inflación, mercados. Fuentes: Infobae, Ámbito, BBC." />
+  <meta property="og:url" content="https://pulsoar.netlify.app/noticias.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href="https://pulsoar.netlify.app/noticias.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b0f1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BilleteAR" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569;--purple:#a78bfa}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    /* Ticker */
+    .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
+    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+    .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
+    .ticker::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
+    .ticker-track{display:inline-flex;animation:ticker 60s linear infinite}
+    .ticker-track:hover{animation-play-state:paused}
+    .t-item{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:.76rem;border-right:1px solid var(--border)}
+    .t-name{color:var(--muted)}.t-price{font-weight:600}
+    .up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--sky)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    /* Header */
+    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:18px;height:18px}
+    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo-text em{color:var(--sky);font-style:normal}
+    .nav-right{display:flex;align-items:center;gap:14px}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
+    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
+    .btn:hover{border-color:var(--sky);color:var(--sky)}
+    /* Topnav */
+    .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .topnav::-webkit-scrollbar{display:none}
+    .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .topnav-link:hover{color:var(--text);border-color:var(--border2)}
+    .topnav-link.active{color:var(--sky);border-color:var(--sky)}
+    /* Main */
+    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
+    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+    .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sec-line{flex:1;height:1px;background:var(--border)}
+    /* Status bar */
+    .status-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.5rem}
+    .news-count{font-size:.78rem;color:var(--muted)}
+    .news-count strong{color:var(--text2)}
+    /* Filter tabs */
+    .filter-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.4rem}
+    .filter-tab{background:var(--card);border:1px solid var(--border);padding:6px 16px;border-radius:20px;font:500 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:5px}
+    .filter-tab:hover{border-color:var(--border2);color:var(--text)}
+    .filter-tab.active{background:rgba(56,189,248,.12);border-color:var(--sky);color:var(--sky)}
+    .filter-tab .count{background:var(--card2);border-radius:10px;padding:1px 6px;font-size:.68rem;color:var(--muted)}
+    .filter-tab.active .count{background:rgba(56,189,248,.2);color:var(--sky)}
+    /* Featured */
+    .news-featured{background:linear-gradient(135deg,var(--card2),var(--card));border:1px solid var(--border2);border-radius:18px;padding:1.8rem;text-decoration:none;color:inherit;display:block;margin-bottom:1.5rem;transition:all .2s;position:relative;overflow:hidden}
+    .news-featured::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.07),transparent 70%);pointer-events:none}
+    .news-featured:hover{border-color:var(--sky);transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,.4)}
+    .nf-badge{display:inline-flex;align-items:center;gap:5px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sky);background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);padding:3px 10px;border-radius:20px;margin-bottom:.8rem}
+    .nf-title{font-size:1.2rem;font-weight:700;color:var(--text);line-height:1.4;margin-bottom:.6rem}
+    .nf-meta{display:flex;align-items:center;gap:10px;font-size:.73rem;color:var(--muted);flex-wrap:wrap}
+    .nf-src{color:var(--sky2)}
+    .tag{display:inline-block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:20px}
+    .tag.ar{background:rgba(56,189,248,.1);color:var(--sky);border:1px solid rgba(56,189,248,.2)}
+    .tag.mundo{background:rgba(167,139,250,.1);color:var(--purple);border:1px solid rgba(167,139,250,.2)}
+    .tag.mercados{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
+    /* Grid */
+    .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(275px,1fr));gap:.9rem}
+    .news-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;transition:all .2s;display:flex;flex-direction:column;gap:.35rem}
+    .news-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.3)}
+    .nc-top{display:flex;align-items:center;justify-content:space-between;gap:.4rem;margin-bottom:.1rem}
+    .nc-src{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--sky)}
+    .nc-src.mundo{color:var(--purple)}
+    .nc-src.mercados{color:var(--orange)}
+    .nc-title{font-size:.9rem;font-weight:500;color:var(--text2);line-height:1.5;flex:1}
+    .nc-date{font-size:.69rem;color:var(--muted2);margin-top:.2rem}
+    /* Empty state */
+    .empty-state{grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)}
+    .empty-icon{font-size:2.5rem;margin-bottom:.8rem}
+    .empty-msg{font-size:.9rem}
+    /* Loading state */
+    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    /* Sources bar */
+    .sources-bar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:.9rem 1.2rem;margin-bottom:1.4rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;font-size:.73rem;color:var(--muted)}
+    .sources-bar strong{color:var(--text2)}
+    .src-dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block}
+    .src-dot.loading{background:var(--orange);animation:livepulse 1s infinite}
+    footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
+    footer a{color:var(--sky);text-decoration:none}
+  </style>
+</head>
+<body>
+
+<div class="ticker"><div class="ticker-track" id="tickerTrack"><span class="t-item"><span class="t-name">Cargando...</span></span></div></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+      <span class="logo-text">Billete<em>AR</em></span>
+    </a>
+    <div class="nav-right">
+      <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Cargando...</span></div>
+      <button class="btn" onclick="loadNews(true)">↻ Actualizar</button>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-link" href="index.html">🏠 Inicio</a>
+    <a class="topnav-link" href="dolares.html">💵 Dólares</a>
+    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
+    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
+    <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
+    <a class="topnav-link active" href="noticias.html">📰 Noticias</a>
+  </div>
+</nav>
+
+<main>
+  <div class="section">
+    <div class="sec-header"><span class="sec-title">Últimas noticias</span><div class="sec-line"></div></div>
+
+    <div class="sources-bar" id="sourcesBar">
+      <strong>Fuentes:</strong>
+      <span><span class="src-dot loading" id="dot1"></span> Google News AR</span>
+      <span><span class="src-dot loading" id="dot2"></span> Mercados globales</span>
+      <span><span class="src-dot loading" id="dot3"></span> Infobae</span>
+      <span><span class="src-dot loading" id="dot4"></span> Ámbito</span>
+      <span><span class="src-dot loading" id="dot5"></span> BBC Mundo</span>
+    </div>
+
+    <div class="filter-tabs" id="filterTabs">
+      <button class="filter-tab active" onclick="applyFilter('todas',this)">Todas <span class="count" id="cntTodas">–</span></button>
+      <button class="filter-tab" onclick="applyFilter('AR',this)">🇦🇷 Argentina <span class="count" id="cntAr">–</span></button>
+      <button class="filter-tab" onclick="applyFilter('MERCADOS',this)">📈 Mercados <span class="count" id="cntMercados">–</span></button>
+      <button class="filter-tab" onclick="applyFilter('MUNDO',this)">🌐 Mundo <span class="count" id="cntMundo">–</span></button>
+    </div>
+
+    <div id="featuredWrap"></div>
+
+    <div class="news-grid" id="newsGrid">
+      <!-- skeletons -->
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.55rem;width:55px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:80%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:60%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:45%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.55rem;width:55px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:80%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:60%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:45%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.55rem;width:55px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:80%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:60%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:45%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.55rem;width:55px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:80%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:60%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:45%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.55rem;width:55px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:80%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:60%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:45%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.55rem;width:55px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:80%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:60%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:45%"></div></div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div><strong>BilleteAR</strong> · Google News · Infobae · Ámbito · BBC Mundo</div>
+  <div>Las noticias enlazan a sus fuentes originales · Se actualiza cada 5 min</div>
+</footer>
+
+<script>
+/* ── Utils ── */
+const q = id => document.getElementById(id);
+
+async function fetchText(url) {
+  // Intentamos 3 proxies distintos en orden
+  const proxies = [
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+    `https://corsproxy.io/?url=${encodeURIComponent(url)}`,
+    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  ];
+  for (const u of proxies) {
+    try {
+      const ctrl = new AbortController();
+      const tid  = setTimeout(() => ctrl.abort(), 9000);
+      const r    = await fetch(u, { signal: ctrl.signal });
+      clearTimeout(tid);
+      if (r.ok) {
+        const txt = await r.text();
+        if (txt && txt.length > 50) return txt; // texto real
+      }
+    } catch { continue; }
+  }
+  return null;
+}
+
+async function fetchJSON(url) {
+  const proxies = [url, `https://corsproxy.io/?url=${encodeURIComponent(url)}`, `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
+  for (const u of proxies) {
+    try {
+      const ctrl = new AbortController();
+      const tid  = setTimeout(() => ctrl.abort(), 7000);
+      const r    = await fetch(u, { signal: ctrl.signal });
+      clearTimeout(tid);
+      if (r.ok) return await r.json();
+    } catch { continue; }
+  }
+  return null;
+}
+
+/* ── Auto-clasificar noticia por palabras clave en el título ── */
+function classify(title) {
+  const t = (title || '').toLowerCase();
+  const AR = ['argentina','dólar','dollar','bcra','milei','inflaci','peso arg','corralito','cepo','indec','merval','anses','pami','kirchner','macri','kicillof','conicet','ypf','vaca muerta','patagonia','buenos aires','córdoba','rosario','mendoza','neuquén','lacunza','caputo','bausili','banco nacion'];
+  const MK = ['bitcoin','btc','ethereum','eth','cripto','crypto','nasdaq','wall street','s&p 500','dow jones','bolsa','acciones','mercado financ','fed ','federal reserve','tasas','bonos del tesoro','oil ','petróleo','brent','oro ','gold ','fx ','forex','ipo ','trading','hedge fund','rally','bear market','bull market','meli','globant','aapl','nvidia','tesla','amazon'];
+  if (AR.some(w => t.includes(w))) return 'AR';
+  if (MK.some(w => t.includes(w))) return 'MERCADOS';
+  return 'MUNDO';
+}
+
+/* ── Parsear RSS XML ── */
+function parseRSS(xml, sourceName) {
+  try {
+    const doc   = new DOMParser().parseFromString(xml, 'text/xml');
+    const items = [...doc.querySelectorAll('item')];
+    return items.slice(0, 8).map(item => {
+      const rawTitle = item.querySelector('title')?.textContent || '';
+      const title = rawTitle
+        .replace(/<!\[CDATA\[|\]\]>/g, '')
+        .replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
+        .split(' - ')[0].trim();
+
+      // Google News pone el link como nodo texto después de <link>
+      let link = '';
+      const linkEl = item.querySelector('link');
+      if (linkEl) {
+        link = (linkEl.nextSibling?.nodeValue || '').trim()
+             || linkEl.textContent?.trim() || '';
+      }
+      const pub = item.querySelector('pubDate')?.textContent || '';
+      return { title, link, pubDate: pub, src: sourceName, tag: classify(title) };
+    }).filter(i => i.title && i.title.length > 10);
+  } catch { return []; }
+}
+
+/* ═══════════════════════════════════════════════════
+   FUENTES RSS
+   Usamos SOLO Google News (muy confiable vía proxy)
+   más algunos medios directos como refuerzo.
+═══════════════════════════════════════════════════ */
+const SOURCES = [
+  // Google News — búsquedas específicas AR
+  { url: 'https://news.google.com/rss/search?q=economia+argentina+dolar+bcra+milei&hl=es-419&gl=AR&ceid=AR:es-419', name: 'Google News', dot: 'dot1' },
+  { url: 'https://news.google.com/rss/search?q=inflacion+argentina+indec+presupuesto&hl=es-419&gl=AR&ceid=AR:es-419', name: 'Google News', dot: 'dot1' },
+  { url: 'https://news.google.com/rss/search?q=merval+acciones+argentina+bolsa+bonos&hl=es-419&gl=AR&ceid=AR:es-419', name: 'Google News', dot: 'dot1' },
+  // Google News — mercados globales
+  { url: 'https://news.google.com/rss/search?q=bitcoin+ethereum+crypto+mercado&hl=es-419&gl=AR&ceid=AR:es-419', name: 'Google News', dot: 'dot2' },
+  { url: 'https://news.google.com/rss/search?q=wall+street+nasdaq+fed+acciones&hl=es-419&gl=AR&ceid=AR:es-419', name: 'Google News', dot: 'dot2' },
+  { url: 'https://news.google.com/rss/search?q=economia+mundial+china+europa+recesion&hl=es-419&gl=AR&ceid=AR:es-419', name: 'Google News', dot: 'dot2' },
+  // Medios argentinos directos (pueden fallar CORS, se intenta igual)
+  { url: 'https://www.infobae.com/feeds/rss/economia/', name: 'Infobae', dot: 'dot3' },
+  { url: 'https://www.ambito.com/rss/pages/economia.xml', name: 'Ámbito', dot: 'dot4' },
+  { url: 'https://feeds.bbci.co.uk/mundo/rss.xml', name: 'BBC Mundo', dot: 'dot5' },
+];
+
+let allNews    = [];
+let activeTag  = 'todas';
+
+/* ── Render ── */
+function renderNews(items) {
+  if (!items.length) {
+    q('featuredWrap').innerHTML = '';
+    q('newsGrid').innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-msg">No hay noticias para este filtro en este momento.</div></div>`;
+    return;
+  }
+
+  const [top, ...rest] = items;
+  const topTag = top.tag.toLowerCase();
+  const topDate = top.pubDate
+    ? new Date(top.pubDate).toLocaleDateString('es-AR', { weekday:'long', day:'numeric', month:'long', hour:'2-digit', minute:'2-digit' })
+    : '';
+
+  q('featuredWrap').innerHTML = `
+    <a class="news-featured" href="${top.link||'#'}" target="_blank" rel="noopener noreferrer">
+      <div class="nf-badge">⭐ Destacada</div>
+      <div class="nf-title">${top.title}</div>
+      <div class="nf-meta">
+        <span class="nf-src">${top.src}</span>
+        <span class="tag ${topTag}">${top.tag}</span>
+        <span>${topDate}</span>
+      </div>
+    </a>`;
+
+  q('newsGrid').innerHTML = rest.slice(0, 24).map(item => {
+    const tc = item.tag.toLowerCase();
+    const date = item.pubDate
+      ? new Date(item.pubDate).toLocaleDateString('es-AR', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
+      : '';
+    return `<a class="news-card" href="${item.link||'#'}" target="_blank" rel="noopener noreferrer">
+      <div class="nc-top">
+        <span class="nc-src ${tc}">${item.src}</span>
+        <span class="tag ${tc}">${item.tag}</span>
+      </div>
+      <div class="nc-title">${item.title}</div>
+      <div class="nc-date">${date}</div>
+    </a>`;
+  }).join('');
+}
+
+function applyFilter(tag, btn) {
+  activeTag = tag;
+  document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = tag === 'todas' ? allNews : allNews.filter(n => n.tag === tag);
+  renderNews(filtered);
+}
+
+function updateCounts() {
+  q('cntTodas').textContent    = allNews.length;
+  q('cntAr').textContent       = allNews.filter(n=>n.tag==='AR').length;
+  q('cntMercados').textContent = allNews.filter(n=>n.tag==='MERCADOS').length;
+  q('cntMundo').textContent    = allNews.filter(n=>n.tag==='MUNDO').length;
+}
+
+/* ── Fetch noticias ── */
+async function loadNews(manual = false) {
+  if (manual) q('lastUpdate').textContent = 'Actualizando...';
+
+  // Fetch todas las fuentes en paralelo
+  const results = await Promise.allSettled(
+    SOURCES.map(async src => {
+      const xml = await fetchText(src.url);
+      if (!xml) return { src: src.name, items: [], ok: false, dot: src.dot };
+      const items = parseRSS(xml, src.name);
+      return { src: src.name, items, ok: items.length > 0, dot: src.dot };
+    })
+  );
+
+  // Actualizar indicadores de fuente
+  const dotStatus = {};
+  results.forEach(r => {
+    if (r.status === 'fulfilled') {
+      const { dot, ok } = r.value;
+      if (!(dot in dotStatus)) dotStatus[dot] = ok;
+      else dotStatus[dot] = dotStatus[dot] || ok;
+    }
+  });
+  Object.entries(dotStatus).forEach(([id, ok]) => {
+    const el = q(id);
+    if (el) { el.classList.remove('loading'); el.style.background = ok ? 'var(--green)' : 'var(--red)'; }
+  });
+
+  // Juntar y deduplicar
+  const flat = results.flatMap(r => r.status === 'fulfilled' ? r.value.items : []);
+  const seen = new Set();
+  allNews = flat
+    .filter(i => {
+      const key = i.title.slice(0, 60);
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
+    .sort((a, b) => new Date(b.pubDate || 0) - new Date(a.pubDate || 0));
+
+  if (allNews.length === 0) {
+    q('lastUpdate').textContent = 'Sin conexión';
+    q('featuredWrap').innerHTML = '';
+    q('newsGrid').innerHTML = `<div class="empty-state"><div class="empty-icon">⚠️</div><div class="empty-msg">No se pudo cargar ninguna fuente. Verificá tu conexión.</div></div>`;
+    return;
+  }
+
+  updateCounts();
+  const filtered = activeTag === 'todas' ? allNews : allNews.filter(n => n.tag === activeTag);
+  renderNews(filtered);
+  q('lastUpdate').textContent = 'En vivo · ' + new Date().toLocaleTimeString('es-AR', { hour:'2-digit', minute:'2-digit' });
+
+  // Ticker desde dólares
+  fetchJSON('https://dolarapi.com/v1/dolares').then(data => {
+    if (!data) return;
+    const html = data.map(d => `<span class="t-item"><span class="t-name">USD ${d.nombre}</span><span class="t-price neu">$\u202f${Number(d.venta).toLocaleString('es-AR')}</span></span>`).join('');
+    q('tickerTrack').innerHTML = html + html;
+  }).catch(() => {});
+}
+
+loadNews();
+setInterval(() => loadNews(), 5 * 60 * 1000);
+
+// PWA: register service worker
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
+</script>
+</body>
+</html>

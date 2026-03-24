@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dólar Blue hoy | MEP, CCL y Oficial en tiempo real – BilleteAR</title>
+  <meta name="description" content="Precio del dólar blue hoy, MEP, CCL, oficial y cripto en tiempo real. Compra y venta actualizados al minuto. Argentina." />
+  <meta name="keywords" content="dolar blue hoy, precio dolar mep, dolar ccl, dolar oficial, tipo de cambio argentina, dolar cripto" />
+  <meta property="og:title" content="Dólar Blue hoy | MEP, CCL y Oficial – BilleteAR" />
+  <meta property="og:description" content="Precio del dólar blue, MEP, CCL y oficial en tiempo real. Argentina." />
+  <meta property="og:url" content="https://pulsoar.netlify.app/dolares.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Dólar Blue hoy | MEP y CCL – BilleteAR" />
+  <meta name="twitter:description" content="Precio actualizado del dólar blue, MEP, CCL y oficial. Argentina." />
+  <link rel="canonical" href="https://pulsoar.netlify.app/dolares.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b0f1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BilleteAR" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
+    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+    .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
+    .ticker::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
+    .ticker-track{display:inline-flex;animation:ticker 60s linear infinite}
+    .ticker-track:hover{animation-play-state:paused}
+    .t-item{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:.76rem;border-right:1px solid var(--border)}
+    .t-name{color:var(--muted)}.t-price{font-weight:600}
+    .up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--sky)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:18px;height:18px}
+    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo-text em{color:var(--sky);font-style:normal}
+    .nav-right{display:flex;align-items:center;gap:14px}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
+    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
+    .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .topnav::-webkit-scrollbar{display:none}
+    .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .topnav-link:hover{color:var(--text);border-color:var(--border2)}
+    .topnav-link.active{color:var(--sky);border-color:var(--sky)}
+    .subnav{background:rgba(20,30,48,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .subnav::-webkit-scrollbar{display:none}
+    .subnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .subnav-link{padding:7px 14px;font-size:.78rem;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .subnav-link:hover,.subnav-link.active{color:var(--sky);border-color:var(--sky)}
+    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
+    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+    .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sec-line{flex:1;height:1px;background:var(--border)}
+
+    /* ── Hero ── */
+    .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1rem}
+    @media(max-width:700px){.hero-grid{grid-template-columns:1fr}}
+    .hero-card{background:linear-gradient(135deg,#0f2a5a 0%,#091730 100%);border:1px solid rgba(56,189,248,.25);border-radius:20px;padding:2rem;position:relative;overflow:hidden}
+    .hero-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(56,189,248,.12) 0%,transparent 70%);pointer-events:none}
+    .hero-badge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sky);background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);padding:3px 10px;border-radius:20px;margin-bottom:.75rem}
+    .hero-name{font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:1.4rem}
+    .hero-prices{display:flex;gap:2.5rem;flex-wrap:wrap}
+    .hp .lbl{font-size:.65rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+    .hp .val{font-size:2.8rem;font-weight:700;line-height:1}
+    .hp.buy .val{color:#7dd3fc}.hp.sell .val{color:var(--sky)}
+    .hero-right{display:flex;flex-direction:column;gap:.75rem}
+    .mini{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.95rem 1.1rem;display:flex;align-items:center;justify-content:space-between;transition:all .2s;flex:1}
+    .mini:hover{border-color:var(--border2);transform:translateX(2px)}
+    .mini-left .lbl{font-size:.66rem;color:var(--muted);margin-bottom:2px}
+    .mini-left .name{font-size:.92rem;font-weight:600}
+    .mini-right{text-align:right}
+    .mini-right .buy2{font-size:.73rem;color:var(--muted);margin-bottom:2px}
+    .mini-right .sell2{font-size:1.25rem;font-weight:700;color:var(--sky)}
+
+    /* ── Exchange grid (todos los cambios) ── */
+    .ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.8rem}
+    .ex-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;transition:all .2s}
+    .ex-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .ex-name{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.6rem}
+    .ex-row{display:flex;justify-content:space-between}
+    .ex-side .l{font-size:.62rem;color:var(--muted2);margin-bottom:2px}
+    .ex-side .v{font-size:1rem;font-weight:700}
+    .ex-side .v.b{color:var(--text2)}.ex-side .v.s{color:var(--sky)}
+    .spread-tag{display:inline-block;font-size:.61rem;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:2px 7px;margin-top:.5rem}
+
+    /* ── Detail expandable cards ── */
+    .detail-section{margin-top:1.2rem}
+    .detail-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1rem}
+    .detail-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;cursor:pointer;user-select:none;transition:background .15s}
+    .detail-header:hover{background:var(--card2)}
+    .detail-title{display:flex;align-items:center;gap:10px}
+    .detail-icon{font-size:1.1rem}
+    .detail-name{font-size:.95rem;font-weight:700}
+    .detail-price{font-size:1rem;font-weight:700;color:var(--sky)}
+    .detail-chevron{color:var(--muted);transition:transform .25s;font-size:.85rem}
+    .detail-body{display:none;border-top:1px solid var(--border)}
+    .detail-body.open{display:block}
+
+    /* ── Exchange table ── */
+    .exch-table{width:100%;border-collapse:collapse}
+    .exch-table th{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:.65rem 1.2rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card2)}
+    .exch-table td{padding:.7rem 1.2rem;border-bottom:1px solid var(--border);font-size:.87rem;transition:background .12s}
+    .exch-table tr:last-child td{border-bottom:none}
+    .exch-table tr:hover td{background:var(--card2)}
+    .exch-name{font-weight:600;color:var(--text2)}
+    .exch-buy{color:var(--text2)}
+    .exch-sell{color:var(--sky);font-weight:700}
+    .exch-spread{font-size:.75rem;color:var(--muted)}
+    .exch-time{font-size:.68rem;color:var(--muted2)}
+    .best-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+    .worst-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.25);padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+    .exch-loading{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem}
+
+    /* ── MEP/CCL explainer ── */
+    .mep-explainer{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:1rem;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem 1.2rem}
+    .mep-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem}
+    .mep-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.3rem;transition:all .2s}
+    .mep-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .mep-card-name{font-size:.88rem;font-weight:700;margin-bottom:.3rem}
+    .mep-card-desc{font-size:.73rem;color:var(--muted);line-height:1.45;margin-bottom:.9rem}
+    .mep-card-prices{display:flex;justify-content:space-between;padding-top:.7rem;border-top:1px solid var(--border)}
+    .mep-side .ml{font-size:.61rem;color:var(--muted2);margin-bottom:2px}
+    .mep-side .mv{font-size:1.1rem;font-weight:700}
+    .mep-side .mv.b{color:var(--text2)}.mep-side .mv.s{color:var(--sky)}
+    /* ── Diarios ── */
+    .diarios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem}
+    .diario-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;transition:all .2s}
+    .diario-card:hover{border-color:var(--border2)}
+    .diario-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.6rem}
+    .diario-row{display:flex;justify-content:space-between}
+    .diario-side .dl{font-size:.62rem;color:var(--muted2);margin-bottom:2px}
+    .diario-side .dv{font-size:1rem;font-weight:700}
+    .diario-side .dv.b{color:var(--text2)}.diario-side .dv.s{color:var(--sky)}
+
+    /* ── Chart ── */
+    .chart-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem}
+    .chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+    .chart-title{font-size:1rem;font-weight:700}
+    .chart-sub{font-size:.73rem;color:var(--muted);margin-top:2px}
+    .chart-stat .val{font-size:1.6rem;font-weight:700;color:var(--sky);text-align:right}
+    .chart-stat .lbl{font-size:.65rem;color:var(--muted);text-align:right}
+    .chart-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+    .chart-tab{background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:8px;font:600 .75rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .chart-tab.active,.chart-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
+    .chart-wrap{height:260px;position:relative}
+
+    /* ── Skel ── */
+    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+    footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
+    footer a{color:var(--sky);text-decoration:none}
+    @media(max-width:480px){.hp .val{font-size:2rem}}
+
+    /* ── Sparklines ── */
+    .spark-wrap{display:flex;align-items:center;gap:8px;margin-top:.9rem;padding-top:.9rem;border-top:1px solid rgba(255,255,255,.07)}
+    .spark-delta{font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px}
+    .spark-delta.up{color:#22c55e;background:rgba(34,197,94,.12)}
+    .spark-delta.down{color:#ef4444;background:rgba(239,68,68,.1)}
+    .spark-delta.neu{color:var(--muted);background:var(--card2)}
+
+    /* ── Copy button ── */
+    .copy-btn{background:none;border:none;cursor:pointer;color:var(--muted);font-size:.8rem;padding:3px 6px;border-radius:6px;transition:all .15s;vertical-align:middle}
+    .copy-btn:hover{color:var(--sky);background:rgba(56,189,248,.1)}
+    .copy-toast{position:fixed;bottom:1.8rem;left:50%;transform:translateX(-50%) translateY(10px);background:#1a2540;border:1px solid var(--border2);color:var(--text);padding:.5rem 1.3rem;border-radius:10px;font-size:.82rem;font-weight:500;opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:9999}
+    .copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    /* ── Calculadora bidireccional ── */
+    .calc-section{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.6rem}
+    .calc-row{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:end;margin-bottom:1rem}
+    @media(max-width:600px){.calc-row{grid-template-columns:1fr;gap:.7rem}.calc-arrow{display:none}}
+    .calc-field label{display:block;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.45rem}
+    .calc-field input{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:.65rem .9rem;color:var(--text);font:600 1.1rem 'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+    .calc-field input:focus{border-color:var(--sky)}
+    .calc-field input::placeholder{color:var(--muted2);font-weight:400}
+    .calc-arrow{color:var(--muted);font-size:1.4rem;padding-bottom:.5rem;text-align:center}
+    .calc-select-wrap{margin-bottom:.4rem}
+    .calc-select-wrap label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.45rem;display:block}
+    .calc-select{width:100%;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:.55rem .9rem;color:var(--text);font:500 .88rem 'DM Sans',sans-serif;outline:none;cursor:pointer}
+    .calc-select:focus{border-color:var(--sky)}
+    .calc-result{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.2rem;min-height:1.2em}
+    .calc-result strong{color:var(--sky)}
+
+    /* ── Stats bar ── */
+    .stats-bar{background:linear-gradient(90deg,rgba(10,22,40,.98),rgba(13,31,60,.98),rgba(10,22,40,.98));border-bottom:1px solid rgba(56,189,248,.12);padding:5px 0;overflow-x:auto;scrollbar-width:none;white-space:nowrap;position:sticky;top:58px;z-index:90}
+    .stats-bar::-webkit-scrollbar{display:none}
+    .stats-bar-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center}
+    .sb-item{display:inline-flex;align-items:center;gap:5px;padding:0 14px;border-right:1px solid rgba(255,255,255,.07)}
+    .sb-item:last-child{border-right:none}
+    .sb-label{font-size:.65rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+    .sb-val{font-size:.76rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
+
+    /* ── Price flash ── */
+    @keyframes flashUp{0%{background:rgba(34,197,94,.22);border-radius:6px}100%{background:transparent}}
+    @keyframes flashDown{0%{background:rgba(239,68,68,.18);border-radius:6px}100%{background:transparent}}
+    .flash-up{animation:flashUp .9s ease-out}
+    .flash-down{animation:flashDown .9s ease-out}
+  </style>
+</head>
+<body>
+<div class="copy-toast" id="copyToast">✓ Copiado</div>
+
+<div class="ticker"><div class="ticker-track" id="tickerTrack"><span class="t-item"><span class="t-name">Cargando...</span></span></div></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+      <span class="logo-text">Billete<em>AR</em></span>
+    </a>
+    <div class="nav-right">
+      <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
+      <span id="countdown" style="font-size:.72rem;color:var(--muted)"></span>
+      <button class="btn" onclick="refreshCountdown=30;refreshAll()">↻ Actualizar</button>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-link" href="index.html">🏠 Inicio</a>
+    <a class="topnav-link active" href="dolares.html">💵 Dólares</a>
+    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
+    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
+    <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
+    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
+  </div>
+</nav>
+
+<!-- ── Stats bar persistente ── -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="sb-item"><span class="sb-label">Blue</span>&nbsp;<span class="sb-val" id="sb-blue">–</span></div>
+    <div class="sb-item"><span class="sb-label">MEP</span>&nbsp;<span class="sb-val" id="sb-mep">–</span></div>
+    <div class="sb-item"><span class="sb-label">CCL</span>&nbsp;<span class="sb-val" id="sb-ccl">–</span></div>
+    <div class="sb-item"><span class="sb-label">Oficial</span>&nbsp;<span class="sb-val" id="sb-oficial">–</span></div>
+    <div class="sb-item"><span class="sb-label">Brecha</span>&nbsp;<span class="sb-val" id="sb-brecha" style="color:var(--purple)">–</span></div>
+  </div>
+</div>
+
+<nav class="subnav">
+  <div class="subnav-inner">
+    <a class="subnav-link active" href="#blue">⭐ Blue</a>
+    <a class="subnav-link" href="#mep">🏦 MEP / CCL</a>
+    <a class="subnav-link" href="#calculadora">🧮 Convertidor</a>
+    <a class="subnav-link" href="#cripto-detail">💱 Cripto</a>
+    <a class="subnav-link" href="#medios">📰 Por fuente</a>
+    <a class="subnav-link" href="#historico">📈 Histórico</a>
+    <a class="subnav-link" href="#fecha">📅 Por fecha</a>
+    <a class="subnav-link" href="#todos">🗂️ Todos</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- ── Hero Blue ── -->
+  <div class="section" id="blue" style="animation-delay:.05s">
+    <div class="sec-header"><span class="sec-title">Dólares destacados</span><div class="sec-line"></div></div>
+    <div class="hero-grid">
+      <div class="hero-card">
+        <div class="hero-badge">⭐ Más consultado</div>
+        <div class="hero-name">Dólar Blue</div>
+        <div class="hero-prices">
+          <div class="hp buy"><div class="lbl">Comprás</div><div class="val" id="blueCompra">–</div></div>
+          <div class="hp sell">
+            <div class="lbl">Vendés <button class="copy-btn" onclick="copyPrice('blueVenta','blue')" title="Copiar precio">⧉</button></div>
+            <div class="val" id="blueVenta">–</div>
+          </div>
+        </div>
+        <div class="spark-wrap" id="blue-spark-wrap" style="display:none">
+          <div id="blue-spark"></div>
+          <span class="spark-delta neu" id="blue-spark-delta">7 días</span>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">Oficial</div></div><div class="mini-right"><div class="buy2" id="oficialC">–</div><div class="sell2" id="oficialV">–</div><button class="copy-btn" onclick="copyPrice('oficialV','oficial')" title="Copiar">⧉</button></div></div>
+        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">Tarjeta / Turista</div></div><div class="mini-right"><div class="buy2" id="tarjetaC">–</div><div class="sell2" id="tarjetaV">–</div><button class="copy-btn" onclick="copyPrice('tarjetaV','tarjeta')" title="Copiar">⧉</button></div></div>
+        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">Cripto (USDT)</div></div><div class="mini-right"><div class="buy2" id="criptoC">–</div><div class="sell2" id="criptoV">–</div><button class="copy-btn" onclick="copyPrice('criptoV','cripto')" title="Copiar">⧉</button></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MEP / CCL ── -->
+  <div class="section" id="mep" style="animation-delay:.08s">
+    <div class="sec-header"><span class="sec-title">Dólar MEP / CCL</span><div class="sec-line"></div></div>
+    <div class="mep-explainer">
+      El <strong>MEP</strong> (Mercado Electrónico de Pagos) se opera comprando bonos en pesos y vendiéndolos en dólares dentro de la bolsa argentina. 100% legal, sin límite. El <strong>CCL</strong> opera igual pero con bonos que cotizan en el exterior — es la referencia para dolarización de carteras.
+    </div>
+    <div class="mep-grid" id="mepGrid">
+      <div class="mep-card"><div class="skel" style="height:.8rem;width:55%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:85%;margin-bottom:.9rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.2rem;width:44%"></div><div class="skel" style="height:1.2rem;width:44%"></div></div></div>
+      <div class="mep-card"><div class="skel" style="height:.8rem;width:55%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:85%;margin-bottom:.9rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.2rem;width:44%"></div><div class="skel" style="height:1.2rem;width:44%"></div></div></div>
+      <div class="mep-card"><div class="skel" style="height:.8rem;width:55%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:85%;margin-bottom:.9rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.2rem;width:44%"></div><div class="skel" style="height:1.2rem;width:44%"></div></div></div>
+    </div>
+
+  </div>
+
+  <!-- ── Calculadora bidireccional ── -->
+  <div class="section" id="calculadora" style="animation-delay:.09s">
+    <div class="sec-header"><span class="sec-title">🧮 Convertidor ARS ↔ USD</span><div class="sec-line"></div></div>
+    <div class="calc-section">
+      <div class="calc-select-wrap">
+        <label>Tipo de dólar</label>
+        <select class="calc-select" id="calcType" onchange="calcConvert('ars')">
+          <option value="blue">Blue</option>
+          <option value="oficial">Oficial</option>
+          <option value="bolsa">MEP (Bolsa)</option>
+          <option value="contadoconliqui">CCL</option>
+          <option value="cripto">Cripto (USDT)</option>
+          <option value="tarjeta">Tarjeta / Turista</option>
+        </select>
+      </div>
+      <div class="calc-row">
+        <div class="calc-field">
+          <label>Pesos argentinos (ARS)</label>
+          <input type="number" id="calcARS" placeholder="Ej: 100000" oninput="calcConvert('ars')" />
+        </div>
+        <div class="calc-arrow">⇄</div>
+        <div class="calc-field">
+          <label>Dólares (USD)</label>
+          <input type="number" id="calcUSD" placeholder="Ej: 100" oninput="calcConvert('usd')" />
+        </div>
+      </div>
+      <div class="calc-result" id="calcResult">Ingresá un monto para convertir</div>
+    </div>
+  </div>
+
+  <!-- ── CRIPTO POR EXCHANGE ── -->
+  <div class="section" id="cripto-detail" style="animation-delay:.11s">
+    <div class="sec-header"><span class="sec-title">💱 Dólar Cripto por exchange</span><div class="sec-line"></div></div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
+      Precios del <strong>USDT</strong> (dólar estable) y <strong>DAI</strong> en pesos argentinos en cada exchange local. Tocá cada sección para ver el detalle completo con compra, venta y spread de cada plataforma.
+    </p>
+
+    <div class="detail-section">
+
+      <!-- USDT -->
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail('usdt-body','usdt-chev')" id="usdt-trigger">
+          <div class="detail-title">
+            <span class="detail-icon">💵</span>
+            <div>
+              <div class="detail-name">USDT (Tether) en pesos</div>
+              <div style="font-size:.73rem;color:var(--muted);margin-top:2px">Precios en todos los exchanges locales</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:.8rem">
+            <div class="detail-price" id="usdt-ref">–</div>
+            <div class="detail-chevron" id="usdt-chev">▼</div>
+          </div>
+        </div>
+        <div class="detail-body" id="usdt-body">
+          <div class="exch-loading" id="usdt-loading">Cargando precios... ⏳</div>
+          <table class="exch-table" id="usdt-table" style="display:none"></table>
+        </div>
+      </div>
+
+      <!-- DAI -->
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail('dai-body','dai-chev')" id="dai-trigger">
+          <div class="detail-title">
+            <span class="detail-icon">🔵</span>
+            <div>
+              <div class="detail-name">DAI (stablecoin) en pesos</div>
+              <div style="font-size:.73rem;color:var(--muted);margin-top:2px">Decentralised stablecoin · exchanges AR</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:.8rem">
+            <div class="detail-price" id="dai-ref">–</div>
+            <div class="detail-chevron" id="dai-chev">▼</div>
+          </div>
+        </div>
+        <div class="detail-body" id="dai-body">
+          <div class="exch-loading" id="dai-loading">Cargando precios... ⏳</div>
+          <table class="exch-table" id="dai-table" style="display:none"></table>
+        </div>
+      </div>
+
+      <!-- BTC/USD implícito -->
+      <div class="detail-card">
+        <div class="detail-header" onclick="toggleDetail('btc-body','btc-chev')">
+          <div class="detail-title">
+            <span class="detail-icon">₿</span>
+            <div>
+              <div class="detail-name">Bitcoin (BTC) en pesos</div>
+              <div style="font-size:.73rem;color:var(--muted);margin-top:2px">Precio en ARS en exchanges locales</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:.8rem">
+            <div class="detail-price" id="btc-ref">–</div>
+            <div class="detail-chevron" id="btc-chev">▼</div>
+          </div>
+        </div>
+        <div class="detail-body" id="btc-body">
+          <div class="exch-loading" id="btc-loading">Cargando precios... ⏳</div>
+          <table class="exch-table" id="btc-table" style="display:none"></table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Blue por fuente ── -->
+  <div class="section" id="medios" style="animation-delay:.14s">
+    <div class="sec-header"><span class="sec-title">Blue en los medios</span><div class="sec-line"></div></div>
+    <div class="diarios-grid" id="diariosGrid">
+      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
+      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
+    </div>
+  </div>
+
+  <!-- ── Histórico ── -->
+  <div class="section" id="historico" style="animation-delay:.17s">
+    <div class="sec-header"><span class="sec-title">Evolución dólar blue</span><div class="sec-line"></div></div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">Dólar Blue – Precio de venta</div><div class="chart-sub">Cotización histórica en pesos argentinos · argentinadatos.com</div></div>
+        <div class="chart-stat"><div class="val" id="chartCurrentVal">—</div><div class="lbl">precio actual</div></div>
+      </div>
+      <div class="chart-tabs">
+        <button class="chart-tab active" onclick="setRange(30,this)">30D</button>
+        <button class="chart-tab" onclick="setRange(90,this)">90D</button>
+        <button class="chart-tab" onclick="setRange(180,this)">6M</button>
+        <button class="chart-tab" onclick="setRange(365,this)">1A</button>
+        <button class="chart-tab" onclick="setRange(9999,this)">Todo</button>
+      </div>
+      <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── Consulta por fecha ── -->
+  <div class="section" id="fecha" style="animation-delay:.19s">
+    <div class="sec-header"><span class="sec-title">Consulta por fecha</span><div class="sec-line"></div></div>
+    <div class="chart-card">
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+        <div>
+          <label style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:.4rem">Fecha</label>
+          <input type="date" id="fechaInput" class="calc-select" style="width:auto;min-width:170px" />
+        </div>
+        <button class="btn" style="align-self:flex-end;padding:8px 18px" onclick="buscarFecha()">Buscar</button>
+      </div>
+      <div id="fechaResult" style="display:none">
+        <div style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem" id="fechaLabel"></div>
+        <div class="ex-grid" id="fechaGrid"></div>
+      </div>
+      <div id="fechaEmpty" style="display:none;text-align:center;padding:1.5rem;color:var(--muted);font-size:.85rem">
+        No hay datos para la fecha seleccionada. Probá con otro día hábil.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Todos los tipos ── -->
+  <div class="section" id="todos" style="animation-delay:.20s">
+    <div class="sec-header"><span class="sec-title">Todos los tipos de cambio</span><div class="sec-line"></div></div>
+    <div class="ex-grid" id="exGrid">
+      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
+      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
+      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
+      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
+      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
+      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div><strong>BilleteAR</strong> · Datos en tiempo real</div>
+  <div>No constituye asesoramiento financiero · Actualización cada 30 seg</div>
+</footer>
+
+<script>
+const q = id => document.getElementById(id);
+
+/* ── Sparkline SVG ── */
+function sparklineSVG(values, w=90, h=32) {
+  if (!values || values.length < 2) return '';
+  const min = Math.min(...values), max = Math.max(...values);
+  const range = max - min || 1;
+  const pts = values.map((v, i) => {
+    const x = (i / (values.length - 1)) * w;
+    const y = h - 2 - ((v - min) / range) * (h - 4);
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }).join(' ');
+  const rising = values[values.length - 1] >= values[0];
+  const color = rising ? '#22c55e' : '#ef4444';
+  const fill = rising ? 'rgba(34,197,94,.1)' : 'rgba(239,68,68,.08)';
+  const last = values[values.length - 1];
+  const ly = h - 2 - ((last - min) / range) * (h - 4);
+  return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block">
+    <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".2"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+    <polygon points="0,${h} ${pts} ${w},${h}" fill="${fill}"/>
+    <polyline fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/>
+    <circle cx="${w}" cy="${ly.toFixed(1)}" r="2.5" fill="${color}"/>
+  </svg>`;
+}
+
+function renderSparkDelta(elId, values) {
+  if (!values || values.length < 2) return;
+  const first = values[0], last = values[values.length - 1];
+  const pct = ((last - first) / first * 100);
+  const el = q(elId);
+  if (!el) return;
+  const sign = pct >= 0 ? '+' : '';
+  el.textContent = `${sign}${pct.toFixed(1)}% (7d)`;
+  el.className = `spark-delta ${pct > 0.1 ? 'up' : pct < -0.1 ? 'down' : 'neu'}`;
+}
+
+/* ── Copy price ── */
+function copyPrice(elId, label) {
+  const el = q(elId);
+  if (!el) return;
+  const text = el.textContent.trim();
+  navigator.clipboard.writeText(text).catch(() => {});
+  const toast = q('copyToast');
+  toast.textContent = `✓ ${label ? label + ': ' : ''}${text} copiado`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 1800);
+}
+
+/* ── Calculadora bidireccional ARS ↔ USD ── */
+let calcRates = {};
+function calcConvert(source) {
+  const tipo = q('calcType').value;
+  const rate = calcRates[tipo];
+  const resEl = q('calcResult');
+  const arsEl = q('calcARS');
+  const usdEl = q('calcUSD');
+  if (!rate || !rate.venta) {
+    if (resEl) resEl.innerHTML = 'Esperando datos de cotización...';
+    return;
+  }
+  const sell = rate.venta, buy = rate.compra || rate.venta;
+  const LABELS = {blue:'Blue',oficial:'Oficial',bolsa:'MEP',contadoconliqui:'CCL',cripto:'Cripto',tarjeta:'Tarjeta'};
+  const label = LABELS[tipo] || tipo;
+  if (source === 'ars') {
+    const ars = parseFloat(arsEl.value);
+    if (!ars || isNaN(ars)) { if (usdEl) usdEl.value = ''; if (resEl) resEl.innerHTML = 'Ingresá un monto para convertir'; return; }
+    const usd = ars / sell;
+    if (usdEl) usdEl.value = usd.toFixed(2);
+    if (resEl) resEl.innerHTML = `${fmtARS(ars)} ÷ <strong>$${sell.toLocaleString('es-AR')} (${label} venta)</strong> = <strong style="color:var(--green)">USD ${usd.toFixed(2)}</strong>`;
+  } else {
+    const usd = parseFloat(usdEl.value);
+    if (!usd || isNaN(usd)) { if (arsEl) arsEl.value = ''; if (resEl) resEl.innerHTML = 'Ingresá un monto para convertir'; return; }
+    const ars = usd * sell;
+    if (arsEl) arsEl.value = Math.round(ars);
+    if (resEl) resEl.innerHTML = `USD ${usd.toFixed(2)} × <strong>$${sell.toLocaleString('es-AR')} (${label} venta)</strong> = <strong style="color:var(--sky)">${fmtARS(ars)}</strong>`;
+  }
+}
+
+/* ── Formatters ── */
+function fmtARS(n){if(n==null)return'–';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
+function fmtM(n){if(n==null)return'–';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
+function relTime(s){if(!s)return'';const d=Math.floor((Date.now()-new Date(s))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
+function ago(ts){if(!ts)return'';const d=Math.floor((Date.now()-ts*1000)/60000);if(d<2)return'ahora';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
+
+/* ── Fetch ── */
+async function fetchJSON(url){
+  const ps=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
+  for(const u of ps){try{const c=new AbortController();const t=setTimeout(()=>c.abort(),8000);const r=await fetch(u,{signal:c.signal});clearTimeout(t);if(r.ok)return await r.json();}catch{continue;}}
+  return null;
+}
+
+/* ── Exchange names dict (criptoya) ── */
+const EXCH_NAMES = {
+  letsbit:'Letsbit', buenbit:'Buenbit', lemoncash:'Lemon Cash',
+  ripio:'Ripio', satoshitango:'Satoshi Tango', bitso:'Bitso',
+  bybit:'Bybit P2P', fiwind:'Fiwind', argenbtc:'ArgenBTC',
+  tiendacrypto:'Tienda Crypto', binancep2p:'Binance P2P',
+  decrypto:'Decrypto', belo:'Belo', kriptonmarket:'Krypton',
+  qubit:'Qubit', cambioar:'CambioAr', cryptomkt:'CryptoMKT',
+  bitmarket:'BitMarket', coingoBtc:'Coingo', plusCrypto:'PlusCrypto',
+  anbazoCrypto:'Anbazo',
+};
+function exchName(k){return EXCH_NAMES[k]||k.charAt(0).toUpperCase()+k.slice(1);}
+
+/* ── Render exchange table ── */
+function renderExchTable(tableId, loadingId, data, refId) {
+  const tbl = q(tableId);
+  const ldr = q(loadingId);
+  const ref = q(refId);
+  if (!data) { ldr.style.display='none'; return; }
+
+  // Filtrar entradas válidas
+  const rows = Object.entries(data)
+    .filter(([k, v]) => v && typeof v.ask === 'number' && v.ask > 0)
+    .map(([k, v]) => ({ name: exchName(k), buy: v.bid || null, sell: v.ask, time: v.time }))
+    .sort((a, b) => a.sell - b.sell);
+
+  if (!rows.length) { ldr.style.display='none'; return; }
+
+  const minSell = rows[0].sell;
+  const maxSell = rows[rows.length - 1].sell;
+  if (ref) ref.textContent = fmtARS(minSell) + ' – ' + fmtARS(maxSell);
+
+  tbl.innerHTML = `<thead><tr>
+    <th>Exchange</th><th>Compra</th><th>Venta</th><th>Spread</th><th>Actualizado</th>
+  </tr></thead><tbody>${rows.map((r, i) => {
+    const spread = r.buy ? ((r.sell - r.buy) / r.buy * 100).toFixed(1) + '%' : '–';
+    const badge  = i === 0 ? '<span class="best-badge">mejor venta</span>' :
+                   i === rows.length - 1 ? '<span class="worst-badge">más caro</span>' : '';
+    return `<tr>
+      <td class="exch-name">${r.name}${badge}</td>
+      <td class="exch-buy">${r.buy ? fmtARS(r.buy) : '–'}</td>
+      <td class="exch-sell">${fmtARS(r.sell)}</td>
+      <td class="exch-spread">${spread}</td>
+      <td class="exch-time">${ago(r.time)}</td>
+    </tr>`;
+  }).join('')}</tbody>`;
+
+  ldr.style.display = 'none';
+  tbl.style.display = 'table';
+}
+
+/* ── Toggle detail panel ── */
+const openPanels = new Set();
+async function toggleDetail(bodyId, chevId) {
+  const body = q(bodyId);
+  const chev = q(chevId);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  chev.style.transform = isOpen ? '' : 'rotate(180deg)';
+
+  // Load data on first open
+  if (!isOpen && !openPanels.has(bodyId)) {
+    openPanels.add(bodyId);
+    const coin = bodyId.replace('-body','');
+    const data = await fetchJSON(`https://criptoya.com/api/${coin}/ars/0.1`);
+    renderExchTable(`${coin}-table`, `${coin}-loading`, data, `${coin}-ref`);
+  }
+}
+
+/* ── Datos dolarapi ── */
+const NAMES={oficial:'Oficial',blue:'Blue',bolsa:'MEP (Bolsa)',contadoconliqui:'CCL',mayorista:'Mayorista',cripto:'Cripto',tarjeta:'Tarjeta'};
+const ORDER=['oficial','blue','bolsa','contadoconliqui','cripto','tarjeta','mayorista'];
+let blueChartInstance=null, allBlueHistory=[];
+let prevPrices={};
+
+function flashEl(id, newVal, prevVal) {
+  const el = q(id);
+  if (!el) return;
+  if (prevVal != null && newVal != null && newVal !== prevVal) {
+    el.classList.remove('flash-up','flash-down');
+    void el.offsetWidth; // reflow to restart animation
+    el.classList.add(newVal > prevVal ? 'flash-up' : 'flash-down');
+    setTimeout(() => el.classList.remove('flash-up','flash-down'), 1000);
+  }
+}
+
+function renderDollars(data){
+  const get=c=>data.find(d=>d.casa===c);
+  const blue=get('blue'),oficial=get('oficial'),tarjeta=get('tarjeta'),cripto=get('cripto');
+  if(blue){
+    flashEl('blueVenta',blue.venta,prevPrices.blueVenta);
+    flashEl('blueCompra',blue.compra,prevPrices.blueCompra);
+    q('blueCompra').textContent=fmtARS(blue.compra);
+    q('blueVenta').textContent=fmtARS(blue.venta);
+    prevPrices.blueVenta=blue.venta;prevPrices.blueCompra=blue.compra;
+    if(q('sb-blue'))q('sb-blue').textContent=fmtARS(blue.venta);
+  }
+  if(oficial){
+    flashEl('oficialV',oficial.venta,prevPrices.oficialV);
+    q('oficialC').textContent=fmtARS(oficial.compra);q('oficialV').textContent=fmtARS(oficial.venta);
+    prevPrices.oficialV=oficial.venta;
+    if(q('sb-oficial'))q('sb-oficial').textContent=fmtARS(oficial.venta);
+  }
+  if(tarjeta){q('tarjetaC').textContent=fmtARS(tarjeta.compra);q('tarjetaV').textContent=fmtARS(tarjeta.venta);}
+  if(cripto){q('criptoC').textContent=fmtARS(cripto.compra);q('criptoV').textContent=fmtARS(cripto.venta);}
+  // Stats bar: MEP, CCL, brecha
+  const mep=get('bolsa'),ccl=get('contadoconliqui');
+  if(mep&&q('sb-mep'))q('sb-mep').textContent=fmtARS(mep.venta);
+  if(ccl&&q('sb-ccl'))q('sb-ccl').textContent=fmtARS(ccl.venta);
+  if(blue&&oficial&&oficial.venta&&blue.venta){
+    const brecha=((blue.venta-oficial.venta)/oficial.venta*100).toFixed(1);
+    if(q('sb-brecha'))q('sb-brecha').textContent='+'+brecha+'%';
+  }
+  q('lastUpdate').textContent='En vivo · '+relTime(blue?.fechaActualizacion);
+
+  const sorted=[...data].sort((a,b)=>{const ai=ORDER.indexOf(a.casa),bi=ORDER.indexOf(b.casa);return(ai<0?99:ai)-(bi<0?99:bi);});
+  q('exGrid').innerHTML=sorted.map(d=>{
+    const spread=d.compra&&d.venta?Math.round(((d.venta-d.compra)/d.compra)*100):null;
+    return`<div class="ex-card"><div class="ex-name">${NAMES[d.casa]||d.nombre}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${fmtARS(d.compra)}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(d.venta)}</div></div></div>${spread!=null?`<span class="spread-tag">spread ${spread}%</span>`:''}</div>`;
+  }).join('');
+}
+
+function renderMEP(dollars){
+  const cards=[
+    {name:'Dólar MEP',desc:'Compra/venta de bonos en bolsa local. Sin límite, 100% legal.',data:dollars.find(d=>d.casa==='bolsa'||d.casa==='mep')},
+    {name:'CCL (Contado con Liqui)',desc:'Opera con bonos que cotizan en el exterior. Referencia dolarización.',data:dollars.find(d=>d.casa==='contadoconliqui'||d.casa==='ccl')},
+    {name:'Cripto (USDT/DAI)',desc:'Tipo de cambio vía stablecoins en exchanges locales.',data:dollars.find(d=>d.casa==='cripto')},
+    {name:'Referencia Oficial',desc:'Cotización Banco Nación. Base del cálculo de brecha.',data:dollars.find(d=>d.casa==='oficial')},
+  ].filter(c=>c.data);
+  q('mepGrid').innerHTML=cards.map(c=>`<div class="mep-card"><div class="mep-card-name">${c.name}</div><div class="mep-card-desc">${c.desc}</div><div class="mep-card-prices"><div class="mep-side"><div class="ml">Compra</div><div class="mv b">${fmtARS(c.data.compra)}</div></div><div class="mep-side" style="text-align:right"><div class="ml">Venta</div><div class="mv s">${fmtARS(c.data.venta)}</div></div></div></div>`).join('');
+}
+
+async function loadBlueBySource(base){
+  const sources=[{nombre:'dolarapi.com',compra:base?.compra,venta:base?.venta}];
+  try{const a=await fetchJSON('https://mercados.ambito.com/dolar/informal/variacion');if(a?.venta)sources.push({nombre:'Ámbito',compra:parseFloat((a.compra||'').toString().replace(',','.')),venta:parseFloat(a.venta.toString().replace(',','.'))});}catch{}
+  try{const b=await fetchJSON('https://api.bluelytics.com.ar/v2/latest');if(b?.blue?.value_sell)sources.push({nombre:'Bluelytics',compra:b.blue.value_buy,venta:b.blue.value_sell});}catch{}
+  q('diariosGrid').innerHTML=sources.filter(s=>s.venta).map(s=>`<div class="diario-card"><div class="diario-name">${s.nombre}</div><div class="diario-row"><div class="diario-side"><div class="dl">Compra</div><div class="dv b">${s.compra?fmtM(s.compra):'–'}</div></div><div class="diario-side" style="text-align:right"><div class="dl">Venta</div><div class="dv s">${fmtM(s.venta)}</div></div></div></div>`).join('');
+}
+
+/* ── Chart ── */
+function drawChart(days){
+  if(!allBlueHistory.length)return;
+  const slice=days>=9999?allBlueHistory:allBlueHistory.slice(-days);
+  const labels=slice.map(d=>{const dt=new Date(d.fecha+'T12:00:00');return dt.toLocaleDateString('es-AR',{day:'numeric',month:'short'});});
+  const values=slice.map(d=>d.venta);
+  const last=values[values.length-1];
+  if(last)q('chartCurrentVal').textContent=fmtARS(last);
+  const ctx=document.getElementById('blueChart').getContext('2d');
+  if(blueChartInstance)blueChartInstance.destroy();
+  const g=ctx.createLinearGradient(0,0,0,200);
+  g.addColorStop(0,'rgba(56,189,248,.25)');g.addColorStop(1,'rgba(56,189,248,0)');
+  blueChartInstance=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data:values,borderColor:'#38bdf8',borderWidth:2,backgroundColor:g,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#38bdf8'}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a2540',borderColor:'#2a3e5e',borderWidth:1,titleColor:'#64748b',bodyColor:'#f1f5f9',bodyFont:{family:'DM Sans',size:13,weight:'600'},callbacks:{label:ctx=>' '+fmtARS(ctx.parsed.y)}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},maxTicksLimit:7,maxRotation:0}},y:{position:'right',grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},callback:v=>'$'+Number(v).toLocaleString('es-AR')}}}}
+  });
+}
+function setRange(days,btn){document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');drawChart(days);}
+
+/* ── Consulta por fecha ── */
+async function buscarFecha(){
+  const input=q('fechaInput').value;
+  if(!input)return;
+  q('fechaResult').style.display='none';
+  q('fechaEmpty').style.display='none';
+  const tipos=['blue','oficial','bolsa','contadoconliqui','cripto','tarjeta','mayorista'];
+  const LABELS={blue:'Blue',oficial:'Oficial',bolsa:'MEP (Bolsa)',contadoconliqui:'CCL',cripto:'Cripto',tarjeta:'Tarjeta',mayorista:'Mayorista'};
+  const results=[];
+  await Promise.allSettled(tipos.map(async tipo=>{
+    const data=await fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`);
+    if(!Array.isArray(data))return;
+    const match=data.find(d=>d.fecha===input);
+    if(match)results.push({tipo,label:LABELS[tipo]||tipo,compra:match.compra,venta:match.venta});
+  }));
+  if(!results.length){q('fechaEmpty').style.display='block';return;}
+  const dt=new Date(input+'T12:00:00');
+  const formatted=dt.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  q('fechaLabel').textContent='Cotizaciones del '+formatted;
+  q('fechaGrid').innerHTML=results.map(r=>`<div class="ex-card"><div class="ex-name">${r.label}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${r.compra?fmtARS(r.compra):'–'}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(r.venta)}</div></div></div></div>`).join('');
+  q('fechaResult').style.display='block';
+}
+// Set max date to today
+(function(){const d=q('fechaInput');if(d)d.max=new Date().toISOString().split('T')[0];})();
+
+/* ── Refresh ── */
+async function refreshAll(){
+  await Promise.allSettled([
+    fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
+      if(!data)return;
+      // Guardar tasas para la calculadora
+      data.forEach(d=>{ calcRates[d.casa]=d; });
+      calcConvert('ars');
+      renderDollars(data);renderMEP(data);
+      const blue=data.find(d=>d.casa==='blue');
+      if(blue)loadBlueBySource(blue).catch(()=>{});
+      const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
+      q('tickerTrack').innerHTML=tick+tick;
+    }).catch(()=>{}),
+    fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/blue').then(data=>{
+      if(Array.isArray(data)&&data.length){
+        allBlueHistory=data;
+        drawChart(30);
+        // Sparkline: últimos 14 días
+        const slice = data.slice(-14).map(d => d.venta);
+        const sparkEl = q('blue-spark');
+        const sparkWrap = q('blue-spark-wrap');
+        if (sparkEl && slice.length >= 2) {
+          sparkEl.innerHTML = sparklineSVG(slice);
+          renderSparkDelta('blue-spark-delta', slice);
+          sparkWrap.style.display = 'flex';
+        }
+      }
+    }).catch(()=>{}),
+    // Pre-carga USDT ref
+    fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(data=>{
+      if(!data)return;
+      const sells=Object.values(data).filter(v=>v?.ask>0).map(v=>v.ask);
+      if(sells.length){const mn=Math.min(...sells),mx=Math.max(...sells);q('usdt-ref').textContent=fmtARS(mn)+' – '+fmtARS(mx);}
+      if(openPanels.has('usdt-body'))renderExchTable('usdt-table','usdt-loading',data,'usdt-ref');
+    }).catch(()=>{}),
+    fetchJSON('https://criptoya.com/api/dai/ars/0.1').then(data=>{
+      if(!data)return;
+      const sells=Object.values(data).filter(v=>v?.ask>0).map(v=>v.ask);
+      if(sells.length){const mn=Math.min(...sells),mx=Math.max(...sells);q('dai-ref').textContent=fmtARS(mn)+' – '+fmtARS(mx);}
+      if(openPanels.has('dai-body'))renderExchTable('dai-table','dai-loading',data,'dai-ref');
+    }).catch(()=>{}),
+    fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(data=>{
+      if(!data)return;
+      const sells=Object.values(data).filter(v=>v?.ask>0).map(v=>v.ask);
+      if(sells.length){const mn=Math.min(...sells),mx=Math.max(...sells);q('btc-ref').textContent=fmtARS(mn)+' – '+fmtARS(mx);}
+      if(openPanels.has('btc-body'))renderExchTable('btc-table','btc-loading',data,'btc-ref');
+    }).catch(()=>{}),
+  ]);
+}
+
+/* Scroll spy */
+function initScrollSpy(){
+  const links=document.querySelectorAll('.subnav-link');
+  const ids=['blue','mep','calculadora','cripto-detail','medios','historico','fecha','todos'];
+  const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s=>obs.observe(s));
+}
+
+refreshAll();
+initScrollSpy();
+
+// Refresh cada 30s para dólares (datos más importantes)
+let refreshCountdown = 30;
+function tickRefresh() {
+  refreshCountdown--;
+  const cd = q('countdown');
+  if (cd) cd.textContent = `Actualiza en ${refreshCountdown}s`;
+  if (refreshCountdown <= 0) {
+    refreshCountdown = 30;
+    refreshAll();
+  }
+}
+setInterval(tickRefresh, 1000);
+
+// PWA: register service worker
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
+</script>
+
+<!-- ── Mobile bottom nav ── -->
+<style>
+.bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(17,24,39,.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:0 0 env(safe-area-inset-bottom,0)}
+.bn-inner{display:flex;justify-content:space-around;align-items:stretch}
+.bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
+.bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
+.bn-icon{font-size:1.1rem;line-height:1}
+@media(max-width:640px){.bottom-nav{display:block}main{padding-bottom:5rem}.topnav{display:none}}
+</style>
+<nav class="bottom-nav">
+  <div class="bn-inner">
+    <a class="bn-item" href="index.html"><span class="bn-icon">🏠</span><span>Inicio</span></a>
+    <a class="bn-item active" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
+    <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
+    <a class="bn-item" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
+    <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
+  </div>
+</nav>
+</body>
+</html>

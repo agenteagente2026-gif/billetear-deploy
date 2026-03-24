@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dólar Blue hoy, MEP, CCL y Economía Argentina – BilleteAR</title>
+  <meta name="description" content="Precio del dólar blue hoy, MEP, CCL, oficial y cripto en tiempo real. Riesgo país, inflación y acciones argentinas en Wall Street. Datos actualizados al minuto." />
+  <meta name="keywords" content="dolar blue hoy, precio dolar mep, dolar ccl hoy, economia argentina, riesgo pais, inflacion argentina, acciones argentinas" />
+  <link rel="canonical" href="https://pulsoar.netlify.app/" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="Dólar Blue hoy, MEP, CCL y Economía Argentina – BilleteAR" />
+  <meta property="og:description" content="Dólar blue, MEP, CCL, cripto, riesgo país e inflación en tiempo real." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pulsoar.netlify.app" />
+  <meta property="og:image" content="https://pulsoar.netlify.app/og-image.png" />
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Dólar Blue hoy, MEP y CCL – BilleteAR" />
+  <meta name="twitter:description" content="Precios del dólar, cripto y economía argentina en tiempo real." />
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "BilleteAR",
+    "url": "https://pulsoar.netlify.app",
+    "description": "Dashboard de economía argentina en tiempo real: dólar blue, MEP, CCL, cripto, acciones e inflación.",
+    "inLanguage": "es-AR",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://pulsoar.netlify.app/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+  <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b0f1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BilleteAR" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <!-- ═══════════════════════════════════════════════════════
+       GOOGLE ADSENSE — pegá tu código acá cuando te aprueben
+       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-TUCODIGOACÁ" crossorigin="anonymous"></script>
+  ═══════════════════════════════════════════════════════ -->
+
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569;--purple:#a78bfa;--hero-bg:linear-gradient(135deg,#0d1830 0%,#0b0f1e 60%,#0f1e38 100%)}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+
+    /* ── LIGHT MODE ── */
+    body.light{--bg:#f0f4f8;--bg2:#e4ecf5;--card:#ffffff;--card2:#f4f7fb;--border:#d1dce8;--border2:#b8c8dc;--text:#0f172a;--text2:#1e293b;--muted:#64748b;--muted2:#94a3b8;--hero-bg:linear-gradient(135deg,#dce8f8 0%,#f0f4f8 60%,#dce8f8 100%)}
+    body.light header{background:rgba(240,244,248,.97)}
+    body.light .stats-bar{background:linear-gradient(90deg,#e4ecf5,#dce6f0,#e4ecf5)}
+    body.light .hero-wrap{background:var(--hero-bg);border-color:rgba(56,189,248,.2)}
+    body.light .dollar-widget{background:rgba(255,255,255,.85);border-color:rgba(56,189,248,.2)}
+    body.light .mm-card{background:rgba(255,255,255,.8);border-color:var(--border)}
+    body.light .topnav,body.light .ticker{background:var(--bg2)}
+    body.light .sec-card,body.light .news-card{background:var(--card);border-color:var(--border)}
+    body.light .heat-tile.neu{background:rgba(255,255,255,.7)}
+    body.light .refresh-btn{background:rgba(56,189,248,.12)}
+    body.light .theme-btn{background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.3);color:#d97706}
+    .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
+    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+    .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
+    .ticker::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
+    .ticker-track{display:inline-flex;animation:ticker 60s linear infinite}
+    .ticker-track:hover{animation-play-state:paused}
+    .t-item{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:.76rem;border-right:1px solid var(--border)}
+    .t-name{color:var(--muted)}.t-price{font-weight:600}
+    .up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--sky)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:18px;height:18px}
+    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo-text em{color:var(--sky);font-style:normal}
+    .nav-right{display:flex;align-items:center;gap:14px}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
+    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
+    .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .refresh-btn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--sky);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1}
+    .refresh-btn:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4)}
+    .theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
+    .theme-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .refresh-spinning{animation:spin .55s linear}
+
+    /* ── Dollar widget search ── */
+    .dw-search{padding:.55rem 1.1rem .45rem;border-bottom:1px solid rgba(255,255,255,.05)}
+    .dw-search-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);padding:.38rem .8rem;font:.82rem 'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+    .dw-search-input::placeholder{color:var(--muted2)}
+    .dw-search-input:focus{border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.04)}
+    body.light .dw-search-input{background:rgba(0,0,0,.04);border-color:var(--border);color:var(--text)}
+
+    /* ── Evolution badge ── */
+    .evo-badge{font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:10px;margin-left:4px;vertical-align:middle}
+    .evo-up{color:var(--green);background:rgba(34,197,94,.12)}
+    .evo-down{color:var(--red);background:rgba(239,68,68,.1)}
+    .evo-neu{color:var(--muted);background:rgba(100,116,139,.1)}
+
+    /* ── Calculadora ── */
+    .calc-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.4rem 1.5rem}
+    .calc-input-wrap{display:flex;align-items:center;background:var(--card2);border:1px solid var(--border2);border-radius:12px;overflow:hidden;margin-bottom:1.1rem;transition:border-color .2s}
+    .calc-input-wrap:focus-within{border-color:var(--sky)}
+    .calc-prefix{padding:0 1rem;font-size:1.3rem;font-weight:700;color:var(--muted);user-select:none}
+    .calc-input{flex:1;background:none;border:none;color:var(--text);padding:.75rem .5rem .75rem 0;font:700 1.3rem 'DM Sans',sans-serif;outline:none}
+    .calc-input::placeholder{color:var(--muted2);font-weight:400;font-size:1rem}
+    .calc-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.6rem}
+    .calc-result-item{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:.65rem .9rem;transition:border-color .2s}
+    .calc-result-item:hover{border-color:var(--border2)}
+    .cr-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.3rem}
+    .cr-val{font-size:1.05rem;font-weight:700;color:var(--sky);font-variant-numeric:tabular-nums}
+    .calc-hint{color:var(--muted);font-size:.82rem;text-align:center;padding:.5rem 0;grid-column:1/-1}
+
+    /* ── Mobile bottom nav ── */
+    .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(17,24,39,.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:0 0 env(safe-area-inset-bottom,0)}
+    body.light .bottom-nav{background:rgba(240,244,248,.97)}
+    .bn-inner{display:flex;justify-content:space-around;align-items:stretch}
+    .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
+    .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
+    .bn-icon{font-size:1.1rem;line-height:1}
+    @media(max-width:640px){
+      .bottom-nav{display:block}
+      .topnav{display:none}
+      main{padding-bottom:5rem}
+      .stats-bar{top:58px}
+    }
+    .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .topnav::-webkit-scrollbar{display:none}
+    .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .topnav-link:hover{color:var(--text);border-color:var(--border2)}
+    .topnav-link.active{color:var(--sky);border-color:var(--sky)}
+    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
+    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+    .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sec-line{flex:1;height:1px;background:var(--border)}
+
+    /* ══════════════════════════════════════
+       HERO — compact widget + macro stats
+    ══════════════════════════════════════ */
+    .hero-wrap{position:relative;border-radius:24px;overflow:hidden;padding:1.5rem;background:linear-gradient(135deg,#0d1830 0%,#0b0f1e 60%,#0f1e38 100%);border:1px solid rgba(56,189,248,.15);margin-bottom:1.5rem}
+    .hero-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(56,189,248,.09) 0%,transparent 70%);pointer-events:none}
+    .hero-wrap::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(167,139,250,.06) 0%,transparent 70%);pointer-events:none}
+    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start;position:relative;z-index:1}
+    @media(max-width:750px){.hero-grid{grid-template-columns:1fr}}
+
+    /* Compact dollar widget */
+    .dollar-widget{background:rgba(20,30,48,.7);backdrop-filter:blur(10px);border:1px solid rgba(56,189,248,.12);border-radius:16px;overflow:hidden}
+    .dw-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.3rem .7rem;border-bottom:1px solid rgba(255,255,255,.06)}
+    .dw-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+    .dw-link{font-size:.72rem;color:var(--sky);text-decoration:none;opacity:.8}
+    .dw-link:hover{opacity:1;text-decoration:underline}
+    .dw-row{display:flex;align-items:center;justify-content:space-between;padding:.62rem 1.3rem .62rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);border-left:3px solid transparent;transition:all .15s;cursor:default}
+    .dw-row:last-child{border-bottom:none}
+    .dw-row:hover{background:rgba(56,189,248,.05);border-left-color:currentColor}
+    .dw-left{display:flex;align-items:center;gap:10px}
+    .dw-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px currentColor}
+    .dw-name{font-size:.87rem;font-weight:600;color:var(--text2)}
+    .dw-right{display:flex;align-items:center;gap:.9rem}
+    .dw-price{font-size:1rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+    .dw-chg{font-size:.73rem;font-weight:700;min-width:56px;text-align:right}
+    .dw-chg.pos{color:var(--green)}.dw-chg.neg{color:var(--red)}.dw-chg.na{color:var(--muted2)}
+    .dw-footer{padding:.6rem 1.3rem;font-size:.67rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05)}
+    /* Share bar */
+    .share-bar{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;position:relative;z-index:1}
+    .share-btn{display:inline-flex;align-items:center;gap:6px;padding:.46rem 1rem;border-radius:9px;font:600 .78rem 'DM Sans',sans-serif;cursor:pointer;border:none;text-decoration:none;transition:all .18s}
+    .share-wa{background:#25D366;color:#fff}.share-wa:hover{background:#20ba59;transform:translateY(-1px)}
+    .share-tw{background:#000;color:#fff;border:1px solid #333}.share-tw:hover{background:#111;transform:translateY(-1px)}
+    .share-copy{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2)}.share-copy:hover{border-color:var(--sky);color:var(--sky)}
+    .share-copied{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green)}
+
+    /* ── Hero Calculator panel ── */
+    .hero-calc-wrap{display:flex;flex-direction:column;gap:.75rem}
+    .hc-calc{background:rgba(20,30,48,.7);backdrop-filter:blur(10px);border:1px solid rgba(56,189,248,.12);border-radius:16px;padding:1.1rem 1.2rem}
+    .hc-calc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
+    .hc-title{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
+    .hc-select{background:var(--card2);border:1px solid var(--border2);color:var(--text);border-radius:8px;padding:.3rem .6rem;font:.78rem 'DM Sans',sans-serif;cursor:pointer;outline:none}
+    .hc-select:focus,.hc-select:hover{border-color:var(--sky)}
+    body.light .hc-select{background:var(--card2);border-color:var(--border);color:var(--text)}
+    .hc-row{display:flex;align-items:center;gap:.55rem;margin-bottom:.65rem}
+    .hc-field{flex:1;min-width:0}
+    .hc-label{display:block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.3rem}
+    .hc-input{width:100%;background:var(--card2);border:1px solid var(--border2);color:var(--text);border-radius:10px;padding:.55rem .75rem;font:700 1rem 'DM Sans',sans-serif;outline:none;transition:border-color .2s;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
+    .hc-input::-webkit-inner-spin-button,.hc-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+    .hc-input:focus{border-color:var(--sky);background:rgba(56,189,248,.04)}
+    .hc-input::placeholder{color:var(--muted2);font-weight:400;font-size:.85rem}
+    body.light .hc-input{background:var(--card2);border-color:var(--border)}
+    .hc-arrow{color:var(--sky);font-size:1.15rem;flex-shrink:0;padding-top:1.15rem;user-select:none}
+    .hc-result{font-size:.76rem;color:var(--muted);text-align:center;min-height:1.1rem}
+    .hc-indicators{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
+    .hc-ind-card{background:rgba(20,30,48,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.7rem .75rem;text-align:center}
+    body.light .hc-ind-card{background:rgba(255,255,255,.8);border-color:var(--border)}
+    body.light .hc-calc{background:rgba(255,255,255,.85);border-color:rgba(56,189,248,.2)}
+    .hc-ind-label{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.25rem}
+    .hc-ind-val{font-size:1.18rem;font-weight:700;line-height:1;letter-spacing:-.02em}
+    .hc-ind-sub{font-size:.58rem;color:var(--muted);margin-top:.2rem}
+
+    /* ══════════════════════════════════════
+       AD SLOT placeholder
+    ══════════════════════════════════════ */
+    .ad-slot{background:var(--card);border:1px dashed var(--border2);border-radius:12px;padding:1rem;text-align:center;min-height:90px;display:flex;align-items:center;justify-content:center;color:var(--muted2);font-size:.72rem}
+    /* Ocultá esta clase cuando tengas AdSense real */
+    .ad-placeholder-label{font-size:.6rem;opacity:.5;margin-top:.3rem;text-transform:uppercase;letter-spacing:.06em}
+
+    /* ══════════════════════════════════════
+       BROKERS / AFFILIATE section
+    ══════════════════════════════════════ */
+    .brokers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.9rem}
+    .broker-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.2rem;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:.5rem;transition:all .2s;position:relative;overflow:hidden}
+    .broker-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+    .broker-card.iol::before{background:linear-gradient(90deg,#2563eb,#38bdf8)}
+    .broker-card.ppi::before{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
+    .broker-card.lemon::before{background:linear-gradient(90deg,#16a34a,#22c55e)}
+    .broker-card.buenbit::before{background:linear-gradient(90deg,#ea580c,#f97316)}
+    .broker-card.ripio::before{background:linear-gradient(90deg,#0891b2,#38bdf8)}
+    .broker-card.cocos::before{background:linear-gradient(90deg,#be185d,#ec4899)}
+    .broker-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .broker-icon{font-size:1.3rem;line-height:1}
+    .broker-name{font-size:.88rem;font-weight:700;color:var(--text)}
+    .broker-desc{font-size:.72rem;color:var(--muted);line-height:1.45}
+    .broker-cta{display:inline-flex;align-items:center;gap:4px;margin-top:.3rem;font-size:.72rem;font-weight:700;color:var(--sky)}
+    .broker-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);padding:1px 6px;border-radius:10px;margin-left:6px}
+
+    /* ══════════════════════════════════════
+       Newsletter capture
+    ══════════════════════════════════════ */
+    .newsletter-box{background:linear-gradient(135deg,#0f1e3a 0%,#0b0f1e 100%);border:1px solid rgba(56,189,248,.2);border-radius:20px;padding:1.8rem 2rem;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+    .nl-text{flex:1;min-width:200px}
+    .nl-title{font-size:1.05rem;font-weight:700;margin-bottom:.4rem}
+    .nl-sub{font-size:.8rem;color:var(--muted);line-height:1.5}
+    .nl-form{display:flex;gap:.6rem;flex-wrap:wrap;min-width:280px}
+    .nl-input{flex:1;min-width:180px;background:var(--card);border:1px solid var(--border2);color:var(--text);padding:.55rem 1rem;border-radius:9px;font:.87rem 'DM Sans',sans-serif;outline:none;transition:border-color .2s}
+    .nl-input::placeholder{color:var(--muted)}
+    .nl-input:focus{border-color:var(--sky)}
+    .nl-btn{background:linear-gradient(135deg,var(--sky2),#2563eb);border:none;color:#fff;padding:.55rem 1.2rem;border-radius:9px;cursor:pointer;font:600 .87rem 'DM Sans',sans-serif;transition:opacity .2s;white-space:nowrap}
+    .nl-btn:hover{opacity:.88}
+    #nlSuccess{display:none;color:var(--green);font-size:.82rem;font-weight:600}
+
+    /* ══════════════════════════════════════
+       Section cards
+    ══════════════════════════════════════ */
+    .section-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem}
+    .sec-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.3rem 1.4rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden}
+    .sec-card::after{content:'→';position:absolute;bottom:1.1rem;right:1.2rem;font-size:.85rem;color:var(--muted);transition:all .2s}
+    .sec-card:hover{border-color:rgba(56,189,248,.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+    .sec-card:hover::after{color:var(--sky);transform:translateX(3px)}
+    .sec-card-icon{font-size:1.8rem;line-height:1;filter:drop-shadow(0 0 8px rgba(56,189,248,.3))}
+    .sec-card-title{font-size:1.05rem;font-weight:700;color:var(--text)}
+    .sec-card-desc{font-size:.77rem;color:var(--muted);line-height:1.5}
+    .sec-card-preview{margin-top:auto;padding-top:.7rem;border-top:1px solid var(--border)}
+    .sc-preview-row{display:flex;justify-content:space-between;align-items:center;font-size:.76rem;margin-bottom:.3rem}
+    .sc-preview-name{color:var(--muted2)}
+    .sc-preview-val{font-weight:700;color:var(--sky);font-variant-numeric:tabular-nums}
+    .sc-cta{display:none}
+
+    /* ══════════════════════════════════════
+       News
+    ══════════════════════════════════════ */
+    .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.85rem}
+    .news-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem 1.1rem 1rem 1.2rem;text-decoration:none;color:inherit;transition:all .2s;display:flex;flex-direction:column;gap:.4rem}
+    .news-card:hover{border-color:rgba(56,189,248,.25);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+    .nc-src{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+    .nc-title{font-size:.86rem;font-weight:500;color:var(--text2);line-height:1.5}
+    .nc-date{font-size:.68rem;color:var(--muted);margin-top:.2rem}
+
+    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
+    footer a{color:var(--sky);text-decoration:none}
+    @media(max-width:500px){.nl-form{flex-direction:column}.brokers-grid{grid-template-columns:1fr 1fr}}
+
+    /* ══════════════════════════════════════
+       STATS BAR — persistent below topnav
+    ══════════════════════════════════════ */
+    .stats-bar{background:linear-gradient(90deg,rgba(10,22,40,.98),rgba(13,31,60,.98),rgba(10,22,40,.98));border-bottom:1px solid rgba(56,189,248,.12);padding:5px 0;overflow-x:auto;scrollbar-width:none;white-space:nowrap;position:sticky;top:58px;z-index:90}
+    .stats-bar::-webkit-scrollbar{display:none}
+    .stats-bar-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center}
+    .sb-item{display:inline-flex;align-items:center;gap:5px;padding:0 14px;border-right:1px solid rgba(255,255,255,.07)}
+    .sb-item:last-child{border-right:none}
+    .sb-label{font-size:.65rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
+    .sb-val{font-size:.76rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;transition:color .3s}
+    .sb-val.up{color:var(--green)}.sb-val.down{color:var(--red)}.sb-val.muted{color:var(--muted)}
+
+    /* ══════════════════════════════════════
+       PRICE FLASH ANIMATION
+    ══════════════════════════════════════ */
+    @keyframes flashUp{0%{background:rgba(34,197,94,.22);border-radius:6px}100%{background:transparent}}
+    @keyframes flashDown{0%{background:rgba(239,68,68,.18);border-radius:6px}100%{background:transparent}}
+    .flash-up{animation:flashUp .9s ease-out}
+    .flash-down{animation:flashDown .9s ease-out}
+
+    /* ══════════════════════════════════════
+       DOLLAR WIDGET ENHANCEMENTS
+    ══════════════════════════════════════ */
+    .dw-rank{font-size:.66rem;font-weight:700;color:var(--muted2);min-width:16px;text-align:right;margin-right:2px}
+    .dw-ts{font-size:.6rem;color:var(--muted2);margin-left:auto;padding-left:.6rem;white-space:nowrap}
+
+    /* ══════════════════════════════════════
+       MARKET HEATMAP
+    ══════════════════════════════════════ */
+    .heat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.55rem}
+    .heat-tile{border-radius:12px;padding:.8rem .9rem;position:relative;overflow:hidden;cursor:default;transition:transform .15s,box-shadow .15s;border:1px solid transparent}
+    .heat-tile:hover{transform:scale(1.03);box-shadow:0 6px 20px rgba(0,0,0,.35)}
+    .heat-tile.pos{background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(34,197,94,.08));border-color:rgba(34,197,94,.25)}
+    .heat-tile.neg{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.08));border-color:rgba(239,68,68,.22)}
+    .heat-tile.neu{background:rgba(20,30,48,.7);border-color:var(--border)}
+    .ht-name{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.35rem}
+    .ht-price{font-size:.98rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;line-height:1;margin-bottom:.3rem}
+    .ht-chg{font-size:.72rem;font-weight:700}
+    .ht-chg.pos{color:var(--green)}.ht-chg.neg{color:var(--red)}.ht-chg.neu{color:var(--muted)}
+  </style>
+</head>
+<body>
+
+<div class="ticker"><div class="ticker-track" id="tickerTrack"><span class="t-item"><span class="t-name">Cargando datos...</span></span></div></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+      <span class="logo-text">Billete<em>AR</em></span>
+    </a>
+    <div class="nav-right">
+      <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate" style="font-size:.7rem;color:var(--muted)"></span></div>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+      <button class="refresh-btn" id="refreshBtn" onclick="triggerRefresh()" title="Actualizar datos">↻</button>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-link active" href="index.html">🏠 Inicio</a>
+    <a class="topnav-link" href="dolares.html">💵 Dólares</a>
+    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
+    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
+    <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
+    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
+  </div>
+</nav>
+
+<!-- ── Stats bar persistente ── -->
+<div class="stats-bar">
+  <div class="stats-bar-inner">
+    <div class="sb-item"><span class="sb-label">Blue</span>&nbsp;<span class="sb-val" id="sb-blue">–</span></div>
+    <div class="sb-item"><span class="sb-label">MEP</span>&nbsp;<span class="sb-val" id="sb-mep">–</span></div>
+    <div class="sb-item"><span class="sb-label">CCL</span>&nbsp;<span class="sb-val" id="sb-ccl">–</span></div>
+    <div class="sb-item"><span class="sb-label">Brecha</span>&nbsp;<span class="sb-val" id="sb-brecha" style="color:var(--purple)">–</span></div>
+    <div class="sb-item"><span class="sb-label">Riesgo País</span>&nbsp;<span class="sb-val" id="sb-riesgo" style="color:var(--orange)">–</span></div>
+    <div class="sb-item"><span class="sb-label" id="sb-btc-label">BTC</span>&nbsp;<span class="sb-val" id="sb-btc" style="color:var(--muted)">–</span></div>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── Hero: compact widget + macro stats ── -->
+  <div class="section" style="animation-delay:.05s">
+    <div class="sec-header"><span class="sec-title">Resumen en tiempo real</span><div class="sec-line"></div><span id="lastUpdateSub" style="font-size:.68rem;color:var(--muted);white-space:nowrap"></span></div>
+    <div class="hero-wrap">
+    <div class="hero-grid">
+
+      <!-- Compact dollar widget (like screenshot) -->
+      <div class="dollar-widget">
+        <div class="dw-header">
+          <span class="dw-title">💵 Dólares</span>
+          <a class="dw-link" href="dolares.html">Ver todo →</a>
+        </div>
+        <div class="dw-search">
+          <input class="dw-search-input" id="dwSearch" type="text" placeholder="🔍 Buscar tipo de cambio..." oninput="filterDollars(this.value)">
+        </div>
+        <div id="dwRows">
+          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
+          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
+          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
+          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
+          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
+        </div>
+        <div class="dw-footer"><span style="color:var(--muted2)">Actualizado</span><span id="dwTime" style="color:var(--muted)">–</span></div>
+      </div>
+
+      <!-- Calculator + compact indicators -->
+      <div class="hero-calc-wrap">
+        <!-- Hidden legacy IDs so existing JS still works without errors -->
+        <span id="mmBtc" style="display:none"></span>
+        <span id="mmBtcChg" style="display:none"></span>
+
+        <!-- Bidirectional calculator -->
+        <div class="hc-calc">
+          <div class="hc-calc-header">
+            <span class="hc-title">💱 Convertidor</span>
+            <select class="hc-select" id="calcType" onchange="calcConvert('ars')">
+              <option value="blue">Blue</option>
+              <option value="oficial">Oficial</option>
+              <option value="bolsa">MEP</option>
+              <option value="contadoconliqui">CCL</option>
+              <option value="cripto">Cripto (USDT)</option>
+              <option value="tarjeta">Tarjeta</option>
+            </select>
+          </div>
+          <div class="hc-row">
+            <div class="hc-field">
+              <label class="hc-label">Pesos (ARS)</label>
+              <input type="number" id="calcARS" class="hc-input" oninput="calcConvert('ars')" placeholder="10.000" min="0">
+            </div>
+            <div class="hc-arrow">⇄</div>
+            <div class="hc-field">
+              <label class="hc-label">Dólares (USD)</label>
+              <input type="number" id="calcUSD" class="hc-input" oninput="calcConvert('usd')" placeholder="0" min="0">
+            </div>
+          </div>
+          <div class="hc-result" id="calcResult">Cargando cotizaciones…</div>
+        </div>
+
+        <!-- Compact indicator strip -->
+        <div class="hc-indicators">
+          <div class="hc-ind-card">
+            <div class="hc-ind-label">📊 Brecha</div>
+            <div class="hc-ind-val" style="color:var(--purple)" id="mmBrecha">–</div>
+            <div class="hc-ind-sub" id="mmBrechaSub">blue/oficial</div>
+          </div>
+          <div class="hc-ind-card">
+            <div class="hc-ind-label">🌡️ Riesgo País</div>
+            <div class="hc-ind-val" style="color:var(--orange)" id="mmRiesgo">–</div>
+            <div class="hc-ind-sub">puntos EMBI+</div>
+          </div>
+          <div class="hc-ind-card">
+            <div class="hc-ind-label">📉 Inflación</div>
+            <div class="hc-ind-val" style="color:var(--green)" id="mmInfla">–</div>
+            <div class="hc-ind-sub" id="mmInflaSub">mensual</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    </div><!-- /hero-wrap -->
+  </div>
+
+  <!-- ── Share bar ── -->
+  <div class="share-bar" style="animation-delay:.06s">
+    <button class="share-btn share-wa" onclick="shareWhatsApp()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.561 4.14 1.535 5.873L.057 23.857c-.09.316.016.65.265.863A.987.987 0 001 25a.98.98 0 00.286-.043l6.197-1.98A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.992a9.965 9.965 0 01-5.058-1.374l-.36-.215-3.732 1.193 1.231-3.622-.236-.373A9.954 9.954 0 012.008 12C2.008 6.476 6.476 2.008 12 2.008S21.992 6.476 21.992 12 17.524 21.992 12 21.992z"/></svg>
+      Compartir en WhatsApp
+    </button>
+    <button class="share-btn share-tw" onclick="shareTwitter()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.26 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Postear en X
+    </button>
+    <button class="share-btn share-copy" id="copyBtn" onclick="copyPrices()">
+      📋 Copiar precios
+    </button>
+  </div>
+
+  <!-- ── Heatmap mercados ── -->
+  <div class="section" style="animation-delay:.10s">
+    <div class="sec-header"><span class="sec-title">Mercado al instante</span><div class="sec-line"></div></div>
+    <div class="heat-grid" id="heatGrid">
+      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
+      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
+      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
+      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
+      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
+      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
+    </div>
+  </div>
+
+  <!-- ── Secciones ── -->
+  <div class="section" style="animation-delay:.12s">
+    <div class="sec-header"><span class="sec-title">Secciones</span><div class="sec-line"></div></div>
+    <div class="section-cards">
+
+      <a class="sec-card" href="dolares.html">
+        <div class="sec-card-icon">💵</div>
+        <div class="sec-card-title">Dólares</div>
+        <div class="sec-card-desc">Blue, MEP, CCL, Oficial y más. Precios por exchange/ALYC en tiempo real.</div>
+        <div class="sec-card-preview">
+          <div class="sc-preview-row"><span class="sc-preview-name">Blue venta</span><span class="sc-preview-val" id="pvBlue">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">MEP venta</span><span class="sc-preview-val" id="pvMep">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">CCL venta</span><span class="sc-preview-val" id="pvCcl">–</span></div>
+        </div>
+        <div class="sc-cta">Ver todos los dólares →</div>
+      </a>
+
+      <a class="sec-card" href="cripto.html">
+        <div class="sec-card-icon">₿</div>
+        <div class="sec-card-title">Criptomonedas</div>
+        <div class="sec-card-desc">Bitcoin, Ethereum, Solana y las principales criptos en tiempo real.</div>
+        <div class="sec-card-preview">
+          <div class="sc-preview-row"><span class="sc-preview-name">BTC</span><span class="sc-preview-val" id="pvBtc">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">ETH</span><span class="sc-preview-val" id="pvEth">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">SOL</span><span class="sc-preview-val" id="pvSol">–</span></div>
+        </div>
+        <div class="sc-cta">Ver criptomonedas →</div>
+      </a>
+
+      <a class="sec-card" href="mercados.html">
+        <div class="sec-card-icon">📈</div>
+        <div class="sec-card-title">Mercados</div>
+        <div class="sec-card-desc">Acciones argentinas en Wall Street, S&P 500, Nasdaq y ETFs globales.</div>
+        <div class="sec-card-preview">
+          <div class="sc-preview-row"><span class="sc-preview-name">S&P 500</span><span class="sc-preview-val" id="pvSpy">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">MercadoLibre</span><span class="sc-preview-val" id="pvMeli">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">YPF</span><span class="sc-preview-val" id="pvYpf">–</span></div>
+        </div>
+        <div class="sc-cta">Ver mercados →</div>
+      </a>
+
+      <a class="sec-card" href="indicadores.html">
+        <div class="sec-card-icon">📊</div>
+        <div class="sec-card-title">Indicadores</div>
+        <div class="sec-card-desc">Riesgo País, inflación, brecha cambiaria y datos macroeconómicos con gráficos históricos.</div>
+        <div class="sec-card-preview">
+          <div class="sc-preview-row"><span class="sc-preview-name">Riesgo País</span><span class="sc-preview-val" id="pvRiesgo">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">Inflación mensual</span><span class="sc-preview-val" id="pvInfla">–</span></div>
+          <div class="sc-preview-row"><span class="sc-preview-name">Brecha blue/oficial</span><span class="sc-preview-val" id="pvBrecha">–</span></div>
+        </div>
+        <div class="sc-cta">Ver indicadores →</div>
+      </a>
+
+      <a class="sec-card" href="noticias.html">
+        <div class="sec-card-icon">📰</div>
+        <div class="sec-card-title">Noticias</div>
+        <div class="sec-card-desc">Últimas noticias económicas de Argentina y el mundo. Actualización automática.</div>
+        <div class="sec-card-preview">
+          <div class="sc-preview-row" style="font-size:.75rem;color:var(--muted2)">Economía · Mercados · Mundo</div>
+          <div class="sc-preview-row" style="font-size:.75rem;color:var(--muted2)">Infobae · Ámbito · BBC · Google News</div>
+        </div>
+        <div class="sc-cta">Ver noticias →</div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ── Últimas noticias ── -->
+  <div class="section" style="animation-delay:.15s">
+    <div class="sec-header"><span class="sec-title">Últimas noticias</span><div class="sec-line"></div><a href="noticias.html" style="font-size:.75rem;color:var(--sky);text-decoration:none;white-space:nowrap">Ver todas →</a></div>
+    <div class="news-grid" id="newsGrid">
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
+      <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
+    </div>
+  </div>
+
+
+</main>
+
+<footer>
+  <div><strong>BilleteAR</strong> · Datos en tiempo real</div>
+  <div>No constituye asesoramiento financiero · Actualización cada 3 min</div>
+</footer>
+
+<!-- ── Mobile bottom nav ── -->
+<nav class="bottom-nav">
+  <div class="bn-inner">
+    <a class="bn-item active" href="index.html"><span class="bn-icon">🏠</span><span>Inicio</span></a>
+    <a class="bn-item" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
+    <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
+    <a class="bn-item" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
+    <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
+  </div>
+</nav>
+
+<script>
+const q=id=>document.getElementById(id);
+function fmtARS(n){if(n==null)return'–';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
+function fmtUSD(n){if(n==null)return'–';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});return'US$\u202f'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d}m`;const h=Math.floor(d/60);return h<24?`hace ${h}h`:new Date(str).toLocaleDateString('es-AR');}
+
+async function fetchJSON(url){
+  const proxies=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
+  for(const u of proxies){try{const c=new AbortController();const t=setTimeout(()=>c.abort(),7000);const r=await fetch(u,{signal:c.signal});clearTimeout(t);if(r.ok)return await r.json();}catch{continue;}}
+  throw new Error('fetch failed');
+}
+async function fetchText(url){
+  const proxies=[url,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,`https://corsproxy.io/?url=${encodeURIComponent(url)}`];
+  for(const u of proxies){try{const c=new AbortController();const t=setTimeout(()=>c.abort(),8000);const r=await fetch(u,{signal:c.signal});clearTimeout(t);if(r.ok)return await r.text();}catch{continue;}}
+  throw new Error('fetchText failed');
+}
+
+// Dollar widget config
+const DW_CONFIG=[
+  {casa:'bolsa',    name:'MEP',       dot:'#38bdf8'},
+  {casa:'contadoconliqui', name:'CCL', dot:'#f97316'},
+  {casa:'cripto',   name:'Cripto',    dot:'#a78bfa'},
+  {casa:'blue',     name:'Blue',      dot:'#facc15'},
+  {casa:'oficial',  name:'Oficial',   dot:'#22c55e'},
+  {casa:'mayorista',name:'Mayorista', dot:'#64748b'},
+  {casa:'tarjeta',  name:'Tarjeta',   dot:'#f472b6'},
+];
+
+// ── Theme toggle ──────────────────────────────────────
+function toggleTheme(){
+  const light=document.body.classList.toggle('light');
+  localStorage.setItem('billetear-theme',light?'light':'dark');
+  const btn=q('themeBtn');
+  if(btn)btn.textContent=light?'☀️':'🌙';
+}
+(function initTheme(){
+  if(localStorage.getItem('billetear-theme')==='light'){
+    document.body.classList.add('light');
+    const btn=q('themeBtn');
+    if(btn)btn.textContent='☀️';
+  }
+})();
+
+// ── Dollar search filter ───────────────────────────────
+function filterDollars(query){
+  const rows=document.querySelectorAll('#dwRows .dw-row');
+  const q2=(query||'').toLowerCase().trim();
+  rows.forEach(row=>{
+    const name=row.querySelector('.dw-name')?.textContent?.toLowerCase()||'';
+    row.style.display=(!q2||name.includes(q2))?'':'none';
+  });
+}
+
+// ── Calculadora bidireccional ARS ⇄ USD ──────────────
+let calcRates={};
+function calcConvert(source){
+  const tipo=q('calcType')?.value||'blue';
+  const rate=calcRates[tipo];
+  const resEl=q('calcResult');
+  const arsEl=q('calcARS');
+  const usdEl=q('calcUSD');
+  if(!rate||!rate.venta){if(resEl)resEl.textContent='Cargando cotizaciones…';return;}
+  const sell=rate.venta;
+  const LABELS={blue:'Blue',oficial:'Oficial',bolsa:'MEP',contadoconliqui:'CCL',cripto:'Cripto',tarjeta:'Tarjeta'};
+  const label=LABELS[tipo]||tipo;
+  if(source==='ars'){
+    const ars=parseFloat(arsEl?.value);
+    if(!ars||isNaN(ars)||ars<=0){if(usdEl)usdEl.value='';if(resEl)resEl.textContent='Ingresá un monto para convertir';return;}
+    const usd=ars/sell;
+    if(usdEl)usdEl.value=usd.toFixed(2);
+    if(resEl)resEl.textContent=`${fmtARS(ars)} → US$ ${usd.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})} (${label} @ ${fmtARS(sell)})`;
+  }else{
+    const usd=parseFloat(usdEl?.value);
+    if(!usd||isNaN(usd)||usd<=0){if(arsEl)arsEl.value='';if(resEl)resEl.textContent='Ingresá un monto para convertir';return;}
+    const ars=usd*sell;
+    if(arsEl)arsEl.value=Math.round(ars);
+    if(resEl)resEl.textContent=`US$ ${usd.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})} → ${fmtARS(ars)} (${label} @ ${fmtARS(sell)})`;
+  }
+}
+
+// ── Evolución 7 días (localStorage) ───────────────────
+function saveWeekSnapshot(prices){
+  try{
+    const snap=JSON.parse(localStorage.getItem('billetear-snap-7d')||'{}');
+    const now=Date.now();
+    // Guardar snapshot cada 6 horas
+    if(!snap.ts||now-snap.ts>6*3600*1000){
+      localStorage.setItem('billetear-snap-7d',JSON.stringify({ts:now,prices}));
+    }
+  }catch{}
+}
+function getWeekChange(casa){
+  try{
+    const snap=JSON.parse(localStorage.getItem('billetear-snap-7d')||'{}');
+    if(!snap.prices||!snap.prices[casa])return null;
+    const age=(Date.now()-snap.ts)/(1000*3600);
+    if(age<1)return null; // muy reciente, no mostrar
+    return snap.prices[casa];
+  }catch{return null;}
+}
+
+// Store prev prices for % change calculation
+let prevDollarPrices={};
+
+// Heatmap data stores
+let _heatDolarData=[], _heatCryptoData=[], _heatStockData=[];
+
+function renderHeatmap(){
+  const grid=q('heatGrid');
+  if(!grid)return;
+  const items=[..._heatDolarData.map(cfg=>{
+    if(!cfg.d)return null;
+    // For dollar types we show venta price and compare to oficial as "change"
+    return{name:cfg.name,price:cfg.d.venta,pct:null,fmt:cfg.fmt,isMoney:true};
+  }).filter(Boolean),..._heatCryptoData,..._heatStockData];
+  if(!items.length)return;
+  grid.innerHTML=items.map(item=>{
+    const priceStr=item.fmt(item.price);
+    let pctStr='',cls='neu';
+    if(item.pct!=null){
+      const sign=item.pct>0?'+':'';
+      pctStr=sign+item.pct.toFixed(2)+'%';
+      cls=item.pct>0.05?'pos':item.pct<-0.05?'neg':'neu';
+    }
+    return`<div class="heat-tile ${cls}"><div class="ht-name">${item.name}</div><div class="ht-price">${priceStr}</div>${pctStr?`<div class="ht-chg ${cls}">${pctStr}</div>`:''}</div>`;
+  }).join('');
+}
+
+function renderDollarWidget(data){
+  const rows=DW_CONFIG.map((cfg,i)=>{
+    const d=data.find(x=>x.casa===cfg.casa);
+    if(!d)return'';
+    const price=d.venta;
+    const prev=prevDollarPrices[cfg.casa];
+    // Flash class if price changed
+    let flashCls='';
+    if(prev!=null&&price!=null&&price!==prev)flashCls=price>prev?'flash-up':'flash-down';
+    let chgHtml='';
+    if(prev!=null&&price!=null&&price!==prev){
+      const pct=((price-prev)/prev*100);
+      const cls=pct>0?'pos':pct<0?'neg':'na';
+      const arrow=pct>0?'▲':pct<0?'▼':'';
+      chgHtml=`<span class="dw-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
+    }
+    const ts=d.fechaActualizacion?`<span class="dw-ts">${relTime(d.fechaActualizacion)}</span>`:'';
+    // Evolución 7 días
+    const oldPrice=getWeekChange(cfg.casa);
+    let evoBadge='';
+    if(oldPrice&&price){const evoP=((price-oldPrice)/oldPrice*100);const evoSign=evoP>0.5?'↑':evoP<-0.5?'↓':'→';const evoCls=evoP>0.5?'evo-up':evoP<-0.5?'evo-down':'evo-neu';evoBadge=`<span class="evo-badge ${evoCls}" title="Variación respecto a hace varios días">${evoSign}${Math.abs(evoP).toFixed(1)}%</span>`;}
+    return`<div class="dw-row ${flashCls}" style="--row-color:${cfg.dot}" onmouseenter="this.style.borderLeftColor='${cfg.dot}'" onmouseleave="this.style.borderLeftColor='transparent'">
+      <div class="dw-left">
+        <span class="dw-rank">${i+1}</span>
+        <div class="dw-dot" style="background:${cfg.dot};color:${cfg.dot}"></div>
+        <div class="dw-name">${cfg.name}${evoBadge}</div>
+      </div>
+      <div class="dw-right">
+        <div class="dw-price">${fmtARS(price)}</div>
+        ${chgHtml}
+        ${ts}
+      </div>
+    </div>`;
+  }).filter(Boolean).join('');
+  q('dwRows').innerHTML=rows;
+  // Save prices for next comparison
+  data.forEach(d=>{if(d.venta!=null)prevDollarPrices[d.casa]=d.venta;});
+}
+
+function parseRSS(xmlText,label){
+  try{
+    const xml=new DOMParser().parseFromString(xmlText,'text/xml');
+    return[...xml.querySelectorAll('item')].slice(0,3).map(item=>{
+      const raw=item.querySelector('title')?.textContent||'';
+      const title=raw.replace(/<!\[CDATA\[|\]\]>/g,'').split(' - ')[0].trim();
+      let link='';
+      const linkEl=item.querySelector('link');
+      if(linkEl)link=linkEl.nextSibling?.nodeValue?.trim()||linkEl.textContent?.trim()||'';
+      const pub=item.querySelector('pubDate')?.textContent||'';
+      return{title,link,pubDate:pub,_src:label};
+    }).filter(i=>i.title);
+  }catch{return[];}
+}
+
+function parseRSSXml(xml, label) {
+  try {
+    const doc = new DOMParser().parseFromString(xml, 'text/xml');
+    return [...doc.querySelectorAll('item')].slice(0,4).map(item => {
+      const titleRaw = item.querySelector('title')?.textContent || '';
+      const title = titleRaw.replace(/<!\[CDATA\[|\]\]>/g,'').replace(/<[^>]+>/g,'').trim();
+      const linkEl = item.querySelector('link');
+      const link = linkEl?.nextSibling?.nodeValue?.trim() || linkEl?.textContent?.trim() || '#';
+      const pubDate = item.querySelector('pubDate')?.textContent || '';
+      return { title, link, pubDate, _src: label };
+    }).filter(i => i.title && i.title.length > 10);
+  } catch { return []; }
+}
+
+async function loadNews(){
+  const feeds=[
+    {url:'https://www.ambito.com/rss/pages/economia.xml', label:'Ámbito'},
+    {url:'https://www.infobae.com/feeds/rss/economia/', label:'Infobae'},
+    {url:'https://news.google.com/rss/search?q=economia+argentina+dolar&hl=es-419&gl=AR&ceid=AR:es-419', label:'Google News'},
+    {url:'https://www.cronista.com/rss/economia/', label:'El Cronista'},
+  ];
+
+  const results = await Promise.allSettled(feeds.map(async f => {
+    // Intentar con allorigins (devuelve JSON con campo contents)
+    try {
+      const aoUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(f.url)}`;
+      const c = new AbortController();
+      const t = setTimeout(()=>c.abort(), 9000);
+      const r = await fetch(aoUrl, {signal:c.signal});
+      clearTimeout(t);
+      if (r.ok) {
+        const j = await r.json();
+        if (j?.contents) return parseRSSXml(j.contents, f.label);
+      }
+    } catch {}
+    // Fallback: corsproxy.io directo
+    try {
+      const cpUrl = `https://corsproxy.io/?url=${encodeURIComponent(f.url)}`;
+      const c2 = new AbortController();
+      const t2 = setTimeout(()=>c2.abort(), 9000);
+      const r2 = await fetch(cpUrl, {signal:c2.signal});
+      clearTimeout(t2);
+      if (r2.ok) return parseRSSXml(await r2.text(), f.label);
+    } catch {}
+    throw new Error('failed');
+  }));
+
+  const all = results.flatMap(r => r.status === 'fulfilled' ? r.value : []);
+
+  if (!all.length) {
+    q('newsGrid').innerHTML='<div class="news-card" style="grid-column:1/-1;color:var(--muted);text-align:center;pointer-events:none;padding:2rem">Noticias no disponibles ahora. <a href="noticias.html" style="color:var(--sky)">Intentar en sección Noticias →</a></div>';
+    return;
+  }
+
+  const seen = new Set();
+  const unique = all
+    .filter(i => { const k=(i.title||'').slice(0,50); if(seen.has(k)||!i.title) return false; seen.add(k); return true; })
+    .sort((a,b) => new Date(b.pubDate||0) - new Date(a.pubDate||0));
+
+  const srcColors = {'Google News':'#38bdf8','Infobae':'#f97316','Ámbito':'#a78bfa','El Cronista':'#22c55e'};
+
+  q('newsGrid').innerHTML = unique.slice(0,4).map(item => {
+    const date = item.pubDate ? new Date(item.pubDate).toLocaleDateString('es-AR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
+    const color = srcColors[item._src] || 'var(--sky)';
+    return `<a class="news-card" href="${item.link}" target="_blank" rel="noopener noreferrer" style="border-left:3px solid ${color}">
+      <div class="nc-src" style="color:${color}">${item._src}</div>
+      <div class="nc-title">${item.title}</div>
+      <div class="nc-date">${date}</div>
+    </a>`;
+  }).join('');
+}
+
+function subscribeNewsletter(){
+  const email=q('nlEmail')?.value?.trim();
+  if(!email||!email.includes('@')){q('nlEmail').style.borderColor='var(--red)';return;}
+  // Acá integrá tu provider (Mailchimp, ConvertKit, etc.)
+  // Por ahora solo muestra el mensaje de éxito
+  q('nlEmail').style.display='none';
+  document.querySelector('.nl-btn').style.display='none';
+  q('nlSuccess').style.display='block';
+  // TODO: enviar a tu API/webhook
+  console.log('Newsletter signup:', email);
+}
+
+async function refreshAll(){
+  let tickerItems=[];
+  await Promise.allSettled([
+    fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
+      renderDollarWidget(data);
+      const blue=data.find(d=>d.casa==='blue');
+      const oficial=data.find(d=>d.casa==='oficial');
+      const mep=data.find(d=>d.casa==='bolsa');
+      const ccl=data.find(d=>d.casa==='contadoconliqui');
+      if(blue&&oficial&&oficial.venta&&blue.venta){
+        const brecha=((blue.venta-oficial.venta)/oficial.venta*100).toFixed(1);
+        q('mmBrecha').textContent='+'+brecha+'%';
+        q('mmBrechaSub').textContent=`Blue ${fmtARS(blue.venta)} · Ofic. ${fmtARS(oficial.venta)}`;
+        q('pvBrecha').textContent='+'+brecha+'%';
+        if(q('sb-brecha'))q('sb-brecha').textContent='+'+brecha+'%';
+      }
+      if(blue){q('pvBlue').textContent=fmtARS(blue.venta);q('dwTime').textContent=relTime(blue.fechaActualizacion);if(q('sb-blue'))q('sb-blue').textContent=fmtARS(blue.venta);}
+      if(mep){q('pvMep').textContent=fmtARS(mep.venta);if(q('sb-mep'))q('sb-mep').textContent=fmtARS(mep.venta);}
+      if(ccl){q('pvCcl').textContent=fmtARS(ccl.venta);if(q('sb-ccl'))q('sb-ccl').textContent=fmtARS(ccl.venta);}
+      // Guardar precios para calculadora y evolución
+      data.forEach(d=>{if(d.venta>0)calcRates[d.casa]=d;});
+      saveWeekSnapshot(Object.fromEntries(data.filter(d=>d.venta>0).map(d=>[d.casa,d.venta])));
+      calcConvert('ars');
+      // Heatmap dólar tiles
+      if(q('heatGrid')){
+        const heatDolars=[
+          {name:'Blue',casa:'blue',fmt:fmtARS},{name:'MEP',casa:'bolsa',fmt:fmtARS},
+          {name:'CCL',casa:'contadoconliqui',fmt:fmtARS},{name:'Oficial',casa:'oficial',fmt:fmtARS},
+          {name:'Cripto',casa:'cripto',fmt:fmtARS},{name:'Tarjeta',casa:'tarjeta',fmt:fmtARS},
+        ];
+        _heatDolarData=heatDolars.map(cfg=>({...cfg,d:data.find(x=>x.casa===cfg.casa)}));
+        renderHeatmap();
+      }
+      const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${d.nombre||d.casa}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`);
+      tickerItems.push(...tick);
+      q('lastUpdate').textContent='En vivo · '+relTime(blue?.fechaActualizacion);
+      q('lastUpdateSub').textContent=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+    }).catch(()=>{}),
+
+    fetchJSON('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana&order=market_cap_desc&per_page=3&sparkline=false&price_change_percentage=24h').then(data=>{
+      const btc=data.find(c=>c.id==='bitcoin');
+      const eth=data.find(c=>c.id==='ethereum');
+      const sol=data.find(c=>c.id==='solana');
+      if(btc){
+        q('mmBtc').textContent=fmtUSD(btc.current_price);
+        const pct=btc.price_change_percentage_24h||0;
+        q('mmBtcChg').textContent=(pct>=0?'▲':'▼')+' '+Math.abs(pct).toFixed(2)+'% 24h';
+        q('mmBtc').className='mm-val '+(pct>=0?'neu':'down');
+        q('pvBtc').textContent=fmtUSD(btc.current_price);
+        // BTC en stats bar: solo mostrar si hay espacio
+        if(q('sb-btc')){q('sb-btc').textContent=fmtUSD(btc.current_price);q('sb-btc').style.color=pct>=0?'var(--green)':'var(--red)';}
+        _heatCryptoData=[
+          {name:'BTC',price:btc.current_price,pct:btc.price_change_percentage_24h||0,fmt:fmtUSD},
+          eth?{name:'ETH',price:eth.current_price,pct:eth.price_change_percentage_24h||0,fmt:fmtUSD}:null,
+          sol?{name:'SOL',price:sol.current_price,pct:sol.price_change_percentage_24h||0,fmt:fmtUSD}:null,
+        ].filter(Boolean);
+        renderHeatmap();
+      }
+      if(eth)q('pvEth').textContent=fmtUSD(eth.current_price);
+      if(sol)q('pvSol').textContent=fmtUSD(sol.current_price);
+      const tick=data.map(c=>{const pct=c.price_change_percentage_24h||0;return`<span class="t-item"><span class="t-name">${(c.symbol||'').toUpperCase()}</span><span class="t-price ${pct>=0?'up':'down'}">${fmtUSD(c.current_price)}</span></span>`;});
+      tickerItems.push(...tick);
+    }).catch(()=>{}),
+
+    fetchJSON('https://query1.finance.yahoo.com/v7/finance/quote?symbols=SPY,MELI,YPF').then(data=>{
+      const r=data?.quoteResponse?.result||[];
+      const spy=r.find(s=>s.symbol==='SPY');
+      const meli=r.find(s=>s.symbol==='MELI');
+      const ypf=r.find(s=>s.symbol==='YPF');
+      if(spy)q('pvSpy').textContent=fmtUSD(spy.regularMarketPrice);
+      if(meli)q('pvMeli').textContent=fmtUSD(meli.regularMarketPrice);
+      if(ypf)q('pvYpf').textContent=fmtUSD(ypf.regularMarketPrice);
+      _heatStockData=r.map(s=>({name:s.symbol,price:s.regularMarketPrice,pct:s.regularMarketChangePercent||0,fmt:fmtUSD}));
+      renderHeatmap();
+    }).catch(()=>{}),
+
+    (async()=>{
+      const eps=['https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo','https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais'];
+      for(const ep of eps){try{const r=await fetchJSON(ep);let e=null;if(Array.isArray(r)&&r.length)e=r[r.length-1];else if(r?.valor!=null)e=r;if(e?.valor!=null){const v=Number(e.valor).toLocaleString('es-AR');q('mmRiesgo').textContent=v;q('pvRiesgo').textContent=v+' pb';if(q('sb-riesgo'))q('sb-riesgo').textContent=v+' pb';break;}}catch{}}
+    })(),
+
+    fetchJSON('https://api.argentinadatos.com/v1/finanzas/indices/inflacion').then(data=>{
+      if(Array.isArray(data)&&data.length){
+        const last=data[data.length-1];
+        q('mmInfla').textContent=last.valor+'%';
+        q('pvInfla').textContent=last.valor+'%';
+        if(last.fecha)q('mmInflaSub').textContent=new Date(last.fecha+'T12:00:00').toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+      }
+    }).catch(()=>{}),
+
+    loadNews().catch(()=>{}),
+  ]);
+
+  if(tickerItems.length){const html=tickerItems.join('');q('tickerTrack').innerHTML=html+html;}
+}
+
+// ── Share functions ─────────────────────────────────────
+function buildShareText(){
+  const rows=document.querySelectorAll('#dwRows .dw-row');
+  let lines=['📊 *BilleteAR – Precios del día*',''];
+  const emojis={MEP:'🏦',CCL:'🌐',Cripto:'💜',Blue:'💵',Oficial:'🏛️',Mayorista:'📦',Tarjeta:'💳'};
+  rows.forEach(row=>{
+    const name=row.querySelector('.dw-name')?.textContent?.trim();
+    const price=row.querySelector('.dw-price')?.textContent?.trim();
+    if(name&&price){
+      const emoji=emojis[name]||'•';
+      lines.push(`${emoji} ${name}: ${price}`);
+    }
+  });
+  lines.push('');
+  lines.push('👉 pulsoar.netlify.app');
+  return lines.join('\n');
+}
+
+function shareWhatsApp(){
+  const text=buildShareText();
+  window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+}
+
+function shareTwitter(){
+  const rows=document.querySelectorAll('#dwRows .dw-row');
+  const blue=document.querySelector('#dwRows .dw-row:nth-child(4) .dw-price')?.textContent||'';
+  const mep=document.querySelector('#dwRows .dw-row:nth-child(1) .dw-price')?.textContent||'';
+  const text=`📊 Dólares hoy en Argentina:\n💵 Blue: ${blue}\n🏦 MEP: ${mep}\n\nVer todos en pulsoar.netlify.app #DolarBlue #Argentina #Economia`;
+  window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank');
+}
+
+async function copyPrices(){
+  const text=buildShareText();
+  try{
+    await navigator.clipboard.writeText(text);
+    const btn=q('copyBtn');
+    btn.textContent='✅ ¡Copiado!';
+    btn.classList.add('share-copied');
+    setTimeout(()=>{btn.textContent='📋 Copiar precios';btn.classList.remove('share-copied');},2200);
+  }catch{
+    alert('Seleccioná y copiá:\n\n'+text);
+  }
+}
+// ────────────────────────────────────────────────────────
+
+function triggerRefresh(){
+  const btn=q('refreshBtn');
+  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
+  refreshAll();
+}
+
+refreshAll();
+setInterval(refreshAll,3*60*1000);
+
+// PWA: register service worker
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
+</script>
+</body>
+</html>

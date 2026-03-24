@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acciones argentinas en Wall Street hoy | S&P 500, Merval – BilleteAR</title>
+  <meta name="description" content="Precios de acciones argentinas en Wall Street hoy: MELI, YPF, GGAL, GGAL. S&P 500, Nasdaq, índices globales y ETFs en tiempo real." />
+  <meta name="keywords" content="acciones argentinas wall street, merval hoy, ypf accion, meli precio, cedears, sp500 hoy, nasdaq" />
+  <meta property="og:title" content="Acciones argentinas en Wall Street hoy – BilleteAR" />
+  <meta property="og:description" content="MELI, YPF, GGAL y más. S&P 500, Nasdaq e índices globales en tiempo real." />
+  <meta property="og:url" content="https://pulsoar.netlify.app/mercados.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="canonical" href="https://pulsoar.netlify.app/mercados.html" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b0f1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BilleteAR" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
+    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+    .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
+    .ticker::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
+    .ticker-track{display:inline-flex;animation:ticker 60s linear infinite}
+    .ticker-track:hover{animation-play-state:paused}
+    .t-item{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:.76rem;border-right:1px solid var(--border)}
+    .t-name{color:var(--muted)}.t-price{font-weight:600}
+    .up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--sky)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:18px;height:18px}
+    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo-text em{color:var(--sky);font-style:normal}
+    .nav-right{display:flex;align-items:center;gap:14px}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
+    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
+    .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .topnav::-webkit-scrollbar{display:none}
+    .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .topnav-link:hover{color:var(--text);border-color:var(--border2)}
+    .topnav-link.active{color:var(--sky);border-color:var(--sky)}
+    .subnav{background:rgba(20,30,48,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .subnav::-webkit-scrollbar{display:none}
+    .subnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .subnav-link{padding:7px 14px;font-size:.78rem;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .subnav-link:hover,.subnav-link.active{color:var(--sky);border-color:var(--sky)}
+    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
+    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+    .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sec-line{flex:1;height:1px;background:var(--border)}
+
+    /* ── Market status banner ── */
+    .market-banner{display:flex;align-items:center;gap:8px;padding:.55rem 1rem;border-radius:10px;font-size:.78rem;margin-bottom:1rem}
+    .market-banner.open{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);color:var(--green)}
+    .market-banner.closed{background:rgba(249,115,22,.08);border:1px solid rgba(249,115,22,.2);color:var(--orange)}
+    .market-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+
+    /* ── Stocks table ── */
+    .stocks-table{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .st-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;padding:.75rem 1.2rem;border-bottom:1px solid var(--border);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+    .st-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:.5rem;padding:.9rem 1.2rem;border-bottom:1px solid var(--border);align-items:center;transition:background .15s}
+    .st-row:last-child{border-bottom:none}
+    .st-row:hover{background:var(--card2)}
+    .st-sym{font-size:.95rem;font-weight:700;color:var(--text)}
+    .st-name{font-size:.72rem;color:var(--muted);margin-top:1px}
+    .st-price{font-size:.92rem;font-weight:600;color:var(--text2)}
+    .st-chg{font-size:.85rem;font-weight:700}
+    .st-chg.pos{color:var(--green)}.st-chg.neg{color:var(--red)}
+    .st-vol{font-size:.75rem;color:var(--muted)}
+    @media(max-width:600px){.st-header,.st-row{grid-template-columns:2fr 1fr 1fr}.st-header>*:last-child,.st-row>*:last-child{display:none}}
+
+    /* ── Index cards ── */
+    .index-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.9rem}
+    .index-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;transition:all .2s}
+    .index-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .ic-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
+    .ic-price{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
+    .ic-chg{font-size:.82rem;font-weight:700}
+    .ic-chg.pos{color:var(--green)}.ic-chg.neg{color:var(--red)}
+    .ic-extra{font-size:.7rem;color:var(--muted2);margin-top:.3rem}
+
+    /* ── Error / empty state ── */
+    .empty-state{padding:2rem 1.5rem;text-align:center;color:var(--muted)}
+    .empty-icon{font-size:2rem;margin-bottom:.5rem}
+    .empty-msg{font-size:.85rem;line-height:1.5}
+    .empty-hint{font-size:.73rem;color:var(--muted2);margin-top:.4rem}
+    .retry-btn{margin-top:.8rem;background:transparent;border:1px solid var(--border2);color:var(--sky);padding:5px 14px;border-radius:8px;cursor:pointer;font:.8rem 'DM Sans',sans-serif}
+    .retry-btn:hover{border-color:var(--sky)}
+
+    .info-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem;font-size:.83rem;color:var(--muted);line-height:1.6}
+    .info-box strong{color:var(--text2)}
+    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
+    footer a{color:var(--sky);text-decoration:none}
+  </style>
+</head>
+<body>
+
+<!-- TradingView Ticker Tape -->
+<div class="tradingview-widget-container" style="height:44px;overflow:hidden">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq 100"},{"proName":"INDEX:MERV","title":"Merval"},{"proName":"NYSE:YPF","title":"YPF"},{"proName":"NASDAQ:MELI","title":"MercadoLibre"},{"proName":"NYSE:GGAL","title":"Galicia"},{"proName":"NYSE:PAM","title":"Pampa"},{"proName":"TVC:GOLD","title":"Oro"},{"proName":"TVC:USOIL","title":"Petróleo"},{"proName":"NASDAQ:NVDA","title":"Nvidia"},{"proName":"NASDAQ:TSLA","title":"Tesla"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"es"}
+  </script>
+</div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+      <span class="logo-text">Billete<em>AR</em></span>
+    </a>
+    <div class="nav-right">
+      <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
+      <button class="btn" onclick="refreshAll()">↻ Actualizar</button>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-link" href="index.html">🏠 Inicio</a>
+    <a class="topnav-link" href="dolares.html">💵 Dólares</a>
+    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
+    <a class="topnav-link active" href="mercados.html">📈 Mercados</a>
+    <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
+    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
+  </div>
+</nav>
+
+<nav class="subnav">
+  <div class="subnav-inner">
+    <a class="subnav-link active" href="#indices">🌐 Índices</a>
+    <a class="subnav-link" href="#argentina">🇦🇷 Argentina</a>
+    <a class="subnav-link" href="#us">🇺🇸 EE.UU.</a>
+    <a class="subnav-link" href="#etfs">📦 ETFs</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- Índices globales + ADRs + Tech + ETFs -->
+  <div class="section" id="indices" style="animation-delay:.05s">
+    <div class="sec-header"><span class="sec-title">Índices globales</span><div class="sec-line"></div></div>
+    <div id="marketBanner"></div>
+    <div class="index-cards" id="indexCards" style="display:none">
+
+    </div>
+
+    <!-- TradingView Market Overview: Índices, ADRs Argentina, Tech, ETFs -->
+    <div class="tradingview-widget-container" style="border-radius:16px;overflow:hidden">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"es","isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,"width":"100%","height":"580","tabs":[{"title":"Índices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:MERV","d":"Merval"},{"s":"TVC:GOLD","d":"Oro"},{"s":"TVC:USOIL","d":"Petróleo WTI"},{"s":"CBOE:VIX","d":"VIX Volatilidad"}],"originalTitle":"Indices"},{"title":"ADRs Argentina","symbols":[{"s":"NASDAQ:MELI","d":"MercadoLibre"},{"s":"NYSE:YPF","d":"YPF S.A."},{"s":"NYSE:GGAL","d":"Grupo Galicia"},{"s":"NYSE:BMA","d":"Banco Macro"},{"s":"NYSE:PAM","d":"Pampa Energía"},{"s":"NYSE:BBAR","d":"BBVA Argentina"},{"s":"NYSE:EDN","d":"Edenor"},{"s":"NYSE:TGS","d":"Trans. Gas del Sur"},{"s":"NYSE:SUPV","d":"Supervielle"},{"s":"NYSE:CEPU","d":"Central Puerto"},{"s":"NASDAQ:GLOB","d":"Globant"},{"s":"NYSE:CAAP","d":"Corp. América"}],"originalTitle":"Argentina ADRs"},{"title":"Tech EE.UU.","symbols":[{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:NVDA","d":"Nvidia"},{"s":"NASDAQ:GOOGL","d":"Alphabet"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"},{"s":"NASDAQ:TSLA","d":"Tesla"},{"s":"NASDAQ:AMD","d":"AMD"}],"originalTitle":"US Tech"},{"title":"ETFs","symbols":[{"s":"AMEX:SPY","d":"S&P 500 ETF"},{"s":"NASDAQ:QQQ","d":"Nasdaq 100 ETF"},{"s":"AMEX:GLD","d":"Gold ETF"},{"s":"AMEX:EEM","d":"Emergentes ETF"},{"s":"AMEX:IWM","d":"Small Cap ETF"},{"s":"NASDAQ:ARKK","d":"ARK Innovation"}],"originalTitle":"ETFs"}]}
+      </script>
+    </div>
+  </div>
+
+  <!-- Acciones argentinas: detalle -->
+  <div class="section" id="argentina" style="animation-delay:.08s">
+    <div class="sec-header"><span class="sec-title">🇦🇷 ADRs argentinos — gráfico</span><div class="sec-line"></div></div>
+
+    <!-- TradingView Symbol Overview: MELI -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="ar-charts">
+      <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+        {"symbols":[["NASDAQ:MELI|1D"],["NYSE:YPF|1D"],["NYSE:GGAL|1D"],["NYSE:PAM|1D"]],"chartOnly":false,"width":"100%","height":"250","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
+        </script>
+      </div>
+      <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
+        <div class="tradingview-widget-container__widget"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+        {"symbols":[["NYSE:BMA|1D"],["NYSE:BBAR|1D"],["NYSE:SUPV|1D"],["NASDAQ:GLOB|1D"]],"chartOnly":false,"width":"100%","height":"250","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
+        </script>
+      </div>
+    </div>
+    <style>#ar-charts{} @media(max-width:640px){#ar-charts{grid-template-columns:1fr}}</style>
+  </div>
+
+  <!-- Merval & S&P full chart -->
+  <div class="section" id="us" style="animation-delay:.11s">
+    <div class="sec-header"><span class="sec-title">📈 S&amp;P 500 y Merval — gráfico comparativo</span><div class="sec-line"></div></div>
+    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+      {"symbols":[["S&P 500","FOREXCOM:SPXUSD|1D"],["Nasdaq 100","FOREXCOM:NSXUSD|1D"],["Merval","INDEX:MERV|1D"],["Oro","TVC:GOLD|1D"]],"chartOnly":false,"width":"100%","height":"340","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]}
+      </script>
+    </div>
+  </div>
+
+  <!-- ETFs -->
+  <div class="section" id="etfs" style="animation-delay:.14s">
+    <div class="sec-header"><span class="sec-title">📦 ETFs principales</span><div class="sec-line"></div></div>
+    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+      {"symbols":[["SPY","AMEX:SPY|1D"],["QQQ","NASDAQ:QQQ|1D"],["GLD","AMEX:GLD|1D"],["EEM","AMEX:EEM|1D"]],"chartOnly":false,"width":"100%","height":"300","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
+      </script>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:.17s">
+    <div class="info-box">
+      <strong>Datos de mercado:</strong> Gráficos y cotizaciones provistos por <a href="https://tradingview.com" target="_blank" style="color:var(--sky)">TradingView</a>. Las acciones argentinas cotizan como ADRs en NYSE/NASDAQ. Valores en USD. No constituyen asesoramiento financiero.
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div><strong>BilleteAR</strong> · Gráficos: <a href="https://tradingview.com" target="_blank">TradingView</a></div>
+  <div>No constituye asesoramiento financiero · Datos en tiempo real</div>
+</footer>
+
+<script>
+const q=id=>document.getElementById(id);
+
+function marketStatus(){
+  const now=new Date();
+  const utcH=now.getUTCHours(),utcM=now.getUTCMinutes(),day=now.getUTCDay();
+  const totalMin=utcH*60+utcM;
+  return day>=1&&day<=5&&totalMin>=810&&totalMin<1200;
+}
+
+function renderMarketBanner(){
+  const open=marketStatus();
+  const el=q('marketBanner');
+  if(el)el.innerHTML=`<div class="market-banner ${open?'open':'closed'}" style="margin-bottom:1rem"><div class="market-dot"></div>${open?'🟢 Mercado NYSE/NASDAQ abierto ahora':'🟠 Mercado NYSE/NASDAQ cerrado · Precios del último cierre'}</div>`;
+}
+
+function initScrollSpy(){
+  const links=document.querySelectorAll('.subnav-link');
+  const sections=['indices','argentina','us','etfs'].map(id=>document.getElementById(id)).filter(Boolean);
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
+  sections.forEach(s=>obs.observe(s));
+}
+
+function refreshAll(){
+  renderMarketBanner();
+  const el=q('lastUpdate');
+  if(el)el.textContent='TradingView · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+}
+
+refreshAll();
+initScrollSpy();
+
+// PWA: register service worker
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
+</script>
+</body>
+</html>

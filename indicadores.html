@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Indicadores – BilleteAR</title>
+  <meta name="description" content="Riesgo País, inflación, brecha cambiaria y datos macroeconómicos de Argentina en tiempo real." />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b0f1e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BilleteAR" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569;--purple:#a78bfa}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
+    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
+    .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
+    .ticker::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
+    .ticker-track{display:inline-flex;animation:ticker 60s linear infinite}
+    .ticker-track:hover{animation-play-state:paused}
+    .t-item{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:.76rem;border-right:1px solid var(--border)}
+    .t-name{color:var(--muted)}.t-price{font-weight:600}
+    .up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--sky)}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
+    .logo-icon svg{width:18px;height:18px}
+    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo-text em{color:var(--sky);font-style:normal}
+    .nav-right{display:flex;align-items:center;gap:14px}
+    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
+    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
+    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
+    .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .topnav::-webkit-scrollbar{display:none}
+    .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
+    .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .topnav-link:hover{color:var(--text);border-color:var(--border2)}
+    .topnav-link.active{color:var(--sky);border-color:var(--sky)}
+    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
+    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
+    .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sec-line{flex:1;height:1px;background:var(--border)}
+
+    /* ── Big stat cards ── */
+    .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
+    .macro-card{border-radius:18px;padding:1.6rem;position:relative;overflow:hidden;transition:all .2s}
+    .macro-card::before{content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;border-radius:50%;pointer-events:none}
+    .macro-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
+    .macro-card.brecha{background:linear-gradient(135deg,#1a1a3e 0%,#0e0e25 100%);border:1px solid rgba(167,139,250,.25)}
+    .macro-card.brecha::before{background:radial-gradient(circle,rgba(167,139,250,.12),transparent 70%)}
+    .macro-card.riesgo{background:linear-gradient(135deg,#1f1206 0%,#0f0903 100%);border:1px solid rgba(249,115,22,.25)}
+    .macro-card.riesgo::before{background:radial-gradient(circle,rgba(249,115,22,.12),transparent 70%)}
+    .macro-card.inflacion{background:linear-gradient(135deg,#0f2a1a 0%,#061510 100%);border:1px solid rgba(34,197,94,.2)}
+    .macro-card.inflacion::before{background:radial-gradient(circle,rgba(34,197,94,.1),transparent 70%)}
+    .macro-card.anual{background:linear-gradient(135deg,#1a0e2a 0%,#0d0715 100%);border:1px solid rgba(56,189,248,.2)}
+    .macro-card.anual::before{background:radial-gradient(circle,rgba(56,189,248,.1),transparent 70%)}
+    .macro-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.6rem}
+    .macro-value{font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:.4rem}
+    .macro-card.brecha .macro-value{color:var(--purple)}
+    .macro-card.riesgo .macro-value{color:var(--orange)}
+    .macro-card.inflacion .macro-value{color:var(--green)}
+    .macro-card.anual .macro-value{color:var(--sky)}
+    .macro-sub{font-size:.75rem;color:var(--muted);line-height:1.4}
+    .macro-trend{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;margin-top:.5rem;padding:3px 8px;border-radius:20px}
+    .macro-trend.up{background:rgba(34,197,94,.12);color:var(--green)}
+    .macro-trend.down{background:rgba(239,68,68,.12);color:var(--red)}
+
+    /* ── Two-col layout for charts ── */
+    .charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    @media(max-width:768px){.charts-2col{grid-template-columns:1fr}}
+
+    /* ── Inflación histórica table ── */
+    .infla-table{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
+    .it-header{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;padding:.7rem 1.2rem;border-bottom:1px solid var(--border);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+    .it-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.5rem;padding:.8rem 1.2rem;border-bottom:1px solid var(--border);align-items:center;font-size:.85rem;transition:background .15s}
+    .it-row:last-child{border-bottom:none}
+    .it-row:hover{background:var(--card2)}
+    .it-month{color:var(--text2);font-weight:500}
+    .it-val{font-weight:700;color:var(--green)}
+    .it-val.high{color:var(--red)}
+    .it-acum{color:var(--sky);font-size:.8rem;font-weight:600}
+
+    /* ── Chart card ── */
+    .chart-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem}
+    .chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+    .chart-title{font-size:1rem;font-weight:700}
+    .chart-sub{font-size:.73rem;color:var(--muted);margin-top:2px}
+    .chart-wrap{height:260px;position:relative}
+    .chart-wrap-lg{height:300px;position:relative}
+    .range-btns{display:flex;gap:4px;flex-wrap:wrap}
+    .range-btn{background:transparent;border:1px solid var(--border2);color:var(--muted);padding:3px 10px;border-radius:6px;cursor:pointer;font:600 .72rem 'DM Sans',sans-serif;transition:all .18s}
+    .range-btn:hover{border-color:var(--sky);color:var(--sky)}
+    .range-btn.active{background:var(--sky2);border-color:var(--sky2);color:#fff}
+
+    /* ── Riesgo table (mini) ── */
+    .riesgo-history{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.6rem;margin-top:.8rem}
+    .rh-item{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;text-align:center}
+    .rh-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+    .rh-val{font-size:1.05rem;font-weight:700;color:var(--orange)}
+    @media(max-width:500px){.riesgo-history{grid-template-columns:1fr 1fr}}
+
+    /* ── Blue history mini stat ── */
+    .blue-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:.8rem}
+    .bs-item{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;text-align:center}
+    .bs-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
+    .bs-val{font-size:1rem;font-weight:700;color:var(--sky)}
+    @media(max-width:500px){.blue-stats{grid-template-columns:1fr 1fr}}
+
+    /* ── Info cards ── */
+    .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
+    .info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem}
+    .info-card-title{font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:.5rem}
+    .info-card-body{font-size:.79rem;color:var(--muted);line-height:1.6}
+
+    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
+    footer a{color:var(--sky);text-decoration:none}
+    @media(max-width:500px){.macro-value{font-size:2rem}}
+  </style>
+</head>
+<body>
+
+<div class="ticker"><div class="ticker-track" id="tickerTrack"><span class="t-item"><span class="t-name">Cargando...</span></span></div></div>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
+      <span class="logo-text">Billete<em>AR</em></span>
+    </a>
+    <div class="nav-right">
+      <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
+      <button class="btn" onclick="refreshAll()">↻ Actualizar</button>
+    </div>
+  </div>
+</header>
+
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="topnav-link" href="index.html">🏠 Inicio</a>
+    <a class="topnav-link" href="dolares.html">💵 Dólares</a>
+    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
+    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
+    <a class="topnav-link active" href="indicadores.html">📊 Indicadores</a>
+    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- Big 4 macro cards -->
+  <div class="section" style="animation-delay:.05s">
+    <div class="sec-header"><span class="sec-title">Indicadores clave</span><div class="sec-line"></div></div>
+    <div class="macro-grid">
+      <div class="macro-card brecha">
+        <div class="macro-label">Brecha cambiaria</div>
+        <div class="macro-value" id="brechaVal">—</div>
+        <div class="macro-sub" id="brechaSub">Blue vs Oficial</div>
+      </div>
+      <div class="macro-card riesgo">
+        <div class="macro-label">🌡️ Riesgo País</div>
+        <div class="macro-value" id="riesgoVal">—</div>
+        <div class="macro-sub" id="riesgoSub">puntos básicos (EMBI+)</div>
+        <div id="riesgoTrend" style="margin-top:.5rem"></div>
+      </div>
+      <div class="macro-card inflacion">
+        <div class="macro-label">📉 Inflación mensual</div>
+        <div class="macro-value" id="inflaVal">—</div>
+        <div class="macro-sub" id="inflaSub">último dato INDEC</div>
+      </div>
+      <div class="macro-card anual">
+        <div class="macro-label">📅 Inflación anual</div>
+        <div class="macro-value" id="inflaAnual">—</div>
+        <div class="macro-sub" id="inflaAnualSub">variación interanual</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Riesgo País chart -->
+  <div class="section" style="animation-delay:.08s">
+    <div class="sec-header"><span class="sec-title">🌡️ Riesgo País – Evolución histórica</span><div class="sec-line"></div></div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Riesgo País (EMBI+)</div>
+          <div class="chart-sub">Fuente: argentinadatos.com · Puntos básicos</div>
+        </div>
+        <div class="range-btns" id="riesgoBtns">
+          <button class="range-btn" onclick="setRiesgoRange(30)">1M</button>
+          <button class="range-btn" onclick="setRiesgoRange(90)">3M</button>
+          <button class="range-btn" onclick="setRiesgoRange(180)">6M</button>
+          <button class="range-btn active" onclick="setRiesgoRange(365)">1A</button>
+          <button class="range-btn" onclick="setRiesgoRange(0)">Todo</button>
+        </div>
+      </div>
+      <div class="riesgo-history" id="riesgoHistory">
+        <div class="rh-item"><div class="rh-label">Actual</div><div class="rh-val skel" style="height:1.3rem;width:80%;margin:0 auto">&nbsp;</div></div>
+        <div class="rh-item"><div class="rh-label">Hace 1 mes</div><div class="rh-val skel" style="height:1.3rem;width:80%;margin:0 auto">&nbsp;</div></div>
+        <div class="rh-item"><div class="rh-label">Hace 6 meses</div><div class="rh-val skel" style="height:1.3rem;width:80%;margin:0 auto">&nbsp;</div></div>
+        <div class="rh-item"><div class="rh-label">Hace 1 año</div><div class="rh-val skel" style="height:1.3rem;width:80%;margin:0 auto">&nbsp;</div></div>
+      </div>
+      <div class="chart-wrap-lg" style="margin-top:.8rem"><canvas id="riesgoChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Inflación chart + table side by side -->
+  <div class="section" style="animation-delay:.11s">
+    <div class="sec-header"><span class="sec-title">📉 Inflación mensual (IPC)</span><div class="sec-line"></div></div>
+    <div class="charts-2col">
+      <div class="chart-card">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title">Variación mensual</div>
+            <div class="chart-sub">Fuente: INDEC vía argentinadatos.com</div>
+          </div>
+          <div class="range-btns">
+            <button class="range-btn" onclick="setInflaRange(12)">12M</button>
+            <button class="range-btn active" onclick="setInflaRange(18)">18M</button>
+            <button class="range-btn" onclick="setInflaRange(0)">Todo</button>
+          </div>
+        </div>
+        <div class="chart-wrap"><canvas id="inflaChart"></canvas></div>
+      </div>
+      <div class="infla-table" id="inflaTable">
+        <div class="it-header"><div>Mes</div><div>Variación</div><div>Acum. año</div></div>
+        <div class="it-row"><div class="skel" style="height:.8rem;width:60%"></div><div class="skel" style="height:.8rem;width:50%"></div><div class="skel" style="height:.8rem;width:40%"></div></div>
+        <div class="it-row"><div class="skel" style="height:.8rem;width:60%"></div><div class="skel" style="height:.8rem;width:50%"></div><div class="skel" style="height:.8rem;width:40%"></div></div>
+        <div class="it-row"><div class="skel" style="height:.8rem;width:60%"></div><div class="skel" style="height:.8rem;width:50%"></div><div class="skel" style="height:.8rem;width:40%"></div></div>
+        <div class="it-row"><div class="skel" style="height:.8rem;width:60%"></div><div class="skel" style="height:.8rem;width:50%"></div><div class="skel" style="height:.8rem;width:40%"></div></div>
+        <div class="it-row"><div class="skel" style="height:.8rem;width:60%"></div><div class="skel" style="height:.8rem;width:50%"></div><div class="skel" style="height:.8rem;width:40%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Blue dollar historical chart -->
+  <div class="section" style="animation-delay:.14s">
+    <div class="sec-header"><span class="sec-title">💵 Dólar Blue – Evolución histórica</span><div class="sec-line"></div></div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Dólar Blue (venta)</div>
+          <div class="chart-sub">Fuente: argentinadatos.com · Precio en pesos</div>
+        </div>
+        <div class="range-btns" id="blueBtns">
+          <button class="range-btn" onclick="setBlueRange(30)">1M</button>
+          <button class="range-btn" onclick="setBlueRange(90)">3M</button>
+          <button class="range-btn active" onclick="setBlueRange(180)">6M</button>
+          <button class="range-btn" onclick="setBlueRange(365)">1A</button>
+          <button class="range-btn" onclick="setBlueRange(0)">Todo</button>
+        </div>
+      </div>
+      <div class="blue-stats" id="blueStats">
+        <div class="bs-item"><div class="bs-label">Actual</div><div class="bs-val" id="blueNow">—</div></div>
+        <div class="bs-item"><div class="bs-label">Hace 1 mes</div><div class="bs-val" id="blue1m">—</div></div>
+        <div class="bs-item"><div class="bs-label">Máx. 1 año</div><div class="bs-val" id="blueMax">—</div></div>
+        <div class="bs-item"><div class="bs-label">Mín. 1 año</div><div class="bs-val" id="blueMin">—</div></div>
+      </div>
+      <div class="chart-wrap-lg"><canvas id="blueChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Glosario / info -->
+  <div class="section" style="animation-delay:.17s">
+    <div class="sec-header"><span class="sec-title">Guía de indicadores</span><div class="sec-line"></div></div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-title">🌡️ Riesgo País (EMBI+)</div>
+        <div class="info-card-body">Mide la diferencia entre la tasa de interés que paga Argentina por su deuda y la tasa de los bonos del Tesoro de EE.UU. Cuanto mayor es el número, más riesgoso perciben los mercados internacionales al país. Se expresa en puntos básicos (100 pb = 1%).</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">📉 Brecha cambiaria</div>
+        <div class="info-card-body">Diferencia porcentual entre el dólar blue (o MEP/CCL) y el tipo de cambio oficial. Una brecha alta indica mayor presión sobre el sistema cambiario. Cuando la brecha baja, señala menor tensión entre el mercado informal y el oficial.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">📅 Inflación (IPC)</div>
+        <div class="info-card-body">El Índice de Precios al Consumidor (IPC) mide la variación mensual del costo de una canasta de bienes y servicios. El INDEC lo publica cada mes. La inflación interanual suma las variaciones de los últimos 12 meses.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">💵 Dólar Blue</div>
+        <div class="info-card-body">El dólar "blue" es el tipo de cambio en el mercado informal o paralelo en Argentina. No es el oficial del Banco Central. Se usa como referencia de la demanda real de divisas. La brecha entre el blue y el oficial es un termómetro económico clave.</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div><strong>BilleteAR</strong> · Datos: <a href="https://argentinadatos.com" target="_blank">argentinadatos.com</a> · <a href="https://dolarapi.com" target="_blank">dolarapi.com</a></div>
+  <div>No constituye asesoramiento financiero · Actualización cada 3 min</div>
+</footer>
+
+<script>
+const q=id=>document.getElementById(id);
+function fmtARS(n){if(n==null)return'–';return '$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
+
+async function fetchJSON(url){
+  const proxies=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
+  for(const u of proxies){try{const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),8000);const r=await fetch(u,{signal:ctrl.signal});clearTimeout(tid);if(r.ok)return await r.json();}catch{continue;}}
+  throw new Error('fetch failed');
+}
+
+// ── Chart helpers ──────────────────────────────────────────
+let inflaChart=null, riesgoChart=null, blueChart=null;
+let allInflaData=[], allRiesgoData=[], allBlueData=[];
+let inflaCurRange=18, riesgoCurRange=365, blueCurRange=180;
+
+function sliceByDays(data,days){
+  if(!days||days===0)return data;
+  const cutoff=new Date();
+  cutoff.setDate(cutoff.getDate()-days);
+  return data.filter(d=>new Date(d.fecha+'T12:00:00')>=cutoff);
+}
+
+// ── Inflación chart ──────────────────────────────────────
+function drawInflaChart(data){
+  const slice=inflaCurRange?data.slice(-inflaCurRange):data;
+  const labels=slice.map(d=>{const dt=new Date(d.fecha+'T12:00:00');return dt.toLocaleDateString('es-AR',{month:'short',year:'2-digit'});});
+  const values=slice.map(d=>d.valor);
+  const ctx=document.getElementById('inflaChart').getContext('2d');
+  if(inflaChart)inflaChart.destroy();
+  inflaChart=new Chart(ctx,{
+    type:'bar',
+    data:{labels,datasets:[{data:values,backgroundColor:values.map(v=>v>10?'rgba(239,68,68,.75)':'rgba(34,197,94,.75)'),borderRadius:5,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a2540',borderColor:'#2a3e5e',borderWidth:1,bodyColor:'#f1f5f9',callbacks:{label:ctx=>` ${ctx.parsed.y}%`}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:10},maxRotation:45}},y:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},callback:v=>v+'%'}}}}
+  });
+}
+
+function setInflaRange(n){
+  inflaCurRange=n;
+  document.querySelectorAll('#inflaChart').forEach(()=>{});
+  // update active button
+  document.querySelectorAll('.range-btn').forEach(b=>{
+    if(b.getAttribute('onclick')===`setInflaRange(${n})`)b.classList.add('active');
+    else if(b.getAttribute('onclick')&&b.getAttribute('onclick').startsWith('setInflaRange'))b.classList.remove('active');
+  });
+  if(allInflaData.length)drawInflaChart(allInflaData);
+}
+
+// ── Riesgo País chart ────────────────────────────────────
+function drawRiesgoChart(data){
+  const labels=data.map(d=>{const dt=new Date(d.fecha+'T12:00:00');return dt.toLocaleDateString('es-AR',{day:'numeric',month:'short',year:'2-digit'});});
+  const values=data.map(d=>d.valor);
+  const ctx=document.getElementById('riesgoChart').getContext('2d');
+  if(riesgoChart)riesgoChart.destroy();
+  const grad=ctx.createLinearGradient(0,0,0,280);
+  grad.addColorStop(0,'rgba(249,115,22,.3)');
+  grad.addColorStop(1,'rgba(249,115,22,0)');
+  riesgoChart=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data:values,borderColor:'#f97316',borderWidth:2.5,fill:true,backgroundColor:grad,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#f97316',tension:.3}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a2540',borderColor:'#2a3e5e',borderWidth:1,bodyColor:'#f1f5f9',callbacks:{label:ctx=>` ${Number(ctx.parsed.y).toLocaleString('es-AR')} pb`}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:10},maxTicksLimit:10,maxRotation:0}},y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},callback:v=>Number(v).toLocaleString('es-AR')}}}}
+  });
+}
+
+function setRiesgoRange(days){
+  riesgoCurRange=days;
+  document.querySelectorAll('[onclick^="setRiesgoRange"]').forEach(b=>{
+    b.classList.toggle('active',b.getAttribute('onclick')===`setRiesgoRange(${days})`);
+  });
+  if(allRiesgoData.length)drawRiesgoChart(sliceByDays(allRiesgoData,days));
+}
+
+// ── Blue chart ───────────────────────────────────────────
+function drawBlueChart(data){
+  const labels=data.map(d=>{const dt=new Date(d.fecha+'T12:00:00');return dt.toLocaleDateString('es-AR',{day:'numeric',month:'short',year:'2-digit'});});
+  const values=data.map(d=>d.venta||d.valor||d.sell);
+  const ctx=document.getElementById('blueChart').getContext('2d');
+  if(blueChart)blueChart.destroy();
+  const grad=ctx.createLinearGradient(0,0,0,280);
+  grad.addColorStop(0,'rgba(56,189,248,.25)');
+  grad.addColorStop(1,'rgba(56,189,248,0)');
+  blueChart=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data:values,borderColor:'#38bdf8',borderWidth:2.5,fill:true,backgroundColor:grad,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#38bdf8',tension:.3}]},
+    options:{responsive:true,maintainAspectRatio:false,interaction:{intersect:false,mode:'index'},plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a2540',borderColor:'#2a3e5e',borderWidth:1,bodyColor:'#f1f5f9',callbacks:{label:ctx=>` ${fmtARS(ctx.parsed.y)}`}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:10},maxTicksLimit:10,maxRotation:0}},y:{grid:{color:'rgba(255,255,255,.06)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},callback:v=>fmtARS(v)}}}}
+  });
+}
+
+function setBlueRange(days){
+  blueCurRange=days;
+  document.querySelectorAll('[onclick^="setBlueRange"]').forEach(b=>{
+    b.classList.toggle('active',b.getAttribute('onclick')===`setBlueRange(${days})`);
+  });
+  if(allBlueData.length)drawBlueChart(sliceByDays(allBlueData,days));
+}
+
+// ── Loaders ──────────────────────────────────────────────
+async function loadInflacion(){
+  const data=await fetchJSON('https://api.argentinadatos.com/v1/finanzas/indices/inflacion');
+  if(!Array.isArray(data)||!data.length)return;
+  allInflaData=data;
+  const last=data[data.length-1];
+  const fecha=last.fecha?new Date(last.fecha+'T12:00:00').toLocaleDateString('es-AR',{month:'long',year:'numeric'}):'';
+  q('inflaVal').textContent=last.valor+'%';
+  q('inflaSub').textContent='variación mensual · '+fecha;
+
+  // Interanual (compound last 12)
+  const last12=data.slice(-12).reduce((acc,d)=>acc*(1+d.valor/100),1)-1;
+  q('inflaAnual').textContent=(last12*100).toFixed(1)+'%';
+  q('inflaAnualSub').textContent='acumulado últimos 12 meses';
+
+  // Table (last 12 months, newest first)
+  const slice12=data.slice(-12);
+  // compute acumulado por año calendario
+  const byYear={};
+  data.forEach(d=>{
+    const yr=d.fecha?d.fecha.slice(0,4):'0';
+    if(!byYear[yr])byYear[yr]=[];
+    byYear[yr].push(d.valor);
+  });
+  const yearAcum={};
+  Object.entries(byYear).forEach(([yr,vals])=>{
+    let cum=1;
+    const perMonth=[];
+    vals.forEach(v=>{cum*=(1+v/100);perMonth.push(+((cum-1)*100).toFixed(2));});
+    yearAcum[yr]=perMonth; // index = month order within year
+  });
+
+  // Build table rows
+  const rows=slice12.map((d,i)=>{
+    const yr=d.fecha?d.fecha.slice(0,4):'';
+    const mn=d.fecha?parseInt(d.fecha.slice(5,7))-1:i;
+    const acumArr=yearAcum[yr]||[];
+    const acum=acumArr[mn]!=null?acumArr[mn]:null;
+    const mesLabel=new Date(d.fecha+'T12:00:00').toLocaleDateString('es-AR',{month:'long',year:'numeric'});
+    const isHigh=d.valor>10;
+    return`<div class="it-row"><div class="it-month">${mesLabel}</div><div class="it-val ${isHigh?'high':''}">${d.valor}%</div><div class="it-acum">${acum!=null?acum+'%':'—'}</div></div>`;
+  }).reverse().join('');
+
+  q('inflaTable').innerHTML=`<div class="it-header"><div>Mes</div><div>Variación</div><div>Acum. año</div></div>`+rows;
+  drawInflaChart(data);
+}
+
+async function loadRiesgoPais(){
+  // Try historical endpoint first
+  let data=null;
+  try{ data=await fetchJSON('https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais'); }catch{}
+
+  if(Array.isArray(data)&&data.length){
+    allRiesgoData=data;
+    const last=data[data.length-1];
+    q('riesgoVal').textContent=Number(last.valor).toLocaleString('es-AR');
+    const fechaStr=last.fecha?new Date(last.fecha+'T12:00:00').toLocaleDateString('es-AR',{day:'numeric',month:'long'}):'';
+    q('riesgoSub').textContent=`puntos básicos · ${fechaStr}`;
+
+    // Trend vs 30 days ago
+    const ago30=sliceByDays(data,35)[0];
+    if(ago30){
+      const diff=last.valor-ago30.valor;
+      const pct=((diff/ago30.valor)*100).toFixed(1);
+      const trendEl=q('riesgoTrend');
+      if(trendEl){
+        const cls=diff>0?'down':'up'; // higher riesgo = bad = down for country
+        const arrow=diff>0?'▲':'▼';
+        trendEl.innerHTML=`<span class="macro-trend ${cls}">${arrow} ${Math.abs(pct)}% vs hace 30 días</span>`;
+      }
+    }
+
+    // History mini stats
+    function nearestVal(targetDays){
+      const cut=new Date();cut.setDate(cut.getDate()-targetDays);
+      const filtered=data.filter(d=>new Date(d.fecha+'T12:00:00')<=cut);
+      return filtered.length?filtered[filtered.length-1].valor:null;
+    }
+    const h1m=nearestVal(30),h6m=nearestVal(180),h1y=nearestVal(365);
+    q('riesgoHistory').innerHTML=
+      `<div class="rh-item"><div class="rh-label">Actual</div><div class="rh-val">${Number(last.valor).toLocaleString('es-AR')}</div></div>`+
+      `<div class="rh-item"><div class="rh-label">Hace 1 mes</div><div class="rh-val">${h1m!=null?Number(h1m).toLocaleString('es-AR'):'—'}</div></div>`+
+      `<div class="rh-item"><div class="rh-label">Hace 6 meses</div><div class="rh-val">${h6m!=null?Number(h6m).toLocaleString('es-AR'):'—'}</div></div>`+
+      `<div class="rh-item"><div class="rh-label">Hace 1 año</div><div class="rh-val">${h1y!=null?Number(h1y).toLocaleString('es-AR'):'—'}</div></div>`;
+
+    drawRiesgoChart(sliceByDays(data,riesgoCurRange));
+  } else {
+    // fallback: try /ultimo endpoint
+    try{
+      const r=await fetchJSON('https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo');
+      if(r?.valor!=null){
+        q('riesgoVal').textContent=Number(r.valor).toLocaleString('es-AR');
+        const f=r.fecha?new Date(r.fecha+'T12:00:00').toLocaleDateString('es-AR',{day:'numeric',month:'long'}):'';
+        q('riesgoSub').textContent=`puntos básicos · ${f}`;
+        q('riesgoHistory').innerHTML='<div class="rh-item" style="grid-column:1/-1;color:var(--muted);font-size:.78rem;padding:.8rem">Historial no disponible en este momento</div>';
+      }
+    }catch{}
+  }
+}
+
+async function loadBlue(){
+  try{
+    const data=await fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/blue');
+    if(!Array.isArray(data)||!data.length)return;
+    allBlueData=data;
+    const last=data[data.length-1];
+    const venta=last.venta||last.valor;
+    q('blueNow').textContent=fmtARS(venta);
+
+    // 1 month ago
+    const m1=sliceByDays(data,32)[0];
+    q('blue1m').textContent=m1?(fmtARS(m1.venta||m1.valor)):'—';
+
+    // Max/min past year
+    const yr=sliceByDays(data,365);
+    const vals=yr.map(d=>d.venta||d.valor).filter(Boolean);
+    if(vals.length){
+      q('blueMax').textContent=fmtARS(Math.max(...vals));
+      q('blueMin').textContent=fmtARS(Math.min(...vals));
+    }
+
+    drawBlueChart(sliceByDays(data,blueCurRange));
+  }catch(e){console.warn('Blue hist error',e);}
+}
+
+async function refreshAll(){
+  await Promise.allSettled([
+    fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
+      const blue=data.find(d=>d.casa==='blue');
+      const oficial=data.find(d=>d.casa==='oficial');
+      if(blue&&oficial&&oficial.venta&&blue.venta){
+        const brecha=((blue.venta-oficial.venta)/oficial.venta*100).toFixed(1);
+        q('brechaVal').textContent='+'+brecha+'%';
+        q('brechaSub').textContent=`Blue ${fmtARS(blue.venta)} · Oficial ${fmtARS(oficial.venta)}`;
+      }
+      const tickerHtml=data.map(d=>`<span class="t-item"><span class="t-name">USD ${d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
+      q('tickerTrack').innerHTML=tickerHtml+tickerHtml;
+    }).catch(()=>{}),
+    loadRiesgoPais().catch(()=>{}),
+    loadInflacion().catch(()=>{}),
+    loadBlue().catch(()=>{}),
+  ]);
+  q('lastUpdate').textContent='En vivo · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
+}
+
+refreshAll();
+setInterval(refreshAll,3*60*1000);
+
+// PWA: register service worker
+if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
+</script>
+</body>
+</html>
