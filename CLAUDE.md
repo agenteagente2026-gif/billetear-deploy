@@ -1,7 +1,7 @@
 # BilleteAR — Dashboard Económico Argentino
 
 ## Qué es esto
-Sitio web multi-página de datos financieros argentinos en tiempo real. Deploy en **https://pulsoar.netlify.app** vía Netlify (conectar GitHub para auto-deploy).
+Sitio web multi-página de datos financieros argentinos en tiempo real. Deploy en **https://billetear.netlify.app** vía Netlify (conectar GitHub para auto-deploy).
 
 ## Archivos del proyecto
 - `index.html` — Página principal: widget de dólares + calculadora bidireccional + heatmap + noticias
@@ -121,7 +121,6 @@ setInterval(refreshAll, 3 * 60 * 1000);
 2. Subir el ZIP a netlify.com/drop
 
 ## Ideas pendientes / roadmap
-- Cambiar dominio de Netlify de pulsoar → billetear
 - Google AdSense (hay placeholder en index.html)
 - Gráficos de evolución para MEP y CCL (no solo blue)
 - Notificaciones push cuando el blue sube/baja más de X%
