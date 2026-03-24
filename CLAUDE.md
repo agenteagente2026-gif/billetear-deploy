@@ -32,7 +32,8 @@ Sitio web multi-página de datos financieros argentinos en tiempo real. Deploy e
 | `https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais` | Riesgo País histórico | ✅ OK |
 | `https://api.argentinadatos.com/v1/finanzas/indices/inflacion` | Inflación mensual histórica | ✅ OK |
 | `https://api.coingecko.com/api/v3/coins/markets` | Precios cripto | ✅ OK (free tier) |
-| `https://criptoya.com/api/{coin}/ars/0.1` | Cripto por exchange | ✅ OK |
+| `https://criptoya.com/api/{coin}/ars/0.1` | Cripto por exchange (usdt, usdc, btc) | ✅ OK |
+| `https://api.comparadolar.ar/usd` | Dólar por banco y broker/fintech | ✅ OK |
 | Yahoo Finance | Acciones | ❌ CORS bloqueado — reemplazado por TradingView |
 | Ambito stocks/índices | Merval, acciones | ❌ CORS — reemplazado por TradingView |
 
@@ -47,7 +48,7 @@ Todas las APIs pasan por este fallback en `fetchJSON()`:
 3. `https://api.allorigins.win/raw?url=`
 
 ## Temas / diseño
-- Dark mode por defecto, light mode toggle guardado en localStorage (`billetear-theme`)
+- Dark mode por defecto, light mode toggle (🌙/☀️) en TODAS las páginas, guardado en localStorage (`billetear-theme`)
 - CSS custom properties en `:root` para todos los colores
 - Paleta: `--sky:#38bdf8`, `--orange:#f97316`, `--green:#22c55e`, `--red:#ef4444`, `--purple:#a78bfa`
 - Animación `fadeUp` en cada `.section`
@@ -68,9 +69,10 @@ Todas las APIs pasan por este fallback en `fetchJSON()`:
 - **Newsletter**: formulario (sin backend por ahora)
 - **Refresh automático**: cada 30s en dolares.html, cada 3 minutos en el resto
 - **PWA**: manifest + service worker, instalable como app en celular/desktop
+- **Dólar por banco/broker** (dolares.html): tabla con datos de comparadolar.ar, tabs Bancos/Brokers, links a cada proveedor
+- **Cripto por exchange con links** (dolares.html): tabs USDT/USDC/BTC, tablas directas (sin acordeón), links a cada exchange
 
 ## Secciones eliminadas (no restaurar)
-- **MEP por ALYC / CCL por ALYC**: tablas expandibles con mejores brokers — eliminadas de dolares.html porque no aportaban valor
 - **Cards de BTC/Brecha/Riesgo/Inflación en el hero de index.html**: reemplazadas por la calculadora + franja de indicadores compacta
 
 ## Estructura hero de index.html
@@ -92,7 +94,8 @@ Secciones (subnav con scroll spy):
 - `#blue` — Hero Blue con sparkline 7d
 - `#mep` — MEP/CCL cards con explainer
 - `#calculadora` — Convertidor bidireccional ARS⇄USD
-- `#cripto-detail` — USDT/DAI/BTC por exchange (expandible, datos de criptoya.com)
+- `#cripto-detail` — USDT/USDC/BTC por exchange con tabs (datos de criptoya.com, links a exchanges)
+- `#comparadolar` — Dólar por banco y broker/fintech (datos de api.comparadolar.ar, tabs Bancos/Brokers)
 - `#medios` — Blue en fuentes (dolarapi, Ámbito, Bluelytics)
 - `#historico` — Gráfico Chart.js evolución blue (30D/90D/6M/1A/Todo)
 - `#fecha` — Consulta por fecha con date picker

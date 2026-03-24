@@ -27,7 +27,16 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569}
     html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+
+    /* ── LIGHT MODE ── */
+    body.light{--bg:#f0f4f8;--bg2:#e4ecf5;--card:#ffffff;--card2:#f4f7fb;--border:#d1dce8;--border2:#b8c8dc;--text:#0f172a;--text2:#1e293b;--muted:#64748b;--muted2:#94a3b8}
+    body.light header{background:rgba(240,244,248,.97)}
+    body.light .stats-bar{background:linear-gradient(90deg,#e4ecf5,#dce6f0,#e4ecf5)}
+    body.light .topnav,body.light .subnav,body.light .ticker{background:var(--bg2)}
+    body.light .hero-card{background:linear-gradient(135deg,#dce8f8 0%,#ffffff 100%);border-color:rgba(56,189,248,.2)}
+    body.light .refresh-btn{background:rgba(56,189,248,.12)}
+    body.light .theme-btn{background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.3);color:#d97706}
     .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
     .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
     .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
@@ -51,6 +60,12 @@
     @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
     .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
     .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .refresh-btn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--sky);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1}
+    .refresh-btn:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4)}
+    .theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
+    .theme-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .refresh-spinning{animation:spin .55s linear}
     .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
     .topnav::-webkit-scrollbar{display:none}
     .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
@@ -100,18 +115,20 @@
     .ex-side .v.b{color:var(--text2)}.ex-side .v.s{color:var(--sky)}
     .spread-tag{display:inline-block;font-size:.61rem;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:2px 7px;margin-top:.5rem}
 
-    /* ── Detail expandable cards ── */
-    .detail-section{margin-top:1.2rem}
-    .detail-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1rem}
-    .detail-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;cursor:pointer;user-select:none;transition:background .15s}
-    .detail-header:hover{background:var(--card2)}
-    .detail-title{display:flex;align-items:center;gap:10px}
-    .detail-icon{font-size:1.1rem}
-    .detail-name{font-size:.95rem;font-weight:700}
-    .detail-price{font-size:1rem;font-weight:700;color:var(--sky)}
-    .detail-chevron{color:var(--muted);transition:transform .25s;font-size:.85rem}
-    .detail-body{display:none;border-top:1px solid var(--border)}
-    .detail-body.open{display:block}
+    /* ── Cripto tabs ── */
+    .cripto-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+    .cripto-tab{background:var(--card2);border:1px solid var(--border);padding:6px 16px;border-radius:8px;font:600 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .cripto-tab.active,.cripto-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
+    .cripto-panel{display:none}
+    .cripto-panel.active{display:block}
+
+    /* ── Comparadolar section ── */
+    .comp-tabs{display:flex;gap:.4rem;margin-bottom:1rem}
+    .comp-tab{background:var(--card2);border:1px solid var(--border);padding:6px 16px;border-radius:8px;font:600 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .comp-tab.active,.comp-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
+    .comp-panel{display:none}
+    .comp-panel.active{display:block}
+    .comp-logo{width:24px;height:24px;border-radius:6px;object-fit:contain;background:var(--card2);vertical-align:middle;margin-right:6px}
 
     /* ── Exchange table ── */
     .exch-table{width:100%;border-collapse:collapse}
@@ -120,6 +137,9 @@
     .exch-table tr:last-child td{border-bottom:none}
     .exch-table tr:hover td{background:var(--card2)}
     .exch-name{font-weight:600;color:var(--text2)}
+    .exch-link{color:var(--sky);text-decoration:none;font-weight:600;transition:color .15s}
+    .exch-link:hover{color:#7dd3fc;text-decoration:underline}
+    .exch-link .ext{font-size:.65rem;opacity:.5;margin-left:3px}
     .exch-buy{color:var(--text2)}
     .exch-sell{color:var(--sky);font-weight:700}
     .exch-spread{font-size:.75rem;color:var(--muted)}
@@ -228,7 +248,8 @@
     <div class="nav-right">
       <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
       <span id="countdown" style="font-size:.72rem;color:var(--muted)"></span>
-      <button class="btn" onclick="refreshCountdown=30;refreshAll()">↻ Actualizar</button>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+      <button class="refresh-btn" id="refreshBtn" onclick="triggerRefresh()" title="Actualizar datos">↻</button>
     </div>
   </div>
 </header>
@@ -261,6 +282,7 @@
     <a class="subnav-link" href="#mep">🏦 MEP / CCL</a>
     <a class="subnav-link" href="#calculadora">🧮 Convertidor</a>
     <a class="subnav-link" href="#cripto-detail">💱 Cripto</a>
+    <a class="subnav-link" href="#comparadolar">🏦 Bancos/Brokers</a>
     <a class="subnav-link" href="#medios">📰 Por fuente</a>
     <a class="subnav-link" href="#historico">📈 Histórico</a>
     <a class="subnav-link" href="#fecha">📅 Por fecha</a>
@@ -345,74 +367,58 @@
   <div class="section" id="cripto-detail" style="animation-delay:.11s">
     <div class="sec-header"><span class="sec-title">💱 Dólar Cripto por exchange</span><div class="sec-line"></div></div>
     <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
-      Precios del <strong>USDT</strong> (dólar estable) y <strong>DAI</strong> en pesos argentinos en cada exchange local. Tocá cada sección para ver el detalle completo con compra, venta y spread de cada plataforma.
+      Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local. Compra, venta y spread de cada plataforma.
     </p>
 
-    <div class="detail-section">
+    <div class="cripto-tabs">
+      <button class="cripto-tab active" onclick="switchCriptoTab('usdt',this)">💵 USDT</button>
+      <button class="cripto-tab" onclick="switchCriptoTab('usdc',this)">🔵 USDC</button>
+      <button class="cripto-tab" onclick="switchCriptoTab('btc',this)">₿ BTC</button>
+    </div>
 
-      <!-- USDT -->
-      <div class="detail-card">
-        <div class="detail-header" onclick="toggleDetail('usdt-body','usdt-chev')" id="usdt-trigger">
-          <div class="detail-title">
-            <span class="detail-icon">💵</span>
-            <div>
-              <div class="detail-name">USDT (Tether) en pesos</div>
-              <div style="font-size:.73rem;color:var(--muted);margin-top:2px">Precios en todos los exchanges locales</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.8rem">
-            <div class="detail-price" id="usdt-ref">–</div>
-            <div class="detail-chevron" id="usdt-chev">▼</div>
-          </div>
-        </div>
-        <div class="detail-body" id="usdt-body">
-          <div class="exch-loading" id="usdt-loading">Cargando precios... ⏳</div>
-          <table class="exch-table" id="usdt-table" style="display:none"></table>
-        </div>
+    <div class="cripto-panel active" id="panel-usdt">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="usdt-loading">Cargando precios... ⏳</div>
+        <table class="exch-table" id="usdt-table" style="display:none"></table>
       </div>
-
-      <!-- DAI -->
-      <div class="detail-card">
-        <div class="detail-header" onclick="toggleDetail('dai-body','dai-chev')" id="dai-trigger">
-          <div class="detail-title">
-            <span class="detail-icon">🔵</span>
-            <div>
-              <div class="detail-name">DAI (stablecoin) en pesos</div>
-              <div style="font-size:.73rem;color:var(--muted);margin-top:2px">Decentralised stablecoin · exchanges AR</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.8rem">
-            <div class="detail-price" id="dai-ref">–</div>
-            <div class="detail-chevron" id="dai-chev">▼</div>
-          </div>
-        </div>
-        <div class="detail-body" id="dai-body">
-          <div class="exch-loading" id="dai-loading">Cargando precios... ⏳</div>
-          <table class="exch-table" id="dai-table" style="display:none"></table>
-        </div>
+    </div>
+    <div class="cripto-panel" id="panel-usdc">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="usdc-loading">Cargando precios... ⏳</div>
+        <table class="exch-table" id="usdc-table" style="display:none"></table>
       </div>
-
-      <!-- BTC/USD implícito -->
-      <div class="detail-card">
-        <div class="detail-header" onclick="toggleDetail('btc-body','btc-chev')">
-          <div class="detail-title">
-            <span class="detail-icon">₿</span>
-            <div>
-              <div class="detail-name">Bitcoin (BTC) en pesos</div>
-              <div style="font-size:.73rem;color:var(--muted);margin-top:2px">Precio en ARS en exchanges locales</div>
-            </div>
-          </div>
-          <div style="display:flex;align-items:center;gap:.8rem">
-            <div class="detail-price" id="btc-ref">–</div>
-            <div class="detail-chevron" id="btc-chev">▼</div>
-          </div>
-        </div>
-        <div class="detail-body" id="btc-body">
-          <div class="exch-loading" id="btc-loading">Cargando precios... ⏳</div>
-          <table class="exch-table" id="btc-table" style="display:none"></table>
-        </div>
+    </div>
+    <div class="cripto-panel" id="panel-btc">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="btc-loading">Cargando precios... ⏳</div>
+        <table class="exch-table" id="btc-table" style="display:none"></table>
       </div>
+    </div>
+  </div>
 
+  <!-- ── COMPARADOLAR: Bancos y Brokers ── -->
+  <div class="section" id="comparadolar" style="animation-delay:.12s">
+    <div class="sec-header"><span class="sec-title">💱 Dólar por banco y broker</span><div class="sec-line"></div></div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
+      Precio del dólar en <strong>bancos</strong> y <strong>brokers/fintechs</strong> argentinos. Ordenados por mejor precio de venta. Datos de comparadolar.ar.
+    </p>
+
+    <div class="comp-tabs">
+      <button class="comp-tab active" onclick="switchCompTab('banks',this)">🏦 Bancos</button>
+      <button class="comp-tab" onclick="switchCompTab('brokers',this)">📊 Brokers / Fintech</button>
+    </div>
+
+    <div class="comp-panel active" id="comp-banks">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="comp-banks-loading">Cargando precios... ⏳</div>
+        <table class="exch-table" id="comp-banks-table" style="display:none"></table>
+      </div>
+    </div>
+    <div class="comp-panel" id="comp-brokers">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="comp-brokers-loading">Cargando precios... ⏳</div>
+        <table class="exch-table" id="comp-brokers-table" style="display:none"></table>
+      </div>
     </div>
   </div>
 
@@ -577,37 +583,59 @@ async function fetchJSON(url){
   return null;
 }
 
-/* ── Exchange names dict (criptoya) ── */
+/* ── Exchange names & URLs dict (criptoya) ── */
 const EXCH_NAMES = {
-  letsbit:'Letsbit', buenbit:'Buenbit', lemoncash:'Lemon Cash',
-  ripio:'Ripio', satoshitango:'Satoshi Tango', bitso:'Bitso',
-  bybit:'Bybit P2P', fiwind:'Fiwind', argenbtc:'ArgenBTC',
-  tiendacrypto:'Tienda Crypto', binancep2p:'Binance P2P',
+  letsbit:'Letsbit', buenbit:'Buenbit', lemoncash:'Lemon Cash', lemoncashp2p:'Lemon P2P',
+  ripio:'Ripio', ripioexchange:'Ripio Exchange', satoshitango:'Satoshi Tango', bitso:'Bitso',
+  bybit:'Bybit', bybitp2p:'Bybit P2P', fiwind:'Fiwind', argenbtc:'ArgenBTC',
+  tiendacrypto:'Tienda Crypto', binancep2p:'Binance P2P', binance:'Binance',
   decrypto:'Decrypto', belo:'Belo', kriptonmarket:'Krypton',
-  qubit:'Qubit', cambioar:'CambioAr', cryptomkt:'CryptoMKT',
-  bitmarket:'BitMarket', coingoBtc:'Coingo', plusCrypto:'PlusCrypto',
-  anbazoCrypto:'Anbazo',
+  qubit:'Qubit', cambioar:'CambioAr', cryptomkt:'CryptoMKT', cryptomktpro:'CryptoMKT Pro',
+  bitmarket:'BitMarket', coingoBtc:'Coingo', plusCrypto:'PlusCrypto', pluscrypto:'PlusCrypto',
+  anbazoCrypto:'Anbazo', okexp2p:'OKX P2P', vitawallet:'Vitawallet',
+  huobip2p:'Huobi P2P', kucoinp2p:'KuCoin P2P', saldo:'Saldo', astropay:'Astropay',
+  bitgetp2p:'Bitget P2P', eluter:'Eluter', paydecep2p:'Paydece P2P',
+  eldoradop2p:'Eldorado P2P', trubit:'Trubit', bingxp2p:'BingX P2P',
+  bitsoalpha:'Bitso Alpha', cocoscrypto:'Cocos Crypto', coinexp2p:'CoinEx P2P',
+  wallbit:'Wallbit', mexcp2p:'MEXC P2P', weexp2p:'WEEX P2P', mexc:'MEXC',
+  peanut:'Peanut', universalcoins:'Universal Coins',
+};
+const EXCH_URLS = {
+  letsbit:'https://letsbit.io', buenbit:'https://buenbit.com',
+  lemoncash:'https://lemon.me', lemoncashp2p:'https://lemon.me',
+  ripio:'https://ripio.com', ripioexchange:'https://ripio.com',
+  satoshitango:'https://satoshitango.com', bitso:'https://bitso.com', bitsoalpha:'https://bitso.com',
+  bybit:'https://bybit.com', bybitp2p:'https://bybit.com',
+  fiwind:'https://fiwind.io', argenbtc:'https://argenbtc.com',
+  tiendacrypto:'https://tiendacrypto.com',
+  binancep2p:'https://p2p.binance.com', binance:'https://binance.com',
+  decrypto:'https://decrypto.la', belo:'https://belo.app',
+  kriptonmarket:'https://kriptonmarket.com',
+  cryptomkt:'https://cryptomkt.com', cryptomktpro:'https://cryptomkt.com',
+  okexp2p:'https://okx.com', vitawallet:'https://vitawallet.io',
+  kucoinp2p:'https://kucoin.com', astropay:'https://astropay.com',
+  bitgetp2p:'https://bitget.com', bingxp2p:'https://bingx.com',
+  cocoscrypto:'https://cocos.capital', wallbit:'https://wallbit.io',
+  mexcp2p:'https://mexc.com', weexp2p:'https://weex.com', mexc:'https://mexc.com',
+  peanut:'https://peanut.trade', pluscrypto:'https://pluscrypto.com.ar',
+  eldoradop2p:'https://eldorado.io', coinexp2p:'https://coinex.com',
+  universalcoins:'https://universalcoins.com',
 };
 function exchName(k){return EXCH_NAMES[k]||k.charAt(0).toUpperCase()+k.slice(1);}
+function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
 
 /* ── Render exchange table ── */
-function renderExchTable(tableId, loadingId, data, refId) {
+function renderExchTable(tableId, loadingId, data) {
   const tbl = q(tableId);
   const ldr = q(loadingId);
-  const ref = q(refId);
-  if (!data) { ldr.style.display='none'; return; }
+  if (!data) { if(ldr)ldr.style.display='none'; return; }
 
-  // Filtrar entradas válidas
   const rows = Object.entries(data)
     .filter(([k, v]) => v && typeof v.ask === 'number' && v.ask > 0)
-    .map(([k, v]) => ({ name: exchName(k), buy: v.bid || null, sell: v.ask, time: v.time }))
+    .map(([k, v]) => ({ key:k, name: exchName(k), buy: v.bid || null, sell: v.ask, time: v.time }))
     .sort((a, b) => a.sell - b.sell);
 
-  if (!rows.length) { ldr.style.display='none'; return; }
-
-  const minSell = rows[0].sell;
-  const maxSell = rows[rows.length - 1].sell;
-  if (ref) ref.textContent = fmtARS(minSell) + ' – ' + fmtARS(maxSell);
+  if (!rows.length) { if(ldr)ldr.style.display='none'; return; }
 
   tbl.innerHTML = `<thead><tr>
     <th>Exchange</th><th>Compra</th><th>Venta</th><th>Spread</th><th>Actualizado</th>
@@ -616,7 +644,7 @@ function renderExchTable(tableId, loadingId, data, refId) {
     const badge  = i === 0 ? '<span class="best-badge">mejor venta</span>' :
                    i === rows.length - 1 ? '<span class="worst-badge">más caro</span>' : '';
     return `<tr>
-      <td class="exch-name">${r.name}${badge}</td>
+      <td>${exchLink(r.key, r.name)}${badge}</td>
       <td class="exch-buy">${r.buy ? fmtARS(r.buy) : '–'}</td>
       <td class="exch-sell">${fmtARS(r.sell)}</td>
       <td class="exch-spread">${spread}</td>
@@ -624,26 +652,62 @@ function renderExchTable(tableId, loadingId, data, refId) {
     </tr>`;
   }).join('')}</tbody>`;
 
-  ldr.style.display = 'none';
+  if(ldr)ldr.style.display = 'none';
   tbl.style.display = 'table';
 }
 
-/* ── Toggle detail panel ── */
-const openPanels = new Set();
-async function toggleDetail(bodyId, chevId) {
-  const body = q(bodyId);
-  const chev = q(chevId);
-  const isOpen = body.classList.contains('open');
-  body.classList.toggle('open', !isOpen);
-  chev.style.transform = isOpen ? '' : 'rotate(180deg)';
+/* ── Cripto tabs ── */
+function switchCriptoTab(coin, btn) {
+  document.querySelectorAll('.cripto-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cripto-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = q('panel-'+coin);
+  if(panel) panel.classList.add('active');
+}
 
-  // Load data on first open
-  if (!isOpen && !openPanels.has(bodyId)) {
-    openPanels.add(bodyId);
-    const coin = bodyId.replace('-body','');
-    const data = await fetchJSON(`https://criptoya.com/api/${coin}/ars/0.1`);
-    renderExchTable(`${coin}-table`, `${coin}-loading`, data, `${coin}-ref`);
-  }
+/* ── Comparadolar tabs ── */
+function switchCompTab(type, btn) {
+  document.querySelectorAll('.comp-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.comp-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel = q('comp-'+type);
+  if(panel) panel.classList.add('active');
+}
+
+/* ── Render comparadolar table ── */
+function renderCompTable(tableId, loadingId, rows) {
+  const tbl = q(tableId);
+  const ldr = q(loadingId);
+  if (!rows || !rows.length) { if(ldr)ldr.style.display='none'; return; }
+
+  // Filtrar outliers (precios razonables entre 500 y 5000 ARS por USD)
+  const sorted = [...rows].filter(r=>r.ask>500 && r.ask<5000).sort((a,b)=>a.ask-b.ask);
+  if(!sorted.length){if(ldr)ldr.style.display='none';return;}
+
+  const bestAsk = sorted[0].ask;
+  const bestBid = Math.max(...sorted.filter(r=>r.bid>0).map(r=>r.bid));
+
+  tbl.innerHTML = `<thead><tr>
+    <th>Nombre</th><th>Compra</th><th>Venta</th><th>Spread</th><th>Variación</th>
+  </tr></thead><tbody>${sorted.map((r, i) => {
+    const spread = r.bid > 0 ? ((r.ask - r.bid) / r.bid * 100).toFixed(1) + '%' : '–';
+    const badges = [];
+    if(r.ask === bestAsk) badges.push('<span class="best-badge">mejor venta</span>');
+    if(r.bid === bestBid && r.bid > 0) badges.push('<span class="best-badge">mejor compra</span>');
+    const logo = r.logoUrl ? `<img class="comp-logo" src="${r.logoUrl}" alt="" onerror="this.style.display='none'">` : '';
+    const link = r.url ? `<a class="exch-link" href="${r.url}" target="_blank" rel="noopener">${logo}${r.prettyName}<span class="ext">↗</span></a>` : `${logo}<span class="exch-name">${r.prettyName}</span>`;
+    const pct = r.pct_variation != null ? `<span style="color:${r.pct_variation>=0?'var(--green)':'var(--red)'};font-weight:700">${r.pct_variation>=0?'+':''}${r.pct_variation.toFixed(2)}%</span>` : '–';
+    return `<tr>
+      <td>${link}${badges.join('')}</td>
+      <td class="exch-buy">${r.bid > 0 ? fmtARS(r.bid) : '–'}</td>
+      <td class="exch-sell">${fmtARS(r.ask)}</td>
+      <td class="exch-spread">${spread}</td>
+      <td>${pct}</td>
+    </tr>`;
+  }).join('')}</tbody>`;
+
+  if(ldr)ldr.style.display = 'none';
+  tbl.style.display = 'table';
 }
 
 /* ── Datos dolarapi ── */
@@ -790,24 +854,23 @@ async function refreshAll(){
         }
       }
     }).catch(()=>{}),
-    // Pre-carga USDT ref
+    // Cripto por exchange (carga directa, sin acordeón)
     fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(data=>{
-      if(!data)return;
-      const sells=Object.values(data).filter(v=>v?.ask>0).map(v=>v.ask);
-      if(sells.length){const mn=Math.min(...sells),mx=Math.max(...sells);q('usdt-ref').textContent=fmtARS(mn)+' – '+fmtARS(mx);}
-      if(openPanels.has('usdt-body'))renderExchTable('usdt-table','usdt-loading',data,'usdt-ref');
+      if(data) renderExchTable('usdt-table','usdt-loading',data);
     }).catch(()=>{}),
-    fetchJSON('https://criptoya.com/api/dai/ars/0.1').then(data=>{
-      if(!data)return;
-      const sells=Object.values(data).filter(v=>v?.ask>0).map(v=>v.ask);
-      if(sells.length){const mn=Math.min(...sells),mx=Math.max(...sells);q('dai-ref').textContent=fmtARS(mn)+' – '+fmtARS(mx);}
-      if(openPanels.has('dai-body'))renderExchTable('dai-table','dai-loading',data,'dai-ref');
+    fetchJSON('https://criptoya.com/api/usdc/ars/0.1').then(data=>{
+      if(data) renderExchTable('usdc-table','usdc-loading',data);
     }).catch(()=>{}),
     fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(data=>{
-      if(!data)return;
-      const sells=Object.values(data).filter(v=>v?.ask>0).map(v=>v.ask);
-      if(sells.length){const mn=Math.min(...sells),mx=Math.max(...sells);q('btc-ref').textContent=fmtARS(mn)+' – '+fmtARS(mx);}
-      if(openPanels.has('btc-body'))renderExchTable('btc-table','btc-loading',data,'btc-ref');
+      if(data) renderExchTable('btc-table','btc-loading',data);
+    }).catch(()=>{}),
+    // Comparadolar: bancos y brokers
+    fetchJSON('https://api.comparadolar.ar/usd').then(data=>{
+      if(!Array.isArray(data))return;
+      const banks = data.filter(d=>d.isBank);
+      const brokers = data.filter(d=>!d.isBank);
+      renderCompTable('comp-banks-table','comp-banks-loading',banks);
+      renderCompTable('comp-brokers-table','comp-brokers-loading',brokers);
     }).catch(()=>{}),
   ]);
 }
@@ -815,7 +878,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['blue','mep','calculadora','cripto-detail','medios','historico','fecha','todos'];
+  const ids=['blue','mep','calculadora','cripto-detail','comparadolar','medios','historico','fecha','todos'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
@@ -836,6 +899,29 @@ function tickRefresh() {
   }
 }
 setInterval(tickRefresh, 1000);
+
+// ── Theme toggle ──
+function toggleTheme(){
+  const light=document.body.classList.toggle('light');
+  localStorage.setItem('billetear-theme',light?'light':'dark');
+  const btn=q('themeBtn');
+  if(btn)btn.textContent=light?'☀️':'🌙';
+}
+(function initTheme(){
+  if(localStorage.getItem('billetear-theme')==='light'){
+    document.body.classList.add('light');
+    const btn=q('themeBtn');
+    if(btn)btn.textContent='☀️';
+  }
+})();
+
+// ── Refresh con animación ──
+function triggerRefresh(){
+  const btn=q('refreshBtn');
+  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
+  refreshCountdown=30;
+  refreshAll();
+}
 
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}

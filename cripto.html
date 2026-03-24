@@ -24,7 +24,14 @@
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569}
     html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+
+    /* ── LIGHT MODE ── */
+    body.light{--bg:#f0f4f8;--bg2:#e4ecf5;--card:#ffffff;--card2:#f4f7fb;--border:#d1dce8;--border2:#b8c8dc;--text:#0f172a;--text2:#1e293b;--muted:#64748b;--muted2:#94a3b8}
+    body.light header{background:rgba(240,244,248,.97)}
+    body.light .topnav,body.light .ticker{background:var(--bg2)}
+    body.light .refresh-btn{background:rgba(56,189,248,.12)}
+    body.light .theme-btn{background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.3);color:#d97706}
     .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
     .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
     .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
@@ -48,6 +55,12 @@
     @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
     .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
     .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .refresh-btn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--sky);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1}
+    .refresh-btn:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4)}
+    .theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
+    .theme-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
+    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+    .refresh-spinning{animation:spin .55s linear}
     .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
     .topnav::-webkit-scrollbar{display:none}
     .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
@@ -132,7 +145,8 @@
     </a>
     <div class="nav-right">
       <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
-      <button class="btn" onclick="refreshAll()">↻ Actualizar</button>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+      <button class="refresh-btn" id="refreshBtn" onclick="triggerRefresh()" title="Actualizar datos">↻</button>
     </div>
   </div>
 </header>
@@ -284,6 +298,27 @@ async function refreshAll(){
 
 refreshAll();
 setInterval(refreshAll,3*60*1000);
+
+// ── Theme toggle ──
+function toggleTheme(){
+  const light=document.body.classList.toggle('light');
+  localStorage.setItem('billetear-theme',light?'light':'dark');
+  const btn=q('themeBtn');
+  if(btn)btn.textContent=light?'☀️':'🌙';
+}
+(function initTheme(){
+  if(localStorage.getItem('billetear-theme')==='light'){
+    document.body.classList.add('light');
+    const btn=q('themeBtn');
+    if(btn)btn.textContent='☀️';
+  }
+})();
+
+function triggerRefresh(){
+  const btn=q('refreshBtn');
+  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
+  refreshAll();
+}
 
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
