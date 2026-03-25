@@ -39,10 +39,8 @@
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
     .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
-    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
-    .logo-icon svg{width:18px;height:18px}
-    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo{display:flex;align-items:center;text-decoration:none}
+    .logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--sky);letter-spacing:-.5px}
     .logo-text em{color:var(--sky);font-style:normal}
     .nav-right{display:flex;align-items:center;gap:14px}
     .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
@@ -142,6 +140,8 @@
     .info-card-title{font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:.5rem}
     .info-card-body{font-size:.79rem;color:var(--muted);line-height:1.6}
 
+    .glass-card{border-radius:20px;transition:transform .15s,box-shadow .15s}
+    .glass-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
     .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
     footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
@@ -156,7 +156,6 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
       <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="nav-right">

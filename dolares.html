@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dólar Blue hoy | MEP, CCL y Oficial en tiempo real – BilleteAR</title>
+  <title>BilleteAR – Dólar Blue, MEP, CCL y Cripto en tiempo real</title>
   <meta name="description" content="Precio del dólar blue hoy, MEP, CCL, oficial y cripto en tiempo real. Compra y venta actualizados al minuto. Argentina." />
   <meta name="keywords" content="dolar blue hoy, precio dolar mep, dolar ccl, dolar oficial, tipo de cambio argentina, dolar cripto" />
   <meta property="og:title" content="Dólar Blue hoy | MEP, CCL y Oficial – BilleteAR" />
@@ -50,10 +50,8 @@
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
     .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
-    .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-    .logo-icon{width:34px;height:34px;background:linear-gradient(135deg,var(--sky2),#2563eb);border-radius:9px;display:flex;align-items:center;justify-content:center}
-    .logo-icon svg{width:18px;height:18px}
-    .logo-text{font-size:1.2rem;font-weight:700;color:var(--text);letter-spacing:-.02em}
+    .logo{display:flex;align-items:center;text-decoration:none}
+    .logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--sky);letter-spacing:-.5px}
     .logo-text em{color:var(--sky);font-style:normal}
     .nav-right{display:flex;align-items:center;gap:14px}
     .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
@@ -93,7 +91,7 @@
     .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
     .topnav-link:hover{color:var(--text);border-color:var(--border2)}
     .topnav-link.active{color:var(--sky);border-color:var(--sky)}
-    .subnav{background:rgba(20,30,48,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
+    .subnav{background:rgba(20,30,48,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);border-radius:16px;overflow-x:auto;scrollbar-width:none}
     .subnav::-webkit-scrollbar{display:none}
     .subnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
     .subnav-link{padding:7px 14px;font-size:.78rem;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
@@ -108,7 +106,7 @@
     /* ── Hero ── */
     .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1rem}
     @media(max-width:700px){.hero-grid{grid-template-columns:1fr}}
-    .hero-card{background:linear-gradient(135deg,#0f2a5a 0%,#091730 100%);border:1px solid rgba(56,189,248,.25);border-radius:20px;padding:2rem;position:relative;overflow:hidden}
+    .hero-card{background:linear-gradient(135deg,#0f2a5a 0%,#091730 100%);border:1px solid rgba(56,189,248,.25);border-radius:22px;padding:2rem;position:relative;overflow:hidden}
     .hero-card::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(56,189,248,.12) 0%,transparent 70%);pointer-events:none}
     .hero-badge{display:inline-flex;align-items:center;gap:5px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--sky);background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);padding:3px 10px;border-radius:20px;margin-bottom:.75rem}
     .hero-name{font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:1.4rem}
@@ -152,7 +150,7 @@
     .comp-logo{width:24px;height:24px;border-radius:6px;object-fit:contain;background:var(--card2);vertical-align:middle;margin-right:6px}
 
     /* ── Exchange table ── */
-    .exch-table{width:100%;border-collapse:collapse}
+    .exch-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
     .exch-table th{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:.65rem 1.2rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card2)}
     .exch-table td{padding:.7rem 1.2rem;border-bottom:1px solid var(--border);font-size:.87rem;transition:background .12s}
     .exch-table tr:last-child td{border-bottom:none}
@@ -198,7 +196,7 @@
     .chart-stat .val{font-size:1.6rem;font-weight:700;color:var(--sky);text-align:right}
     .chart-stat .lbl{font-size:.65rem;color:var(--muted);text-align:right}
     .chart-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
-    .chart-tab{background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:8px;font:600 .75rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .chart-tab{background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:10px;font:600 .75rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
     .chart-tab.active,.chart-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
     .chart-wrap{height:260px;position:relative}
 
@@ -208,6 +206,8 @@
 
     footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
     footer a{color:var(--sky);text-decoration:none}
+    .glass-card{transition:transform .15s,box-shadow .15s}
+    .glass-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
     @media(max-width:480px){.hp .val{font-size:2rem}}
 
     /* ── Sparklines ── */
@@ -251,7 +251,6 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
-      <div class="logo-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg></div>
       <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="nav-right">
@@ -573,15 +572,17 @@ function calcAll(from) {
     const d = currentDollarData.find(x => x.casa === t.key);
     if (!d) return;
     let result = '';
+    const price = from === 'ars' ? d.venta : d.compra;
+    const priceLabel = from === 'ars' ? 'venta' : 'compra';
     if (from === 'ars' && ars > 0) {
       result = 'U$D ' + (ars / d.venta).toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2});
     } else if (from === 'usd' && usd > 0) {
-      result = '$ ' + (usd * d.venta).toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:0});
+      result = '$ ' + (usd * d.compra).toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:0});
     } else {
       result = '—';
     }
-    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;display:flex;justify-content:space-between;align-items:center">
-      <span style="font-size:.78rem;color:${t.color};font-weight:600">${t.label}</span>
+    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.7rem .9rem;display:flex;justify-content:space-between;align-items:center">
+      <div><span style="font-size:.78rem;color:${t.color};font-weight:600">${t.label}</span><span style="font-size:.6rem;color:var(--muted);margin-left:6px">${(from === 'ars' || from === 'usd') && (ars > 0 || usd > 0) ? priceLabel + ' $' + price.toLocaleString('es-AR') : ''}</span></div>
       <span style="font-size:.9rem;color:var(--text);font-weight:500">${result}</span>
     </div>`;
   });
