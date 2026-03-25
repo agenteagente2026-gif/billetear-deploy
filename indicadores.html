@@ -492,8 +492,8 @@ async function loadRiesgoPais(){
       const pct=((diff/ago30.valor)*100).toFixed(1);
       const trendEl=q('riesgoTrend');
       if(trendEl){
-        const cls=diff>0?'down':'up'; // higher riesgo = bad = down for country
-        const arrow=diff>0?'▲':'▼';
+        const cls=diff>0?'down':'up'; // higher riesgo = bad
+        const arrow=diff>0?'▼':'▲';
         trendEl.innerHTML=`<span class="macro-trend ${cls}">${arrow} ${Math.abs(pct)}% vs hace 30 días</span>`;
       }
     }
