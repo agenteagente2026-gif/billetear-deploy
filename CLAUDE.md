@@ -62,9 +62,12 @@ Todas las APIs pasan por este fallback en `fetchJSON()`:
 - **Ticker animado**: scroll horizontal con precios en tiempo real
 - **Heatmap**: tiles de colores verde/rojo por variación (dólares, cripto, acciones)
 - **Ganadoras/perdedoras del día** (cripto.html): top 5 de las 50 mayores criptos por capitalización
-- **Gráficos históricos** (indicadores.html + dolares.html): Chart.js con datos de argentinadatos.com
+- **Gráficos históricos multi-dólar** (dolares.html): Chart.js con Blue/MEP/CCL/Oficial superpuestos, toggles por tipo + indicadores.html
 - **Consulta por fecha** (dolares.html): date picker que muestra todos los tipos de cambio de una fecha específica
-- **Noticias**: RSS feeds de Ámbito, Infobae, Google News, El Cronista via allorigins proxy
+- **Noticias**: RSS feeds de Ámbito, Infobae, Google News, El Cronista, La Nación via allorigins proxy + tabs AR/Mundo/Mercados
+- **Tablas ordenables** (dolares.html): click en headers de columna para ordenar por compra/venta/spread
+- **Insight banner** (dolares.html): frase editorial automática con brecha, comparación blue vs MEP
+- **Tipografía editorial**: DM Serif Display para títulos, DM Sans para datos
 - **Share**: botones WhatsApp, X (Twitter), copiar precios
 - **Newsletter**: formulario (sin backend por ahora)
 - **Refresh automático**: cada 30s en dolares.html, cada 3 minutos en el resto

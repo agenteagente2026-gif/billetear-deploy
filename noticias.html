@@ -20,6 +20,7 @@
   <link rel="apple-touch-icon" href="/icon-192.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#64748b;--muted2:#475569;--purple:#a78bfa}
@@ -57,6 +58,8 @@
     @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
     .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
     .btn:hover{border-color:var(--sky);color:var(--sky)}
+    .chart-tab{background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:8px;font:600 .75rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .chart-tab.active,.chart-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
     .refresh-btn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--sky);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1}
     .refresh-btn:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4)}
     .theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
@@ -114,6 +117,15 @@
     .empty-state{grid-column:1/-1;text-align:center;padding:3rem;color:var(--muted)}
     .empty-icon{font-size:2.5rem;margin-bottom:.8rem}
     .empty-msg{font-size:.9rem}
+    .sec-title,.featured-title{font-family:'DM Serif Display',serif}
+    .sec-title{font-size:.85rem;text-transform:none;letter-spacing:0;font-weight:400;color:var(--text2)}
+    .src-badge{font-size:.62rem;font-weight:600;padding:2px 7px;border-radius:10px;text-transform:uppercase;letter-spacing:.04em}
+    .src-badge[data-src="Infobae"]{background:rgba(56,189,248,.12);color:var(--sky)}
+    .src-badge[data-src="Ámbito"]{background:rgba(249,115,22,.12);color:var(--orange)}
+    .src-badge[data-src="El Cronista"]{background:rgba(167,139,250,.12);color:#a78bfa}
+    .src-badge[data-src="La Nación"]{background:rgba(34,197,94,.12);color:var(--green)}
+    .src-badge[data-src="BBC Mundo"]{background:rgba(239,68,68,.12);color:var(--red)}
+    .src-badge[data-src="Google News"]{background:rgba(100,116,139,.12);color:var(--muted)}
     /* Loading state */
     .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
@@ -158,6 +170,12 @@
 <main>
   <div class="section">
     <div class="sec-header"><span class="sec-title">Últimas noticias</span><div class="sec-line"></div></div>
+    <div style="display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap">
+      <button class="chart-tab active" onclick="filterNews('all',this)">Todas</button>
+      <button class="chart-tab" onclick="filterNews('AR',this)">Argentina</button>
+      <button class="chart-tab" onclick="filterNews('MUNDO',this)">Mundo</button>
+      <button class="chart-tab" onclick="filterNews('MERCADOS',this)">Mercados</button>
+    </div>
 
     <div class="sources-bar" id="sourcesBar">
       <strong>Fuentes:</strong>
@@ -287,6 +305,8 @@ const SOURCES = [
   { url: 'https://www.infobae.com/feeds/rss/economia/', name: 'Infobae', dot: 'dot3' },
   { url: 'https://www.ambito.com/rss/pages/economia.xml', name: 'Ámbito', dot: 'dot4' },
   { url: 'https://feeds.bbci.co.uk/mundo/rss.xml', name: 'BBC Mundo', dot: 'dot5' },
+  { url: 'https://www.cronista.com/files-rss/summary.xml', name: 'El Cronista', dot: 'dot6' },
+  { url: 'https://www.lanacion.com.ar/arcio/rss/category/economia/', name: 'La Nación', dot: 'dot7' },
 ];
 
 let allNews    = [];
@@ -307,11 +327,11 @@ function renderNews(items) {
     : '';
 
   q('featuredWrap').innerHTML = `
-    <a class="news-featured" href="${top.link||'#'}" target="_blank" rel="noopener noreferrer">
+    <a class="news-featured featured-card" data-tag="${top.tag}" href="${top.link||'#'}" target="_blank" rel="noopener noreferrer">
       <div class="nf-badge">⭐ Destacada</div>
       <div class="nf-title">${top.title}</div>
       <div class="nf-meta">
-        <span class="nf-src">${top.src}</span>
+        <span class="src-badge" data-src="${top.src}">${top.src}</span>
         <span class="tag ${topTag}">${top.tag}</span>
         <span>${topDate}</span>
       </div>
@@ -322,9 +342,9 @@ function renderNews(items) {
     const date = item.pubDate
       ? new Date(item.pubDate).toLocaleDateString('es-AR', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit' })
       : '';
-    return `<a class="news-card" href="${item.link||'#'}" target="_blank" rel="noopener noreferrer">
+    return `<a class="news-card" data-tag="${item.tag}" href="${item.link||'#'}" target="_blank" rel="noopener noreferrer">
       <div class="nc-top">
-        <span class="nc-src ${tc}">${item.src}</span>
+        <span class="src-badge" data-src="${item.src}">${item.src}</span>
         <span class="tag ${tc}">${item.tag}</span>
       </div>
       <div class="nc-title">${item.title}</div>
@@ -406,6 +426,19 @@ async function loadNews(manual = false) {
     const html = data.map(d => `<span class="t-item"><span class="t-name">USD ${d.nombre}</span><span class="t-price neu">$\u202f${Number(d.venta).toLocaleString('es-AR')}</span></span>`).join('');
     q('tickerTrack').innerHTML = html + html;
   }).catch(() => {});
+}
+
+let currentFilter = 'all';
+function filterNews(tag, btn) {
+  currentFilter = tag;
+  document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.news-card, .featured-card');
+  cards.forEach(c => {
+    if (tag === 'all') { c.style.display = ''; return; }
+    const cardTag = c.dataset.tag || '';
+    c.style.display = cardTag === tag ? '' : 'none';
+  });
 }
 
 loadNews();

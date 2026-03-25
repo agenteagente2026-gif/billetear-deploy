@@ -22,6 +22,7 @@
   <link rel="apple-touch-icon" href="/icon-192.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -66,6 +67,31 @@
     .theme-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
     @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
     .refresh-spinning{animation:spin .55s linear}
+
+    /* ── Serif for titles ── */
+    .sec-title,.hero-name,.chart-title{font-family:'DM Serif Display',serif}
+    .sec-title{font-size:.85rem;text-transform:none;letter-spacing:0;font-weight:400;color:var(--text2)}
+
+    /* ── Sortable table headers ── */
+    .exch-table th{cursor:pointer;user-select:none;transition:color .15s}
+    .exch-table th:hover{color:var(--sky)}
+    .sort-arrow{font-size:.6rem;margin-left:4px;opacity:.4}
+    .sort-arrow.active{opacity:1;color:var(--sky)}
+
+    /* ── Insight banner ── */
+    .insight-banner{background:linear-gradient(90deg,rgba(56,189,248,.08),rgba(249,115,22,.06));border:1px solid rgba(56,189,248,.12);border-radius:14px;padding:.85rem 1.3rem;margin-bottom:1.5rem;font-size:.85rem;color:var(--text2);line-height:1.6;font-family:'DM Serif Display',serif;font-style:italic}
+    .insight-banner strong{color:var(--sky);font-style:normal}
+    body.light .insight-banner{background:linear-gradient(90deg,rgba(56,189,248,.06),rgba(249,115,22,.04))}
+
+    /* ── Section dividers ── */
+    .sec-line{background:linear-gradient(90deg,transparent,var(--border),transparent)}
+
+    /* ── Chart toggles ── */
+    .chart-toggles{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+    .chart-toggle{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer;font:500 .75rem 'DM Sans',sans-serif;color:var(--muted);transition:all .2s}
+    .chart-toggle.active{border-color:currentColor;color:var(--text)}
+    .chart-toggle .dot{width:8px;height:8px;border-radius:50%}
+
     .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
     .topnav::-webkit-scrollbar{display:none}
     .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
@@ -278,19 +304,22 @@
 
 <nav class="subnav">
   <div class="subnav-inner">
-    <a class="subnav-link active" href="#blue">⭐ Blue</a>
-    <a class="subnav-link" href="#mep">🏦 MEP / CCL</a>
-    <a class="subnav-link" href="#calculadora">🧮 Convertidor</a>
-    <a class="subnav-link" href="#cripto-detail">💱 Cripto</a>
-    <a class="subnav-link" href="#comparadolar">🏦 Bancos/Brokers</a>
-    <a class="subnav-link" href="#medios">📰 Por fuente</a>
-    <a class="subnav-link" href="#historico">📈 Histórico</a>
-    <a class="subnav-link" href="#fecha">📅 Por fecha</a>
-    <a class="subnav-link" href="#todos">🗂️ Todos</a>
+    <a class="subnav-link active" href="#blue">Blue</a>
+    <a class="subnav-link" href="#mep">MEP / CCL</a>
+    <a class="subnav-link" href="#calculadora">Convertidor</a>
+    <a class="subnav-link" href="#cripto-detail">Cripto</a>
+    <a class="subnav-link" href="#comparadolar">Bancos / Brokers</a>
+    <a class="subnav-link" href="#medios">Por fuente</a>
+    <a class="subnav-link" href="#historico">Histórico</a>
+    <a class="subnav-link" href="#fecha">Por fecha</a>
+    <a class="subnav-link" href="#todos">Todos</a>
   </div>
 </nav>
 
 <main>
+
+  <!-- ── Insight banner ── -->
+  <div class="insight-banner" id="insightBanner" style="display:none"></div>
 
   <!-- ── Hero Blue ── -->
   <div class="section" id="blue" style="animation-delay:.05s">
@@ -335,7 +364,7 @@
 
   <!-- ── Calculadora bidireccional ── -->
   <div class="section" id="calculadora" style="animation-delay:.09s">
-    <div class="sec-header"><span class="sec-title">🧮 Convertidor ARS ↔ USD</span><div class="sec-line"></div></div>
+    <div class="sec-header"><span class="sec-title">Convertidor ARS ↔ USD</span><div class="sec-line"></div></div>
     <div class="calc-section">
       <div class="calc-select-wrap">
         <label>Tipo de dólar</label>
@@ -365,7 +394,7 @@
 
   <!-- ── CRIPTO POR EXCHANGE ── -->
   <div class="section" id="cripto-detail" style="animation-delay:.11s">
-    <div class="sec-header"><span class="sec-title">💱 Dólar Cripto por exchange</span><div class="sec-line"></div></div>
+    <div class="sec-header"><span class="sec-title">Dólar Cripto por exchange</span><div class="sec-line"></div></div>
     <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
       Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local. Compra, venta y spread de cada plataforma.
     </p>
@@ -398,7 +427,7 @@
 
   <!-- ── COMPARADOLAR: Bancos y Brokers ── -->
   <div class="section" id="comparadolar" style="animation-delay:.12s">
-    <div class="sec-header"><span class="sec-title">💱 Dólar por banco y broker</span><div class="sec-line"></div></div>
+    <div class="sec-header"><span class="sec-title">Dólar por banco y broker</span><div class="sec-line"></div></div>
     <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
       Precio del dólar en <strong>bancos</strong> y <strong>brokers/fintechs</strong> argentinos. Ordenados por mejor precio de venta. Datos de comparadolar.ar.
     </p>
@@ -436,8 +465,14 @@
     <div class="sec-header"><span class="sec-title">Evolución dólar blue</span><div class="sec-line"></div></div>
     <div class="chart-card">
       <div class="chart-header">
-        <div><div class="chart-title">Dólar Blue – Precio de venta</div><div class="chart-sub">Cotización histórica en pesos argentinos · argentinadatos.com</div></div>
-        <div class="chart-stat"><div class="val" id="chartCurrentVal">—</div><div class="lbl">precio actual</div></div>
+        <div><div class="chart-title">Evolución tipos de cambio</div><div class="chart-sub">Comparación histórica en pesos argentinos · argentinadatos.com</div></div>
+        <div class="chart-stat"><div class="val" id="chartCurrentVal">—</div><div class="lbl">blue actual</div></div>
+      </div>
+      <div class="chart-toggles">
+        <button class="chart-toggle active" onclick="toggleSeries('blue',this)" style="--c:#38bdf8"><span class="dot" style="background:#38bdf8"></span>Blue</button>
+        <button class="chart-toggle active" onclick="toggleSeries('bolsa',this)" style="--c:#22c55e"><span class="dot" style="background:#22c55e"></span>MEP</button>
+        <button class="chart-toggle active" onclick="toggleSeries('contadoconliqui',this)" style="--c:#f97316"><span class="dot" style="background:#f97316"></span>CCL</button>
+        <button class="chart-toggle" onclick="toggleSeries('oficial',this)" style="--c:#a78bfa"><span class="dot" style="background:#a78bfa"></span>Oficial</button>
       </div>
       <div class="chart-tabs">
         <button class="chart-tab active" onclick="setRange(30,this)">30D</button>
@@ -624,6 +659,34 @@ const EXCH_URLS = {
 function exchName(k){return EXCH_NAMES[k]||k.charAt(0).toUpperCase()+k.slice(1);}
 function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
 
+/* ── Sortable tables ── */
+function sortTable(tableId, colIdx, type) {
+  const tbl = q(tableId);
+  if (!tbl) return;
+  const tbody = tbl.querySelector('tbody');
+  if (!tbody) return;
+  const rows = Array.from(tbody.querySelectorAll('tr'));
+  const th = tbl.querySelectorAll('th')[colIdx];
+  // Toggle direction
+  const asc = th.dataset.sort !== 'asc';
+  tbl.querySelectorAll('th').forEach(h => { h.dataset.sort = ''; });
+  th.dataset.sort = asc ? 'asc' : 'desc';
+  // Update arrows
+  tbl.querySelectorAll('.sort-arrow').forEach(a => a.classList.remove('active'));
+  const arrow = th.querySelector('.sort-arrow');
+  if (arrow) { arrow.classList.add('active'); arrow.textContent = asc ? '▲' : '▼'; }
+  rows.sort((a, b) => {
+    let va = a.cells[colIdx]?.textContent.trim() || '';
+    let vb = b.cells[colIdx]?.textContent.trim() || '';
+    if (type === 'num') {
+      va = parseFloat(va.replace(/[^0-9.,-]/g, '').replace('.', '').replace(',', '.')) || 0;
+      vb = parseFloat(vb.replace(/[^0-9.,-]/g, '').replace('.', '').replace(',', '.')) || 0;
+    }
+    return asc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+  });
+  rows.forEach(r => tbody.appendChild(r));
+}
+
 /* ── Render exchange table ── */
 function renderExchTable(tableId, loadingId, data) {
   const tbl = q(tableId);
@@ -638,7 +701,7 @@ function renderExchTable(tableId, loadingId, data) {
   if (!rows.length) { if(ldr)ldr.style.display='none'; return; }
 
   tbl.innerHTML = `<thead><tr>
-    <th>Exchange</th><th>Compra</th><th>Venta</th><th>Spread</th><th>Actualizado</th>
+    <th onclick="sortTable('${tableId}',0,'alpha')">Exchange <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',1,'num')">Compra <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',2,'num')">Venta <span class="sort-arrow active">▲</span></th><th onclick="sortTable('${tableId}',3,'num')">Spread <span class="sort-arrow">▼</span></th><th>Actualizado</th>
   </tr></thead><tbody>${rows.map((r, i) => {
     const spread = r.buy ? ((r.sell - r.buy) / r.buy * 100).toFixed(1) + '%' : '–';
     const badge  = i === 0 ? '<span class="best-badge">mejor venta</span>' :
@@ -688,7 +751,7 @@ function renderCompTable(tableId, loadingId, rows) {
   const bestBid = Math.max(...sorted.filter(r=>r.bid>0).map(r=>r.bid));
 
   tbl.innerHTML = `<thead><tr>
-    <th>Nombre</th><th>Compra</th><th>Venta</th><th>Spread</th><th>Variación</th>
+    <th onclick="sortTable('${tableId}',0,'alpha')">Nombre <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',1,'num')">Compra <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',2,'num')">Venta <span class="sort-arrow active">▲</span></th><th onclick="sortTable('${tableId}',3,'num')">Spread <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',4,'num')">Variación <span class="sort-arrow">▼</span></th>
   </tr></thead><tbody>${sorted.map((r, i) => {
     const spread = r.bid > 0 ? ((r.ask - r.bid) / r.bid * 100).toFixed(1) + '%' : '–';
     const badges = [];
@@ -713,7 +776,7 @@ function renderCompTable(tableId, loadingId, rows) {
 /* ── Datos dolarapi ── */
 const NAMES={oficial:'Oficial',blue:'Blue',bolsa:'MEP (Bolsa)',contadoconliqui:'CCL',mayorista:'Mayorista',cripto:'Cripto',tarjeta:'Tarjeta'};
 const ORDER=['oficial','blue','bolsa','contadoconliqui','cripto','tarjeta','mayorista'];
-let blueChartInstance=null, allBlueHistory=[];
+let blueChartInstance=null;
 let prevPrices={};
 
 function flashEl(id, newVal, prevVal) {
@@ -761,6 +824,7 @@ function renderDollars(data){
     const spread=d.compra&&d.venta?Math.round(((d.venta-d.compra)/d.compra)*100):null;
     return`<div class="ex-card"><div class="ex-name">${NAMES[d.casa]||d.nombre}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${fmtARS(d.compra)}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(d.venta)}</div></div></div>${spread!=null?`<span class="spread-tag">spread ${spread}%</span>`:''}</div>`;
   }).join('');
+  generateInsight(data);
 }
 
 function renderMEP(dollars){
@@ -780,25 +844,88 @@ async function loadBlueBySource(base){
   q('diariosGrid').innerHTML=sources.filter(s=>s.venta).map(s=>`<div class="diario-card"><div class="diario-name">${s.nombre}</div><div class="diario-row"><div class="diario-side"><div class="dl">Compra</div><div class="dv b">${s.compra?fmtM(s.compra):'–'}</div></div><div class="diario-side" style="text-align:right"><div class="dl">Venta</div><div class="dv s">${fmtM(s.venta)}</div></div></div></div>`).join('');
 }
 
-/* ── Chart ── */
-function drawChart(days){
-  if(!allBlueHistory.length)return;
-  const slice=days>=9999?allBlueHistory:allBlueHistory.slice(-days);
-  const labels=slice.map(d=>{const dt=new Date(d.fecha+'T12:00:00');return dt.toLocaleDateString('es-AR',{day:'numeric',month:'short'});});
-  const values=slice.map(d=>d.venta);
-  const last=values[values.length-1];
-  if(last)q('chartCurrentVal').textContent=fmtARS(last);
-  const ctx=document.getElementById('blueChart').getContext('2d');
-  if(blueChartInstance)blueChartInstance.destroy();
-  const g=ctx.createLinearGradient(0,0,0,200);
-  g.addColorStop(0,'rgba(56,189,248,.25)');g.addColorStop(1,'rgba(56,189,248,0)');
-  blueChartInstance=new Chart(ctx,{
-    type:'line',
-    data:{labels,datasets:[{data:values,borderColor:'#38bdf8',borderWidth:2,backgroundColor:g,fill:true,tension:0.4,pointRadius:0,pointHoverRadius:5,pointHoverBackgroundColor:'#38bdf8'}]},
-    options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},plugins:{legend:{display:false},tooltip:{backgroundColor:'#1a2540',borderColor:'#2a3e5e',borderWidth:1,titleColor:'#64748b',bodyColor:'#f1f5f9',bodyFont:{family:'DM Sans',size:13,weight:'600'},callbacks:{label:ctx=>' '+fmtARS(ctx.parsed.y)}}},scales:{x:{grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},maxTicksLimit:7,maxRotation:0}},y:{position:'right',grid:{color:'rgba(255,255,255,.04)'},ticks:{color:'#475569',font:{family:'DM Sans',size:11},callback:v=>'$'+Number(v).toLocaleString('es-AR')}}}}
+/* ── Multi-dollar chart ── */
+const CHART_COLORS = {blue:'#38bdf8', bolsa:'#22c55e', contadoconliqui:'#f97316', oficial:'#a78bfa'};
+const CHART_LABELS = {blue:'Blue', bolsa:'MEP', contadoconliqui:'CCL', oficial:'Oficial'};
+let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[]};
+let activeSeries = new Set(['blue','bolsa','contadoconliqui']);
+let currentRange = 30;
+
+function toggleSeries(key, btn) {
+  if (activeSeries.has(key)) { activeSeries.delete(key); btn.classList.remove('active'); }
+  else { activeSeries.add(key); btn.classList.add('active'); }
+  drawChart(currentRange);
+}
+
+function drawChart(days) {
+  currentRange = days;
+  const ctx = document.getElementById('blueChart').getContext('2d');
+  if (blueChartInstance) blueChartInstance.destroy();
+
+  const datasets = [];
+  for (const key of activeSeries) {
+    const data = allHistory[key];
+    if (!data || !data.length) continue;
+    const slice = days >= 9999 ? data : data.slice(-days);
+    const color = CHART_COLORS[key];
+    datasets.push({
+      label: CHART_LABELS[key],
+      data: slice.map(d => ({x: d.fecha, y: d.venta})),
+      borderColor: color,
+      borderWidth: 2,
+      backgroundColor: 'transparent',
+      fill: false,
+      tension: 0.4,
+      pointRadius: 0,
+      pointHoverRadius: 5,
+      pointHoverBackgroundColor: color
+    });
+  }
+
+  // Fill the first dataset for visual effect
+  if (datasets.length > 0) {
+    const g = ctx.createLinearGradient(0, 0, 0, 200);
+    const c = datasets[0].borderColor;
+    g.addColorStop(0, c.replace(')', ',.18)').replace('rgb', 'rgba'));
+    g.addColorStop(1, 'transparent');
+    datasets[0].backgroundColor = g;
+    datasets[0].fill = true;
+  }
+
+  // Update current value display
+  if (allHistory.blue && allHistory.blue.length) {
+    const last = allHistory.blue[allHistory.blue.length - 1].venta;
+    q('chartCurrentVal').textContent = fmtARS(last);
+  }
+
+  blueChartInstance = new Chart(ctx, {
+    type: 'line',
+    data: { datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: {mode: 'index', intersect: false},
+      plugins: {
+        legend: {display: true, position: 'top', labels: {color: '#64748b', font: {family: 'DM Sans', size: 11}, boxWidth: 12, padding: 12}},
+        tooltip: {
+          backgroundColor: '#1a2540', borderColor: '#2a3e5e', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#f1f5f9',
+          bodyFont: {family: 'DM Sans', size: 13, weight: '600'},
+          callbacks: {label: ctx => ' ' + ctx.dataset.label + ': ' + fmtARS(ctx.parsed.y)}
+        }
+      },
+      scales: {
+        x: {type: 'category', grid: {color: 'rgba(255,255,255,.04)'}, ticks: {color: '#475569', font: {family: 'DM Sans', size: 11}, maxTicksLimit: 7, maxRotation: 0, callback: function(val) { const d = new Date(this.getLabelForValue(val) + 'T12:00:00'); return d.toLocaleDateString('es-AR', {day:'numeric', month:'short'}); }}},
+        y: {position: 'right', grid: {color: 'rgba(255,255,255,.04)'}, ticks: {color: '#475569', font: {family: 'DM Sans', size: 11}, callback: v => '$' + Number(v).toLocaleString('es-AR')}}
+      }
+    }
   });
 }
-function setRange(days,btn){document.querySelectorAll('.chart-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');drawChart(days);}
+
+function setRange(days, btn) {
+  document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  drawChart(days);
+}
 
 /* ── Consulta por fecha ── */
 async function buscarFecha(){
@@ -839,21 +966,23 @@ async function refreshAll(){
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
       q('tickerTrack').innerHTML=tick+tick;
     }).catch(()=>{}),
-    fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/blue').then(data=>{
-      if(Array.isArray(data)&&data.length){
-        allBlueHistory=data;
-        drawChart(30);
-        // Sparkline: últimos 14 días
-        const slice = data.slice(-14).map(d => d.venta);
-        const sparkEl = q('blue-spark');
-        const sparkWrap = q('blue-spark-wrap');
-        if (sparkEl && slice.length >= 2) {
-          sparkEl.innerHTML = sparklineSVG(slice);
-          renderSparkDelta('blue-spark-delta', slice);
-          sparkWrap.style.display = 'flex';
+    ...((['blue','bolsa','contadoconliqui','oficial']).map(tipo =>
+      fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(data => {
+        if (Array.isArray(data) && data.length) {
+          allHistory[tipo] = data;
+          if (tipo === 'blue') {
+            const slice = data.slice(-14).map(d => d.venta);
+            const sparkEl = q('blue-spark');
+            const sparkWrap = q('blue-spark-wrap');
+            if (sparkEl && slice.length >= 2) {
+              sparkEl.innerHTML = sparklineSVG(slice);
+              renderSparkDelta('blue-spark-delta', slice);
+              sparkWrap.style.display = 'flex';
+            }
+          }
         }
-      }
-    }).catch(()=>{}),
+      }).catch(() => {})
+    )),
     // Cripto por exchange (carga directa, sin acordeón)
     fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(data=>{
       if(data) renderExchTable('usdt-table','usdt-loading',data);
@@ -873,6 +1002,8 @@ async function refreshAll(){
       renderCompTable('comp-brokers-table','comp-brokers-loading',brokers);
     }).catch(()=>{}),
   ]);
+  // Draw chart after all data loaded
+  drawChart(currentRange);
 }
 
 /* Scroll spy */
@@ -921,6 +1052,27 @@ function triggerRefresh(){
   if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
   refreshCountdown=30;
   refreshAll();
+}
+
+// ── Insight banner ──
+function generateInsight(data) {
+  const blue = data.find(d => d.casa === 'blue');
+  const oficial = data.find(d => d.casa === 'oficial');
+  const mep = data.find(d => d.casa === 'bolsa');
+  const ccl = data.find(d => d.casa === 'contadoconliqui');
+  if (!blue || !oficial) return;
+  const parts = [];
+  parts.push(`<strong>Blue $${blue.venta.toLocaleString('es-AR')}</strong>`);
+  const brecha = ((blue.venta - oficial.venta) / oficial.venta * 100).toFixed(1);
+  parts.push(`brecha con oficial <strong>${brecha}%</strong>`);
+  if (mep) {
+    const diff = ((blue.venta - mep.venta) / mep.venta * 100).toFixed(1);
+    if (Math.abs(diff) < 1) parts.push('blue y MEP casi igualados');
+    else if (diff > 0) parts.push(`blue ${diff}% arriba del MEP`);
+    else parts.push(`MEP ${Math.abs(diff)}% arriba del blue`);
+  }
+  const banner = q('insightBanner');
+  if (banner) { banner.innerHTML = parts.join(' · '); banner.style.display = 'block'; }
 }
 
 // PWA: register service worker
