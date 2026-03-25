@@ -428,12 +428,7 @@
         </div>
 
         <!-- Compact indicator strip -->
-        <div class="hc-indicators">
-          <div class="hc-ind-card">
-            <div class="hc-ind-label">📊 Brecha</div>
-            <div class="hc-ind-val" style="color:var(--purple)" id="mmBrecha">–</div>
-            <div class="hc-ind-sub" id="mmBrechaSub">blue/oficial</div>
-          </div>
+        <div class="hc-indicators" style="grid-template-columns:repeat(2,1fr)">
           <div class="hc-ind-card">
             <div class="hc-ind-label">🌡️ Riesgo País</div>
             <div class="hc-ind-val" style="color:var(--orange)" id="mmRiesgo">–</div>
@@ -445,6 +440,9 @@
             <div class="hc-ind-sub" id="mmInflaSub">mensual</div>
           </div>
         </div>
+        <!-- Hidden brecha elements so JS doesn't error -->
+        <span id="mmBrecha" style="display:none">–</span>
+        <span id="mmBrechaSub" style="display:none"></span>
       </div>
 
     </div>
@@ -511,7 +509,7 @@
       <a class="sec-card" href="mercados.html">
         <div class="sec-card-icon">📈</div>
         <div class="sec-card-title">Mercados</div>
-        <div class="sec-card-desc">Acciones argentinas en Wall Street, S&P 500, Nasdaq y ETFs globales.</div>
+        <div class="sec-card-desc">ADRs argentinos, S&P 500, Nasdaq, MELI, YPF, GGAL y más. Cotizaciones en tiempo real con variación diaria.</div>
         <div class="sec-card-preview">
           <div class="sc-preview-row"><span class="sc-preview-name">S&P 500</span><span class="sc-preview-val" id="pvSpy">–</span></div>
           <div class="sc-preview-row"><span class="sc-preview-name">MercadoLibre</span><span class="sc-preview-val" id="pvMeli">–</span></div>
@@ -597,11 +595,10 @@ async function fetchText(url){
 const DW_CONFIG=[
   {casa:'bolsa',    name:'MEP',       dot:'#38bdf8'},
   {casa:'contadoconliqui', name:'CCL', dot:'#f97316'},
-  {casa:'cripto',   name:'Cripto',    dot:'#a78bfa'},
   {casa:'blue',     name:'Blue',      dot:'#facc15'},
+  {casa:'cripto',   name:'Cripto',    dot:'#a78bfa'},
   {casa:'oficial',  name:'Oficial',   dot:'#22c55e'},
   {casa:'mayorista',name:'Mayorista', dot:'#64748b'},
-  {casa:'tarjeta',  name:'Tarjeta',   dot:'#f472b6'},
 ];
 
 // ── Theme toggle ──────────────────────────────────────
@@ -868,9 +865,9 @@ async function refreshAll(){
       // Heatmap dólar tiles
       if(q('heatGrid')){
         const heatDolars=[
-          {name:'Blue',casa:'blue',fmt:fmtARS},{name:'MEP',casa:'bolsa',fmt:fmtARS},
-          {name:'CCL',casa:'contadoconliqui',fmt:fmtARS},{name:'Oficial',casa:'oficial',fmt:fmtARS},
-          {name:'Cripto',casa:'cripto',fmt:fmtARS},{name:'Tarjeta',casa:'tarjeta',fmt:fmtARS},
+          {name:'MEP',casa:'bolsa',fmt:fmtARS},{name:'CCL',casa:'contadoconliqui',fmt:fmtARS},
+          {name:'Blue',casa:'blue',fmt:fmtARS},{name:'Oficial',casa:'oficial',fmt:fmtARS},
+          {name:'Cripto',casa:'cripto',fmt:fmtARS},
         ];
         _heatDolarData=heatDolars.map(cfg=>({...cfg,d:data.find(x=>x.casa===cfg.casa)}));
         renderHeatmap();
@@ -906,17 +903,38 @@ async function refreshAll(){
       tickerItems.push(...tick);
     }).catch(()=>{}),
 
-    fetchJSON('https://query1.finance.yahoo.com/v7/finance/quote?symbols=SPY,MELI,YPF').then(data=>{
-      const r=data?.quoteResponse?.result||[];
-      const spy=r.find(s=>s.symbol==='SPY');
-      const meli=r.find(s=>s.symbol==='MELI');
-      const ypf=r.find(s=>s.symbol==='YPF');
-      if(spy)q('pvSpy').textContent=fmtUSD(spy.regularMarketPrice);
-      if(meli)q('pvMeli').textContent=fmtUSD(meli.regularMarketPrice);
-      if(ypf)q('pvYpf').textContent=fmtUSD(ypf.regularMarketPrice);
-      _heatStockData=r.map(s=>({name:s.symbol,price:s.regularMarketPrice,pct:s.regularMarketChangePercent||0,fmt:fmtUSD}));
-      renderHeatmap();
-    }).catch(()=>{}),
+    (async()=>{
+      const symbols=['SPY','MELI','YPF'];
+      const yUrl='https://query1.finance.yahoo.com/v7/finance/quote?symbols='+symbols.join(',');
+      let r=[];
+      try{
+        const data=await fetchJSON(yUrl);
+        r=data?.quoteResponse?.result||[];
+      }catch{
+        // Yahoo direct failed, try individual finnhub-style fallback via allorigins
+        try{
+          const proxyUrl=`https://api.allorigins.win/raw?url=${encodeURIComponent(yUrl)}`;
+          const c=new AbortController();const t=setTimeout(()=>c.abort(),9000);
+          const resp=await fetch(proxyUrl,{signal:c.signal});clearTimeout(t);
+          if(resp.ok){const data=await resp.json();r=data?.quoteResponse?.result||[];}
+        }catch{}
+      }
+      if(r.length){
+        const spy=r.find(s=>s.symbol==='SPY');
+        const meli=r.find(s=>s.symbol==='MELI');
+        const ypf=r.find(s=>s.symbol==='YPF');
+        if(spy)q('pvSpy').textContent=fmtUSD(spy.regularMarketPrice);
+        if(meli)q('pvMeli').textContent=fmtUSD(meli.regularMarketPrice);
+        if(ypf)q('pvYpf').textContent=fmtUSD(ypf.regularMarketPrice);
+        _heatStockData=r.map(s=>({name:s.symbol,price:s.regularMarketPrice,pct:s.regularMarketChangePercent||0,fmt:fmtUSD}));
+        renderHeatmap();
+      }else{
+        // Show friendly fallback in the mercados preview card
+        q('pvSpy').innerHTML='<a href="mercados.html" style="color:var(--sky);font-size:.72rem">Ver en vivo →</a>';
+        q('pvMeli').textContent='';
+        q('pvYpf').textContent='';
+      }
+    })(),
 
     (async()=>{
       const eps=['https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais/ultimo','https://api.argentinadatos.com/v1/finanzas/indices/riesgo-pais'];
