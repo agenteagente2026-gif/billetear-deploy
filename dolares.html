@@ -523,6 +523,23 @@
       </div>
       <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
     </div>
+    <!-- TradingView Widget -->
+    <div style="margin-top:1.2rem">
+      <div class="sec-header"><span class="sec-title">Dólar en mercados</span><div class="sec-line"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px">
+          <div class="tradingview-widget-container">
+            <div id="tv-mep"></div>
+          </div>
+        </div>
+        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px">
+          <div class="tradingview-widget-container">
+            <div id="tv-ccl"></div>
+          </div>
+        </div>
+      </div>
+      <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.5rem">Datos de TradingView · BYMA/MAE en tiempo real</div>
+    </div>
   </div>
 
   <!-- ── Consulta por fecha ── -->
@@ -1149,6 +1166,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
 .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
 .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
 .bn-icon{font-size:1.1rem;line-height:1}
+@media(max-width:700px){.tradingview-widget-container{min-height:200px}}
 @media(max-width:640px){.bottom-nav{display:block}main{padding-bottom:5rem}.topnav{display:none}}
 </style>
 <nav class="bottom-nav">
@@ -1159,5 +1177,59 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
     <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
   </div>
 </nav>
+<script src="https://s3.tradingview.com/tv.js"></script>
+<script>
+// TradingView MEP widget (AL30D vs AL30)
+if(document.getElementById('tv-mep')){
+  new TradingView.MediumWidget({
+    symbols: [["Dólar MEP (AL30)", "BCBA:AL30D|1M"]],
+    chartOnly: true,
+    width: "100%",
+    height: 280,
+    locale: "es",
+    colorTheme: document.body.classList.contains('light') ? "light" : "dark",
+    autosize: false,
+    showVolume: false,
+    hideDateRanges: false,
+    scalePosition: "right",
+    scaleMode: "Normal",
+    fontFamily: "DM Sans, sans-serif",
+    fontSize: "10",
+    noTimeScale: false,
+    valuesTracking: "1",
+    chartType: "area",
+    lineColor: "#22c55e",
+    bottomColor: "rgba(34, 197, 94, 0.05)",
+    topColor: "rgba(34, 197, 94, 0.15)",
+    container_id: "tv-mep"
+  });
+}
+
+// TradingView CCL widget
+if(document.getElementById('tv-ccl')){
+  new TradingView.MediumWidget({
+    symbols: [["Dólar CCL (GD30D)", "BCBA:GD30D|1M"]],
+    chartOnly: true,
+    width: "100%",
+    height: 280,
+    locale: "es",
+    colorTheme: document.body.classList.contains('light') ? "light" : "dark",
+    autosize: false,
+    showVolume: false,
+    hideDateRanges: false,
+    scalePosition: "right",
+    scaleMode: "Normal",
+    fontFamily: "DM Sans, sans-serif",
+    fontSize: "10",
+    noTimeScale: false,
+    valuesTracking: "1",
+    chartType: "area",
+    lineColor: "#f97316",
+    bottomColor: "rgba(249, 115, 22, 0.05)",
+    topColor: "rgba(249, 115, 22, 0.15)",
+    container_id: "tv-ccl"
+  });
+}
+</script>
 </body>
 </html>

@@ -7,13 +7,13 @@
   <title>Dólar Blue hoy, MEP, CCL y Economía Argentina – BilleteAR</title>
   <meta name="description" content="Precio del dólar blue hoy, MEP, CCL, oficial y cripto en tiempo real. Riesgo país, inflación y acciones argentinas en Wall Street. Datos actualizados al minuto." />
   <meta name="keywords" content="dolar blue hoy, precio dolar mep, dolar ccl hoy, economia argentina, riesgo pais, inflacion argentina, acciones argentinas" />
-  <link rel="canonical" href="https://billetear.netlify.app/" />
+  <link rel="canonical" href="https://billetear.com/" />
   <!-- Open Graph -->
   <meta property="og:title" content="Dólar Blue hoy, MEP, CCL y Economía Argentina – BilleteAR" />
   <meta property="og:description" content="Dólar blue, MEP, CCL, cripto, riesgo país e inflación en tiempo real." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://billetear.netlify.app" />
-  <meta property="og:image" content="https://billetear.netlify.app/og-image.png" />
+  <meta property="og:url" content="https://billetear.com" />
+  <meta property="og:image" content="https://billetear.com/og-image.png" />
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dólar Blue hoy, MEP y CCL – BilleteAR" />
@@ -24,12 +24,12 @@
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "BilleteAR",
-    "url": "https://billetear.netlify.app",
+    "url": "https://billetear.com",
     "description": "Dashboard de economía argentina en tiempo real: dólar blue, MEP, CCL, cripto, acciones e inflación.",
     "inLanguage": "es-AR",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": "https://billetear.netlify.app/?q={search_term_string}",
+      "target": "https://billetear.com/?q={search_term_string}",
       "query-input": "required name=search_term_string"
     }
   }
@@ -344,7 +344,6 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="topnav-link active" href="index.html">🏠 Inicio</a>
     <a class="topnav-link" href="dolares.html">💵 Dólares</a>
     <a class="topnav-link" href="cripto.html">₿ Cripto</a>
     <a class="topnav-link" href="mercados.html">📈 Mercados</a>
@@ -369,7 +368,7 @@
 
   <!-- ── Hero: compact widget + macro stats ── -->
   <div class="section" style="animation-delay:.05s">
-    <div class="sec-header"><span class="sec-title">Resumen en tiempo real</span><div class="sec-line"></div><span id="lastUpdateSub" style="font-size:.68rem;color:var(--muted);white-space:nowrap"></span></div>
+    <span id="lastUpdateSub" style="display:none"></span>
     <div class="hero-wrap">
     <div class="hero-grid">
 
@@ -447,20 +446,6 @@
     </div><!-- /hero-wrap -->
   </div>
 
-  <!-- ── Share bar ── -->
-  <div class="share-bar" style="animation-delay:.06s">
-    <button class="share-btn share-wa" onclick="shareWhatsApp()">
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.137.561 4.14 1.535 5.873L.057 23.857c-.09.316.016.65.265.863A.987.987 0 001 25a.98.98 0 00.286-.043l6.197-1.98A11.932 11.932 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.992a9.965 9.965 0 01-5.058-1.374l-.36-.215-3.732 1.193 1.231-3.622-.236-.373A9.954 9.954 0 012.008 12C2.008 6.476 6.476 2.008 12 2.008S21.992 6.476 21.992 12 17.524 21.992 12 21.992z"/></svg>
-      Compartir en WhatsApp
-    </button>
-    <button class="share-btn share-tw" onclick="shareTwitter()">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.26 5.632zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      Postear en X
-    </button>
-    <button class="share-btn share-copy" id="copyBtn" onclick="copyPrices()">
-      📋 Copiar precios
-    </button>
-  </div>
 
   <!-- ── Heatmap mercados ── -->
   <div class="section" style="animation-delay:.10s">
@@ -475,72 +460,20 @@
     </div>
   </div>
 
-  <!-- ── Secciones ── -->
-  <div class="section" style="animation-delay:.12s">
-    <div class="sec-header"><span class="sec-title">Secciones</span><div class="sec-line"></div></div>
-    <div class="section-cards">
-
-      <a class="sec-card" href="dolares.html">
-        <div class="sec-card-icon">💵</div>
-        <div class="sec-card-title">Dólares</div>
-        <div class="sec-card-desc">Blue, MEP, CCL, Oficial y más. Precios por exchange/ALYC en tiempo real.</div>
-        <div class="sec-card-preview">
-          <div class="sc-preview-row"><span class="sc-preview-name">Blue venta</span><span class="sc-preview-val" id="pvBlue">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">MEP venta</span><span class="sc-preview-val" id="pvMep">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">CCL venta</span><span class="sc-preview-val" id="pvCcl">–</span></div>
-        </div>
-        <div class="sc-cta">Ver todos los dólares →</div>
-      </a>
-
-      <a class="sec-card" href="cripto.html">
-        <div class="sec-card-icon">₿</div>
-        <div class="sec-card-title">Criptomonedas</div>
-        <div class="sec-card-desc">Bitcoin, Ethereum, Solana y las principales criptos en tiempo real.</div>
-        <div class="sec-card-preview">
-          <div class="sc-preview-row"><span class="sc-preview-name">BTC</span><span class="sc-preview-val" id="pvBtc">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">ETH</span><span class="sc-preview-val" id="pvEth">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">SOL</span><span class="sc-preview-val" id="pvSol">–</span></div>
-        </div>
-        <div class="sc-cta">Ver criptomonedas →</div>
-      </a>
-
-      <a class="sec-card" href="mercados.html">
-        <div class="sec-card-icon">📈</div>
-        <div class="sec-card-title">Mercados</div>
-        <div class="sec-card-desc">ADRs argentinos, S&P 500, Nasdaq, MELI, YPF, GGAL y más. Cotizaciones en tiempo real con variación diaria.</div>
-        <div class="sec-card-preview">
-          <div class="sc-preview-row"><span class="sc-preview-name">S&P 500</span><span class="sc-preview-val" id="pvSpy">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">MercadoLibre</span><span class="sc-preview-val" id="pvMeli">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">YPF</span><span class="sc-preview-val" id="pvYpf">–</span></div>
-        </div>
-        <div class="sc-cta">Ver mercados →</div>
-      </a>
-
-      <a class="sec-card" href="indicadores.html">
-        <div class="sec-card-icon">📊</div>
-        <div class="sec-card-title">Indicadores</div>
-        <div class="sec-card-desc">Riesgo País, inflación, brecha cambiaria y datos macroeconómicos con gráficos históricos.</div>
-        <div class="sec-card-preview">
-          <div class="sc-preview-row"><span class="sc-preview-name">Riesgo País</span><span class="sc-preview-val" id="pvRiesgo">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">Inflación mensual</span><span class="sc-preview-val" id="pvInfla">–</span></div>
-          <div class="sc-preview-row"><span class="sc-preview-name">Brecha blue/oficial</span><span class="sc-preview-val" id="pvBrecha">–</span></div>
-        </div>
-        <div class="sc-cta">Ver indicadores →</div>
-      </a>
-
-      <a class="sec-card" href="noticias.html">
-        <div class="sec-card-icon">📰</div>
-        <div class="sec-card-title">Noticias</div>
-        <div class="sec-card-desc">Últimas noticias económicas de Argentina y el mundo. Actualización automática.</div>
-        <div class="sec-card-preview">
-          <div class="sc-preview-row" style="font-size:.75rem;color:var(--muted2)">Economía · Mercados · Mundo</div>
-          <div class="sc-preview-row" style="font-size:.75rem;color:var(--muted2)">Infobae · Ámbito · BBC · Google News</div>
-        </div>
-        <div class="sc-cta">Ver noticias →</div>
-      </a>
-
-    </div>
-  </div>
+  <!-- Hidden elements for JS compatibility (removed sections still referenced by JS) -->
+  <span id="copyBtn" style="display:none"></span>
+  <span id="pvBlue" style="display:none">–</span>
+  <span id="pvMep" style="display:none">–</span>
+  <span id="pvCcl" style="display:none">–</span>
+  <span id="pvBtc" style="display:none">–</span>
+  <span id="pvEth" style="display:none">–</span>
+  <span id="pvSol" style="display:none">–</span>
+  <span id="pvSpy" style="display:none">–</span>
+  <span id="pvMeli" style="display:none">–</span>
+  <span id="pvYpf" style="display:none">–</span>
+  <span id="pvRiesgo" style="display:none">–</span>
+  <span id="pvInfla" style="display:none">–</span>
+  <span id="pvBrecha" style="display:none">–</span>
 
   <!-- ── Últimas noticias ── -->
   <div class="section" style="animation-delay:.15s">
@@ -564,7 +497,6 @@
 <!-- ── Mobile bottom nav ── -->
 <nav class="bottom-nav">
   <div class="bn-inner">
-    <a class="bn-item active" href="index.html"><span class="bn-icon">🏠</span><span>Inicio</span></a>
     <a class="bn-item" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
     <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
     <a class="bn-item" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
@@ -968,7 +900,7 @@ function buildShareText(){
     }
   });
   lines.push('');
-  lines.push('👉 billetear.netlify.app');
+  lines.push('👉 billetear.com');
   return lines.join('\n');
 }
 
@@ -981,7 +913,7 @@ function shareTwitter(){
   const rows=document.querySelectorAll('#dwRows .dw-row');
   const blue=document.querySelector('#dwRows .dw-row:nth-child(4) .dw-price')?.textContent||'';
   const mep=document.querySelector('#dwRows .dw-row:nth-child(1) .dw-price')?.textContent||'';
-  const text=`📊 Dólares hoy en Argentina:\n💵 Blue: ${blue}\n🏦 MEP: ${mep}\n\nVer todos en billetear.netlify.app #DolarBlue #Argentina #Economia`;
+  const text=`📊 Dólares hoy en Argentina:\n💵 Blue: ${blue}\n🏦 MEP: ${mep}\n\nVer todos en billetear.com #DolarBlue #Argentina #Economia`;
   window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank');
 }
 
