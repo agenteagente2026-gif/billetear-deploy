@@ -39,6 +39,10 @@
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
     .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .header-nav{display:flex;align-items:center;gap:4px;margin-left:1.5rem}
+    .header-nav .topnav-link{padding:6px 12px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:8px;transition:all .2s}
+    .header-nav .topnav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
+    .header-nav .topnav-link.active{color:var(--sky);background:rgba(56,189,248,.08)}
     .logo{display:flex;align-items:center;text-decoration:none}
     .logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--sky);letter-spacing:-.5px}
     .logo-text em{color:var(--sky);font-style:normal}
@@ -95,6 +99,7 @@
 
     /* ── Two-col layout for charts ── */
     .charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+    @media(max-width:640px){.header-nav{display:none}}
     @media(max-width:768px){.charts-2col{grid-template-columns:1fr}}
 
     /* ── Inflación histórica table ── */
@@ -166,9 +171,16 @@
 
 <header>
   <div class="header-inner">
-    <a class="logo" href="dolares.html" style="flex:1;text-align:center">
+    <a class="logo" href="index.html">
       <span class="logo-text" style="font-family:'DM Serif Display',serif;font-size:1.6rem;letter-spacing:-1px">Billete<em style="color:var(--sky);font-style:normal">AR</em></span>
     </a>
+    <div class="header-nav">
+      <a class="topnav-link" href="dolares.html">Dolares</a>
+      <a class="topnav-link" href="cripto.html">Cripto</a>
+      <a class="topnav-link" href="mercados.html">Mercados</a>
+      <a class="topnav-link active" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="noticias.html">Noticias</a>
+    </div>
     <div class="nav-right">
       <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
       <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
@@ -176,17 +188,6 @@
     </div>
   </div>
 </header>
-
-<nav class="topnav">
-  <div class="topnav-inner">
-    
-    <a class="topnav-link" href="dolares.html">💵 Dólares</a>
-    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
-    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
-    <a class="topnav-link active" href="indicadores.html">📊 Indicadores</a>
-    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
-  </div>
-</nav>
 
 <main>
 

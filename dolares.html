@@ -77,6 +77,10 @@
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
     .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .header-nav{display:flex;align-items:center;gap:4px;margin-left:1.5rem}
+    .header-nav .topnav-link{padding:6px 12px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:8px;transition:all .2s}
+    .header-nav .topnav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
+    .header-nav .topnav-link.active{color:var(--sky);background:rgba(56,189,248,.08)}
     .logo{display:flex;align-items:center;text-decoration:none}
     .logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--sky);letter-spacing:-.5px}
     .logo-text em{color:var(--sky);font-style:normal}
@@ -297,13 +301,8 @@
     .dolar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem}
     @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:550px){.dolar-grid{grid-template-columns:repeat(2,1fr)}}
-    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1rem 1.1rem;transition:all .25s;border-top:3px solid var(--border2);position:relative}
+    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1rem 1.1rem;transition:all .25s;position:relative}
     .dolar-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25);border-color:var(--border2)}
-    .blue-accent{border-top-color:#facc15}
-    .mep-accent{border-top-color:#38bdf8}
-    .ccl-accent{border-top-color:#f97316}
-    .oficial-accent{border-top-color:#22c55e}
-    .cripto-accent{border-top-color:#a78bfa}
     .dc-name{font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
     .dc-prices{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.5rem}
     .dc-buy{font-size:.72rem;color:var(--muted)}
@@ -339,9 +338,16 @@
 
 <header>
   <div class="header-inner">
-    <a class="logo" href="dolares.html" style="flex:1;text-align:center">
+    <a class="logo" href="index.html">
       <span class="logo-text" style="font-family:'DM Serif Display',serif;font-size:1.6rem;letter-spacing:-1px">Billete<em style="color:var(--sky);font-style:normal">AR</em></span>
     </a>
+    <div class="header-nav">
+      <a class="topnav-link active" href="dolares.html">Dolares</a>
+      <a class="topnav-link" href="cripto.html">Cripto</a>
+      <a class="topnav-link" href="mercados.html">Mercados</a>
+      <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="noticias.html">Noticias</a>
+    </div>
     <div class="nav-right">
       <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
       <span id="countdown" style="font-size:.72rem;color:var(--muted)"></span>
@@ -350,16 +356,6 @@
     </div>
   </div>
 </header>
-
-<nav class="topnav">
-  <div class="topnav-inner">
-    <a class="topnav-link active" href="dolares.html">Dólares</a>
-    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
-    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
-    <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
-    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
-  </div>
-</nav>
 
 <!-- ── Stats bar persistente ── -->
 <div class="stats-bar">
@@ -392,11 +388,11 @@
   <div class="section" id="blue" style="animation-delay:.05s">
     <div class="sec-header"><span class="sec-title">Dólares</span><div class="sec-line"></div></div>
     <div class="dolar-grid" id="dolarGrid">
-      <div class="dolar-card blue-accent" id="card-blue"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
-      <div class="dolar-card mep-accent" id="card-mep"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
-      <div class="dolar-card ccl-accent" id="card-ccl"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
-      <div class="dolar-card oficial-accent" id="card-oficial"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
-      <div class="dolar-card cripto-accent" id="card-cripto"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
+      <div class="dolar-card" id="card-blue"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
+      <div class="dolar-card" id="card-mep"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
+      <div class="dolar-card" id="card-ccl"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
+      <div class="dolar-card" id="card-oficial"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
+      <div class="dolar-card" id="card-cripto"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
     </div>
     <!-- Hidden elements for backward compat -->
     <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
@@ -529,7 +525,7 @@
     </div>
     <!-- TradingView Widgets -->
     <div style="margin-top:1.2rem">
-      <div class="sec-header"><span class="sec-title">MEP y CCL en vivo · BYMA</span><div class="sec-line"></div></div>
+      <div class="sec-header"><span class="sec-title">Dólar MEP y CCL en vivo</span><div class="sec-line"></div></div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="tvGrid">
         <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px;height:420px">
           <div class="tradingview-widget-container" style="height:100%">
@@ -941,7 +937,7 @@ async function loadBlueBySource(base){
 /* ── Multi-dollar chart ── */
 const CHART_COLORS = {blue:'#38bdf8', bolsa:'#22c55e', contadoconliqui:'#f97316', oficial:'#a78bfa'};
 const CHART_LABELS = {blue:'Blue', bolsa:'MEP', contadoconliqui:'CCL', oficial:'Oficial'};
-let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[]};
+let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[], cripto:[]};
 let activeSeries = new Set(['blue','bolsa','contadoconliqui']);
 let currentRange = 30;
 
@@ -1043,8 +1039,18 @@ async function buscarFecha(){
   q('fechaGrid').innerHTML=results.map(r=>`<div class="ex-card"><div class="ex-name">${r.label}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${r.compra?fmtARS(r.compra):'–'}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(r.venta)}</div></div></div></div>`).join('');
   q('fechaResult').style.display='block';
 }
-// Set max date to today
-(function(){const d=q('fechaInput');if(d)d.max=new Date().toISOString().split('T')[0];})();
+// Set default date to yesterday (skip weekends) and max to today
+(function(){
+  const d=q('fechaInput');
+  if(!d)return;
+  const today=new Date();
+  d.max=today.toISOString().split('T')[0];
+  const yesterday=new Date();
+  yesterday.setDate(yesterday.getDate()-1);
+  if(yesterday.getDay()===0) yesterday.setDate(yesterday.getDate()-2);
+  if(yesterday.getDay()===6) yesterday.setDate(yesterday.getDate()-1);
+  d.value=yesterday.toISOString().split('T')[0];
+})();
 
 /* ── Refresh ── */
 async function refreshAll(){
@@ -1060,7 +1066,7 @@ async function refreshAll(){
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
       q('tickerTrack').innerHTML=tick+tick;
     }).catch(()=>{}),
-    ...((['blue','bolsa','contadoconliqui','oficial']).map(tipo =>
+    ...((['blue','bolsa','contadoconliqui','oficial','cripto']).map(tipo =>
       fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(data => {
         if (Array.isArray(data) && data.length) {
           allHistory[tipo] = data;
@@ -1160,7 +1166,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
 .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
 .bn-icon{font-size:1.1rem;line-height:1}
 @media(max-width:700px){.tradingview-widget-container{min-height:200px}}
-@media(max-width:640px){.bottom-nav{display:block}main{padding-bottom:5rem}.topnav{display:none}}
+@media(max-width:640px){.bottom-nav{display:block}main{padding-bottom:5rem}.topnav{display:none}.header-nav{display:none}}
 </style>
 <nav class="bottom-nav">
   <div class="bn-inner">
@@ -1176,7 +1182,7 @@ function tvTheme(){return document.body.classList.contains('light')?'light':'dar
 if(document.getElementById('tv-mep')){
   new TradingView.widget({
     container_id:'tv-mep',
-    symbol:'BCBA:AL30D',
+    symbol:'BCBA:AL30/BCBA:AL30D',
     interval:'60',
     timezone:'America/Argentina/Buenos_Aires',
     theme:tvTheme(),
@@ -1196,7 +1202,7 @@ if(document.getElementById('tv-mep')){
 if(document.getElementById('tv-ccl')){
   new TradingView.widget({
     container_id:'tv-ccl',
-    symbol:'BCBA:GD30D',
+    symbol:'BCBA:GD30/BCBA:GD30D',
     interval:'60',
     timezone:'America/Argentina/Buenos_Aires',
     theme:tvTheme(),

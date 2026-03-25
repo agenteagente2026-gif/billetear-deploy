@@ -80,6 +80,10 @@
     @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
     header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
     .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
+    .header-nav{display:flex;align-items:center;gap:4px;margin-left:1.5rem}
+    .header-nav .topnav-link{padding:6px 12px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:8px;transition:all .2s}
+    .header-nav .topnav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
+    .header-nav .topnav-link.active{color:var(--sky);background:rgba(56,189,248,.08)}
     .logo{display:flex;align-items:center;text-decoration:none}
     .logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--sky);letter-spacing:-.5px}
     .logo-text em{color:var(--sky);font-style:normal}
@@ -134,6 +138,7 @@
     @media(max-width:640px){
       .bottom-nav{display:block}
       .topnav{display:none}
+      .header-nav{display:none}
       main{padding-bottom:5rem}
       .stats-bar{top:58px}
     }
@@ -334,6 +339,13 @@
     <a class="logo" href="index.html">
       <span class="logo-text" style="font-family:'DM Serif Display',serif;font-size:1.6rem;letter-spacing:-1px">Billete<em style="color:var(--sky);font-style:normal">AR</em></span>
     </a>
+    <div class="header-nav">
+      <a class="topnav-link" href="dolares.html">Dolares</a>
+      <a class="topnav-link" href="cripto.html">Cripto</a>
+      <a class="topnav-link" href="mercados.html">Mercados</a>
+      <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="noticias.html">Noticias</a>
+    </div>
     <div class="nav-right">
       <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate" style="font-size:.7rem;color:var(--muted)"></span></div>
       <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
@@ -342,15 +354,6 @@
   </div>
 </header>
 
-<nav class="topnav">
-  <div class="topnav-inner">
-    <a class="topnav-link" href="dolares.html">💵 Dólares</a>
-    <a class="topnav-link" href="cripto.html">₿ Cripto</a>
-    <a class="topnav-link" href="mercados.html">📈 Mercados</a>
-    <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
-    <a class="topnav-link" href="noticias.html">📰 Noticias</a>
-  </div>
-</nav>
 
 <!-- ── Stats bar persistente ── -->
 <div class="stats-bar">
@@ -615,8 +618,11 @@ function renderHeatmap(){
   if(!grid)return;
   const items=[..._heatDolarData.map(cfg=>{
     if(!cfg.d)return null;
-    // For dollar types we show venta price and compare to oficial as "change"
-    return{name:cfg.name,price:cfg.d.venta,pct:null,fmt:cfg.fmt,isMoney:true};
+    // Calculate daily % change for dollar tiles using localStorage snapshot
+    let pct=null;
+    const oldPrice=getWeekChange(cfg.casa);
+    if(oldPrice&&cfg.d.venta){pct=((cfg.d.venta-oldPrice)/oldPrice*100);}
+    return{name:cfg.name,price:cfg.d.venta,pct:pct,fmt:cfg.fmt,isMoney:true};
   }).filter(Boolean),..._heatCryptoData,..._heatStockData];
   if(!items.length)return;
   grid.innerHTML=items.map(item=>{
@@ -646,6 +652,15 @@ function renderDollarWidget(data){
       const cls=pct>0?'pos':pct<0?'neg':'na';
       const arrow=pct>0?'▲':pct<0?'▼':'';
       chgHtml=`<span class="dw-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
+    } else if(price!=null){
+      // Fallback: daily % change from localStorage snapshot
+      const snapPrice=getWeekChange(cfg.casa);
+      if(snapPrice&&snapPrice!==price){
+        const pct=((price-snapPrice)/snapPrice*100);
+        const cls=pct>0?'pos':pct<0?'neg':'na';
+        const arrow=pct>0?'▲':pct<0?'▼':'';
+        chgHtml=`<span class="dw-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
+      }
     }
     const ts=d.fechaActualizacion?`<span class="dw-ts">${relTime(d.fechaActualizacion)}</span>`:'';
     // Evolución 7 días
