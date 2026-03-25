@@ -523,22 +523,21 @@
       </div>
       <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
     </div>
-    <!-- TradingView Widget -->
+    <!-- TradingView Widgets -->
     <div style="margin-top:1.2rem">
-      <div class="sec-header"><span class="sec-title">Dólar en mercados</span><div class="sec-line"></div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px">
-          <div class="tradingview-widget-container">
-            <div id="tv-mep"></div>
+      <div class="sec-header"><span class="sec-title">MEP y CCL en vivo · BYMA</span><div class="sec-line"></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="tvGrid">
+        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px;height:420px">
+          <div class="tradingview-widget-container" style="height:100%">
+            <div id="tv-mep" style="height:100%"></div>
           </div>
         </div>
-        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px">
-          <div class="tradingview-widget-container">
-            <div id="tv-ccl"></div>
+        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px;height:420px">
+          <div class="tradingview-widget-container" style="height:100%">
+            <div id="tv-ccl" style="height:100%"></div>
           </div>
         </div>
       </div>
-      <div style="font-size:.65rem;color:var(--muted);text-align:center;margin-top:.5rem">Datos de TradingView · BYMA/MAE en tiempo real</div>
     </div>
   </div>
 
@@ -1177,57 +1176,47 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
     <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
   </div>
 </nav>
-<script src="https://s3.tradingview.com/tv.js"></script>
+<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 <script>
-// TradingView MEP widget (AL30D vs AL30)
+function tvTheme(){return document.body.classList.contains('light')?'light':'dark';}
 if(document.getElementById('tv-mep')){
-  new TradingView.MediumWidget({
-    symbols: [["Dólar MEP (AL30)", "BCBA:AL30D|1M"]],
-    chartOnly: true,
-    width: "100%",
-    height: 280,
-    locale: "es",
-    colorTheme: document.body.classList.contains('light') ? "light" : "dark",
-    autosize: false,
-    showVolume: false,
-    hideDateRanges: false,
-    scalePosition: "right",
-    scaleMode: "Normal",
-    fontFamily: "DM Sans, sans-serif",
-    fontSize: "10",
-    noTimeScale: false,
-    valuesTracking: "1",
-    chartType: "area",
-    lineColor: "#22c55e",
-    bottomColor: "rgba(34, 197, 94, 0.05)",
-    topColor: "rgba(34, 197, 94, 0.15)",
-    container_id: "tv-mep"
+  new TradingView.widget({
+    container_id:'tv-mep',
+    symbol:'BCBA:AL30D',
+    interval:'60',
+    timezone:'America/Argentina/Buenos_Aires',
+    theme:tvTheme(),
+    style:'1',
+    locale:'es',
+    toolbar_bg:'#0b0f1e',
+    enable_publishing:false,
+    hide_top_toolbar:false,
+    hide_legend:false,
+    save_image:false,
+    width:'100%',
+    height:'100%',
+    studies:['MASimple@tv-basicstudies'],
+    overrides:{'mainSeriesProperties.candleStyle.upColor':'#22c55e','mainSeriesProperties.candleStyle.downColor':'#ef4444','mainSeriesProperties.candleStyle.wickUpColor':'#22c55e','mainSeriesProperties.candleStyle.wickDownColor':'#ef4444'}
   });
 }
-
-// TradingView CCL widget
 if(document.getElementById('tv-ccl')){
-  new TradingView.MediumWidget({
-    symbols: [["Dólar CCL (GD30D)", "BCBA:GD30D|1M"]],
-    chartOnly: true,
-    width: "100%",
-    height: 280,
-    locale: "es",
-    colorTheme: document.body.classList.contains('light') ? "light" : "dark",
-    autosize: false,
-    showVolume: false,
-    hideDateRanges: false,
-    scalePosition: "right",
-    scaleMode: "Normal",
-    fontFamily: "DM Sans, sans-serif",
-    fontSize: "10",
-    noTimeScale: false,
-    valuesTracking: "1",
-    chartType: "area",
-    lineColor: "#f97316",
-    bottomColor: "rgba(249, 115, 22, 0.05)",
-    topColor: "rgba(249, 115, 22, 0.15)",
-    container_id: "tv-ccl"
+  new TradingView.widget({
+    container_id:'tv-ccl',
+    symbol:'BCBA:GD30D',
+    interval:'60',
+    timezone:'America/Argentina/Buenos_Aires',
+    theme:tvTheme(),
+    style:'1',
+    locale:'es',
+    toolbar_bg:'#0b0f1e',
+    enable_publishing:false,
+    hide_top_toolbar:false,
+    hide_legend:false,
+    save_image:false,
+    width:'100%',
+    height:'100%',
+    studies:['MASimple@tv-basicstudies'],
+    overrides:{'mainSeriesProperties.candleStyle.upColor':'#22c55e','mainSeriesProperties.candleStyle.downColor':'#ef4444','mainSeriesProperties.candleStyle.wickUpColor':'#22c55e','mainSeriesProperties.candleStyle.wickDownColor':'#ef4444'}
   });
 }
 </script>
