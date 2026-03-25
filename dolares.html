@@ -250,8 +250,8 @@
 
 <header>
   <div class="header-inner">
-    <a class="logo" href="index.html">
-      <span class="logo-text">Billete<em>AR</em></span>
+    <a class="logo" href="dolares.html" style="flex:1;text-align:center">
+      <span class="logo-text" style="font-family:'DM Serif Display',serif;font-size:1.6rem;letter-spacing:-1px">Billete<em style="color:var(--sky);font-style:normal">AR</em></span>
     </a>
     <div class="nav-right">
       <div class="live-badge"><div class="live-dot"></div><span id="lastUpdate">Conectando...</span></div>
@@ -264,8 +264,7 @@
 
 <nav class="topnav">
   <div class="topnav-inner">
-    <a class="topnav-link" href="index.html">🏠 Inicio</a>
-    <a class="topnav-link active" href="dolares.html">💵 Dólares</a>
+    <a class="topnav-link active" href="dolares.html">Dólares</a>
     <a class="topnav-link" href="cripto.html">₿ Cripto</a>
     <a class="topnav-link" href="mercados.html">📈 Mercados</a>
     <a class="topnav-link" href="indicadores.html">📊 Indicadores</a>
@@ -346,19 +345,18 @@
   <div class="section" id="calculadora" style="animation-delay:.09s">
     <div class="sec-header"><span class="sec-title">Convertidor ARS ↔ USD</span><div class="sec-line"></div></div>
     <div class="glass-card" style="padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:20px">
-      <h3 class="sec-title" style="margin-bottom:1rem">Convertidor ARS ↔ USD</h3>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:1.2rem">
         <div style="flex:1;min-width:140px">
-          <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Pesos argentinos</label>
-          <input type="text" id="calcARS" placeholder="10.000" style="width:100%;padding:.7rem;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.1rem;font-family:'DM Sans',sans-serif;margin-top:4px" oninput="calcAll('ars')">
+          <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Tengo (pesos)</label>
+          <input type="text" id="calcARS" placeholder="10.000" style="width:100%;padding:.7rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.1rem;font-family:'DM Sans',sans-serif;margin-top:4px" oninput="calcAll('ars')">
         </div>
         <div style="display:flex;align-items:center;color:var(--muted);font-size:1.2rem;padding-top:1rem">⇄</div>
         <div style="flex:1;min-width:140px">
-          <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Dólares</label>
-          <input type="text" id="calcUSD" placeholder="1" style="width:100%;padding:.7rem;border-radius:10px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.1rem;font-family:'DM Sans',sans-serif;margin-top:4px" oninput="calcAll('usd')">
+          <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Tengo (dólares)</label>
+          <input type="text" id="calcUSD" placeholder="100" style="width:100%;padding:.7rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.1rem;font-family:'DM Sans',sans-serif;margin-top:4px" oninput="calcAll('usd')">
         </div>
       </div>
-      <div id="calcGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.6rem"></div>
+      <div id="calcGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.6rem"></div>
     </div>
   </div>
 
@@ -554,7 +552,10 @@ function calcAll(from) {
   const grid = q('calcGrid');
   if (!grid) return;
 
-  // Parse input
+  // Clear the other field so only one direction is active
+  if (from === 'ars') usdInput.value = '';
+  if (from === 'usd') arsInput.value = '';
+
   let ars = parseFloat(arsInput.value.replace(/\./g,'').replace(',','.')) || 0;
   let usd = parseFloat(usdInput.value.replace(/\./g,'').replace(',','.')) || 0;
 
@@ -563,27 +564,29 @@ function calcAll(from) {
     {key:'bolsa', label:'MEP', color:'#22c55e'},
     {key:'contadoconliqui', label:'CCL', color:'#f97316'},
     {key:'oficial', label:'Oficial', color:'#a78bfa'},
-    {key:'cripto', label:'Cripto', color:'#facc15'},
-    {key:'tarjeta', label:'Tarjeta', color:'#64748b'}
+    {key:'cripto', label:'Cripto', color:'#facc15'}
   ];
 
   let html = '';
   types.forEach(t => {
     const d = currentDollarData.find(x => x.casa === t.key);
     if (!d) return;
-    let result = '';
-    const price = from === 'ars' ? d.venta : d.compra;
-    const priceLabel = from === 'ars' ? 'venta' : 'compra';
+    let result = '', sub = '';
     if (from === 'ars' && ars > 0) {
       result = 'U$D ' + (ars / d.venta).toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2});
+      sub = 'venta $' + d.venta.toLocaleString('es-AR');
     } else if (from === 'usd' && usd > 0) {
       result = '$ ' + (usd * d.compra).toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:0});
+      sub = 'compra $' + d.compra.toLocaleString('es-AR');
     } else {
       result = '—';
     }
-    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.7rem .9rem;display:flex;justify-content:space-between;align-items:center">
-      <div><span style="font-size:.78rem;color:${t.color};font-weight:600">${t.label}</span><span style="font-size:.6rem;color:var(--muted);margin-left:6px">${(from === 'ars' || from === 'usd') && (ars > 0 || usd > 0) ? priceLabel + ' $' + price.toLocaleString('es-AR') : ''}</span></div>
-      <span style="font-size:.9rem;color:var(--text);font-weight:500">${result}</span>
+    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.8rem 1rem">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <span style="font-size:.85rem;color:${t.color};font-weight:600">${t.label}</span>
+        <span style="font-size:1rem;color:var(--text);font-weight:600">${result}</span>
+      </div>
+      ${sub ? `<div style="font-size:.65rem;color:var(--muted);margin-top:3px">cotización ${sub}</div>` : ''}
     </div>`;
   });
   grid.innerHTML = html;
