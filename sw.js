@@ -1,7 +1,5 @@
-const CACHE_NAME = 'billetear-v1';
+const CACHE_NAME = 'billetear-v2';
 const SHELL_FILES = [
-  '/',
-  '/index.html',
   '/dolares.html',
   '/cripto.html',
   '/mercados.html',
@@ -10,7 +8,7 @@ const SHELL_FILES = [
   '/manifest.json'
 ];
 
-// Install: cache shell files
+// Install: cache shell files (skip index.html — it's just a redirect)
 self.addEventListener('install', e => {
   e.waitUntil(
     caches.open(CACHE_NAME)
@@ -19,7 +17,7 @@ self.addEventListener('install', e => {
   );
 });
 
-// Activate: clean old caches
+// Activate: clean ALL old caches
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
@@ -28,27 +26,22 @@ self.addEventListener('activate', e => {
   );
 });
 
-// Fetch: network-first for API calls, cache-first for shell
+// Fetch: network-first, fallback to cache
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // API calls: network only (always fresh data)
-  if (url.hostname !== location.hostname) {
-    return;
-  }
+  // Skip API calls and redirects
+  if (url.hostname !== location.hostname) return;
+  if (e.request.mode === 'navigate' && url.pathname === '/') return;
+  if (url.pathname === '/index.html') return;
 
-  // HTML/assets: stale-while-revalidate
   e.respondWith(
-    caches.match(e.request).then(cached => {
-      const fetchPromise = fetch(e.request).then(response => {
-        if (response.ok) {
-          const clone = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
-        }
-        return response;
-      }).catch(() => cached);
-
-      return cached || fetchPromise;
-    })
+    fetch(e.request).then(response => {
+      if (response.ok && response.type !== 'opaqueredirect') {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+      }
+      return response;
+    }).catch(() => caches.match(e.request))
   );
 });
