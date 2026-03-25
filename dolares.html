@@ -293,6 +293,24 @@
     .mini-chg.up{color:var(--green);background:rgba(34,197,94,.1)}
     .mini-chg.down{color:var(--red);background:rgba(239,68,68,.1)}
     .mini-chg.neu{color:var(--muted);background:rgba(100,116,139,.1)}
+    /* ── Dólar grid uniforme ── */
+    .dolar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem}
+    @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:550px){.dolar-grid{grid-template-columns:repeat(2,1fr)}}
+    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1rem 1.1rem;transition:all .25s;border-top:3px solid var(--border2);position:relative}
+    .dolar-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25);border-color:var(--border2)}
+    .blue-accent{border-top-color:#facc15}
+    .mep-accent{border-top-color:#38bdf8}
+    .ccl-accent{border-top-color:#f97316}
+    .oficial-accent{border-top-color:#22c55e}
+    .cripto-accent{border-top-color:#a78bfa}
+    .dc-name{font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
+    .dc-prices{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.5rem}
+    .dc-buy{font-size:.72rem;color:var(--muted)}
+    .dc-buy::before{content:'Compra ';font-size:.6rem;text-transform:uppercase;letter-spacing:.04em}
+    .dc-sell{font-size:1.3rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+    .dc-sell::before{content:'Venta ';font-size:.55rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);vertical-align:middle}
+    .dc-chg{margin-top:.2rem}
     .ex-card,.mep-card,.diario-card,.mini{transition:all .25s cubic-bezier(.4,0,.2,1)}
     .refresh-btn:hover{transform:scale(1.1);box-shadow:0 0 16px rgba(56,189,248,.3)}
     #calcARS:focus,#calcUSD:focus,#fechaInput:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(56,189,248,.15);outline:none}
@@ -370,32 +388,18 @@
 
 <main>
 
-  <!-- ── Hero Blue ── -->
+  <!-- ── Dólares grid uniforme ── -->
   <div class="section" id="blue" style="animation-delay:.05s">
     <div class="sec-header"><span class="sec-title">Dólares</span><div class="sec-line"></div></div>
-    <div class="hero-grid">
-      <div class="hero-card">
-        <div class="hero-badge">⭐ Más consultado</div>
-        <div class="hero-name">Dólar Blue</div>
-        <div class="hero-prices">
-          <div class="hp buy"><div class="lbl">Comprás</div><div class="val" id="blueCompra">–</div></div>
-          <div class="hp sell">
-            <div class="lbl">Vendés <button class="copy-btn" onclick="copyPrice('blueVenta','blue')" title="Copiar precio">⧉</button></div>
-            <div class="val" id="blueVenta">–</div>
-          </div>
-        </div>
-        <div class="spark-wrap" id="blue-spark-wrap" style="display:none">
-          <div id="blue-spark"></div>
-          <span class="spark-delta neu" id="blue-spark-delta">7 días</span>
-        </div>
-      </div>
-      <div class="hero-right">
-        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">MEP (Bolsa)</div></div><div class="mini-right"><div class="sell2" id="mepV">–</div><div class="mini-chg" id="mepChg"></div><button class="copy-btn" onclick="copyPrice('mepV','MEP')" title="Copiar">⧉</button></div></div>
-        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">CCL</div></div><div class="mini-right"><div class="sell2" id="cclV">–</div><div class="mini-chg" id="cclChg"></div><button class="copy-btn" onclick="copyPrice('cclV','CCL')" title="Copiar">⧉</button></div></div>
-        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">Oficial</div></div><div class="mini-right"><div class="sell2" id="oficialV">–</div><div class="mini-chg" id="oficialChg"></div><button class="copy-btn" onclick="copyPrice('oficialV','oficial')" title="Copiar">⧉</button></div></div>
-        <div class="mini"><div class="mini-left"><div class="lbl">Tipo de cambio</div><div class="name">Cripto (USDT)</div></div><div class="mini-right"><div class="sell2" id="criptoV">–</div><div class="mini-chg" id="criptoChg"></div><button class="copy-btn" onclick="copyPrice('criptoV','cripto')" title="Copiar">⧉</button></div></div>
-      </div>
+    <div class="dolar-grid" id="dolarGrid">
+      <div class="dolar-card blue-accent" id="card-blue"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
+      <div class="dolar-card mep-accent" id="card-mep"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
+      <div class="dolar-card ccl-accent" id="card-ccl"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
+      <div class="dolar-card oficial-accent" id="card-oficial"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
+      <div class="dolar-card cripto-accent" id="card-cripto"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
     </div>
+    <!-- Hidden elements for backward compat -->
+    <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
   </div>
 
   <!-- ── MEP / CCL ── -->
@@ -883,34 +887,24 @@ function renderDollars(data){
   const get=c=>data.find(d=>d.casa===c);
   const blue=get('blue'),oficial=get('oficial'),cripto=get('cripto');
   const mep=get('bolsa'),ccl=get('contadoconliqui');
-  if(blue){
-    flashEl('blueVenta',blue.venta,prevPrices.blueVenta);
-    flashEl('blueCompra',blue.compra,prevPrices.blueCompra);
-    q('blueCompra').textContent=fmtARS(blue.compra);
-    q('blueVenta').textContent=fmtARS(blue.venta);
-    prevPrices.blueVenta=blue.venta;prevPrices.blueCompra=blue.compra;
-    if(q('sb-blue'))q('sb-blue').textContent=fmtARS(blue.venta);
-  }
-  if(mep){
-    flashEl('mepV',mep.venta,prevPrices.mepV);
-    q('mepV').textContent=fmtARS(mep.venta);
-    prevPrices.mepV=mep.venta;
-    renderMiniChg('mepChg','bolsa',mep.venta);
-  }
-  if(ccl){
-    flashEl('cclV',ccl.venta,prevPrices.cclV);
-    q('cclV').textContent=fmtARS(ccl.venta);
-    prevPrices.cclV=ccl.venta;
-    renderMiniChg('cclChg','contadoconliqui',ccl.venta);
-  }
-  if(oficial){
-    flashEl('oficialV',oficial.venta,prevPrices.oficialV);
-    q('oficialV').textContent=fmtARS(oficial.venta);
-    prevPrices.oficialV=oficial.venta;
-    if(q('sb-oficial'))q('sb-oficial').textContent=fmtARS(oficial.venta);
-    renderMiniChg('oficialChg','oficial',oficial.venta);
-  }
-  if(cripto){q('criptoV').textContent=fmtARS(cripto.venta);renderMiniChg('criptoChg','cripto',cripto.venta);}
+  // Render all dollar cards uniformly
+  const cardMap = [
+    {d:blue, casa:'blue', sellId:'blueVenta', buyId:'blueCompra', chgId:'blueChg', histKey:'blue'},
+    {d:mep, casa:'bolsa', sellId:'mepV', buyId:'mepC2', chgId:'mepChg', histKey:'bolsa'},
+    {d:ccl, casa:'contadoconliqui', sellId:'cclV', buyId:'cclC2', chgId:'cclChg', histKey:'contadoconliqui'},
+    {d:oficial, casa:'oficial', sellId:'oficialV', buyId:'oficialC2', chgId:'oficialChg', histKey:'oficial'},
+    {d:cripto, casa:'cripto', sellId:'criptoV', buyId:'criptoC2', chgId:'criptoChg', histKey:'cripto'},
+  ];
+  cardMap.forEach(({d,casa,sellId,buyId,chgId,histKey}) => {
+    if(!d) return;
+    flashEl(sellId, d.venta, prevPrices[sellId]);
+    if(q(sellId)) q(sellId).textContent = fmtARS(d.venta);
+    if(q(buyId)) q(buyId).textContent = fmtARS(d.compra);
+    prevPrices[sellId] = d.venta;
+    renderMiniChg(chgId, histKey, d.venta);
+  });
+  if(blue && q('sb-blue')) q('sb-blue').textContent = fmtARS(blue.venta);
+  if(oficial && q('sb-oficial')) q('sb-oficial').textContent = fmtARS(oficial.venta);
   // Stats bar: MEP, CCL, brecha
   if(mep&&q('sb-mep'))q('sb-mep').textContent=fmtARS(mep.venta);
   if(ccl&&q('sb-ccl'))q('sb-ccl').textContent=fmtARS(ccl.venta);
