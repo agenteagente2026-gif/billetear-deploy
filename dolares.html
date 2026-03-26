@@ -284,14 +284,8 @@
     .section{margin-bottom:3.2rem}
     #blue{margin-bottom:3.8rem}
     .hero-card{padding:2.4rem 2.2rem 2.2rem;border-radius:24px;box-shadow:0 0 60px rgba(56,189,248,.08),0 20px 40px rgba(0,0,0,.3)}
-    .mini{border-left:3px solid transparent}
-    .mini:nth-child(1){border-left-color:var(--sky)}
-    .mini:nth-child(2){border-left-color:var(--green)}
-    .mini:nth-child(3){border-left-color:#a78bfa}
-    .mini:nth-child(4){border-left-color:var(--accent)}
     .mep-card{border-top:2px solid var(--green);background:linear-gradient(180deg,rgba(34,197,94,.04) 0%,var(--card) 15%)}
     .chart-card{border-radius:22px;background:linear-gradient(180deg,var(--card2) 0%,var(--card) 8%);box-shadow:0 4px 20px rgba(0,0,0,.15)}
-    .diario-card{border-left:3px solid var(--accent)}
     .sec-line{height:2px;background:linear-gradient(90deg,transparent,var(--border2),var(--accent),var(--border2),transparent);opacity:.5}
     .mini-chg{font-size:.7rem;font-weight:700;padding:2px 6px;border-radius:6px;white-space:nowrap}
     .mini-chg.up{color:var(--green);background:rgba(34,197,94,.1)}
@@ -372,6 +366,7 @@
     <a class="subnav-link" href="#oficial-bancos">Bancos</a>
     <a class="subnav-link" href="#mep-brokers">Brokers</a>
     <a class="subnav-link" href="#historico">Histórico</a>
+    <a class="subnav-link" href="#tv-mep">MEP en vivo</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
   </div>
 </nav>
@@ -402,13 +397,13 @@
       <div class="calc-wrap">
         <div class="calc-col">
           <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Tengo pesos</label>
-          <input type="text" id="calcARS" placeholder="1.000.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="document.getElementById('calcUSD').value='';calcAll('ars')">
+          <input type="text" id="calcARS" placeholder="1.000.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="formatCalcInput(this);calcAll('ars')">
           <div id="calcLeft" class="calc-col"></div>
         </div>
         <div class="calc-mid">⇄</div>
         <div class="calc-col">
           <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Tengo dólares</label>
-          <input type="text" id="calcUSD" placeholder="1.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="document.getElementById('calcARS').value='';calcAll('usd')">
+          <input type="text" id="calcUSD" placeholder="1.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="formatCalcInput(this);calcAll('usd')">
           <div id="calcRight" class="calc-col"></div>
         </div>
       </div>
@@ -501,6 +496,35 @@
         <button class="chart-tab" onclick="setRange(9999,this)">Todo</button>
       </div>
       <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
+    </div>
+  </div>
+
+  <!-- ── TradingView MEP en vivo ── -->
+  <div class="section" id="tv-mep">
+    <div class="sec-header"><span class="sec-title">Dólar MEP en vivo · BYMA</span><div class="sec-line"></div></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:500px">
+      <div class="tradingview-widget-container" style="height:100%;width:100%">
+        <div id="tradingview_mep" style="height:100%;width:100%"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+        new TradingView.widget({
+          "autosize": true,
+          "symbol": "BYMA:AL30/BYMA:AL30D",
+          "interval": "D",
+          "timezone": "America/Argentina/Buenos_Aires",
+          "theme": "dark",
+          "style": "1",
+          "locale": "es",
+          "toolbar_bg": "#0b0f1e",
+          "enable_publishing": false,
+          "hide_top_toolbar": false,
+          "hide_legend": false,
+          "save_image": false,
+          "container_id": "tradingview_mep",
+          "backgroundColor": "#141e30"
+        });
+        </script>
+      </div>
     </div>
   </div>
 
@@ -608,6 +632,19 @@ function copyPrice(elId, label) {
 /* ── Convertidor lado a lado ── */
 let currentDollarData = [];
 let lastCalcDir = 'ars';
+
+function formatCalcInput(el) {
+  const cursor = el.selectionStart;
+  const raw = el.value.replace(/\./g, '');
+  const digits = raw.replace(/[^0-9]/g, '');
+  if (!digits) { el.value = ''; return; }
+  const formatted = Number(digits).toLocaleString('es-AR');
+  const dotsBefore = (el.value.slice(0, cursor).match(/\./g) || []).length;
+  el.value = formatted;
+  const dotsAfter = (formatted.slice(0, cursor).match(/\./g) || []).length;
+  el.selectionStart = el.selectionEnd = cursor + (dotsAfter - dotsBefore);
+}
+
 function calcAll(from) {
   const arsInput = q('calcARS');
   const usdInput = q('calcUSD');
@@ -632,11 +669,11 @@ function calcAll(from) {
   let usd = parseFloat(usdInput.value.replace(/\./g,'').replace(',','.')) || 0;
 
   const types = [
-    {key:'blue', label:'Blue', color:'#38bdf8'},
-    {key:'bolsa', label:'MEP', color:'#22c55e'},
-    {key:'contadoconliqui', label:'CCL', color:'#f97316'},
-    {key:'oficial', label:'Oficial', color:'#a78bfa'},
-    {key:'cripto', label:'Cripto', color:'#facc15'}
+    {key:'blue', label:'Blue'},
+    {key:'bolsa', label:'MEP'},
+    {key:'contadoconliqui', label:'CCL'},
+    {key:'oficial', label:'Oficial'},
+    {key:'cripto', label:'Cripto'}
   ];
 
   let leftHtml = '', rightHtml = '';
@@ -644,17 +681,15 @@ function calcAll(from) {
     const d = currentDollarData.find(x => x.casa === t.key);
     if (!d) return;
     if (from === 'ars' && ars > 0) {
-      // Pesos → muestra dólares a la DERECHA (user buys USD at venta price)
       const val = (ars / d.venta).toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2});
       rightHtml += `<div class="calc-result">
-        <div><span class="cr-label" style="color:${t.color}">${t.label}</span><span class="cr-sub">venta $${d.venta.toLocaleString('es-AR')}</span></div>
+        <div><span class="cr-label">${t.label}</span><span class="cr-sub">venta $${d.venta.toLocaleString('es-AR')}</span></div>
         <span class="cr-val">U\$D ${val}</span>
       </div>`;
     } else if (from === 'usd' && usd > 0) {
-      // Dólares → muestra pesos a la IZQUIERDA (user sells USD at compra price)
       const val = (usd * d.compra).toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:0});
       leftHtml += `<div class="calc-result">
-        <div><span class="cr-label" style="color:${t.color}">${t.label}</span><span class="cr-sub">compra $${d.compra.toLocaleString('es-AR')}</span></div>
+        <div><span class="cr-label">${t.label}</span><span class="cr-sub">compra $${d.compra.toLocaleString('es-AR')}</span></div>
         <span class="cr-val">$ ${val}</span>
       </div>`;
     }
@@ -1171,7 +1206,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['calculadora','cripto-detail','oficial-bancos','mep-brokers','historico','fecha','medios'];
+  const ids=['calculadora','cripto-detail','oficial-bancos','mep-brokers','historico','tv-mep','fecha','medios'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));

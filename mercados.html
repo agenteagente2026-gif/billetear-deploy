@@ -141,6 +141,22 @@
     .header-inner{height:64px}
     header{border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--sky),var(--sky),transparent) 1}
     :focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+    /* ── Educational cards ── */
+    .edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
+    .edu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+    .edu-card:hover{border-color:var(--border2)}
+    .edu-header{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.4rem}
+    .edu-header h3{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;color:var(--text)}
+    .edu-arrow{color:var(--muted);transition:transform .3s;font-size:.8rem}
+    .edu-card.open .edu-arrow{transform:rotate(180deg)}
+    .edu-body{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease;padding:0 1.4rem}
+    .edu-card.open .edu-body{max-height:600px;padding:0 1.4rem 1.4rem}
+    .edu-body p{font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:.8rem}
+    .edu-body ul{list-style:none;padding:0;margin-bottom:.8rem}
+    .edu-body li{font-size:.82rem;color:var(--text2);padding:.4rem 0;border-bottom:1px solid var(--border);line-height:1.5}
+    .edu-body li:last-child{border-bottom:none}
+    .edu-body li strong{color:var(--text)}
   </style>
 </head>
 <body>
@@ -179,6 +195,7 @@
     <a class="subnav-link" href="#argentina">🇦🇷 Argentina</a>
     <a class="subnav-link" href="#us">🇺🇸 EE.UU.</a>
     <a class="subnav-link" href="#etfs">📦 ETFs</a>
+    <a class="subnav-link" href="#aprender">📚 Aprendé</a>
   </div>
 </nav>
 
@@ -245,7 +262,93 @@
     </div>
   </div>
 
-  <div class="section" style="animation-delay:.17s">
+  <div class="section" id="aprender" style="animation-delay:.17s">
+    <div class="sec-header"><span class="sec-title">Aprendé a invertir</span><div class="sec-line"></div></div>
+    <div class="edu-grid">
+      <div class="edu-card" onclick="this.classList.toggle('open')">
+        <div class="edu-header">
+          <h3>Plazo Fijo</h3>
+          <span class="edu-arrow">&#9660;</span>
+        </div>
+        <div class="edu-body">
+          <p>El plazo fijo es la inversión más simple y segura de Argentina. Depositás pesos en un banco por un período mínimo de 30 días y recibís una tasa de interés.</p>
+          <ul>
+            <li><strong>Tasa actual:</strong> ~30-35% TNA (varía por banco)</li>
+            <li><strong>Plazo mínimo:</strong> 30 días</li>
+            <li><strong>Garantía:</strong> Hasta $35M por el Seguro de Depósitos (SEDESA)</li>
+            <li><strong>Riesgo:</strong> Bajo, pero perdés contra la inflación si la tasa es menor</li>
+          </ul>
+          <p><strong>Tip:</strong> Compará tasas en diferentes bancos. Los bancos digitales suelen ofrecer mejores tasas que los tradicionales.</p>
+        </div>
+      </div>
+      <div class="edu-card" onclick="this.classList.toggle('open')">
+        <div class="edu-header">
+          <h3>Cauciones bursátiles</h3>
+          <span class="edu-arrow">&#9660;</span>
+        </div>
+        <div class="edu-body">
+          <p>La caución bursátil es como un plazo fijo, pero en la bolsa. Prestás tu dinero a otros inversores que lo necesitan como garantía para operar.</p>
+          <ul>
+            <li><strong>Plazo:</strong> Desde 1 día hasta 120 días</li>
+            <li><strong>Tasa:</strong> Similar o mejor que el plazo fijo</li>
+            <li><strong>Ventaja:</strong> Podés hacer cauciones a 1 día y reinvertir diariamente</li>
+            <li><strong>Riesgo:</strong> Muy bajo, garantizado por BYMA</li>
+          </ul>
+          <p><strong>Tip:</strong> Ideal para poner a trabajar pesos que vas a necesitar pronto. Disponible en cualquier broker (IOL, PPI, Cocos, etc.).</p>
+        </div>
+      </div>
+      <div class="edu-card" onclick="this.classList.toggle('open')">
+        <div class="edu-header">
+          <h3>CEDEARs</h3>
+          <span class="edu-arrow">&#9660;</span>
+        </div>
+        <div class="edu-body">
+          <p>Los CEDEARs son certificados que representan acciones de empresas extranjeras (Apple, Google, Tesla, etc.) pero se compran en pesos en la bolsa argentina.</p>
+          <ul>
+            <li><strong>Ventaja:</strong> Invertís en empresas globales sin abrir cuenta afuera</li>
+            <li><strong>Moneda:</strong> Comprás en pesos, pero el valor sigue al dólar CCL + la acción</li>
+            <li><strong>Riesgo:</strong> Medio-alto (depende de la empresa y el tipo de cambio)</li>
+            <li><strong>Horario:</strong> Operan en horario de BYMA (11-17hs)</li>
+          </ul>
+          <p><strong>Tip:</strong> Son una forma de dolarizar tu cartera de manera legal comprando en pesos.</p>
+        </div>
+      </div>
+      <div class="edu-card" onclick="this.classList.toggle('open')">
+        <div class="edu-header">
+          <h3>Bonos argentinos</h3>
+          <span class="edu-arrow">&#9660;</span>
+        </div>
+        <div class="edu-body">
+          <p>Los bonos son títulos de deuda del gobierno o empresas. Al comprar un bono, le prestás dinero al emisor a cambio de intereses periódicos (cupones).</p>
+          <ul>
+            <li><strong>Bonos en pesos:</strong> Lecaps, Boncaps — rinden tasa fija en pesos</li>
+            <li><strong>Bonos en dólares:</strong> AL30, GD30 — pagan interés en USD</li>
+            <li><strong>Dólar MEP:</strong> Se obtiene comprando AL30 en pesos y vendiendo AL30D en dólares</li>
+            <li><strong>Riesgo:</strong> Medio-alto (depende del riesgo país)</li>
+          </ul>
+          <p><strong>Tip:</strong> Los bonos en dólares como el AL30 son la base para operar dólar MEP y CCL.</p>
+        </div>
+      </div>
+      <div class="edu-card" onclick="this.classList.toggle('open')">
+        <div class="edu-header">
+          <h3>Fondos Comunes de Inversión (FCI)</h3>
+          <span class="edu-arrow">&#9660;</span>
+        </div>
+        <div class="edu-body">
+          <p>Un FCI agrupa el dinero de muchos inversores y lo administra un profesional. Es la forma más simple de diversificar sin elegir activos individuales.</p>
+          <ul>
+            <li><strong>Money Market:</strong> Como una caja de ahorro que rinde — rescate inmediato</li>
+            <li><strong>Renta Fija:</strong> Invierte en bonos — mayor rendimiento, rescate en 24-48hs</li>
+            <li><strong>Renta Variable:</strong> Invierte en acciones — más riesgo, más potencial</li>
+            <li><strong>Dólar Linked:</strong> Sigue al tipo de cambio oficial</li>
+          </ul>
+          <p><strong>Tip:</strong> Los Money Market son ideales para principiantes — rendís más que una caja de ahorro con riesgo mínimo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="animation-delay:.20s">
     <div class="info-box">
       <strong>Datos de mercado:</strong> Gráficos y cotizaciones provistos por <a href="https://tradingview.com" target="_blank" style="color:var(--sky)">TradingView</a>. Las acciones argentinas cotizan como ADRs en NYSE/NASDAQ. Valores en USD. No constituyen asesoramiento financiero.
     </div>
@@ -299,7 +402,7 @@ function renderMarketBanner(){
 
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const sections=['indices','argentina','us','etfs'].map(id=>document.getElementById(id)).filter(Boolean);
+  const sections=['indices','argentina','us','etfs','aprender'].map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
 }

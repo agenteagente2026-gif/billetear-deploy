@@ -149,6 +149,27 @@
     .header-inner{height:64px}
     header{border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--sky),var(--sky),transparent) 1}
     :focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+    /* ── Expandable detail panel ── */
+    .ct-row{cursor:pointer}
+    .ct-expand-icon{margin-left:auto;font-size:.65rem;color:var(--muted);transition:transform .25s;flex-shrink:0}
+    .ct-row.expanded .ct-expand-icon{transform:rotate(180deg)}
+    .ct-detail{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease;opacity:0;background:var(--card2);border-bottom:1px solid var(--border)}
+    .ct-detail.open{max-height:300px;opacity:1}
+    .ct-detail-inner{padding:1rem 1.2rem;display:flex;flex-direction:column;gap:.7rem}
+    .ct-detail-desc{font-size:.83rem;color:var(--text2);line-height:1.55}
+    .ct-detail-exchanges-title{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.2rem}
+    .ct-detail-exchanges{display:flex;flex-wrap:wrap;gap:.5rem}
+    .ct-detail-exchanges a{display:inline-flex;align-items:center;gap:4px;padding:5px 12px;border-radius:8px;font-size:.78rem;font-weight:500;color:var(--sky);background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);text-decoration:none;transition:all .2s}
+    .ct-detail-exchanges a:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.35)}
+
+    /* Top coin expandable */
+    .top-coin{cursor:pointer;position:relative}
+    .tc-expand-icon{position:absolute;top:1rem;right:1rem;font-size:.65rem;color:var(--muted);transition:transform .25s}
+    .top-coin.expanded .tc-expand-icon{transform:rotate(180deg)}
+    .tc-detail{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease;opacity:0}
+    .tc-detail.open{max-height:300px;opacity:1}
+    .tc-detail-inner{padding-top:.7rem;border-top:1px solid var(--border);margin-top:.6rem;display:flex;flex-direction:column;gap:.6rem}
   </style>
 </head>
 <body>
@@ -269,6 +290,34 @@ function fmtUSD(n){if(n==null)return'–';if(n>=1000)return'US$\u202f'+Number(n)
 function fmtMktCap(n){if(!n)return'–';if(n>=1e12)return'US$'+(n/1e12).toFixed(2)+'T';if(n>=1e9)return'US$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'US$'+(n/1e6).toFixed(0)+'M';return'–';}
 function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d} min`;return`hace ${Math.floor(d/60)}h`;}
 
+// ── Crypto detail descriptions ──
+const cryptoDescriptions={
+  'btc':'La primera y más conocida criptomoneda. Creada en 2009 por Satoshi Nakamoto. Es descentralizada, con un suministro máximo de 21 millones de unidades. Se usa como reserva de valor y medio de pago.',
+  'eth':'Plataforma de contratos inteligentes y aplicaciones descentralizadas. Su criptomoneda Ether alimenta la red más grande de DeFi y NFTs.',
+  'sol':'Blockchain de alta velocidad y bajo costo. Procesa hasta 65.000 transacciones por segundo. Popular para DeFi y NFTs.',
+  'xrp':'Criptomoneda enfocada en pagos internacionales rápidos y baratos. Usada por instituciones financieras.',
+  'bnb':'Token nativo de Binance, el exchange más grande del mundo. Se usa para pagar comisiones y en la Binance Smart Chain.',
+  'ada':'Blockchain de tercera generación basada en investigación académica. Enfocada en escalabilidad y sustentabilidad.'
+};
+const defaultDesc='Criptomoneda disponible en los principales exchanges.';
+const exchanges=[
+  {name:'Binance',url:'https://www.binance.com'},
+  {name:'Lemon Cash',url:'https://www.lemon.me'},
+  {name:'Ripio',url:'https://www.ripio.com'},
+  {name:'Buenbit',url:'https://www.buenbit.com'},
+  {name:'Cocos Crypto',url:'https://www.cocos.capital'}
+];
+
+function getDetailHTML(symbol){
+  const sym=symbol.toLowerCase();
+  const desc=cryptoDescriptions[sym]||defaultDesc;
+  const exLinks=exchanges.map(e=>`<a href="${e.url}" target="_blank" rel="noopener noreferrer">${e.name} ↗</a>`).join('');
+  return`<div class="ct-detail-inner">
+    <div class="ct-detail-desc">${desc}</div>
+    <div><div class="ct-detail-exchanges-title">Dónde comprar</div><div class="ct-detail-exchanges">${exLinks}</div></div>
+  </div>`;
+}
+
 async function fetchJSON(url){
   const proxies=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
   for(const u of proxies){try{const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),7000);const r=await fetch(u,{signal:ctrl.signal});clearTimeout(tid);if(r.ok)return await r.json();}catch{continue;}}
@@ -280,11 +329,16 @@ const TOP_IDS=['bitcoin','ethereum','solana','binancecoin'];
 function renderTop(data){
   q('topCoins').innerHTML=data.filter(c=>TOP_IDS.includes(c.id)).map(c=>{
     const pct=c.price_change_percentage_24h||0;
-    return`<div class="top-coin">
+    const sym=c.symbol.toLowerCase();
+    const desc=cryptoDescriptions[sym]||defaultDesc;
+    const exLinks=exchanges.map(e=>`<a href="${e.url}" target="_blank" rel="noopener noreferrer">${e.name} ↗</a>`).join('');
+    return`<div class="top-coin" data-symbol="${c.symbol}">
+      <span class="tc-expand-icon">▼</span>
       <div class="tc-head"><img class="tc-img" src="${c.image}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'"><div><div class="tc-symbol">${c.symbol}</div><div class="tc-name">${c.name}</div></div></div>
       <div class="tc-price">${fmtUSD(c.current_price)}</div>
       <div class="tc-change ${pct>=0?'pos':'neg'}">${pct>=0?'▲':'▼'} ${Math.abs(pct).toFixed(2)}%</div>
       <div class="tc-mktcap">Cap. mercado: ${fmtMktCap(c.market_cap)}</div>
+      <div class="tc-detail"><div class="tc-detail-inner"><div class="ct-detail-desc">${desc}</div><div><div class="ct-detail-exchanges-title">Dónde comprar</div><div class="ct-detail-exchanges">${exLinks}</div></div></div></div>
     </div>`;
   }).join('');
 }
@@ -292,12 +346,12 @@ function renderTop(data){
 function renderTable(data){
   const rows=data.slice(0,20).map(c=>{
     const pct=c.price_change_percentage_24h||0;
-    return`<div class="ct-row">
-      <div class="ct-coin"><img class="ct-img" src="${c.image}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'"><div><div class="ct-cname">${c.name}</div><div class="ct-csym">${c.symbol}</div></div></div>
+    return`<div class="ct-row" data-symbol="${c.symbol}">
+      <div class="ct-coin"><img class="ct-img" src="${c.image}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'"><div><div class="ct-cname">${c.name}</div><div class="ct-csym">${c.symbol}</div></div><span class="ct-expand-icon">▼</span></div>
       <div class="ct-val">${fmtUSD(c.current_price)}</div>
       <div class="ct-chg ${pct>=0?'pos':'neg'}">${pct>=0?'▲':'▼'} ${Math.abs(pct).toFixed(2)}%</div>
       <div class="ct-mkt">${fmtMktCap(c.market_cap)}</div>
-    </div>`;
+    </div><div class="ct-detail">${getDetailHTML(c.symbol)}</div>`;
   }).join('');
   q('cryptoTable').innerHTML=`<div class="ct-header"><div>Moneda</div><div>Precio</div><div>24h</div><div>Market Cap</div></div>${rows}`;
 }
@@ -355,6 +409,29 @@ function triggerRefresh(){
   if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
   refreshAll();
 }
+
+// ── Toggle for crypto table rows ──
+document.addEventListener('click',function(e){
+  const row=e.target.closest('.ct-row');
+  if(!row||!row.dataset.symbol)return;
+  const detail=row.nextElementSibling;
+  if(!detail||!detail.classList.contains('ct-detail'))return;
+  const wasOpen=detail.classList.contains('open');
+  // Close all open panels first
+  document.querySelectorAll('.ct-detail.open').forEach(d=>{d.classList.remove('open');d.previousElementSibling.classList.remove('expanded');});
+  if(!wasOpen){detail.classList.add('open');row.classList.add('expanded');}
+});
+
+// ── Toggle for top coin cards ──
+document.addEventListener('click',function(e){
+  const card=e.target.closest('.top-coin[data-symbol]');
+  if(!card)return;
+  const detail=card.querySelector('.tc-detail');
+  if(!detail)return;
+  const wasOpen=detail.classList.contains('open');
+  document.querySelectorAll('.tc-detail.open').forEach(d=>{d.classList.remove('open');d.closest('.top-coin').classList.remove('expanded');});
+  if(!wasOpen){detail.classList.add('open');card.classList.add('expanded');}
+});
 
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
