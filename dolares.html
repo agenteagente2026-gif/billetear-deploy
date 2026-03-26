@@ -392,8 +392,7 @@
     <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
   </div>
 
-  <!-- ── Resumen editorial ── -->
-  <div id="editorialSummary" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--text2);line-height:1.7;padding:.8rem 0 1.5rem;display:none"></div>
+  <span id="editorialSummary" style="display:none"></span>
 
   <!-- ── Convertidor multi-tipo ── -->
   <div class="section" id="calculadora" style="animation-delay:.09s">
@@ -402,13 +401,13 @@
       <div class="calc-wrap">
         <div class="calc-col">
           <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Tengo pesos</label>
-          <input type="text" id="calcARS" placeholder="100.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="calcAll('ars')">
+          <input type="text" id="calcARS" placeholder="1.000.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="q('calcUSD').value='';calcAll('ars')">
           <div id="calcLeft" class="calc-col"></div>
         </div>
         <div class="calc-mid">⇄</div>
         <div class="calc-col">
           <label style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px">Tengo dólares</label>
-          <input type="text" id="calcUSD" placeholder="100" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="calcAll('usd')">
+          <input type="text" id="calcUSD" placeholder="1.000" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="q('calcARS').value='';calcAll('usd')">
           <div id="calcRight" class="calc-col"></div>
         </div>
       </div>

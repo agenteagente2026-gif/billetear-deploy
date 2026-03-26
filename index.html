@@ -153,24 +153,20 @@
     /* ══════════════════════════════════════
        INDEX DOLLAR GRID
     ══════════════════════════════════════ */
-    .idx-dolar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin-bottom:1.5rem}
-    @media(max-width:700px){.idx-dolar-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:400px){.idx-dolar-grid{grid-template-columns:1fr}}
-    .idx-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.1rem 1.2rem;cursor:pointer;transition:all .25s;text-decoration:none;color:inherit;display:block}
-    .idx-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25);border-color:var(--sky)}
-    .idx-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem}
-    .idx-name{font-size:.85rem;font-weight:700;color:var(--text)}
-    .idx-chg{font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:6px;display:inline-block}
-    .idx-chg.up{color:#22c55e;background:rgba(34,197,94,.12)}
-    .idx-chg.down{color:#ef4444;background:rgba(239,68,68,.12)}
-    .idx-chg.neu{color:var(--muted);background:rgba(100,116,139,.1)}
-    .idx-prices{display:flex;gap:1.5rem;align-items:baseline}
-    .idx-sell{font-size:1.4rem;font-weight:800;color:#f1f5f9;font-variant-numeric:tabular-nums}
-    .idx-buy{font-size:.78rem;color:var(--muted)}
-    .idx-buy span{font-weight:600;color:var(--text2)}
-    .idx-arrow{position:absolute;right:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.85rem;opacity:0;transition:opacity .2s}
-    .idx-card:hover .idx-arrow{opacity:1}
-    .idx-card{position:relative}
+    .idx-dolar-table{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;margin-bottom:1.5rem;max-width:500px}
+    .idx-row{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:.8rem;padding:.7rem 1.2rem;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:background .15s;cursor:pointer}
+    .idx-row:last-child{border-bottom:none}
+    .idx-row:hover{background:rgba(56,189,248,.04)}
+    .idx-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+    .idx-name{font-size:.9rem;font-weight:700;color:var(--text)}
+    .idx-price{font-size:1.05rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums;text-align:right}
+    .idx-chg{font-size:.82rem;font-weight:700;text-align:right;min-width:60px}
+    .idx-chg.up{color:#22c55e}
+    .idx-chg.down{color:#ef4444}
+    .idx-chg.neu{color:var(--muted)}
+    .idx-footer{padding:.6rem 1.2rem;font-size:.75rem;text-align:center}
+    .idx-footer a{color:var(--sky);text-decoration:none}
+    .idx-footer a:hover{text-decoration:underline}
 
     /* ══════════════════════════════════════
        AD SLOT placeholder
@@ -322,9 +318,8 @@
   <!-- ── Dólares grid ── -->
   <div class="section" style="animation-delay:.05s">
     <span id="lastUpdateSub" style="display:none"></span>
-    <div id="idxEditorial" style="font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--text2);line-height:1.7;padding:1rem 0 1.2rem;max-width:700px"></div>
     <div class="sec-header"><span class="sec-title">Dólares</span><div class="sec-line"></div></div>
-    <div class="idx-dolar-grid" id="idxDolarGrid">
+    <div class="idx-dolar-table" id="idxDolarGrid">
     </div>
 
     <!-- Hidden legacy IDs so existing JS still works without errors -->
@@ -544,28 +539,29 @@ function renderDollarWidget(data){
     {casa:'mayorista',name:'Mayorista'},
   ];
 
+  const colors = {blue:'#facc15', bolsa:'#38bdf8', contadoconliqui:'#f97316', oficial:'#22c55e', cripto:'#a78bfa', mayorista:'#6b7d95'};
   const anchors = {blue:'#medios', bolsa:'#historico', contadoconliqui:'#historico', oficial:'#historico', cripto:'#cripto-detail', mayorista:'#fecha'};
-  grid.innerHTML = CONFIG.map(cfg => {
+  let rows = CONFIG.map(cfg => {
     const d = data.find(x => x.casa === cfg.casa);
     if (!d || !d.venta) return '';
     const oldPrice = getWeekChange(cfg.casa);
-    let chgHtml = '';
-    if (oldPrice && Math.abs(((d.venta - oldPrice) / oldPrice * 100)) > 0.01) {
+    let chgHtml = '<span class="idx-chg neu">—</span>';
+    if (oldPrice && oldPrice !== d.venta) {
       const pct = ((d.venta - oldPrice) / oldPrice * 100);
-      const arrow = pct > 0 ? '▲' : '▼';
-      const cls = pct > 0 ? 'up' : 'down';
-      chgHtml = `<span class="idx-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
+      const cls = pct > 0 ? 'up' : pct < 0 ? 'down' : 'neu';
+      chgHtml = `<span class="idx-chg ${cls}">${pct > 0 ? '+' : ''}${pct.toFixed(2)}%</span>`;
     }
     const href = 'dolares.html' + (anchors[cfg.casa] || '');
-    return `<a class="idx-card" href="${href}">
-      <div class="idx-top"><span class="idx-name">${cfg.name}</span>${chgHtml}</div>
-      <div class="idx-prices">
-        <span class="idx-sell">${fmtARS(d.venta)}</span>
-      </div>
-      <div class="idx-buy">Compra <span>${fmtARS(d.compra)}</span></div>
-      <span class="idx-arrow">→</span>
+    const priceStr = '$\u202f' + Number(d.venta).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});
+    return `<a class="idx-row" href="${href}">
+      <span class="idx-dot" style="background:${colors[cfg.casa]}"></span>
+      <span class="idx-name">${cfg.name}</span>
+      <span class="idx-price">${priceStr}</span>
+      ${chgHtml}
     </a>`;
   }).filter(Boolean).join('');
+  rows += `<div class="idx-footer"><a href="dolares.html">Ver en tiempo real →</a></div>`;
+  grid.innerHTML = rows;
 
   // Save snapshot for future comparisons
   saveWeekSnapshot(Object.fromEntries(data.filter(d=>d.venta>0).map(d=>[d.casa,d.venta])));
