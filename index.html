@@ -85,8 +85,8 @@
     .header-nav .topnav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
     .header-nav .topnav-link.active{color:var(--sky);background:rgba(56,189,248,.08)}
     .logo{display:flex;align-items:center;text-decoration:none}
-    .logo-text{font-family:'DM Serif Display',serif;font-size:1.3rem;font-weight:400;color:var(--sky);letter-spacing:-.5px}
-    .logo-text em{color:var(--sky);font-style:normal}
+    .logo-text{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;color:#38bdf8;letter-spacing:-.5px;text-decoration:none}
+    .logo-text em{font-style:normal;color:#7dd3fc}
     .nav-right{display:flex;align-items:center;gap:14px}
     .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
     .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
@@ -161,8 +161,7 @@
     .hero-wrap{position:relative;border-radius:24px;overflow:hidden;padding:1.5rem;background:linear-gradient(135deg,#0d1830 0%,#0b0f1e 60%,#0f1e38 100%);border:1px solid rgba(56,189,248,.15);margin-bottom:1.5rem}
     .hero-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(56,189,248,.09) 0%,transparent 70%);pointer-events:none}
     .hero-wrap::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(167,139,250,.06) 0%,transparent 70%);pointer-events:none}
-    .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start;position:relative;z-index:1}
-    @media(max-width:750px){.hero-grid{grid-template-columns:1fr}}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;align-items:start;position:relative;z-index:1;max-width:700px;margin:0 auto}
 
     /* Compact dollar widget */
     .dollar-widget{background:rgba(20,30,48,.7);backdrop-filter:blur(10px);border:1px solid rgba(56,189,248,.12);border-radius:16px;overflow:hidden}
@@ -170,7 +169,7 @@
     .dw-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
     .dw-link{font-size:.72rem;color:var(--sky);text-decoration:none;opacity:.8}
     .dw-link:hover{opacity:1;text-decoration:underline}
-    .dw-row{display:flex;align-items:center;justify-content:space-between;padding:.62rem 1.3rem .62rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);border-left:3px solid transparent;transition:all .15s;cursor:default}
+    .dw-row{display:flex;align-items:center;justify-content:space-between;padding:.62rem 1.3rem .62rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);border-left:3px solid transparent;transition:all .15s;cursor:pointer}
     .dw-row:last-child{border-bottom:none}
     .dw-row:hover{background:rgba(56,189,248,.05);border-left-color:currentColor}
     .dw-left{display:flex;align-items:center;gap:10px}
@@ -337,7 +336,7 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
-      <span class="logo-text" style="font-family:'DM Serif Display',serif;font-size:1.6rem;letter-spacing:-1px">Billete<em style="color:var(--sky);font-style:normal">AR</em></span>
+      <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="header-nav">
       <a class="topnav-link" href="dolares.html">Dolares</a>
@@ -394,74 +393,26 @@
         <div class="dw-footer"><span style="color:var(--muted2)">Actualizado</span><span id="dwTime" style="color:var(--muted)">–</span></div>
       </div>
 
-      <!-- Calculator + compact indicators -->
-      <div class="hero-calc-wrap">
-        <!-- Hidden legacy IDs so existing JS still works without errors -->
-        <span id="mmBtc" style="display:none"></span>
-        <span id="mmBtcChg" style="display:none"></span>
-
-        <!-- Bidirectional calculator -->
-        <div class="hc-calc">
-          <div class="hc-calc-header">
-            <span class="hc-title">💱 Convertidor</span>
-            <select class="hc-select" id="calcType" onchange="calcConvert('ars')">
-              <option value="blue">Blue</option>
-              <option value="oficial">Oficial</option>
-              <option value="bolsa">MEP</option>
-              <option value="contadoconliqui">CCL</option>
-              <option value="cripto">Cripto (USDT)</option>
-              <option value="tarjeta">Tarjeta</option>
-            </select>
-          </div>
-          <div class="hc-row">
-            <div class="hc-field">
-              <label class="hc-label">Pesos (ARS)</label>
-              <input type="number" id="calcARS" class="hc-input" oninput="calcConvert('ars')" placeholder="10.000" min="0">
-            </div>
-            <div class="hc-arrow">⇄</div>
-            <div class="hc-field">
-              <label class="hc-label">Dólares (USD)</label>
-              <input type="number" id="calcUSD" class="hc-input" oninput="calcConvert('usd')" placeholder="0" min="0">
-            </div>
-          </div>
-          <div class="hc-result" id="calcResult">Cargando cotizaciones…</div>
-        </div>
-
-        <!-- Compact indicator strip -->
-        <div class="hc-indicators" style="grid-template-columns:repeat(2,1fr)">
-          <div class="hc-ind-card">
-            <div class="hc-ind-label">🌡️ Riesgo País</div>
-            <div class="hc-ind-val" style="color:var(--orange)" id="mmRiesgo">–</div>
-            <div class="hc-ind-sub">puntos EMBI+</div>
-          </div>
-          <div class="hc-ind-card">
-            <div class="hc-ind-label">📉 Inflación</div>
-            <div class="hc-ind-val" style="color:var(--green)" id="mmInfla">–</div>
-            <div class="hc-ind-sub" id="mmInflaSub">mensual</div>
-          </div>
-        </div>
-        <!-- Hidden brecha elements so JS doesn't error -->
-        <span id="mmBrecha" style="display:none">–</span>
-        <span id="mmBrechaSub" style="display:none"></span>
-      </div>
+      <!-- Hidden legacy IDs so existing JS still works without errors -->
+      <span id="mmBtc" style="display:none"></span>
+      <span id="mmBtcChg" style="display:none"></span>
+      <span id="calcType" style="display:none"></span>
+      <span id="calcARS" style="display:none"></span>
+      <span id="calcUSD" style="display:none"></span>
+      <span id="calcResult" style="display:none"></span>
+      <span id="mmRiesgo" style="display:none"></span>
+      <span id="mmInfla" style="display:none"></span>
+      <span id="mmInflaSub" style="display:none"></span>
+      <span id="mmBrecha" style="display:none">–</span>
+      <span id="mmBrechaSub" style="display:none"></span>
 
     </div>
     </div><!-- /hero-wrap -->
   </div>
 
 
-  <!-- ── Heatmap mercados ── -->
-  <div class="section" style="animation-delay:.10s">
-    <div class="sec-header"><span class="sec-title">Mercado al instante</span><div class="sec-line"></div></div>
-    <div class="heat-grid" id="heatGrid">
-      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
-      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
-      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
-      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
-      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
-      <div class="heat-tile neu"><div class="ht-name skel" style="height:.6rem;width:50px;margin-bottom:.4rem"></div><div class="ht-price skel" style="height:.9rem;width:70px;margin-bottom:.3rem"></div><div class="ht-chg skel" style="height:.7rem;width:40px"></div></div>
-    </div>
-  </div>
+  <!-- Heatmap removed — data now on mercados.html -->
+  <span id="heatGrid" style="display:none"></span>
 
   <!-- Hidden elements for JS compatibility (removed sections still referenced by JS) -->
   <span id="copyBtn" style="display:none"></span>
@@ -637,6 +588,9 @@ function renderHeatmap(){
   }).join('');
 }
 
+// Map casa to dolares.html anchor
+const DW_ANCHORS={blue:'#blue',bolsa:'#mep',contadoconliqui:'#mep',cripto:'#cripto-detail',oficial:'#todos',mayorista:'#todos'};
+
 function renderDollarWidget(data){
   const rows=DW_CONFIG.map((cfg,i)=>{
     const d=data.find(x=>x.casa===cfg.casa);
@@ -663,11 +617,12 @@ function renderDollarWidget(data){
       }
     }
     const ts=d.fechaActualizacion?`<span class="dw-ts">${relTime(d.fechaActualizacion)}</span>`:'';
-    // Evolución 7 días
+    // Evolución 7 días — only show if there's real historical data with a meaningful change
     const oldPrice=getWeekChange(cfg.casa);
     let evoBadge='';
-    if(oldPrice&&price){const evoP=((price-oldPrice)/oldPrice*100);const evoSign=evoP>0.5?'↑':evoP<-0.5?'↓':'→';const evoCls=evoP>0.5?'evo-up':evoP<-0.5?'evo-down':'evo-neu';evoBadge=`<span class="evo-badge ${evoCls}" title="Variación respecto a hace varios días">${evoSign}${Math.abs(evoP).toFixed(1)}%</span>`;}
-    return`<div class="dw-row ${flashCls}" style="--row-color:${cfg.dot}" onmouseenter="this.style.borderLeftColor='${cfg.dot}'" onmouseleave="this.style.borderLeftColor='transparent'">
+    if(oldPrice&&price&&oldPrice!==price){const evoP=((price-oldPrice)/oldPrice*100);if(Math.abs(evoP)>0.01){const evoSign=evoP>0.5?'↑':evoP<-0.5?'↓':'→';const evoCls=evoP>0.5?'evo-up':evoP<-0.5?'evo-down':'evo-neu';evoBadge=`<span class="evo-badge ${evoCls}" title="Variación respecto a hace varios días">${evoSign}${Math.abs(evoP).toFixed(1)}%</span>`;}}
+    const anchor=DW_ANCHORS[cfg.casa]||'';
+    return`<div class="dw-row ${flashCls}" style="--row-color:${cfg.dot}" onclick="window.location='dolares.html${anchor}'" onmouseenter="this.style.borderLeftColor='${cfg.dot}'" onmouseleave="this.style.borderLeftColor='transparent'">
       <div class="dw-left">
         <span class="dw-rank">${i+1}</span>
         <div class="dw-dot" style="background:${cfg.dot};color:${cfg.dot}"></div>
@@ -717,9 +672,10 @@ function parseRSSXml(xml, label) {
 async function loadNews(){
   const feeds=[
     {url:'https://www.ambito.com/rss/pages/economia.xml', label:'Ámbito'},
-    {url:'https://www.infobae.com/feeds/rss/economia/', label:'Infobae'},
+    {url:'https://www.infobae.com/feeds/rss/', label:'Infobae'},
     {url:'https://news.google.com/rss/search?q=economia+argentina+dolar&hl=es-419&gl=AR&ceid=AR:es-419', label:'Google News'},
-    {url:'https://www.cronista.com/rss/economia/', label:'El Cronista'},
+    {url:'https://www.cronista.com/files-rss/summary.xml', label:'Cronista'},
+    {url:'https://feeds.bbci.co.uk/mundo/rss.xml', label:'BBC Mundo'},
   ];
 
   const results = await Promise.allSettled(feeds.map(async f => {
@@ -759,7 +715,7 @@ async function loadNews(){
     .filter(i => { const k=(i.title||'').slice(0,50); if(seen.has(k)||!i.title) return false; seen.add(k); return true; })
     .sort((a,b) => new Date(b.pubDate||0) - new Date(a.pubDate||0));
 
-  const srcColors = {'Google News':'#38bdf8','Infobae':'#f97316','Ámbito':'#a78bfa','El Cronista':'#22c55e'};
+  const srcColors = {'Google News':'#38bdf8','Infobae':'#f97316','Ámbito':'#a78bfa','Cronista':'#22c55e','BBC Mundo':'#e74c3c'};
 
   q('newsGrid').innerHTML = unique.slice(0,4).map(item => {
     const date = item.pubDate ? new Date(item.pubDate).toLocaleDateString('es-AR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
