@@ -373,6 +373,7 @@
     <a class="subnav-link" href="#cripto-detail">Cripto</a>
     <a class="subnav-link" href="#comparadolar">Bancos / Brokers</a>
     <a class="subnav-link" href="#medios">Por fuente</a>
+    <a class="subnav-link" href="#blue-fuentes">Blue por fuente</a>
     <a class="subnav-link" href="#historico">Histórico</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
   </div>
@@ -411,6 +412,19 @@
           <input type="text" id="calcUSD" placeholder="100" style="width:100%;padding:.8rem;border-radius:14px;border:1px solid var(--border);background:var(--card2);color:var(--text);font-size:1.2rem;font-family:'DM Sans',sans-serif" oninput="calcAll('usd')">
           <div id="calcRight" class="calc-col"></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Dólar Mayorista Info ── -->
+  <div class="section" id="mayorista-info">
+    <div class="sec-header"><span class="sec-title">Dólar Mayorista</span><div class="sec-line"></div></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.5rem;max-width:700px">
+      <p style="color:var(--text2);font-size:.85rem;line-height:1.6;margin-bottom:.8rem">El dólar mayorista es el tipo de cambio que usan bancos e instituciones financieras para operaciones de gran volumen. Se opera en el Mercado Único y Libre de Cambios (MULC) regulado por el BCRA.</p>
+      <div style="display:flex;gap:2rem;flex-wrap:wrap">
+        <div><div style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Compra</div><div style="font-size:1.3rem;font-weight:700" id="mayoristaCompraInfo">–</div></div>
+        <div><div style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Venta</div><div style="font-size:1.3rem;font-weight:700" id="mayoristaVentaInfo">–</div></div>
+        <div><div style="font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em">Fuente</div><div style="font-size:.85rem;color:var(--text2)">BCRA / MULC</div></div>
       </div>
     </div>
   </div>
@@ -478,6 +492,16 @@
   <div class="section" id="medios" style="animation-delay:.14s">
     <div class="sec-header"><span class="sec-title">Blue en los medios</span><div class="sec-line"></div></div>
     <div class="diarios-grid" id="diariosGrid">
+      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
+      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
+    </div>
+  </div>
+
+  <!-- ── Blue por fuente (Bluelytics + DolarAPI) ── -->
+  <div class="section" id="blue-fuentes" style="animation-delay:.16s">
+    <div class="sec-header"><span class="sec-title">Blue por fuente</span><div class="sec-line"></div></div>
+    <div class="diarios-grid" id="blueSourcesGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.7rem">
+      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
       <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
       <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1rem;width:45%"></div><div class="skel" style="height:1rem;width:45%"></div></div></div>
     </div>
@@ -604,6 +628,7 @@ function copyPrice(elId, label) {
 
 /* ── Convertidor lado a lado ── */
 let currentDollarData = [];
+let lastCalcDir = 'ars';
 function calcAll(from) {
   const arsInput = q('calcARS');
   const usdInput = q('calcUSD');
@@ -612,8 +637,14 @@ function calcAll(from) {
   const rightCol = q('calcRight');
   if (!leftCol || !rightCol) return;
 
-  if (from === 'ars') usdInput.value = '';
-  if (from === 'usd') arsInput.value = '';
+  // If called from refresh (no explicit direction), use last user direction and don't clear fields
+  if (from === 'refresh') {
+    from = lastCalcDir;
+  } else {
+    lastCalcDir = from;
+    if (from === 'ars') usdInput.value = '';
+    if (from === 'usd') arsInput.value = '';
+  }
 
   let ars = parseFloat(arsInput.value.replace(/\./g,'').replace(',','.')) || 0;
   let usd = parseFloat(usdInput.value.replace(/\./g,'').replace(',','.')) || 0;
@@ -881,6 +912,12 @@ function renderDollars(data){
     if(q('sb-brecha'))q('sb-brecha').textContent='+'+brecha+'%';
   }
   q('lastUpdate').textContent='En vivo · '+relTime(blue?.fechaActualizacion);
+  // Mayorista info card
+  const mayorista=get('mayorista');
+  if(mayorista){
+    if(q('mayoristaCompraInfo')) q('mayoristaCompraInfo').textContent = fmtARS(mayorista.compra);
+    if(q('mayoristaVentaInfo')) q('mayoristaVentaInfo').textContent = fmtARS(mayorista.venta);
+  }
 
   const sorted=[...data].sort((a,b)=>{const ai=ORDER.indexOf(a.casa),bi=ORDER.indexOf(b.casa);return(ai<0?99:ai)-(bi<0?99:bi);});
   if(q('exGrid')) q('exGrid').innerHTML=sorted.map(d=>{
@@ -1032,7 +1069,7 @@ async function refreshAll(){
       if(!data)return;
       // Guardar tasas para el convertidor
       currentDollarData = data;
-      calcAll('ars');
+      calcAll('refresh');
       renderDollars(data);renderMEP(data);
       const blue=data.find(d=>d.casa==='blue');
       if(blue)loadBlueBySource(blue).catch(()=>{});
@@ -1066,6 +1103,31 @@ async function refreshAll(){
     fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(data=>{
       if(data) renderExchTable('btc-table','btc-loading',data);
     }).catch(()=>{}),
+    // Blue por fuente: Bluelytics + DolarAPI combined
+    Promise.all([
+      fetchJSON('https://api.bluelytics.com.ar/v2/latest').catch(()=>null),
+      fetchJSON('https://dolarapi.com/v1/dolares').catch(()=>null)
+    ]).then(([blyData, dolarData])=>{
+      const grid = q('blueSourcesGrid');
+      if(!grid) return;
+      const sources = [];
+      // Bluelytics aggregated data
+      if(blyData){
+        if(blyData.blue) sources.push({name:'Blue (Bluelytics)', compra:blyData.blue.value_buy, venta:blyData.blue.value_sell});
+        if(blyData.oficial) sources.push({name:'Oficial BNA (Bluelytics)', compra:blyData.oficial.value_buy, venta:blyData.oficial.value_sell});
+        if(blyData.blue_promedio) sources.push({name:'Blue promedio', compra:blyData.blue_promedio.value_buy, venta:blyData.blue_promedio.value_sell});
+      }
+      // DolarAPI per-casa sources
+      if(Array.isArray(dolarData)){
+        dolarData.forEach(d=>{
+          if(d.venta) sources.push({name: NAMES[d.casa]||d.nombre||d.casa, compra:d.compra, venta:d.venta});
+        });
+      }
+      if(sources.length===0) return;
+      grid.innerHTML = sources.map(s =>
+        `<div class="diario-card"><div class="diario-name">${s.name}</div><div class="diario-row"><div class="diario-side"><div class="dl">Compra</div><div class="dv b">${s.compra?fmtARS(s.compra):'–'}</div></div><div class="diario-side" style="text-align:right"><div class="dl">Venta</div><div class="dv s">${fmtARS(s.venta)}</div></div></div></div>`
+      ).join('');
+    }).catch(()=>{}),
     // Comparadolar: bancos y brokers
     fetchJSON('https://api.comparadolar.ar/usd').then(data=>{
       if(!Array.isArray(data))return;
@@ -1082,7 +1144,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['blue','calculadora','cripto-detail','comparadolar','medios','historico','fecha'];
+  const ids=['blue','calculadora','cripto-detail','comparadolar','medios','blue-fuentes','historico','fecha'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
