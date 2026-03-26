@@ -60,8 +60,6 @@
     body.light{--bg:#f0f4f8;--bg2:#e4ecf5;--card:#ffffff;--card2:#f4f7fb;--border:#d1dce8;--border2:#b8c8dc;--text:#0f172a;--text2:#1e293b;--muted:#64748b;--muted2:#94a3b8;--hero-bg:linear-gradient(135deg,#dce8f8 0%,#f0f4f8 60%,#dce8f8 100%)}
     body.light header{background:rgba(240,244,248,.97)}
     body.light .stats-bar{background:linear-gradient(90deg,#e4ecf5,#dce6f0,#e4ecf5)}
-    body.light .hero-wrap{background:var(--hero-bg);border-color:rgba(56,189,248,.2)}
-    body.light .dollar-widget{background:rgba(255,255,255,.85);border-color:rgba(56,189,248,.2)}
     body.light .mm-card{background:rgba(255,255,255,.8);border-color:var(--border)}
     body.light .topnav,body.light .ticker{background:var(--bg2)}
     body.light .sec-card,body.light .news-card{background:var(--card);border-color:var(--border)}
@@ -101,18 +99,6 @@
     .refresh-spinning{animation:spin .55s linear}
     .sec-title{font-family:'DM Serif Display',serif}
 
-    /* ── Dollar widget search ── */
-    .dw-search{padding:.55rem 1.1rem .45rem;border-bottom:1px solid rgba(255,255,255,.05)}
-    .dw-search-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:var(--text);padding:.38rem .8rem;font:.82rem 'DM Sans',sans-serif;outline:none;transition:border-color .2s}
-    .dw-search-input::placeholder{color:var(--muted2)}
-    .dw-search-input:focus{border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.04)}
-    body.light .dw-search-input{background:rgba(0,0,0,.04);border-color:var(--border);color:var(--text)}
-
-    /* ── Evolution badge ── */
-    .evo-badge{font-size:.6rem;font-weight:700;padding:1px 5px;border-radius:10px;margin-left:4px;vertical-align:middle}
-    .evo-up{color:var(--green);background:rgba(34,197,94,.12)}
-    .evo-down{color:var(--red);background:rgba(239,68,68,.1)}
-    .evo-neu{color:var(--muted);background:rgba(100,116,139,.1)}
 
     /* ── Calculadora ── */
     .calc-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.4rem 1.5rem}
@@ -155,31 +141,6 @@
     .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
     .sec-line{flex:1;height:1px;background:var(--border)}
 
-    /* ══════════════════════════════════════
-       HERO — compact widget + macro stats
-    ══════════════════════════════════════ */
-    .hero-wrap{position:relative;border-radius:24px;overflow:hidden;padding:1.5rem;background:linear-gradient(135deg,#0d1830 0%,#0b0f1e 60%,#0f1e38 100%);border:1px solid rgba(56,189,248,.15);margin-bottom:1.5rem}
-    .hero-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:340px;height:340px;background:radial-gradient(circle,rgba(56,189,248,.09) 0%,transparent 70%);pointer-events:none}
-    .hero-wrap::after{content:'';position:absolute;bottom:-60px;left:-60px;width:260px;height:260px;background:radial-gradient(circle,rgba(167,139,250,.06) 0%,transparent 70%);pointer-events:none}
-    .hero-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;align-items:start;position:relative;z-index:1;max-width:700px;margin:0 auto}
-
-    /* Compact dollar widget */
-    .dollar-widget{background:rgba(20,30,48,.7);backdrop-filter:blur(10px);border:1px solid rgba(56,189,248,.12);border-radius:16px;overflow:hidden}
-    .dw-header{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.3rem .7rem;border-bottom:1px solid rgba(255,255,255,.06)}
-    .dw-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
-    .dw-link{font-size:.72rem;color:var(--sky);text-decoration:none;opacity:.8}
-    .dw-link:hover{opacity:1;text-decoration:underline}
-    .dw-row{display:flex;align-items:center;justify-content:space-between;padding:.62rem 1.3rem .62rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);border-left:3px solid transparent;transition:all .15s;cursor:pointer}
-    .dw-row:last-child{border-bottom:none}
-    .dw-row:hover{background:rgba(56,189,248,.05);border-left-color:currentColor}
-    .dw-left{display:flex;align-items:center;gap:10px}
-    .dw-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;box-shadow:0 0 6px currentColor}
-    .dw-name{font-size:.87rem;font-weight:600;color:var(--text2)}
-    .dw-right{display:flex;align-items:center;gap:.9rem}
-    .dw-price{font-size:1rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-    .dw-chg{font-size:.73rem;font-weight:700;min-width:56px;text-align:right}
-    .dw-chg.pos{color:var(--green)}.dw-chg.neg{color:var(--red)}.dw-chg.na{color:var(--muted2)}
-    .dw-footer{padding:.6rem 1.3rem;font-size:.67rem;color:var(--muted);display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(255,255,255,.05)}
     /* Share bar */
     .share-bar{display:flex;gap:.6rem;margin-top:1rem;flex-wrap:wrap;position:relative;z-index:1}
     .share-btn{display:inline-flex;align-items:center;gap:6px;padding:.46rem 1rem;border-radius:9px;font:600 .78rem 'DM Sans',sans-serif;cursor:pointer;border:none;text-decoration:none;transition:all .18s}
@@ -188,31 +149,22 @@
     .share-copy{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2)}.share-copy:hover{border-color:var(--sky);color:var(--sky)}
     .share-copied{background:rgba(34,197,94,.15);border-color:var(--green);color:var(--green)}
 
-    /* ── Hero Calculator panel ── */
-    .hero-calc-wrap{display:flex;flex-direction:column;gap:.75rem}
-    .hc-calc{background:rgba(20,30,48,.7);backdrop-filter:blur(10px);border:1px solid rgba(56,189,248,.12);border-radius:16px;padding:1.1rem 1.2rem}
-    .hc-calc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
-    .hc-title{font-size:.73rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--muted)}
-    .hc-select{background:var(--card2);border:1px solid var(--border2);color:var(--text);border-radius:8px;padding:.3rem .6rem;font:.78rem 'DM Sans',sans-serif;cursor:pointer;outline:none}
-    .hc-select:focus,.hc-select:hover{border-color:var(--sky)}
-    body.light .hc-select{background:var(--card2);border-color:var(--border);color:var(--text)}
-    .hc-row{display:flex;align-items:center;gap:.55rem;margin-bottom:.65rem}
-    .hc-field{flex:1;min-width:0}
-    .hc-label{display:block;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:.3rem}
-    .hc-input{width:100%;background:var(--card2);border:1px solid var(--border2);color:var(--text);border-radius:10px;padding:.55rem .75rem;font:700 1rem 'DM Sans',sans-serif;outline:none;transition:border-color .2s;font-variant-numeric:tabular-nums;-moz-appearance:textfield}
-    .hc-input::-webkit-inner-spin-button,.hc-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
-    .hc-input:focus{border-color:var(--sky);background:rgba(56,189,248,.04)}
-    .hc-input::placeholder{color:var(--muted2);font-weight:400;font-size:.85rem}
-    body.light .hc-input{background:var(--card2);border-color:var(--border)}
-    .hc-arrow{color:var(--sky);font-size:1.15rem;flex-shrink:0;padding-top:1.15rem;user-select:none}
-    .hc-result{font-size:.76rem;color:var(--muted);text-align:center;min-height:1.1rem}
-    .hc-indicators{display:grid;grid-template-columns:repeat(3,1fr);gap:.55rem}
-    .hc-ind-card{background:rgba(20,30,48,.6);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:.7rem .75rem;text-align:center}
-    body.light .hc-ind-card{background:rgba(255,255,255,.8);border-color:var(--border)}
-    body.light .hc-calc{background:rgba(255,255,255,.85);border-color:rgba(56,189,248,.2)}
-    .hc-ind-label{font-size:.56rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.25rem}
-    .hc-ind-val{font-size:1.18rem;font-weight:700;line-height:1;letter-spacing:-.02em}
-    .hc-ind-sub{font-size:.58rem;color:var(--muted);margin-top:.2rem}
+
+    /* ══════════════════════════════════════
+       INDEX DOLLAR GRID
+    ══════════════════════════════════════ */
+    .idx-dolar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.7rem;margin-bottom:1.5rem}
+    @media(max-width:900px){.idx-dolar-grid{grid-template-columns:repeat(3,1fr)}}
+    @media(max-width:550px){.idx-dolar-grid{grid-template-columns:repeat(2,1fr)}}
+    .idx-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:.9rem 1rem;cursor:pointer;transition:all .25s;text-decoration:none;color:inherit;display:block}
+    .idx-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25);border-color:var(--border2)}
+    .idx-name{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+    .idx-price{font-size:1.25rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums;margin-bottom:.3rem}
+    .idx-sub{font-size:.7rem;color:var(--muted2);margin-bottom:.3rem}
+    .idx-chg{font-size:.68rem;font-weight:700;padding:2px 6px;border-radius:6px;display:inline-block}
+    .idx-chg.up{color:#22c55e;background:rgba(34,197,94,.1)}
+    .idx-chg.down{color:#ef4444;background:rgba(239,68,68,.1)}
+    .idx-chg.neu{color:#64748b;background:rgba(100,116,139,.1)}
 
     /* ══════════════════════════════════════
        AD SLOT placeholder
@@ -308,11 +260,6 @@
     .flash-up{animation:flashUp .9s ease-out}
     .flash-down{animation:flashDown .9s ease-out}
 
-    /* ══════════════════════════════════════
-       DOLLAR WIDGET ENHANCEMENTS
-    ══════════════════════════════════════ */
-    .dw-rank{font-size:.66rem;font-weight:700;color:var(--muted2);min-width:16px;text-align:right;margin-right:2px}
-    .dw-ts{font-size:.6rem;color:var(--muted2);margin-left:auto;padding-left:.6rem;white-space:nowrap}
 
     /* ══════════════════════════════════════
        MARKET HEATMAP
@@ -368,46 +315,26 @@
 
 <main>
 
-  <!-- ── Hero: compact widget + macro stats ── -->
+  <!-- ── Dólares grid ── -->
   <div class="section" style="animation-delay:.05s">
     <span id="lastUpdateSub" style="display:none"></span>
-    <div class="hero-wrap">
-    <div class="hero-grid">
-
-      <!-- Compact dollar widget (like screenshot) -->
-      <div class="dollar-widget">
-        <div class="dw-header">
-          <span class="dw-title">💵 Dólares</span>
-          <a class="dw-link" href="dolares.html">Ver todo →</a>
-        </div>
-        <div class="dw-search">
-          <input class="dw-search-input" id="dwSearch" type="text" placeholder="🔍 Buscar tipo de cambio..." oninput="filterDollars(this.value)">
-        </div>
-        <div id="dwRows">
-          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
-          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
-          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
-          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
-          <div class="dw-row"><div class="dw-left"><div class="dw-dot skel" style="width:9px;height:9px;border-radius:50%"></div><div class="dw-name skel" style="height:.8rem;width:60px"></div></div><div class="dw-right"><div class="dw-price skel" style="height:.9rem;width:80px"></div></div></div>
-        </div>
-        <div class="dw-footer"><span style="color:var(--muted2)">Actualizado</span><span id="dwTime" style="color:var(--muted)">–</span></div>
-      </div>
-
-      <!-- Hidden legacy IDs so existing JS still works without errors -->
-      <span id="mmBtc" style="display:none"></span>
-      <span id="mmBtcChg" style="display:none"></span>
-      <span id="calcType" style="display:none"></span>
-      <span id="calcARS" style="display:none"></span>
-      <span id="calcUSD" style="display:none"></span>
-      <span id="calcResult" style="display:none"></span>
-      <span id="mmRiesgo" style="display:none"></span>
-      <span id="mmInfla" style="display:none"></span>
-      <span id="mmInflaSub" style="display:none"></span>
-      <span id="mmBrecha" style="display:none">–</span>
-      <span id="mmBrechaSub" style="display:none"></span>
-
+    <div class="sec-header"><span class="sec-title">Dólares</span><div class="sec-line"></div></div>
+    <div class="idx-dolar-grid" id="idxDolarGrid">
     </div>
-    </div><!-- /hero-wrap -->
+
+    <!-- Hidden legacy IDs so existing JS still works without errors -->
+    <span id="dwTime" style="display:none">–</span>
+    <span id="mmBtc" style="display:none"></span>
+    <span id="mmBtcChg" style="display:none"></span>
+    <span id="calcType" style="display:none"></span>
+    <span id="calcARS" style="display:none"></span>
+    <span id="calcUSD" style="display:none"></span>
+    <span id="calcResult" style="display:none"></span>
+    <span id="mmRiesgo" style="display:none"></span>
+    <span id="mmInfla" style="display:none"></span>
+    <span id="mmInflaSub" style="display:none"></span>
+    <span id="mmBrecha" style="display:none">–</span>
+    <span id="mmBrechaSub" style="display:none"></span>
   </div>
 
 
@@ -475,15 +402,6 @@ async function fetchText(url){
   throw new Error('fetchText failed');
 }
 
-// Dollar widget config
-const DW_CONFIG=[
-  {casa:'bolsa',    name:'MEP',       dot:'#38bdf8'},
-  {casa:'contadoconliqui', name:'CCL', dot:'#f97316'},
-  {casa:'blue',     name:'Blue',      dot:'#facc15'},
-  {casa:'cripto',   name:'Cripto',    dot:'#a78bfa'},
-  {casa:'oficial',  name:'Oficial',   dot:'#22c55e'},
-  {casa:'mayorista',name:'Mayorista', dot:'#64748b'},
-];
 
 // ── Theme toggle ──────────────────────────────────────
 function toggleTheme(){
@@ -500,15 +418,6 @@ function toggleTheme(){
   }
 })();
 
-// ── Dollar search filter ───────────────────────────────
-function filterDollars(query){
-  const rows=document.querySelectorAll('#dwRows .dw-row');
-  const q2=(query||'').toLowerCase().trim();
-  rows.forEach(row=>{
-    const name=row.querySelector('.dw-name')?.textContent?.toLowerCase()||'';
-    row.style.display=(!q2||name.includes(q2))?'':'none';
-  });
-}
 
 // ── Calculadora bidireccional ARS ⇄ USD ──────────────
 let calcRates={};
@@ -558,8 +467,6 @@ function getWeekChange(casa){
   }catch{return null;}
 }
 
-// Store prev prices for % change calculation
-let prevDollarPrices={};
 
 // Heatmap data stores
 let _heatDolarData=[], _heatCryptoData=[], _heatStockData=[];
@@ -588,56 +495,51 @@ function renderHeatmap(){
   }).join('');
 }
 
-// Map casa to dolares.html anchor
-const DW_ANCHORS={blue:'#blue',bolsa:'#mep',contadoconliqui:'#mep',cripto:'#cripto-detail',oficial:'#todos',mayorista:'#todos'};
 
 function renderDollarWidget(data){
-  const rows=DW_CONFIG.map((cfg,i)=>{
+  const grid=q('idxDolarGrid');
+  if(!grid)return;
+
+  const CONFIG=[
+    {casa:'blue',name:'Blue',color:'#facc15'},
+    {casa:'bolsa',name:'MEP',color:'#38bdf8'},
+    {casa:'contadoconliqui',name:'CCL',color:'#f97316'},
+    {casa:'oficial',name:'Oficial',color:'#22c55e'},
+    {casa:'cripto',name:'Cripto',color:'#a78bfa'},
+    {casa:'mayorista',name:'Mayorista',color:'#64748b'},
+  ];
+
+  grid.innerHTML=CONFIG.map(cfg=>{
     const d=data.find(x=>x.casa===cfg.casa);
-    if(!d)return'';
-    const price=d.venta;
-    const prev=prevDollarPrices[cfg.casa];
-    // Flash class if price changed
-    let flashCls='';
-    if(prev!=null&&price!=null&&price!==prev)flashCls=price>prev?'flash-up':'flash-down';
+    if(!d||!d.venta)return'';
+
+    // Daily change
+    const oldPrice=getWeekChange(cfg.casa);
     let chgHtml='';
-    if(prev!=null&&price!=null&&price!==prev){
-      const pct=((price-prev)/prev*100);
-      const cls=pct>0?'pos':pct<0?'neg':'na';
-      const arrow=pct>0?'▲':pct<0?'▼':'';
-      chgHtml=`<span class="dw-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
-    } else if(price!=null){
-      // Fallback: daily % change from localStorage snapshot
-      const snapPrice=getWeekChange(cfg.casa);
-      if(snapPrice&&snapPrice!==price){
-        const pct=((price-snapPrice)/snapPrice*100);
-        const cls=pct>0?'pos':pct<0?'neg':'na';
-        const arrow=pct>0?'▲':pct<0?'▼':'';
-        chgHtml=`<span class="dw-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
+    if(oldPrice&&oldPrice!==d.venta){
+      const pct=((d.venta-oldPrice)/oldPrice*100);
+      if(Math.abs(pct)>0.01){
+        const arrow=pct>0?'▲':'▼';
+        const cls=pct>0?'up':'down';
+        chgHtml=`<span class="idx-chg ${cls}">${arrow} ${Math.abs(pct).toFixed(2)}%</span>`;
       }
     }
-    const ts=d.fechaActualizacion?`<span class="dw-ts">${relTime(d.fechaActualizacion)}</span>`:'';
-    // Evolución 7 días — only show if there's real historical data with a meaningful change
-    const oldPrice=getWeekChange(cfg.casa);
-    let evoBadge='';
-    if(oldPrice&&price&&oldPrice!==price){const evoP=((price-oldPrice)/oldPrice*100);if(Math.abs(evoP)>0.01){const evoSign=evoP>0.5?'↑':evoP<-0.5?'↓':'→';const evoCls=evoP>0.5?'evo-up':evoP<-0.5?'evo-down':'evo-neu';evoBadge=`<span class="evo-badge ${evoCls}" title="Variación respecto a hace varios días">${evoSign}${Math.abs(evoP).toFixed(1)}%</span>`;}}
-    const anchor=DW_ANCHORS[cfg.casa]||'';
-    return`<div class="dw-row ${flashCls}" style="--row-color:${cfg.dot}" onclick="window.location='dolares.html${anchor}'" onmouseenter="this.style.borderLeftColor='${cfg.dot}'" onmouseleave="this.style.borderLeftColor='transparent'">
-      <div class="dw-left">
-        <span class="dw-rank">${i+1}</span>
-        <div class="dw-dot" style="background:${cfg.dot};color:${cfg.dot}"></div>
-        <div class="dw-name">${cfg.name}${evoBadge}</div>
-      </div>
-      <div class="dw-right">
-        <div class="dw-price">${fmtARS(price)}</div>
-        ${chgHtml}
-        ${ts}
-      </div>
-    </div>`;
+
+    return`<a class="idx-card" href="dolares.html">
+      <div class="idx-name">${cfg.name}</div>
+      <div class="idx-price">${fmtARS(d.venta)}</div>
+      <div class="idx-sub">Compra ${fmtARS(d.compra)}</div>
+      ${chgHtml}
+    </a>`;
   }).filter(Boolean).join('');
-  q('dwRows').innerHTML=rows;
-  // Save prices for next comparison
-  data.forEach(d=>{if(d.venta!=null)prevDollarPrices[d.casa]=d.venta;});
+
+  // Save snapshot for future comparisons
+  saveWeekSnapshot(Object.fromEntries(data.filter(d=>d.venta>0).map(d=>[d.casa,d.venta])));
+
+  // Update time
+  const blue=data.find(d=>d.casa==='blue');
+  if(q('dwTime'))q('dwTime').textContent=relTime(blue?.fechaActualizacion);
+  q('lastUpdate').textContent='En vivo · '+relTime(blue?.fechaActualizacion);
 }
 
 function parseRSS(xmlText,label){
@@ -671,11 +573,12 @@ function parseRSSXml(xml, label) {
 
 async function loadNews(){
   const feeds=[
+    {url:'https://news.google.com/rss/search?q=dolar+blue+argentina+economia&hl=es-419&gl=AR&ceid=AR:es-419', label:'Google News'},
+    {url:'https://feeds.bbci.co.uk/mundo/rss.xml', label:'BBC Mundo'},
     {url:'https://www.ambito.com/rss/pages/economia.xml', label:'Ámbito'},
     {url:'https://www.infobae.com/feeds/rss/', label:'Infobae'},
-    {url:'https://news.google.com/rss/search?q=economia+argentina+dolar&hl=es-419&gl=AR&ceid=AR:es-419', label:'Google News'},
     {url:'https://www.cronista.com/files-rss/summary.xml', label:'Cronista'},
-    {url:'https://feeds.bbci.co.uk/mundo/rss.xml', label:'BBC Mundo'},
+    {url:'https://www.lanacion.com.ar/arcio/rss/category/economia/', label:'La Nación'},
   ];
 
   const results = await Promise.allSettled(feeds.map(async f => {
@@ -688,7 +591,7 @@ async function loadNews(){
       clearTimeout(t);
       if (r.ok) {
         const j = await r.json();
-        if (j?.contents) return parseRSSXml(j.contents, f.label);
+        if (j && j.contents) return parseRSSXml(j.contents, f.label);
       }
     } catch {}
     // Fallback: corsproxy.io directo
@@ -710,14 +613,34 @@ async function loadNews(){
     return;
   }
 
+  // Deduplicate by title prefix
   const seen = new Set();
   const unique = all
-    .filter(i => { const k=(i.title||'').slice(0,50); if(seen.has(k)||!i.title) return false; seen.add(k); return true; })
+    .filter(i => { const k=(i.title||'').slice(0,50).toLowerCase(); if(seen.has(k)||!i.title) return false; seen.add(k); return true; })
     .sort((a,b) => new Date(b.pubDate||0) - new Date(a.pubDate||0));
 
-  const srcColors = {'Google News':'#38bdf8','Infobae':'#f97316','Ámbito':'#a78bfa','Cronista':'#22c55e','BBC Mundo':'#e74c3c'};
+  // Distribute: max 2 from each source for variety
+  const srcCount = {};
+  const distributed = [];
+  for (const item of unique) {
+    const src = item._src || 'unknown';
+    srcCount[src] = (srcCount[src] || 0) + 1;
+    if (srcCount[src] <= 2) distributed.push(item);
+    if (distributed.length >= 6) break;
+  }
+  // If not enough, fill from remaining
+  if (distributed.length < 6) {
+    for (const item of unique) {
+      if (!distributed.includes(item)) {
+        distributed.push(item);
+        if (distributed.length >= 6) break;
+      }
+    }
+  }
 
-  q('newsGrid').innerHTML = unique.slice(0,4).map(item => {
+  const srcColors = {'Google News':'#38bdf8','Infobae':'#f97316','Ámbito':'#a78bfa','Cronista':'#22c55e','BBC Mundo':'#e74c3c','La Nación':'#1d9bf0'};
+
+  q('newsGrid').innerHTML = distributed.slice(0,6).map(item => {
     const date = item.pubDate ? new Date(item.pubDate).toLocaleDateString('es-AR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : '';
     const color = srcColors[item._src] || 'var(--sky)';
     return `<a class="news-card" href="${item.link}" target="_blank" rel="noopener noreferrer" style="border-left:3px solid ${color}">
@@ -859,12 +782,12 @@ async function refreshAll(){
 
 // ── Share functions ─────────────────────────────────────
 function buildShareText(){
-  const rows=document.querySelectorAll('#dwRows .dw-row');
+  const cards=document.querySelectorAll('#idxDolarGrid .idx-card');
   let lines=['📊 *BilleteAR – Precios del día*',''];
   const emojis={MEP:'🏦',CCL:'🌐',Cripto:'💜',Blue:'💵',Oficial:'🏛️',Mayorista:'📦',Tarjeta:'💳'};
-  rows.forEach(row=>{
-    const name=row.querySelector('.dw-name')?.textContent?.trim();
-    const price=row.querySelector('.dw-price')?.textContent?.trim();
+  cards.forEach(card=>{
+    const name=card.querySelector('.idx-name')?.textContent?.trim();
+    const price=card.querySelector('.idx-price')?.textContent?.trim();
     if(name&&price){
       const emoji=emojis[name]||'•';
       lines.push(`${emoji} ${name}: ${price}`);
@@ -881,9 +804,9 @@ function shareWhatsApp(){
 }
 
 function shareTwitter(){
-  const rows=document.querySelectorAll('#dwRows .dw-row');
-  const blue=document.querySelector('#dwRows .dw-row:nth-child(4) .dw-price')?.textContent||'';
-  const mep=document.querySelector('#dwRows .dw-row:nth-child(1) .dw-price')?.textContent||'';
+  const cards=document.querySelectorAll('#idxDolarGrid .idx-card');
+  const blue=cards[0]?.querySelector('.idx-price')?.textContent||'';
+  const mep=cards[1]?.querySelector('.idx-price')?.textContent||'';
   const text=`📊 Dólares hoy en Argentina:\n💵 Blue: ${blue}\n🏦 MEP: ${mep}\n\nVer todos en billetear.com #DolarBlue #Argentina #Economia`;
   window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank');
 }
