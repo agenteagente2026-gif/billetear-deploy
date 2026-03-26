@@ -247,8 +247,7 @@
 
     .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
     @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-    footer{border-top:1px solid var(--border);padding:1.5rem;max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.74rem;color:var(--muted)}
-    footer a{color:var(--sky);text-decoration:none}
+    @media(max-width:640px){footer>div:first-child{grid-template-columns:1fr !important}}
     @media(max-width:500px){.nl-form{flex-direction:column}.brokers-grid{grid-template-columns:1fr 1fr}}
 
     /* ══════════════════════════════════════
@@ -387,9 +386,32 @@
 
 </main>
 
-<footer>
-  <div><strong>BilleteAR</strong> · Datos en tiempo real</div>
-  <div>No constituye asesoramiento financiero · Actualización cada 3 min</div>
+<footer style="border-top:1px solid var(--border);margin-top:3rem">
+  <div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;font-size:.82rem;color:var(--muted)">
+    <div>
+      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem">Billete<span style="color:#7dd3fc">AR</span></div>
+      <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">Información financiera de Argentina en tiempo real. Dólar blue, MEP, CCL, criptomonedas, acciones y más. Simple, rápido y actualizado al minuto.</p>
+      <p style="font-size:.72rem;color:var(--muted2)">Los datos se obtienen de fuentes públicas (DolarAPI, ArgentinaDatos, CoinGecko, Bluelytics, TradingView). BilleteAR no garantiza la exactitud de los precios.</p>
+    </div>
+    <div>
+      <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Legal</div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <a href="disclaimer.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Disclaimer</a>
+        <a href="terminos.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Términos y condiciones</a>
+        <a href="privacidad.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Política de privacidad</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Contacto</div>
+      <div style="display:flex;flex-direction:column;gap:.5rem">
+        <a href="mailto:contacto@billetear.com" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">contacto@billetear.com</a>
+      </div>
+    </div>
+  </div>
+  <div style="max-width:1200px;margin:0 auto;padding:.8rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem;color:var(--muted2)">
+    <div>&copy; 2026 BilleteAR. Todos los derechos reservados.</div>
+    <div>No constituye asesoramiento financiero ni recomendación de inversión.</div>
+  </div>
 </footer>
 
 <!-- ── Mobile bottom nav ── -->
