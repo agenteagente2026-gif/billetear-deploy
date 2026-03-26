@@ -298,10 +298,10 @@
     .mini-chg.down{color:var(--red);background:rgba(239,68,68,.1)}
     .mini-chg.neu{color:var(--muted);background:rgba(100,116,139,.1)}
     /* ── Dólar grid uniforme ── */
-    .dolar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem}
+    .dolar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem}
     @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:550px){.dolar-grid{grid-template-columns:repeat(2,1fr)}}
-    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1rem 1.1rem;transition:all .25s;position:relative}
+    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1rem 1.1rem;transition:all .25s;position:relative;cursor:pointer}
     .dolar-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.25);border-color:var(--border2)}
     .dc-name{font-size:.78rem;font-weight:700;color:var(--text2);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.05em}
     .dc-prices{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.5rem}
@@ -369,14 +369,12 @@
 <nav class="subnav">
   <div class="subnav-inner">
     <a class="subnav-link active" href="#blue">Blue</a>
-    <a class="subnav-link" href="#mep">MEP / CCL</a>
     <a class="subnav-link" href="#calculadora">Convertidor</a>
     <a class="subnav-link" href="#cripto-detail">Cripto</a>
     <a class="subnav-link" href="#comparadolar">Bancos / Brokers</a>
     <a class="subnav-link" href="#medios">Por fuente</a>
     <a class="subnav-link" href="#historico">Histórico</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
-    <a class="subnav-link" href="#todos">Todos</a>
   </div>
 </nav>
 
@@ -391,23 +389,10 @@
       <div class="dolar-card" id="card-ccl"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
       <div class="dolar-card" id="card-oficial"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
       <div class="dolar-card" id="card-cripto"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
+      <div class="dolar-card" id="card-mayorista"><div class="dc-name">Mayorista</div><div class="dc-prices"><span class="dc-buy" id="mayoristaC2">–</span><span class="dc-sell" id="mayoristaV2">–</span></div><div class="dc-chg" id="mayoristaChg"></div></div>
     </div>
     <!-- Hidden elements for backward compat -->
     <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
-  </div>
-
-  <!-- ── MEP / CCL ── -->
-  <div class="section" id="mep" style="animation-delay:.08s">
-    <div class="sec-header"><span class="sec-title">Dólar MEP / CCL</span><div class="sec-line"></div></div>
-    <div class="mep-explainer">
-      El <strong>MEP</strong> (Mercado Electrónico de Pagos) se opera comprando bonos en pesos y vendiéndolos en dólares dentro de la bolsa argentina. 100% legal, sin límite. El <strong>CCL</strong> opera igual pero con bonos que cotizan en el exterior — es la referencia para dolarización de carteras.
-    </div>
-    <div class="mep-grid" id="mepGrid">
-      <div class="mep-card"><div class="skel" style="height:.8rem;width:55%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:85%;margin-bottom:.9rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.2rem;width:44%"></div><div class="skel" style="height:1.2rem;width:44%"></div></div></div>
-      <div class="mep-card"><div class="skel" style="height:.8rem;width:55%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:85%;margin-bottom:.9rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.2rem;width:44%"></div><div class="skel" style="height:1.2rem;width:44%"></div></div></div>
-      <div class="mep-card"><div class="skel" style="height:.8rem;width:55%;margin-bottom:.5rem"></div><div class="skel" style="height:.6rem;width:85%;margin-bottom:.9rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.2rem;width:44%"></div><div class="skel" style="height:1.2rem;width:44%"></div></div></div>
-    </div>
-
   </div>
 
   <!-- ── Convertidor multi-tipo ── -->
@@ -560,18 +545,6 @@
     </div>
   </div>
 
-  <!-- ── Todos los tipos ── -->
-  <div class="section" id="todos" style="animation-delay:.20s">
-    <div class="sec-header"><span class="sec-title">Todos los tipos de cambio</span><div class="sec-line"></div></div>
-    <div class="ex-grid" id="exGrid">
-      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
-      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
-      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
-      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
-      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
-      <div class="ex-card"><div class="skel" style="height:.65rem;width:55%;margin-bottom:.8rem"></div><div style="display:flex;justify-content:space-between"><div class="skel" style="height:1.3rem;width:44%"></div><div class="skel" style="height:1.3rem;width:44%"></div></div></div>
-    </div>
-  </div>
 
 </main>
 
@@ -888,6 +861,7 @@ function renderDollars(data){
     {d:ccl, casa:'contadoconliqui', sellId:'cclV', buyId:'cclC2', chgId:'cclChg', histKey:'contadoconliqui'},
     {d:oficial, casa:'oficial', sellId:'oficialV', buyId:'oficialC2', chgId:'oficialChg', histKey:'oficial'},
     {d:cripto, casa:'cripto', sellId:'criptoV', buyId:'criptoC2', chgId:'criptoChg', histKey:'cripto'},
+    {d:data.find(x=>x.casa==='mayorista'), casa:'mayorista', sellId:'mayoristaV2', buyId:'mayoristaC2', chgId:'mayoristaChg', histKey:'mayorista'},
   ];
   cardMap.forEach(({d,casa,sellId,buyId,chgId,histKey}) => {
     if(!d) return;
@@ -909,13 +883,14 @@ function renderDollars(data){
   q('lastUpdate').textContent='En vivo · '+relTime(blue?.fechaActualizacion);
 
   const sorted=[...data].sort((a,b)=>{const ai=ORDER.indexOf(a.casa),bi=ORDER.indexOf(b.casa);return(ai<0?99:ai)-(bi<0?99:bi);});
-  q('exGrid').innerHTML=sorted.map(d=>{
+  if(q('exGrid')) q('exGrid').innerHTML=sorted.map(d=>{
     const spread=d.compra&&d.venta?Math.round(((d.venta-d.compra)/d.compra)*100):null;
     return`<div class="ex-card"><div class="ex-name">${NAMES[d.casa]||d.nombre}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${fmtARS(d.compra)}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(d.venta)}</div></div></div>${spread!=null?`<span class="spread-tag">spread ${spread}%</span>`:''}</div>`;
   }).join('');
 }
 
 function renderMEP(dollars){
+  if(!q('mepGrid')) return;
   const cards=[
     {name:'Dólar MEP',desc:'Compra/venta de bonos en bolsa local. Sin límite, 100% legal.',data:dollars.find(d=>d.casa==='bolsa'||d.casa==='mep')},
     {name:'CCL (Contado con Liqui)',desc:'Opera con bonos que cotizan en el exterior. Referencia dolarización.',data:dollars.find(d=>d.casa==='contadoconliqui'||d.casa==='ccl')},
@@ -935,7 +910,7 @@ async function loadBlueBySource(base){
 /* ── Multi-dollar chart ── */
 const CHART_COLORS = {blue:'#38bdf8', bolsa:'#22c55e', contadoconliqui:'#f97316', oficial:'#a78bfa'};
 const CHART_LABELS = {blue:'Blue', bolsa:'MEP', contadoconliqui:'CCL', oficial:'Oficial'};
-let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[], cripto:[]};
+let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[], cripto:[], mayorista:[]};
 let activeSeries = new Set(['blue','bolsa','contadoconliqui']);
 let currentRange = 30;
 
@@ -1064,7 +1039,7 @@ async function refreshAll(){
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
       q('tickerTrack').innerHTML=tick+tick;
     }).catch(()=>{}),
-    ...((['blue','bolsa','contadoconliqui','oficial','cripto']).map(tipo =>
+    ...((['blue','bolsa','contadoconliqui','oficial','cripto','mayorista']).map(tipo =>
       fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(data => {
         if (Array.isArray(data) && data.length) {
           allHistory[tipo] = data;
@@ -1107,7 +1082,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['blue','mep','calculadora','cripto-detail','comparadolar','medios','historico','fecha','todos'];
+  const ids=['blue','calculadora','cripto-detail','comparadolar','medios','historico','fecha'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
