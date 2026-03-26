@@ -527,6 +527,7 @@ function renderHeatmap(){
 
 
 function renderDollarWidget(data){
+  window._lastDollarData = data;
   const grid=q('idxDolarGrid');
   if(!grid)return;
 
@@ -745,6 +746,26 @@ async function refreshAll(){
       q('lastUpdate').textContent='En vivo · '+relTime(blue?.fechaActualizacion);
       q('lastUpdateSub').textContent=new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
     }).catch(()=>{}),
+
+    // Fetch yesterday's prices for daily % change on dollar widget
+    Promise.allSettled(['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].map(tipo =>
+      fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(hist => {
+        if (Array.isArray(hist) && hist.length >= 2) {
+          const yesterday = hist[hist.length - 2].venta;
+          try {
+            const snap = JSON.parse(localStorage.getItem('billetear-snap-7d') || '{}');
+            if (!snap.prices) snap.prices = {};
+            // Always overwrite with yesterday's price from historical API
+            snap.prices[tipo] = yesterday;
+            snap.ts = Date.now() - 2*3600*1000;
+            localStorage.setItem('billetear-snap-7d', JSON.stringify(snap));
+          } catch{}
+        }
+      }).catch(()=>{})
+    )).then(() => {
+      // Re-render with the now-available historical data
+      if (window._lastDollarData) renderDollarWidget(window._lastDollarData);
+    }),
 
     fetchJSON('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin,ethereum,solana&order=market_cap_desc&per_page=3&sparkline=false&price_change_percentage=24h').then(data=>{
       const btc=data.find(c=>c.id==='bitcoin');
