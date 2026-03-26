@@ -13,6 +13,7 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Dólar Blue hoy | MEP y CCL – BilleteAR" />
   <meta name="twitter:description" content="Precio actualizado del dólar blue, MEP, CCL y oficial. Argentina." />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href="https://billetear.com/dolares.html" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#0b0f1e" />
@@ -371,7 +372,6 @@
     <a class="subnav-link" href="#oficial-bancos">Bancos</a>
     <a class="subnav-link" href="#mep-brokers">Brokers</a>
     <a class="subnav-link" href="#historico">Histórico</a>
-    <a class="subnav-link" href="#tv-mep-section">MEP en vivo</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
   </div>
 </nav>
@@ -387,7 +387,7 @@
       <div class="dolar-card" id="card-ccl" onclick="document.getElementById('mep-brokers').scrollIntoView({behavior:'smooth'})"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
       <div class="dolar-card" id="card-oficial" onclick="document.getElementById('oficial-bancos').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
       <div class="dolar-card" id="card-cripto" onclick="document.getElementById('cripto-detail').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
-      <div class="dolar-card" id="card-mayorista" onclick="document.getElementById('fecha').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Mayorista</div><div class="dc-prices"><span class="dc-buy" id="mayoristaC2">–</span><span class="dc-sell" id="mayoristaV2">–</span></div><div class="dc-chg" id="mayoristaChg"></div></div>
+      <div class="dolar-card" id="card-mayorista" onclick="window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'})"><div class="dc-name">Mayorista</div><div class="dc-prices"><span class="dc-buy" id="mayoristaC2">–</span><span class="dc-sell" id="mayoristaV2">–</span></div><div class="dc-chg" id="mayoristaChg"></div></div>
     </div>
     <!-- Hidden elements for backward compat -->
     <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
@@ -481,10 +481,10 @@
 
   <!-- ── Histórico ── -->
   <div class="section" id="historico" style="animation-delay:.17s">
-    <div class="sec-header"><span class="sec-title">Evolución tipos de cambio</span><div class="sec-line"></div></div>
+    <div class="sec-header"><span class="sec-title">Evolución histórica</span><div class="sec-line"></div></div>
     <div class="chart-card">
       <div class="chart-header">
-        <div><div class="chart-title">Evolución tipos de cambio</div><div class="chart-sub">Comparación histórica · argentinadatos.com</div></div>
+        <div><div class="chart-title">Evolución histórica</div><div class="chart-sub">Comparación histórica · argentinadatos.com</div></div>
         <div class="chart-stat"><div class="val" id="chartCurrentVal">—</div><div class="lbl">blue actual</div></div>
       </div>
       <div class="chart-toggles">
@@ -501,33 +501,6 @@
         <button class="chart-tab" onclick="setRange(9999,this)">Todo</button>
       </div>
       <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
-    </div>
-  </div>
-
-  <!-- ── TradingView MEP en vivo ── -->
-  <div class="section" id="tv-mep-section" style="animation-delay:.2s">
-    <div class="sec-header"><span class="sec-title">Dólar MEP en vivo · BYMA</span><div class="sec-line"></div></div>
-    <div style="height:450px;border-radius:16px;overflow:hidden;border:1px solid var(--border)">
-      <div class="tradingview-widget-container" style="height:100%;width:100%">
-        <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-        {
-          "autosize": true,
-          "symbol": "BCBA:AL30D",
-          "interval": "D",
-          "timezone": "America/Argentina/Buenos_Aires",
-          "theme": "dark",
-          "style": "1",
-          "locale": "es",
-          "hide_top_toolbar": false,
-          "hide_legend": false,
-          "allow_symbol_change": false,
-          "save_image": false,
-          "calendar": false,
-          "support_host": "https://www.tradingview.com"
-        }
-        </script>
-      </div>
     </div>
   </div>
 
@@ -671,14 +644,14 @@ function calcAll(from) {
     const d = currentDollarData.find(x => x.casa === t.key);
     if (!d) return;
     if (from === 'ars' && ars > 0) {
-      // Pesos → muestra dólares a la DERECHA
+      // Pesos → muestra dólares a la DERECHA (user buys USD at venta price)
       const val = (ars / d.venta).toLocaleString('es-AR', {minimumFractionDigits:2, maximumFractionDigits:2});
       rightHtml += `<div class="calc-result">
         <div><span class="cr-label" style="color:${t.color}">${t.label}</span><span class="cr-sub">venta $${d.venta.toLocaleString('es-AR')}</span></div>
         <span class="cr-val">U\$D ${val}</span>
       </div>`;
     } else if (from === 'usd' && usd > 0) {
-      // Dólares → muestra pesos a la IZQUIERDA
+      // Dólares → muestra pesos a la IZQUIERDA (user sells USD at compra price)
       const val = (usd * d.compra).toLocaleString('es-AR', {minimumFractionDigits:0, maximumFractionDigits:0});
       leftHtml += `<div class="calc-result">
         <div><span class="cr-label" style="color:${t.color}">${t.label}</span><span class="cr-sub">compra $${d.compra.toLocaleString('es-AR')}</span></div>
@@ -687,6 +660,7 @@ function calcAll(from) {
     }
   });
 
+  // Always clear both sides, then populate the relevant one
   leftCol.innerHTML = leftHtml;
   rightCol.innerHTML = rightHtml;
 }
@@ -1197,7 +1171,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['calculadora','cripto-detail','oficial-bancos','mep-brokers','historico','tv-mep-section','fecha','medios'];
+  const ids=['calculadora','cripto-detail','oficial-bancos','mep-brokers','historico','fecha','medios'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
