@@ -540,7 +540,7 @@ function renderDollarWidget(data){
   ];
 
   const colors = {blue:'#facc15', bolsa:'#38bdf8', contadoconliqui:'#f97316', oficial:'#22c55e', cripto:'#a78bfa', mayorista:'#6b7d95'};
-  const anchors = {blue:'#medios', bolsa:'#historico', contadoconliqui:'#historico', oficial:'#historico', cripto:'#cripto-detail', mayorista:'#fecha'};
+  const anchors = {blue:'#medios', bolsa:'#mep-brokers', contadoconliqui:'#mep-brokers', oficial:'#oficial-bancos', cripto:'#cripto-detail', mayorista:'#fecha'};
   let rows = CONFIG.map(cfg => {
     const d = data.find(x => x.casa === cfg.casa);
     if (!d || !d.venta) return '';

@@ -368,7 +368,8 @@
   <div class="subnav-inner">
     <a class="subnav-link active" href="#calculadora">Convertidor</a>
     <a class="subnav-link" href="#cripto-detail">Cripto</a>
-    <a class="subnav-link" href="#comparadolar">Comparar</a>
+    <a class="subnav-link" href="#oficial-bancos">Bancos</a>
+    <a class="subnav-link" href="#mep-brokers">Brokers</a>
     <a class="subnav-link" href="#historico">Histórico</a>
     <a class="subnav-link" href="#tv-mep-section">MEP en vivo</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
@@ -382,9 +383,9 @@
     <div class="sec-header"><span class="sec-title">Dólares</span><div class="sec-line"></div></div>
     <div class="dolar-grid" id="dolarGrid">
       <div class="dolar-card" id="card-blue" onclick="document.getElementById('medios').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
-      <div class="dolar-card" id="card-mep" onclick="document.getElementById('tv-mep-section').scrollIntoView({behavior:'smooth'})"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
-      <div class="dolar-card" id="card-ccl" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
-      <div class="dolar-card" id="card-oficial" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
+      <div class="dolar-card" id="card-mep" onclick="document.getElementById('mep-brokers').scrollIntoView({behavior:'smooth'})"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
+      <div class="dolar-card" id="card-ccl" onclick="document.getElementById('mep-brokers').scrollIntoView({behavior:'smooth'})"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
+      <div class="dolar-card" id="card-oficial" onclick="document.getElementById('oficial-bancos').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
       <div class="dolar-card" id="card-cripto" onclick="document.getElementById('cripto-detail').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
       <div class="dolar-card" id="card-mayorista" onclick="document.getElementById('fecha').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Mayorista</div><div class="dc-prices"><span class="dc-buy" id="mayoristaC2">–</span><span class="dc-sell" id="mayoristaV2">–</span></div><div class="dc-chg" id="mayoristaChg"></div></div>
     </div>
@@ -448,29 +449,23 @@
     </div>
   </div>
 
-  <!-- ── COMPARADOLAR: Bancos y Brokers ── -->
-  <div class="section" id="comparadolar" style="animation-delay:.12s">
-    <div class="sec-header"><span class="sec-title">Dólar por banco y broker</span><div class="sec-line"></div></div>
-    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
-      Precio del dólar en <strong>bancos</strong> y <strong>brokers/fintechs</strong> argentinos. Ordenados por mejor precio de venta. Datos de comparadolar.ar.
-    </p>
-
-    <div class="comp-tabs">
-      <button class="comp-tab active" onclick="switchCompTab('banks',this)">🏦 Bancos</button>
-      <button class="comp-tab" onclick="switchCompTab('brokers',this)">📊 Brokers / Fintech</button>
+  <!-- ── Dólar Oficial (Bancos) ── -->
+  <div class="section" id="oficial-bancos" style="animation-delay:.12s">
+    <div class="sec-header"><span class="sec-title">Dólar Oficial por banco</span><div class="sec-line"></div></div>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Cotización del dólar oficial en los principales bancos argentinos.</p>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+      <div class="exch-loading" id="comp-banks-loading">Cargando precios de bancos...</div>
+      <table class="exch-table" id="comp-banks-table" style="display:none"></table>
     </div>
+  </div>
 
-    <div class="comp-panel active" id="comp-banks">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="comp-banks-loading">Cargando precios...</div>
-        <table class="exch-table" id="comp-banks-table" style="display:none"></table>
-      </div>
-    </div>
-    <div class="comp-panel" id="comp-brokers">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="comp-brokers-loading">Cargando precios...</div>
-        <table class="exch-table" id="comp-brokers-table" style="display:none"></table>
-      </div>
+  <!-- ── Dólar MEP (Brokers) ── -->
+  <div class="section" id="mep-brokers" style="animation-delay:.13s">
+    <div class="sec-header"><span class="sec-title">Dólar MEP por broker</span><div class="sec-line"></div></div>
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Cotización del dólar MEP en brokers y fintechs argentinas.</p>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+      <div class="exch-loading" id="comp-brokers-loading">Cargando precios de brokers...</div>
+      <table class="exch-table" id="comp-brokers-table" style="display:none"></table>
     </div>
   </div>
 
@@ -1187,7 +1182,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['calculadora','cripto-detail','comparadolar','historico','tv-mep-section','fecha'];
+  const ids=['calculadora','cripto-detail','oficial-bancos','mep-brokers','historico','tv-mep-section','fecha','medios'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
