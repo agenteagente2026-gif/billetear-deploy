@@ -94,7 +94,7 @@
     .dolar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
     @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:500px){.dolar-grid{grid-template-columns:1fr}}
-    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;border-left:4px solid var(--border)}
+    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;}
     .dolar-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
     .dc-top{display:flex;align-items:center;justify-content:space-between}
     .dc-name{font-size:1rem;font-weight:700;color:var(--text)}
@@ -207,12 +207,12 @@
     </div>
     <div class="dolar-grid" id="dolarGrid">
       <!-- Skeleton cards while loading -->
-      <div class="dolar-card" style="border-left-color:#facc15"><div class="dc-top"><span class="dc-name">Blue</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" style="border-left-color:#38bdf8"><div class="dc-top"><span class="dc-name">MEP</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" style="border-left-color:#f97316"><div class="dc-top"><span class="dc-name">CCL</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" style="border-left-color:#22c55e"><div class="dc-top"><span class="dc-name">Oficial</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" style="border-left-color:#a78bfa"><div class="dc-top"><span class="dc-name">Cripto</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" style="border-left-color:#6b7d95"><div class="dc-top"><span class="dc-name">Mayorista</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Blue</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">MEP</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">CCL</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Oficial</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Cripto</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Mayorista</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
     </div>
   </div>
 
@@ -359,7 +359,7 @@ function renderDollarCards(data){
       }
     }
 
-    return '<a class="dolar-card" href="dolares.html'+cfg.anchor+'" style="border-left-color:'+cfg.color+'">'+
+    return '<a class="dolar-card" href="dolares.html'+cfg.anchor+'" >'+
       '<div class="dc-top"><span class="dc-name">'+cfg.name+'</span>'+varHtml+'</div>'+
       '<div class="dc-prices">'+
         '<div class="dc-col"><span class="dc-label">Compra</span><span class="dc-price">'+compra+'</span></div>'+
@@ -439,7 +439,7 @@ async function loadNews(){
   q('newsGrid').innerHTML=unique.slice(0,4).map(item=>{
     const date=item.pubDate?new Date(item.pubDate).toLocaleDateString('es-AR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
     const color=srcColors[item._src]||'var(--sky)';
-    return '<a class="news-card" href="'+item.link+'" target="_blank" rel="noopener noreferrer" style="border-left:3px solid '+color+'">'+
+    return '<a class="news-card" href="'+item.link+'" target="_blank" rel="noopener noreferrer" >'+
       '<div class="nc-src" style="color:'+color+'">'+item._src+'</div>'+
       '<div class="nc-title">'+item.title+'</div>'+
       '<div class="nc-date">'+date+'</div>'+
