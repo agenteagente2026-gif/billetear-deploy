@@ -99,7 +99,7 @@
 
     /* ── Serif for titles ── */
     .sec-title,.hero-name,.chart-title{font-family:'DM Serif Display',serif}
-    .sec-title{font-size:.85rem;text-transform:none;letter-spacing:0;font-weight:400;color:var(--text2)}
+    .sec-title{font-size:1.1rem;text-transform:none;letter-spacing:0;font-weight:400;color:var(--text)}
 
     /* ── Sortable table headers ── */
     .exch-table th{cursor:pointer;user-select:none;transition:color .15s}
@@ -131,7 +131,7 @@
     .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
-    .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
+    .sec-title{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--text);white-space:nowrap}
     .sec-line{flex:1;height:1px;background:var(--border)}
 
     /* ── Hero ── */
@@ -276,7 +276,7 @@
     /* ── EDITORIAL WARMTH PATCH ── */
     :root{--accent:#38bdf8;--accent-bg:rgba(56,189,248,.08);--accent-border:rgba(56,189,248,.2)}
     .hero-badge{color:var(--accent);background:var(--accent-bg);border-color:var(--accent-border)}
-    .sec-title{font-size:.88rem;color:var(--accent);padding-left:12px;border-left:3px solid var(--accent)}
+    .sec-title{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--text);padding-left:12px;border-left:3px solid var(--accent)}
     .hero-name{font-size:2rem;letter-spacing:-.5px;background:linear-gradient(135deg,#fff 0%,#7dd3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .chart-title{font-size:1.25rem;letter-spacing:-.3px}
     .hp .val{font-variant-numeric:tabular-nums;letter-spacing:-1px}
@@ -307,7 +307,7 @@
     .dc-prices{display:flex;flex-direction:column;gap:.2rem;margin-bottom:.5rem}
     .dc-buy{font-size:.72rem;color:var(--muted)}
     .dc-buy::before{content:'Compra ';font-size:.6rem;text-transform:uppercase;letter-spacing:.04em}
-    .dc-sell{font-size:1.3rem;font-weight:800;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+    .dc-sell{font-size:1.3rem;font-weight:800;color:#f1f5f9;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
     .dc-sell::before{content:'Venta ';font-size:.55rem;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);vertical-align:middle}
     .dc-chg{margin-top:.2rem}
     .ex-card,.mep-card,.diario-card,.mini{transition:all .25s cubic-bezier(.4,0,.2,1)}
@@ -331,8 +331,6 @@
 </head>
 <body>
 <div class="copy-toast" id="copyToast">✓ Copiado</div>
-
-<div class="ticker"><div class="ticker-track" id="tickerTrack"><span class="t-item"><span class="t-name">Cargando...</span></span></div></div>
 
 <header>
   <div class="header-inner">
@@ -368,12 +366,9 @@
 
 <nav class="subnav">
   <div class="subnav-inner">
-    <a class="subnav-link active" href="#blue">Blue</a>
-    <a class="subnav-link" href="#calculadora">Convertidor</a>
+    <a class="subnav-link active" href="#calculadora">Convertidor</a>
     <a class="subnav-link" href="#cripto-detail">Cripto</a>
-    <a class="subnav-link" href="#comparadolar">Bancos / Brokers</a>
-    <a class="subnav-link" href="#medios">Por fuente</a>
-    <a class="subnav-link" href="#blue-fuentes">Blue por fuente</a>
+    <a class="subnav-link" href="#comparadolar">Comparar</a>
     <a class="subnav-link" href="#historico">Histórico</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
   </div>
@@ -385,16 +380,19 @@
   <div class="section" id="blue" style="animation-delay:.05s">
     <div class="sec-header"><span class="sec-title">Dólares</span><div class="sec-line"></div></div>
     <div class="dolar-grid" id="dolarGrid">
-      <div class="dolar-card" id="card-blue" onclick="location.hash='medios'"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
-      <div class="dolar-card" id="card-mep" onclick="location.hash='historico'"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
-      <div class="dolar-card" id="card-ccl" onclick="location.hash='historico'"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
-      <div class="dolar-card" id="card-oficial" onclick="location.hash='historico'"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
-      <div class="dolar-card" id="card-cripto" onclick="location.hash='cripto-detail'"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
-      <div class="dolar-card" id="card-mayorista" onclick="location.hash='mayorista-info'"><div class="dc-name">Mayorista</div><div class="dc-prices"><span class="dc-buy" id="mayoristaC2">–</span><span class="dc-sell" id="mayoristaV2">–</span></div><div class="dc-chg" id="mayoristaChg"></div></div>
+      <div class="dolar-card" id="card-blue" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
+      <div class="dolar-card" id="card-mep" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
+      <div class="dolar-card" id="card-ccl" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">CCL</div><div class="dc-prices"><span class="dc-buy" id="cclC2">–</span><span class="dc-sell" id="cclV">–</span></div><div class="dc-chg" id="cclChg"></div></div>
+      <div class="dolar-card" id="card-oficial" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Oficial</div><div class="dc-prices"><span class="dc-buy" id="oficialC2">–</span><span class="dc-sell" id="oficialV">–</span></div><div class="dc-chg" id="oficialChg"></div></div>
+      <div class="dolar-card" id="card-cripto" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Cripto (USDT)</div><div class="dc-prices"><span class="dc-buy" id="criptoC2">–</span><span class="dc-sell" id="criptoV">–</span></div><div class="dc-chg" id="criptoChg"></div></div>
+      <div class="dolar-card" id="card-mayorista" onclick="document.getElementById('historico').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Mayorista</div><div class="dc-prices"><span class="dc-buy" id="mayoristaC2">–</span><span class="dc-sell" id="mayoristaV2">–</span></div><div class="dc-chg" id="mayoristaChg"></div></div>
     </div>
     <!-- Hidden elements for backward compat -->
     <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
   </div>
+
+  <!-- ── Resumen editorial ── -->
+  <div id="editorialSummary" style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--text2);line-height:1.7;padding:.8rem 0 1.5rem;display:none"></div>
 
   <!-- ── Convertidor multi-tipo ── -->
   <div class="section" id="calculadora" style="animation-delay:.09s">
@@ -508,60 +506,6 @@
         <button class="chart-tab" onclick="setRange(9999,this)">Todo</button>
       </div>
       <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
-    </div>
-    <!-- TradingView Widgets -->
-    <div style="margin-top:1.2rem">
-      <div class="sec-header"><span class="sec-title">Dólar MEP y CCL en vivo</span><div class="sec-line"></div></div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="tvGrid">
-        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px;height:420px">
-          <!-- TradingView Widget BEGIN -->
-          <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-              "autosize": true,
-              "symbol": "BCBA:AL30/BCBA:AL30D",
-              "interval": "D",
-              "timezone": "America/Argentina/Buenos_Aires",
-              "theme": "dark",
-              "style": "1",
-              "locale": "es",
-              "hide_top_toolbar": false,
-              "hide_legend": false,
-              "allow_symbol_change": false,
-              "save_image": false,
-              "calendar": false,
-              "support_host": "https://www.tradingview.com"
-            }
-            </script>
-          </div>
-          <!-- TradingView Widget END -->
-        </div>
-        <div class="chart-card" style="padding:0;overflow:hidden;border-radius:16px;height:420px">
-          <!-- TradingView Widget BEGIN -->
-          <div class="tradingview-widget-container" style="height:100%;width:100%">
-            <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-            {
-              "autosize": true,
-              "symbol": "BCBA:GD30/BCBA:GD30D",
-              "interval": "D",
-              "timezone": "America/Argentina/Buenos_Aires",
-              "theme": "dark",
-              "style": "1",
-              "locale": "es",
-              "hide_top_toolbar": false,
-              "hide_legend": false,
-              "allow_symbol_change": false,
-              "save_image": false,
-              "calendar": false,
-              "support_host": "https://www.tradingview.com"
-            }
-            </script>
-          </div>
-          <!-- TradingView Widget END -->
-        </div>
-      </div>
     </div>
   </div>
 
@@ -939,6 +883,19 @@ function renderDollars(data){
     if(q('mayoristaVentaInfo')) q('mayoristaVentaInfo').textContent = fmtARS(mayorista.venta);
   }
 
+  // Editorial summary
+  const sumEl = q('editorialSummary');
+  if(sumEl && blue && oficial) {
+    const brecha = ((blue.venta - oficial.venta) / oficial.venta * 100).toFixed(1);
+    const dayName = new Date().toLocaleDateString('es-AR',{weekday:'long', day:'numeric', month:'long'});
+    let summary = `${dayName.charAt(0).toUpperCase()+dayName.slice(1)} — El dólar blue cotiza a ${fmtARS(blue.venta)}`;
+    if(mep) summary += `, el MEP a ${fmtARS(mep.venta)}`;
+    if(ccl) summary += ` y el CCL a ${fmtARS(ccl.venta)}`;
+    summary += `. La brecha con el oficial es del ${brecha}%.`;
+    sumEl.textContent = summary;
+    sumEl.style.display = 'block';
+  }
+
   const sorted=[...data].sort((a,b)=>{const ai=ORDER.indexOf(a.casa),bi=ORDER.indexOf(b.casa);return(ai<0?99:ai)-(bi<0?99:bi);});
   if(q('exGrid')) q('exGrid').innerHTML=sorted.map(d=>{
     const spread=d.compra&&d.venta?Math.round(((d.venta-d.compra)/d.compra)*100):null;
@@ -1110,7 +1067,7 @@ async function refreshAll(){
       const blue=data.find(d=>d.casa==='blue');
       if(blue)loadBlueBySource(blue).catch(()=>{});
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
-      q('tickerTrack').innerHTML=tick+tick;
+      if(q('tickerTrack')) q('tickerTrack').innerHTML=tick+tick;
     }).catch(()=>{}),
     ...((['blue','bolsa','contadoconliqui','oficial','cripto','mayorista']).map(tipo =>
       fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(data => {
@@ -1180,7 +1137,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['blue','calculadora','cripto-detail','comparadolar','medios','blue-fuentes','historico','fecha'];
+  const ids=['calculadora','cripto-detail','comparadolar','historico','fecha'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
@@ -1236,7 +1193,6 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
 .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
 .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
 .bn-icon{font-size:1.1rem;line-height:1}
-@media(max-width:700px){#tvGrid{grid-template-columns:1fr}.tradingview-widget-container{min-height:200px}}
 @media(max-width:640px){.bottom-nav{display:block}main{padding-bottom:5rem}.topnav{display:none}.header-nav{display:none}}
 </style>
 <nav class="bottom-nav">
