@@ -31,6 +31,8 @@
   <link rel="stylesheet" href="shared.css">
   <style>
     /* AdSense: add .ad-slot{margin:2rem auto;max-width:728px} when activating ads */
+    .subnav-link{padding:7px 14px;font-size:.78rem;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
+    .subnav-link:hover,.subnav-link.active{color:var(--sky);border-color:var(--sky)}
 
     /* -- Page-specific light mode -- */
     body.light .rend-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
@@ -158,6 +160,7 @@
 <header>
   <div class="header-inner">
     <a class="logo" href="index.html">
+      <img src="/favicon.svg" alt="" width="28" height="28" style="margin-right:8px" />
       <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="header-nav">
@@ -176,11 +179,24 @@
   </div>
 </header>
 
+<nav class="topnav">
+  <div class="topnav-inner">
+    <a class="subnav-link active" href="#plazo-fijo">Plazo Fijo</a>
+    <a class="subnav-link" href="#uva">UVA</a>
+    <a class="subnav-link" href="#billeteras">Billeteras</a>
+    <a class="subnav-link" href="#cauciones">Cauciones</a>
+    <a class="subnav-link" href="#fci">FCI</a>
+    <a class="subnav-link" href="#cer">CER</a>
+    <a class="subnav-link" href="#simulador">Simulador</a>
+    <a class="subnav-link" href="#faq">FAQ</a>
+  </div>
+</nav>
+
 <main>
 <h1 class="sr-only">Rendimientos en Argentina – Plazo fijo, billeteras virtuales, cauciones y FCI</h1>
 
   <!-- 1. Plazo Fijo Tradicional -->
-  <div class="section" style="animation-delay:.05s">
+  <div class="section" id="plazo-fijo" style="animation-delay:.05s">
     <div class="sec-header"><h2 class="sec-title">Plazo Fijo Tradicional</h2><div class="sec-line"></div></div>
     <div class="rend-card">
       <div class="rend-card-header">
@@ -194,7 +210,7 @@
   </div>
 
   <!-- 2. Plazo Fijo UVA -->
-  <div class="section" style="animation-delay:.08s">
+  <div class="section" id="uva" style="animation-delay:.08s">
     <div class="sec-header"><h2 class="sec-title">Plazo Fijo UVA</h2><div class="sec-line"></div></div>
     <div class="explain-card">
       <div class="explain-title">&#x1F4C8; Plazo Fijo ajustado por UVA (CER)</div>
@@ -207,7 +223,7 @@
   </div>
 
   <!-- 3. Billeteras Virtuales -->
-  <div class="section" style="animation-delay:.11s">
+  <div class="section" id="billeteras" style="animation-delay:.11s">
     <div class="sec-header"><h2 class="sec-title">Billeteras Virtuales</h2><div class="sec-line"></div></div>
     <div class="rend-card">
       <div class="rend-card-header">
@@ -221,7 +237,7 @@
   </div>
 
   <!-- 4. Cauciones Bursatiles -->
-  <div class="section" style="animation-delay:.14s">
+  <div class="section" id="cauciones" style="animation-delay:.14s">
     <div class="sec-header"><h2 class="sec-title">Cauciones Burs&aacute;tiles</h2><div class="sec-line"></div></div>
     <div class="explain-card">
       <div class="explain-title">&#x1F4B0; Pr&eacute;stamos a corto plazo en el mercado burs&aacute;til</div>
@@ -234,7 +250,7 @@
   </div>
 
   <!-- 5. FCI -->
-  <div class="section" style="animation-delay:.17s">
+  <div class="section" id="fci" style="animation-delay:.17s">
     <div class="sec-header"><h2 class="sec-title">Fondos Comunes de Inversi&oacute;n (FCI)</h2><div class="sec-line"></div></div>
     <div class="rend-card">
       <div class="rend-card-header">
@@ -248,7 +264,7 @@
   </div>
 
   <!-- 6. CER -->
-  <div class="section" style="animation-delay:.2s">
+  <div class="section" id="cer" style="animation-delay:.2s">
     <div class="sec-header"><h2 class="sec-title">CER (Coeficiente de Estabilizaci&oacute;n de Referencia)</h2><div class="sec-line"></div></div>
     <div class="explain-card">
       <div class="explain-title">&#x1F4D0; &iquest;Qu&eacute; es el CER y c&oacute;mo funciona?</div>
@@ -262,7 +278,7 @@
   </div>
 
   <!-- 7. Simulador comparativo -->
-  <div class="section" style="animation-delay:.23s">
+  <div class="section" id="simulador" style="animation-delay:.23s">
     <div class="sec-header"><h2 class="sec-title">Simulador comparativo</h2><div class="sec-line"></div></div>
     <div class="sim-card">
       <div class="sim-title">&#x1F9EE; Compar&aacute; rendimientos lado a lado</div>
@@ -611,6 +627,14 @@ async function refreshAll() {
 renderAll();
 refreshAll();
 setInterval(refreshAll, 3 * 60 * 1000);
+
+// Subnav scroll tracking
+(function(){
+  const links=document.querySelectorAll('.subnav-link');
+  const ids=[...links].map(l=>l.getAttribute('href')?.replace('#','')).filter(Boolean);
+  const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
+  ids.forEach(id=>{const el=document.getElementById(id);if(el)obs.observe(el);});
+})();
 
 </script>
 
