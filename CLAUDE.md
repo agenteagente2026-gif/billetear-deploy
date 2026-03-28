@@ -5,10 +5,11 @@ Sitio web multi-página de datos financieros argentinos en tiempo real. Deploy e
 
 ## Archivos del proyecto
 - `index.html` — Página principal: widget de dólares + calculadora bidireccional + heatmap + noticias
-- `dolares.html` — Todos los tipos de cambio + calculadora ARS⇄USD + gráfico blue + consulta por fecha
+- `dolares.html` — Todos los tipos de cambio + calculadora ARS⇄USD + gráfico blue + consulta por fecha + Mi Sueldo en Dólares
 - `cripto.html` — Top criptos + tabla mercado + ganadoras/perdedoras del día
 - `mercados.html` — TradingView widgets (acciones, índices, ETFs)
 - `indicadores.html` — Riesgo País, inflación, brecha cambiaria con gráficos históricos (Chart.js)
+- `rendimientos.html` — Plazo fijo (tradicional + UVA), billeteras virtuales, cauciones, FCI, CER, simulador comparativo
 - `noticias.html` — RSS feeds de medios económicos argentinos
 - `manifest.json` — PWA manifest
 - `sw.js` — Service worker (stale-while-revalidate para shell, network-only para APIs)
@@ -66,7 +67,9 @@ Todas las APIs pasan por este fallback en `fetchJSON()`:
 - **Consulta por fecha** (dolares.html): date picker que muestra todos los tipos de cambio de una fecha específica
 - **Noticias**: RSS feeds de Ámbito, Infobae, Google News, El Cronista, La Nación via allorigins proxy + tabs AR/Mundo/Mercados
 - **Tablas ordenables** (dolares.html): click en headers de columna para ordenar por compra/venta/spread
-- **Insight banner** (dolares.html): frase editorial automática con brecha, comparación blue vs MEP
+- **Insight banner** (dolares.html): banner editorial visible con fecha, precios y brecha generados automáticamente
+- **Mi Sueldo en Dólares** (dolares.html): ingresá tu sueldo, ve la conversión a Blue/MEP/CCL/Oficial/Cripto, se guarda en localStorage, gráfico histórico mensual
+- **Rendimientos** (rendimientos.html): plazo fijo tradicional (10 bancos), plazo fijo UVA (5 bancos), billeteras virtuales (8 apps), cauciones bursátiles, FCI (5 fondos), CER, simulador comparativo, guía educativa
 - **Tipografía editorial**: DM Serif Display para títulos, DM Sans para datos
 - **Share**: botones WhatsApp, X (Twitter), copiar precios
 - **Newsletter**: formulario (sin backend por ahora)
@@ -102,6 +105,7 @@ Secciones (subnav con scroll spy):
 - `#medios` — Blue en fuentes (dolarapi, Ámbito, Bluelytics)
 - `#historico` — Gráfico Chart.js evolución blue (30D/90D/6M/1A/Todo)
 - `#fecha` — Consulta por fecha con date picker
+- `#mi-sueldo` — Mi Sueldo en Dólares (conversión + histórico)
 - `#todos` — Grid con todos los tipos de cambio
 
 ## JS global pattern
@@ -114,19 +118,18 @@ setInterval(refreshAll, 3 * 60 * 1000);
 ```
 
 ## Deploy workflow
-### Opción 1: GitHub + Netlify auto-deploy (recomendado)
-1. Crear repo en GitHub
-2. `git init && git add . && git commit -m "initial"`
-3. `git remote add origin <url> && git push -u origin main`
-4. En Netlify: New site → Import from Git → seleccionar repo
-5. Build command: (vacío), Publish directory: `.`
-6. Cada push a main hace deploy automático
-
-### Opción 2: Manual (legacy)
-1. Crear ZIP con todos los archivos
-2. Subir el ZIP a netlify.com/drop
+### Cloudflare Pages (actual)
+1. `git add` + `git commit` en el repo
+2. `git push` al remoto
+3. Cloudflare Pages hace build automático (1-2 min)
+4. Si no se ve, Ctrl+Shift+R para forzar cache
 
 ## Ideas pendientes / roadmap
 - Google AdSense (hay placeholder en index.html)
-- Gráficos de evolución para MEP y CCL (no solo blue)
 - Notificaciones push cuando el blue sube/baja más de X%
+- Migrar fuente de datos principal a CriptoYa API (actualiza cada 30s-1min vs minutos de dolarapi)
+- Mi Sueldo en Dólares: Plazo Fijo vs Dólar (simulador head-to-head)
+- Máquina del Tiempo ("si hubieras comprado blue el...")
+- Poder de Compra (qué comprás con $100 USD hoy vs hace 1 año)
+- Cuota Simple para consumidores (¿conviene cuotas o de contado?)
+- Alertas contextuales (brecha > X%, sueldo < $Y USD)

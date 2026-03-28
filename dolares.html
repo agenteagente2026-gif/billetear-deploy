@@ -27,7 +27,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--purple:#a78bfa;--amber:#fbbf24}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
@@ -267,11 +267,39 @@
     .sb-label{font-size:.65rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
     .sb-val{font-size:.76rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
 
+    /* ── Mi Sueldo en Dólares ── */
+    .sueldo-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.8rem;position:relative;overflow:hidden}
+    .sueldo-wrap::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.06),transparent 70%);pointer-events:none}
+    .sueldo-input-row{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.5rem}
+    .sueldo-field{display:flex;align-items:center;gap:8px}
+    .sueldo-field label{font-size:.78rem;color:var(--muted);white-space:nowrap}
+    .sueldo-field input{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px;font:600 1rem 'DM Sans',sans-serif;width:180px;transition:border-color .2s}
+    .sueldo-field input:focus{outline:none;border-color:var(--sky)}
+    .sueldo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem}
+    .sueldo-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:1rem;text-align:center;transition:all .2s}
+    .sueldo-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .sueldo-card .sc-type{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.4rem}
+    .sueldo-card .sc-usd{font-size:1.6rem;font-weight:700;color:var(--sky);line-height:1.1;margin-bottom:.2rem}
+    .sueldo-card .sc-rate{font-size:.68rem;color:var(--muted2)}
+    .sueldo-card.best{border-color:rgba(34,197,94,.4);background:linear-gradient(180deg,rgba(34,197,94,.06) 0%,var(--card2) 40%)}
+    .sueldo-card.best .sc-usd{color:var(--green)}
+    .sueldo-history{margin-top:1.5rem}
+    .sueldo-history-title{font-size:.75rem;color:var(--muted);margin-bottom:.8rem;font-weight:600}
+    .sh-chart-wrap{height:200px;position:relative}
+    body.light .sueldo-wrap{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    body.light .sueldo-card{background:var(--card);border-color:var(--border)}
+
     /* ── Price flash ── */
     @keyframes flashUp{0%{background:rgba(34,197,94,.22);border-radius:6px}100%{background:transparent}}
     @keyframes flashDown{0%{background:rgba(239,68,68,.18);border-radius:6px}100%{background:transparent}}
     .flash-up{animation:flashUp .9s ease-out}
     .flash-down{animation:flashDown .9s ease-out}
+
+    /* ── Insight banner ── */
+    .insight-banner{background:linear-gradient(135deg,rgba(56,189,248,.06) 0%,rgba(167,139,250,.06) 100%);border:1px solid rgba(56,189,248,.15);border-radius:14px;padding:.9rem 1.4rem;margin-bottom:2rem;font-family:'DM Serif Display',serif;font-size:.92rem;color:var(--text2);line-height:1.6;position:relative;overflow:hidden}
+    .insight-banner::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--sky),var(--purple))}
+    .insight-banner .ib-date{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem}
+    body.light .insight-banner{background:linear-gradient(135deg,rgba(37,99,235,.04) 0%,rgba(167,139,250,.04) 100%);border-color:rgba(37,99,235,.15)}
 
     /* ── EDITORIAL WARMTH PATCH ── */
     :root{--accent:#38bdf8;--accent-bg:rgba(56,189,248,.08);--accent-border:rgba(56,189,248,.2)}
@@ -337,6 +365,7 @@
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link" href="mercados.html">Mercados</a>
       <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -368,6 +397,7 @@
     <a class="subnav-link" href="#historico">Histórico</a>
     <a class="subnav-link" href="#tv-mep">MEP en vivo</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
+    <a class="subnav-link" href="#mi-sueldo">Mi sueldo</a>
   </div>
 </nav>
 
@@ -388,7 +418,10 @@
     <div style="display:none"><span id="blue-spark-wrap"><span id="blue-spark"></span><span id="blue-spark-delta"></span></span></div>
   </div>
 
-  <span id="editorialSummary" style="display:none"></span>
+  <div class="insight-banner" id="insightBanner" style="display:none">
+    <div class="ib-date" id="insightDate"></div>
+    <div id="insightText"></div>
+  </div>
 
   <!-- ── Convertidor multi-tipo ── -->
   <div class="section" id="calculadora" style="animation-delay:.09s">
@@ -549,6 +582,26 @@
     </div>
   </div>
 
+
+  <!-- Mi Sueldo en Dólares -->
+  <div class="section" id="mi-sueldo">
+    <div class="sec-header"><span class="sec-title">Mi sueldo en dólares</span><div class="sec-line"></div></div>
+    <div class="sueldo-wrap">
+      <div class="sueldo-input-row">
+        <div class="sueldo-field">
+          <label>Tu sueldo en pesos</label>
+          <input id="sueldoInput" type="number" placeholder="Ej: 800000" oninput="calcSueldo()">
+        </div>
+        <button class="btn" onclick="saveSueldo()" style="padding:8px 16px;font-size:.8rem">Guardar</button>
+        <span id="sueldoSaved" style="font-size:.72rem;color:var(--green);opacity:0;transition:opacity .3s"></span>
+      </div>
+      <div id="sueldoCards" class="sueldo-grid"></div>
+      <div class="sueldo-history" id="sueldoHistory" style="display:none">
+        <div class="sueldo-history-title">Tu sueldo en USD Blue — últimos 12 meses</div>
+        <div class="sh-chart-wrap"><canvas id="sueldoChart"></canvas></div>
+      </div>
+    </div>
+  </div>
 
 </main>
 
@@ -937,16 +990,32 @@ function renderDollars(data){
     if(q('mayoristaVentaInfo')) q('mayoristaVentaInfo').textContent = fmtARS(mayorista.venta);
   }
 
-  // Editorial summary
-  const sumEl = q('editorialSummary');
-  if(sumEl && blue && oficial) {
+  // Editorial insight banner
+  const banner = q('insightBanner');
+  if(banner && blue && oficial) {
     const brecha = ((blue.venta - oficial.venta) / oficial.venta * 100).toFixed(1);
     const dayName = new Date().toLocaleDateString('es-AR',{weekday:'long', day:'numeric', month:'long'});
-    let summary = `${dayName.charAt(0).toUpperCase()+dayName.slice(1)} — El dólar blue cotiza a ${fmtARS(blue.venta)}`;
-    if(mep) summary += `, el MEP a ${fmtARS(mep.venta)}`;
-    if(ccl) summary += ` y el CCL a ${fmtARS(ccl.venta)}`;
-    summary += `. La brecha con el oficial es del ${brecha}%.`;
-    sumEl.textContent = summary;
+    q('insightDate').textContent = dayName.charAt(0).toUpperCase() + dayName.slice(1);
+
+    let parts = [];
+    parts.push(`El dólar blue cotiza a <strong>${fmtARS(blue.venta)}</strong>`);
+    if(mep) parts.push(`MEP a <strong>${fmtARS(mep.venta)}</strong>`);
+    if(ccl) parts.push(`CCL a <strong>${fmtARS(ccl.venta)}</strong>`);
+
+    let extra = [];
+    if(brecha <= 2) extra.push('La brecha con el oficial es mínima (' + brecha + '%)');
+    else if(brecha <= 10) extra.push('Brecha con el oficial: ' + brecha + '%');
+    else extra.push('La brecha con el oficial alcanza el ' + brecha + '%');
+
+    if(mep && blue && Math.abs(blue.venta - mep.venta) < blue.venta * 0.01) {
+      extra.push('Blue y MEP prácticamente igualados');
+    } else if(mep && blue && blue.venta > mep.venta) {
+      const diff = ((blue.venta - mep.venta) / mep.venta * 100).toFixed(1);
+      extra.push('Blue ' + diff + '% por encima del MEP');
+    }
+
+    q('insightText').innerHTML = parts.join(' · ') + '. ' + extra.join(' · ') + '.';
+    banner.style.display = '';
   }
 
   const sorted=[...data].sort((a,b)=>{const ai=ORDER.indexOf(a.casa),bi=ORDER.indexOf(b.casa);return(ai<0?99:ai)-(bi<0?99:bi);});
@@ -1250,6 +1319,135 @@ function triggerRefresh(){
   refreshCountdown=30;
   refreshAll();
 }
+
+// ── Mi Sueldo en Dólares ──
+let sueldoChart = null;
+
+(function initSueldo(){
+  const saved = localStorage.getItem('billetear-sueldo');
+  if(saved && q('sueldoInput')) q('sueldoInput').value = saved;
+})();
+
+function saveSueldo(){
+  const v = q('sueldoInput')?.value;
+  if(!v) return;
+  localStorage.setItem('billetear-sueldo', v);
+  // Guardar snapshot mensual para histórico
+  const key = 'billetear-sueldo-history';
+  const hist = JSON.parse(localStorage.getItem(key) || '[]');
+  const now = new Date();
+  const monthKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
+  const existing = hist.findIndex(h => h.month === monthKey);
+  if(existing >= 0) hist[existing].salary = Number(v);
+  else hist.push({ month: monthKey, salary: Number(v) });
+  // Mantener solo últimos 12 meses
+  while(hist.length > 12) hist.shift();
+  localStorage.setItem(key, JSON.stringify(hist));
+  const badge = q('sueldoSaved');
+  if(badge){ badge.textContent = 'Guardado'; badge.style.opacity = '1'; setTimeout(()=> badge.style.opacity='0', 2000); }
+  calcSueldo();
+}
+
+function calcSueldo(){
+  const sueldo = parseFloat(q('sueldoInput')?.value);
+  if(!sueldo || !currentDollarData.length){ q('sueldoCards').innerHTML=''; return; }
+
+  const get = c => currentDollarData.find(d => d.casa === c);
+  const types = [
+    { key: 'blue', name: 'Blue', color: 'var(--sky)' },
+    { key: 'bolsa', name: 'MEP', color: 'var(--green)' },
+    { key: 'contadoconliqui', name: 'CCL', color: 'var(--orange)' },
+    { key: 'oficial', name: 'Oficial', color: 'var(--purple)' },
+    { key: 'cripto', name: 'Cripto', color: 'var(--sky2)' }
+  ];
+
+  let cards = [];
+  let maxUSD = 0;
+  types.forEach(t => {
+    const d = get(t.key);
+    if(!d || !d.venta) return;
+    const usd = sueldo / d.venta;
+    if(usd > maxUSD) maxUSD = usd;
+    cards.push({ ...t, usd, rate: d.venta });
+  });
+
+  q('sueldoCards').innerHTML = cards.map(c =>
+    `<div class="sueldo-card${c.usd === maxUSD ? ' best' : ''}">
+      <div class="sc-type">${c.name}</div>
+      <div class="sc-usd">US$ ${c.usd.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})}</div>
+      <div class="sc-rate">1 USD = $${c.rate.toLocaleString('es-AR')}</div>
+    </div>`
+  ).join('');
+
+  renderSueldoHistory();
+}
+
+function renderSueldoHistory(){
+  const hist = JSON.parse(localStorage.getItem('billetear-sueldo-history') || '[]');
+  if(hist.length < 2 || !allHistory.blue?.length){
+    q('sueldoHistory').style.display = 'none';
+    return;
+  }
+  q('sueldoHistory').style.display = '';
+
+  // Para cada mes guardado, buscar el blue promedio de ese mes
+  const points = hist.map(h => {
+    const [y,m] = h.month.split('-').map(Number);
+    const monthData = allHistory.blue.filter(d => {
+      const dt = new Date(d.fecha);
+      return dt.getFullYear() === y && dt.getMonth()+1 === m;
+    });
+    if(!monthData.length) return null;
+    const avgBlue = monthData.reduce((s,d) => s + (d.venta||d.valor||0), 0) / monthData.length;
+    if(!avgBlue) return null;
+    return { month: h.month, usd: h.salary / avgBlue };
+  }).filter(Boolean);
+
+  if(points.length < 2){ q('sueldoHistory').style.display = 'none'; return; }
+
+  const labels = points.map(p => {
+    const [y,m] = p.month.split('-');
+    const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    return months[Number(m)-1] + ' ' + y.slice(2);
+  });
+  const data = points.map(p => Math.round(p.usd));
+
+  if(sueldoChart) sueldoChart.destroy();
+  const ctx = q('sueldoChart').getContext('2d');
+  const isLight = document.body.classList.contains('light');
+  sueldoChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Sueldo en USD Blue',
+        data,
+        borderColor: '#38bdf8',
+        backgroundColor: 'rgba(56,189,248,.1)',
+        fill: true,
+        tension: .3,
+        pointRadius: 4,
+        pointBackgroundColor: '#38bdf8'
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: isLight?'#475569':'#8896ab', font:{size:11} }, grid: { display:false } },
+        y: { ticks: { color: isLight?'#475569':'#8896ab', font:{size:11}, callback:v=>'US$'+v }, grid: { color: isLight?'rgba(0,0,0,.06)':'rgba(255,255,255,.06)' } }
+      }
+    }
+  });
+}
+
+// Recalcular sueldo cuando se actualizan los datos
+const _origRenderDollars = renderDollars;
+renderDollars = function(data){
+  _origRenderDollars(data);
+  if(q('sueldoInput')?.value) calcSueldo();
+};
 
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}

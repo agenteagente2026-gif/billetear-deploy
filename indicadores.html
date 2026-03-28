@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Riesgo País, Inflación y Brecha hoy – BilleteAR</title>
   <meta name="description" content="Riesgo País, inflación, brecha cambiaria y datos macroeconómicos de Argentina en tiempo real." />
+  <meta name="keywords" content="riesgo pais argentina hoy, inflacion argentina, brecha cambiaria, indicadores economicos argentina" />
+  <meta property="og:title" content="Riesgo País, Inflación y Brecha hoy – BilleteAR" />
+  <meta property="og:description" content="Riesgo País, inflación, brecha cambiaria y datos macro de Argentina en tiempo real." />
+  <meta property="og:url" content="https://billetear.com/indicadores.html" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Riesgo País e Inflación hoy – BilleteAR" />
+  <meta name="twitter:description" content="Indicadores económicos de Argentina: riesgo país, inflación, brecha cambiaria." />
+  <link rel="canonical" href="https://billetear.com/indicadores.html" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
   <meta name="theme-color" content="#0b0f1e" />
@@ -28,6 +37,13 @@
     body.light .topnav,body.light .ticker{background:var(--bg2)}
     body.light .refresh-btn{background:rgba(56,189,248,.12)}
     body.light .theme-btn{background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.3);color:#d97706}
+    body.light .chart-card,.light .info-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    body.light .chart-card:hover,.light .info-card:hover{border-color:var(--border2);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    body.light .glass-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    body.light .sec-line{background:linear-gradient(90deg,transparent,var(--border),#93a3b8,var(--border),transparent)}
+    body.light footer{border-top-color:var(--border);color:var(--muted)}
+    body.light .bottom-nav{background:rgba(240,244,248,.97);border-top-color:var(--border)}
+    body.light .bn-item{color:var(--muted)}
     .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
     .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
     .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
@@ -73,10 +89,11 @@
     .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
     .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
     .sec-line{flex:1;height:1px;background:var(--border)}
+    .section+.section::before{content:'';display:block;height:1px;margin:-1.2rem auto 2.5rem;max-width:200px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
 
     /* ── Big stat cards ── */
     .macro-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1rem}
-    .macro-card{border-radius:18px;padding:1.6rem;position:relative;overflow:hidden;transition:all .2s}
+    .macro-card{border-radius:22px;padding:1.8rem;position:relative;overflow:hidden;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.1)}
     .macro-card::before{content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;border-radius:50%;pointer-events:none}
     .macro-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
     .macro-card.brecha{background:linear-gradient(135deg,#1a1a3e 0%,#0e0e25 100%);border:1px solid rgba(167,139,250,.25)}
@@ -100,7 +117,12 @@
 
     /* ── Two-col layout for charts ── */
     .charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
-    @media(max-width:640px){.header-nav{display:none}}
+    @media(max-width:640px){.header-nav{display:none}.bottom-nav{display:block}main{padding-bottom:5rem}}
+    .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(17,24,39,.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:0 0 env(safe-area-inset-bottom,0)}
+    .bn-inner{display:flex;justify-content:space-around;align-items:stretch}
+    .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
+    .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
+    .bn-icon{font-size:1.1rem;line-height:1}
     @media(max-width:768px){.charts-2col{grid-template-columns:1fr}}
 
     /* ── Inflación histórica table ── */
@@ -142,7 +164,8 @@
 
     /* ── Info cards ── */
     .info-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem}
-    .info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem}
+    .info-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.4rem;box-shadow:0 2px 8px rgba(0,0,0,.08);transition:all .25s}
+    .info-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
     .info-card-title{font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:.5rem}
     .info-card-body{font-size:.79rem;color:var(--muted);line-height:1.6}
 
@@ -178,6 +201,7 @@
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link" href="mercados.html">Mercados</a>
       <a class="topnav-link active" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -200,18 +224,18 @@
         <div class="macro-sub" id="brechaSub">Blue vs Oficial</div>
       </div>
       <div class="macro-card riesgo">
-        <div class="macro-label">🌡️ Riesgo País</div>
+        <div class="macro-label">Riesgo País</div>
         <div class="macro-value" id="riesgoVal">—</div>
         <div class="macro-sub" id="riesgoSub">puntos básicos (EMBI+)</div>
         <div id="riesgoTrend" style="margin-top:.5rem"></div>
       </div>
       <div class="macro-card inflacion">
-        <div class="macro-label">📉 Inflación mensual</div>
+        <div class="macro-label">Inflación mensual</div>
         <div class="macro-value" id="inflaVal">—</div>
         <div class="macro-sub" id="inflaSub">último dato INDEC</div>
       </div>
       <div class="macro-card anual">
-        <div class="macro-label">📅 Inflación anual</div>
+        <div class="macro-label">Inflación anual</div>
         <div class="macro-value" id="inflaAnual">—</div>
         <div class="macro-sub" id="inflaAnualSub">variación interanual</div>
       </div>
@@ -306,19 +330,19 @@
     <div class="sec-header"><span class="sec-title">Guía de indicadores</span><div class="sec-line"></div></div>
     <div class="info-grid">
       <div class="info-card">
-        <div class="info-card-title">🌡️ Riesgo País (EMBI+)</div>
+        <div class="info-card-title">Riesgo País (EMBI+)</div>
         <div class="info-card-body">Mide la diferencia entre la tasa de interés que paga Argentina por su deuda y la tasa de los bonos del Tesoro de EE.UU. Cuanto mayor es el número, más riesgoso perciben los mercados internacionales al país. Se expresa en puntos básicos (100 pb = 1%).</div>
       </div>
       <div class="info-card">
-        <div class="info-card-title">📉 Brecha cambiaria</div>
+        <div class="info-card-title">Brecha cambiaria</div>
         <div class="info-card-body">Diferencia porcentual entre el dólar blue (o MEP/CCL) y el tipo de cambio oficial. Una brecha alta indica mayor presión sobre el sistema cambiario. Cuando la brecha baja, señala menor tensión entre el mercado informal y el oficial.</div>
       </div>
       <div class="info-card">
-        <div class="info-card-title">📅 Inflación (IPC)</div>
+        <div class="info-card-title">Inflación (IPC)</div>
         <div class="info-card-body">El Índice de Precios al Consumidor (IPC) mide la variación mensual del costo de una canasta de bienes y servicios. El INDEC lo publica cada mes. La inflación interanual suma las variaciones de los últimos 12 meses.</div>
       </div>
       <div class="info-card">
-        <div class="info-card-title">💵 Dólar Blue</div>
+        <div class="info-card-title">Dólar Blue</div>
         <div class="info-card-body">El dólar "blue" es el tipo de cambio en el mercado informal o paralelo en Argentina. No es el oficial del Banco Central. Se usa como referencia de la demanda real de divisas. La brecha entre el blue y el oficial es un termómetro económico clave.</div>
       </div>
     </div>
@@ -621,5 +645,15 @@ function triggerRefresh(){
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
+
+<!-- Mobile bottom nav -->
+<nav class="bottom-nav">
+  <div class="bn-inner">
+    <a class="bn-item" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
+    <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
+    <a class="bn-item" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
+    <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
+  </div>
+</nav>
 </body>
 </html>

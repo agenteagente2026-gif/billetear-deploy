@@ -34,6 +34,13 @@
     body.light .topnav,body.light .ticker{background:var(--bg2)}
     body.light .refresh-btn{background:rgba(56,189,248,.12)}
     body.light .theme-btn{background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.3);color:#d97706}
+    body.light .index-card,.light .edu-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    body.light .index-card:hover,.light .edu-card:hover{border-color:var(--border2);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    body.light .glass-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+    body.light .sec-line{background:linear-gradient(90deg,transparent,var(--border),#93a3b8,var(--border),transparent)}
+    body.light footer{border-top-color:var(--border);color:var(--muted)}
+    body.light .bottom-nav{background:rgba(240,244,248,.97);border-top-color:var(--border)}
+    body.light .bn-item{color:var(--muted)}
     .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
     .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
     .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
@@ -84,6 +91,7 @@
     .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
     .sec-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);white-space:nowrap}
     .sec-line{flex:1;height:1px;background:var(--border)}
+    .section+.section::before{content:'';display:block;height:1px;margin:-1.2rem auto 2.5rem;max-width:200px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
 
     /* ── Market status banner ── */
     .market-banner{display:flex;align-items:center;gap:8px;padding:.55rem 1rem;border-radius:10px;font-size:.78rem;margin-bottom:1rem}
@@ -103,12 +111,18 @@
     .st-chg{font-size:.85rem;font-weight:700}
     .st-chg.pos{color:var(--green)}.st-chg.neg{color:var(--red)}
     .st-vol{font-size:.75rem;color:var(--muted)}
-    @media(max-width:640px){.header-nav{display:none}}
+    @media(max-width:640px){.header-nav{display:none}.bottom-nav{display:block}main{padding-bottom:5rem}}
+    .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(17,24,39,.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:0 0 env(safe-area-inset-bottom,0)}
+    .bn-inner{display:flex;justify-content:space-around;align-items:stretch}
+    .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
+    .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
+    .bn-icon{font-size:1.1rem;line-height:1}
     @media(max-width:600px){.st-header,.st-row{grid-template-columns:2fr 1fr 1fr}.st-header>*:last-child,.st-row>*:last-child{display:none}}
 
     /* ── Index cards ── */
     .index-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.9rem}
-    .index-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem;transition:all .2s}
+    .index-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.3rem;transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .index-card:hover{transform:translateY(-2px) scale(1.01);box-shadow:0 8px 28px rgba(0,0,0,.25)}
     .index-card:hover{border-color:var(--border2);transform:translateY(-2px)}
     .ic-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.4rem}
     .ic-price{font-size:1.3rem;font-weight:700;color:var(--text);margin-bottom:.3rem}
@@ -144,7 +158,8 @@
 
     /* ── Educational cards ── */
     .edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1rem}
-    .edu-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+    .edu-card{background:var(--card);border:1px solid var(--border);border-radius:20px;overflow:hidden;cursor:pointer;transition:all .25s;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+    .edu-card:hover{border-color:var(--border2);box-shadow:0 6px 20px rgba(0,0,0,.2)}
     .edu-card:hover{border-color:var(--border2)}
     .edu-header{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.4rem}
     .edu-header h3{font-family:'DM Serif Display',serif;font-size:1.05rem;font-weight:400;color:var(--text)}
@@ -179,6 +194,7 @@
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link active" href="mercados.html">Mercados</a>
       <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -192,7 +208,7 @@
 <nav class="subnav">
   <div class="subnav-inner">
     <a class="subnav-link active" href="#indices">🌐 Índices</a>
-    <a class="subnav-link" href="#argentina">🇦🇷 Argentina</a>
+    <a class="subnav-link" href="#argentina">Argentina</a>
     <a class="subnav-link" href="#us">🇺🇸 EE.UU.</a>
     <a class="subnav-link" href="#etfs">📦 ETFs</a>
     <a class="subnav-link" href="#aprender">📚 Aprendé</a>
@@ -220,7 +236,7 @@
 
   <!-- Acciones argentinas: detalle -->
   <div class="section" id="argentina" style="animation-delay:.08s">
-    <div class="sec-header"><span class="sec-title">🇦🇷 ADRs argentinos — gráfico</span><div class="sec-line"></div></div>
+    <div class="sec-header"><span class="sec-title">ADRs argentinos — gráfico</span><div class="sec-line"></div></div>
 
     <!-- TradingView Symbol Overview: MELI -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="ar-charts">
@@ -242,7 +258,7 @@
 
   <!-- Merval & S&P full chart -->
   <div class="section" id="us" style="animation-delay:.11s">
-    <div class="sec-header"><span class="sec-title">📈 S&amp;P 500 y Merval — gráfico comparativo</span><div class="sec-line"></div></div>
+    <div class="sec-header"><span class="sec-title">S&amp;P 500 y Merval — gráfico comparativo</span><div class="sec-line"></div></div>
     <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
       <div class="tradingview-widget-container__widget"></div>
       <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
@@ -440,5 +456,15 @@ function triggerRefresh(){
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
+
+<!-- Mobile bottom nav -->
+<nav class="bottom-nav">
+  <div class="bn-inner">
+    <a class="bn-item" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
+    <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
+    <a class="bn-item active" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
+    <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
+  </div>
+</nav>
 </body>
 </html>

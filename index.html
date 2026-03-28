@@ -26,7 +26,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--accent:#75AADB}
+    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--accent:#38bdf8}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
@@ -88,14 +88,15 @@
     @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
     .sec-title{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;color:var(--text);white-space:nowrap}
-    .sec-line{flex:1;height:1px;background:var(--border)}
+    .sec-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--border2),var(--border),transparent);opacity:.5}
+    .section+.section::before{content:'';display:block;height:1px;margin:-1.2rem auto 2.5rem;max-width:200px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
 
     /* ── Dollar cards grid ── */
-    .dolar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem}
+    .dolar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:500px){.dolar-grid{grid-template-columns:1fr}}
-    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem 1.3rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;}
-    .dolar-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.35)}
+    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.3rem 1.4rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .dolar-card:hover{border-color:var(--border2);transform:translateY(-3px) scale(1.01);box-shadow:0 12px 36px rgba(0,0,0,.3)}
     .dc-top{display:flex;align-items:center;justify-content:space-between}
     .dc-name{font-size:1rem;font-weight:700;color:var(--text)}
     .dc-var{font-size:.82rem;font-weight:700;padding:2px 8px;border-radius:6px}
@@ -169,10 +170,11 @@
       <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="header-nav">
-      <a class="topnav-link" href="dolares.html">Dolares</a>
+      <a class="topnav-link" href="dolares.html">Dólares</a>
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link" href="mercados.html">Mercados</a>
       <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -201,7 +203,7 @@
   <!-- Dollar cards -->
   <div class="section" style="animation-delay:.05s">
     <div class="sec-header">
-      <span class="sec-title">Dolares</span>
+      <span class="sec-title">Dólares</span>
       <div class="sec-line"></div>
       <a href="dolares.html" style="font-size:.75rem;color:var(--sky);text-decoration:none;white-space:nowrap">Ver detalle &rarr;</a>
     </div>
@@ -236,12 +238,12 @@
       <a class="sec-link-card" href="indicadores.html">
         <span class="slc-icon">&#x1F4CA;</span>
         <span class="slc-title">Indicadores</span>
-        <span class="slc-desc">Inflacion, riesgo pais, tasas, reservas del BCRA y mas datos clave.</span>
+        <span class="slc-desc">Inflación, riesgo país, tasas, reservas del BCRA y más datos clave.</span>
       </a>
       <a class="sec-link-card" href="noticias.html">
         <span class="slc-icon">&#x1F4F0;</span>
         <span class="slc-title">Noticias</span>
-        <span class="slc-desc">Ultimas noticias de economia, finanzas y mercados de Argentina.</span>
+        <span class="slc-desc">Últimas noticias de economía, finanzas y mercados de Argentina.</span>
       </a>
     </div>
   </div>
@@ -249,7 +251,7 @@
   <!-- News -->
   <div class="section" style="animation-delay:.15s">
     <div class="sec-header">
-      <span class="sec-title">Ultimas noticias</span>
+      <span class="sec-title">Últimas noticias</span>
       <div class="sec-line"></div>
       <a href="noticias.html" style="font-size:.75rem;color:var(--sky);text-decoration:none;white-space:nowrap">Ver todas &rarr;</a>
     </div>
@@ -267,15 +269,15 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand">Billete<span>AR</span></div>
-      <p class="footer-desc">Informacion financiera de Argentina en tiempo real. Dolar blue, MEP, CCL, oficial y cripto. Simple, rapido y actualizado al minuto.</p>
+      <p class="footer-desc">Información financiera de Argentina en tiempo real. Dólar blue, MEP, CCL, oficial y cripto. Simple, rápido y actualizado al minuto.</p>
       <p class="footer-disclaimer">Los datos se obtienen de fuentes publicas (DolarAPI, ArgentinaDatos, CoinGecko). BilleteAR no garantiza la exactitud de los precios. No constituye asesoramiento financiero.</p>
     </div>
     <div>
       <div class="footer-heading">Legal</div>
       <div class="footer-links">
         <a href="disclaimer.html">Disclaimer</a>
-        <a href="terminos.html">Terminos y condiciones</a>
-        <a href="privacidad.html">Politica de privacidad</a>
+        <a href="terminos.html">Términos y condiciones</a>
+        <a href="privacidad.html">Política de privacidad</a>
       </div>
     </div>
     <div>
@@ -293,7 +295,7 @@
 <!-- Mobile bottom nav -->
 <nav class="bottom-nav">
   <div class="bn-inner">
-    <a class="bn-item" href="dolares.html"><span class="bn-icon">&#x1F4B5;</span><span>Dolares</span></a>
+    <a class="bn-item" href="dolares.html"><span class="bn-icon">&#x1F4B5;</span><span>Dólares</span></a>
     <a class="bn-item" href="cripto.html"><span class="bn-icon">&#8383;</span><span>Cripto</span></a>
     <a class="bn-item" href="mercados.html"><span class="bn-icon">&#x1F4C8;</span><span>Mercados</span></a>
     <a class="bn-item" href="noticias.html"><span class="bn-icon">&#x1F4F0;</span><span>Noticias</span></a>
