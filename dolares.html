@@ -10,11 +10,11 @@
   <meta property="og:description" content="Precio del dólar blue, MEP, CCL y oficial en tiempo real. Argentina." />
   <meta property="og:url" content="https://billetear.com/dolares.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://billetear.com/og-image.svg" />
+  <meta property="og:image" content="https://billetear.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cotización Dólar Hoy | Blue, MEP, CCL – BilleteAR" />
   <meta name="twitter:description" content="Dólar blue, MEP, CCL, oficial y tarjeta hoy. Convertidor, histórico y más." />
-  <meta name="twitter:image" content="https://billetear.com/og-image.svg" />
+  <meta name="twitter:image" content="https://billetear.com/og-image.png" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="canonical" href="https://billetear.com/dolares.html" />
   <link rel="manifest" href="/manifest.json" />
@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--purple:#a78bfa;--amber:#fbbf24}
@@ -895,7 +895,8 @@ const EXCH_URLS = {
   eldoradop2p:'https://eldorado.io', coinexp2p:'https://coinex.com',
   universalcoins:'https://universalcoins.com',
 };
-function exchName(k){return EXCH_NAMES[k]||k.charAt(0).toUpperCase()+k.slice(1);}
+function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function exchName(k){return EXCH_NAMES[k]||escHTML(k.charAt(0).toUpperCase()+k.slice(1));}
 function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
 
 /* ── Sortable tables ── */
@@ -1109,22 +1110,6 @@ function renderDollars(data){
     banner.style.display = '';
   }
 
-  const sorted=[...data].sort((a,b)=>{const ai=ORDER.indexOf(a.casa),bi=ORDER.indexOf(b.casa);return(ai<0?99:ai)-(bi<0?99:bi);});
-  if(q('exGrid')) q('exGrid').innerHTML=sorted.map(d=>{
-    const spread=d.compra&&d.venta?Math.round(((d.venta-d.compra)/d.compra)*100):null;
-    return`<div class="ex-card"><div class="ex-name">${NAMES[d.casa]||d.nombre}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${fmtARS(d.compra)}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(d.venta)}</div></div></div>${spread!=null?`<span class="spread-tag">spread ${spread}%</span>`:''}</div>`;
-  }).join('');
-}
-
-function renderMEP(dollars){
-  if(!q('mepGrid')) return;
-  const cards=[
-    {name:'Dólar MEP',desc:'Compra/venta de bonos en bolsa local. Sin límite, 100% legal.',data:dollars.find(d=>d.casa==='bolsa'||d.casa==='mep')},
-    {name:'CCL (Contado con Liqui)',desc:'Opera con bonos que cotizan en el exterior. Referencia dolarización.',data:dollars.find(d=>d.casa==='contadoconliqui'||d.casa==='ccl')},
-    {name:'Cripto (USDT/DAI)',desc:'Tipo de cambio vía stablecoins en exchanges locales.',data:dollars.find(d=>d.casa==='cripto')},
-    {name:'Referencia Oficial',desc:'Cotización Banco Nación. Base del cálculo de brecha.',data:dollars.find(d=>d.casa==='oficial')},
-  ].filter(c=>c.data);
-  q('mepGrid').innerHTML=cards.map(c=>`<div class="mep-card"><div class="mep-card-name">${c.name}</div><div class="mep-card-desc">${c.desc}</div><div class="mep-card-prices"><div class="mep-side"><div class="ml">Compra</div><div class="mv b">${fmtARS(c.data.compra)}</div></div><div class="mep-side" style="text-align:right"><div class="ml">Venta</div><div class="mv s">${fmtARS(c.data.venta)}</div></div></div></div>`).join('');
 }
 
 async function loadBlueBySource(base){
@@ -1284,7 +1269,7 @@ async function refreshAll(){
       // Guardar tasas para el convertidor
       currentDollarData = data;
       calcAll('refresh');
-      renderDollars(data);renderMEP(data);
+      renderDollars(data);
       const blue=data.find(d=>d.casa==='blue');
       if(blue)loadBlueBySource(blue).catch(()=>{});
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
@@ -1316,31 +1301,6 @@ async function refreshAll(){
     }).catch(()=>{}),
     fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(data=>{
       if(data) renderExchTable('btc-table','btc-loading',data);
-    }).catch(()=>{}),
-    // Blue por fuente: Bluelytics + DolarAPI combined
-    Promise.all([
-      fetchJSON('https://api.bluelytics.com.ar/v2/latest').catch(()=>null),
-      fetchJSON('https://dolarapi.com/v1/dolares').catch(()=>null)
-    ]).then(([blyData, dolarData])=>{
-      const grid = q('blueSourcesGrid');
-      if(!grid) return;
-      const sources = [];
-      // Bluelytics aggregated data
-      if(blyData){
-        if(blyData.blue) sources.push({name:'Blue (Bluelytics)', compra:blyData.blue.value_buy, venta:blyData.blue.value_sell});
-        if(blyData.oficial) sources.push({name:'Oficial BNA (Bluelytics)', compra:blyData.oficial.value_buy, venta:blyData.oficial.value_sell});
-        if(blyData.blue_promedio) sources.push({name:'Blue promedio', compra:blyData.blue_promedio.value_buy, venta:blyData.blue_promedio.value_sell});
-      }
-      // DolarAPI per-casa sources
-      if(Array.isArray(dolarData)){
-        dolarData.forEach(d=>{
-          if(d.venta) sources.push({name: NAMES[d.casa]||d.nombre||d.casa, compra:d.compra, venta:d.venta});
-        });
-      }
-      if(sources.length===0) return;
-      grid.innerHTML = sources.map(s =>
-        `<div class="diario-card"><div class="diario-name">${s.name}</div><div class="diario-row"><div class="diario-side"><div class="dl">Compra</div><div class="dv b">${s.compra?fmtARS(s.compra):'–'}</div></div><div class="diario-side" style="text-align:right"><div class="dl">Venta</div><div class="dv s">${fmtARS(s.venta)}</div></div></div></div>`
-      ).join('');
     }).catch(()=>{}),
     // Comparadolar: bancos y brokers
     fetchJSON('https://api.comparadolar.ar/usd').then(data=>{
@@ -1570,6 +1530,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
     <a class="bn-item active" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
     <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
     <a class="bn-item" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
+    <a class="bn-item" href="rendimientos.html"><span class="bn-icon">💰</span><span>Rendimientos</span></a>
     <a class="bn-item" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
   </div>
 </nav>

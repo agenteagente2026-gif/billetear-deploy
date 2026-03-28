@@ -13,8 +13,8 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Noticias Económicas Argentina Hoy – BilleteAR" />
   <meta name="twitter:description" content="Últimas noticias: dólar, inflación, mercados. Fuentes: Infobae, Ámbito, Cronista." />
-  <meta name="twitter:image" content="https://billetear.com/og-image.svg" />
-  <meta property="og:image" content="https://billetear.com/og-image.svg" />
+  <meta name="twitter:image" content="https://billetear.com/og-image.png" />
+  <meta property="og:image" content="https://billetear.com/og-image.png" />
   <link rel="canonical" href="https://billetear.com/noticias.html" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
@@ -289,6 +289,7 @@
 <script>
 /* ── Utils ── */
 const q = id => document.getElementById(id);
+function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
 async function fetchText(url) {
   // Intentamos 3 proxies distintos en orden
@@ -403,7 +404,7 @@ function renderNews(items) {
   q('featuredWrap').innerHTML = `
     <a class="news-featured featured-card" data-tag="${top.tag}" href="${top.link||'#'}" target="_blank" rel="noopener noreferrer">
       <div class="nf-badge">⭐ Destacada</div>
-      <div class="nf-title">${top.title}</div>
+      <div class="nf-title">${escHTML(top.title)}</div>
       <div class="nf-meta">
         <span class="src-badge" data-src="${top.src}">${top.src}</span>
         <span class="tag ${topTag}">${top.tag}</span>
@@ -421,7 +422,7 @@ function renderNews(items) {
         <span class="src-badge" data-src="${item.src}">${item.src}</span>
         <span class="tag ${tc}">${item.tag}</span>
       </div>
-      <div class="nc-title">${item.title}</div>
+      <div class="nc-title">${escHTML(item.title)}</div>
       <div class="nc-date">${date}</div>
     </a>`;
   }).join('');
@@ -549,6 +550,7 @@ if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catc
     <a class="bn-item" href="dolares.html"><span class="bn-icon">💵</span><span>Dólares</span></a>
     <a class="bn-item" href="cripto.html"><span class="bn-icon">₿</span><span>Cripto</span></a>
     <a class="bn-item" href="mercados.html"><span class="bn-icon">📈</span><span>Mercados</span></a>
+    <a class="bn-item" href="rendimientos.html"><span class="bn-icon">💰</span><span>Rendimientos</span></a>
     <a class="bn-item active" href="noticias.html"><span class="bn-icon">📰</span><span>Noticias</span></a>
   </div>
 </nav>

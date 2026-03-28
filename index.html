@@ -10,11 +10,11 @@
   <meta property="og:description" content="Precio del dólar blue, MEP, CCL y oficial en tiempo real. Argentina." />
   <meta property="og:url" content="https://billetear.com/" />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://billetear.com/og-image.svg" />
+  <meta property="og:image" content="https://billetear.com/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Dólar Blue Hoy | MEP, CCL y Oficial – BilleteAR" />
   <meta name="twitter:description" content="Cotización del dólar blue, MEP, CCL y oficial en tiempo real. Argentina." />
-  <meta name="twitter:image" content="https://billetear.com/og-image.svg" />
+  <meta name="twitter:image" content="https://billetear.com/og-image.png" />
   <link rel="canonical" href="https://billetear.com/" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
@@ -170,12 +170,7 @@
   "@type": "WebSite",
   "name": "BilleteAR",
   "url": "https://billetear.com",
-  "description": "Dashboard financiero argentino con cotizaciones del dólar, criptomonedas, indicadores y rendimientos en tiempo real.",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://billetear.com/dolares.html?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
+  "description": "Dashboard financiero argentino con cotizaciones del dólar, criptomonedas, indicadores y rendimientos en tiempo real."
 }
 </script>
 </head>
@@ -255,6 +250,11 @@
         <span class="slc-title">Mercados</span>
         <span class="slc-desc">Acciones argentinas, CEDEARs, bonos y mercados internacionales.</span>
       </a>
+      <a class="sec-link-card" href="rendimientos.html">
+        <span class="slc-icon">&#x1F4B0;</span>
+        <span class="slc-title">Rendimientos</span>
+        <span class="slc-desc">Plazo fijo, billeteras y más. Compará tasas y simulá ganancias.</span>
+      </a>
       <a class="sec-link-card" href="indicadores.html">
         <span class="slc-icon">&#x1F4CA;</span>
         <span class="slc-title">Indicadores</span>
@@ -318,13 +318,15 @@
     <a class="bn-item" href="dolares.html"><span class="bn-icon">&#x1F4B5;</span><span>Dólares</span></a>
     <a class="bn-item" href="cripto.html"><span class="bn-icon">&#8383;</span><span>Cripto</span></a>
     <a class="bn-item" href="mercados.html"><span class="bn-icon">&#x1F4C8;</span><span>Mercados</span></a>
+    <a class="bn-item" href="rendimientos.html"><span class="bn-icon">&#x1F4B0;</span><span>Rendimientos</span></a>
     <a class="bn-item" href="noticias.html"><span class="bn-icon">&#x1F4F0;</span><span>Noticias</span></a>
   </div>
 </nav>
 
 <script>
 const q=id=>document.getElementById(id);
-function fmtARS(n){if(n==null)return'\u2013';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function fmtARS(n){if(n==null)return'\u2013';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function fmtUSD(n){if(n==null)return'\u2013';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return'hace '+d+'m';const h=Math.floor(d/60);return h<24?'hace '+h+'h':new Date(str).toLocaleDateString('es-AR');}
 
@@ -463,7 +465,7 @@ async function loadNews(){
     const color=srcColors[item._src]||'var(--sky)';
     return '<a class="news-card" href="'+item.link+'" target="_blank" rel="noopener noreferrer" >'+
       '<div class="nc-src" style="color:'+color+'">'+item._src+'</div>'+
-      '<div class="nc-title">'+item.title+'</div>'+
+      '<div class="nc-title">'+escHTML(item.title)+'</div>'+
       '<div class="nc-date">'+date+'</div>'+
     '</a>';
   }).join('');
