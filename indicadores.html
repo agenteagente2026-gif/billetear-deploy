@@ -499,11 +499,8 @@ function drawInflaChart(data){
 
 function setInflaRange(n){
   inflaCurRange=n;
-  document.querySelectorAll('#inflaChart').forEach(()=>{});
-  // update active button
-  document.querySelectorAll('.range-btn').forEach(b=>{
-    if(b.getAttribute('onclick')===`setInflaRange(${n})`)b.classList.add('active');
-    else if(b.getAttribute('onclick')&&b.getAttribute('onclick').startsWith('setInflaRange'))b.classList.remove('active');
+  document.querySelectorAll('[onclick^="setInflaRange"]').forEach(b=>{
+    b.classList.toggle('active',b.getAttribute('onclick')===`setInflaRange(${n})`);
   });
   if(allInflaData.length)drawInflaChart(allInflaData);
 }

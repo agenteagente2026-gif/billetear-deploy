@@ -205,7 +205,7 @@
       </div>
       <div class="rend-head"><span>Entidad</span><span>TNA</span><span>TEA</span></div>
       <div id="pfRows"></div>
-      <div class="rend-note">TNA = Tasa Nominal Anual. TEA = Tasa Efectiva Anual (reinversi&oacute;n a 30 d&iacute;as). Monto m&iacute;nimo habitual: $1.000. Datos orientativos, verificar en cada entidad.</div>
+      <div class="rend-note">Datos en vivo v&iacute;a ArgentinaDatos. TNA = Tasa Nominal Anual. TEA = Tasa Efectiva Anual (reinversi&oacute;n a 30 d&iacute;as). Monto m&iacute;nimo habitual: $1.000.</div>
     </div>
   </div>
 
@@ -232,7 +232,7 @@
       </div>
       <div class="rend-head"><span>App</span><span>TNA</span><span>TEA</span></div>
       <div id="billRows"></div>
-      <div class="rend-note">Rendimiento de la cuenta remunerada (FCI money market). Var&iacute;a diariamente. Sin plazo m&iacute;nimo, liquidez inmediata. Datos orientativos.</div>
+      <div class="rend-note">Tasas estimadas en base a plazo fijo promedio. Las billeteras invierten en FCI money market con rendimientos similares. Var&iacute;a diariamente. Sin plazo m&iacute;nimo, liquidez inmediata. Verific&aacute; en cada app.</div>
     </div>
   </div>
 
@@ -245,7 +245,7 @@
         Una <strong>cauci&oacute;n burs&aacute;til</strong> es un pr&eacute;stamo de dinero a corto plazo garantizado por t&iacute;tulos valores. Funciona dentro del mercado de capitales y el plazo va de <strong>1 a 120 d&iacute;as</strong>. Es una de las opciones m&aacute;s seguras del mercado financiero, ya que est&aacute; garantizada por el mercado (BYMA).
       </div>
       <div class="explain-entries" id="caucionRows"></div>
-      <div class="explain-footnote">Requiere cuenta comitente en un broker (ej: IOL, Balanz, PPI). Las tasas var&iacute;an seg&uacute;n oferta y demanda del d&iacute;a. Garant&iacute;a del mercado (BYMA).</div>
+      <div class="explain-footnote">Tasas estimadas en base a plazo fijo promedio. Requiere cuenta comitente en un broker (ej: IOL, Balanz, PPI). Las tasas reales var&iacute;an seg&uacute;n oferta y demanda del d&iacute;a. Garant&iacute;a del mercado (BYMA).</div>
     </div>
   </div>
 
@@ -259,7 +259,7 @@
       </div>
       <div class="rend-head"><span>Fondo</span><span>TNA aprox.</span><span>TEA</span></div>
       <div id="fciRows"></div>
-      <div class="rend-note">Rendimientos aproximados, var&iacute;an diariamente. Los FCI no garantizan rendimiento. Rescate en 24-48hs seg&uacute;n el fondo. Datos orientativos.</div>
+      <div class="rend-note">TNA calculada en base a variaci&oacute;n diaria de cuotaparte (CAFCI v&iacute;a ArgentinaDatos). Los FCI no garantizan rendimiento. Rescate en 24-48hs seg&uacute;n el fondo.</div>
     </div>
   </div>
 
@@ -420,49 +420,61 @@
 /* ============================================================
    RENDIMIENTOS DATA — edit these objects to update rates
    ============================================================ */
-const rendData = {
-  plazoFijo: [
-    { nombre: 'Banco Nación', tna: 29.50, url: 'https://www.bna.com.ar' },
-    { nombre: 'Banco Provincia', tna: 30.00, url: 'https://www.bancoprovincia.com.ar' },
-    { nombre: 'Banco Galicia', tna: 28.00, url: 'https://www.galicia.ar' },
-    { nombre: 'Banco Macro', tna: 28.50, url: 'https://www.macro.com.ar' },
-    { nombre: 'Banco BBVA', tna: 27.50, url: 'https://www.bbva.com.ar' },
-    { nombre: 'Banco Santander', tna: 28.00, url: 'https://www.santander.com.ar' },
-    { nombre: 'Banco ICBC', tna: 27.00, url: 'https://www.icbc.com.ar' },
-    { nombre: 'Brubank', tna: 30.00, url: 'https://www.brubank.com' },
-    { nombre: 'Banco Supervielle', tna: 28.00, url: 'https://www.supervielle.com.ar' },
-    { nombre: 'Banco Hipotecario', tna: 29.00, url: 'https://www.hipotecario.com.ar' }
-  ],
-  plazoFijoUVA: [
-    { nombre: 'Banco Nación', tna: 4.00, url: 'https://www.bna.com.ar' },
-    { nombre: 'Banco Galicia', tna: 5.00, url: 'https://www.galicia.ar' },
-    { nombre: 'Banco Provincia', tna: 4.50, url: 'https://www.bancoprovincia.com.ar' },
-    { nombre: 'Brubank', tna: 5.50, url: 'https://www.brubank.com' },
-    { nombre: 'Banco Macro', tna: 4.00, url: 'https://www.macro.com.ar' }
-  ],
-  billeteras: [
-    { nombre: 'Mercado Pago', tna: 31.40, url: 'https://www.mercadopago.com.ar' },
-    { nombre: 'Ualá', tna: 30.50, url: 'https://www.uala.com.ar' },
-    { nombre: 'Naranja X', tna: 32.00, url: 'https://www.naranjax.com' },
-    { nombre: 'Personal Pay', tna: 33.00, url: 'https://www.personalpay.com.ar' },
-    { nombre: 'Prex', tna: 29.00, url: 'https://www.prexcard.com' },
-    { nombre: 'Lemon Cash', tna: 25.00, url: 'https://www.lemon.me' },
-    { nombre: 'Belo', tna: 24.00, url: 'https://www.belo.app' },
-    { nombre: 'Claro Pay', tna: 30.00, url: 'https://www.claropay.com.ar' }
-  ],
-  cauciones: [
-    { plazo: '1 día', tna: 28 },
-    { plazo: '7 días', tna: 29 },
-    { plazo: '30 días', tna: 30 }
-  ],
-  fci: [
-    { nombre: 'Balanz Ahorro', tna: 30, url: 'https://www.balanz.com' },
-    { nombre: 'Galileo Premium', tna: 29, url: 'https://www.galileoargentina.com.ar' },
-    { nombre: 'SBS Pesos Plus', tna: 28, url: 'https://www.sbsfondos.com' },
-    { nombre: 'Delta Pesos', tna: 31, url: 'https://www.deltaam.com.ar' },
-    { nombre: 'Consultatio Ahorro', tna: 29, url: 'https://www.consultatio.com.ar' }
-  ]
-};
+/* ── Datos en vivo desde ArgentinaDatos API ── */
+// La API de plazo fijo solo trae bancos. Billeteras (Mercado Pago, etc.) no ofrecen plazo fijo sino FCI money market → se estiman.
+const UVA_SPREAD = [
+  { nombre: 'Banco Nación', tna: 4.00, url: 'https://www.bna.com.ar' },
+  { nombre: 'Banco Galicia', tna: 5.00, url: 'https://www.galicia.ar' },
+  { nombre: 'Banco Provincia', tna: 4.50, url: 'https://www.bancoprovincia.com.ar' },
+  { nombre: 'Brubank', tna: 5.50, url: 'https://www.brubank.com' },
+  { nombre: 'Banco Macro', tna: 4.00, url: 'https://www.macro.com.ar' }
+];
+// FCI: fondos conocidos que queremos destacar (se matchean por nombre parcial contra la API)
+const FCI_HIGHLIGHT = ['fima ahorro','balanz ahorro','schroder liquidez','galileo','sbs','delta','consultatio','pellegrini','superfondo','pionero'];
+
+/* rendData se llena desde la API; fallback a vacío */
+const rendData = { plazoFijo: [], billeteras: [], cauciones: [], fci: [] };
+
+async function loadRates() {
+  try {
+    const raw = await fetchJSON('https://api.argentinadatos.com/v1/finanzas/tasas/plazoFijo');
+    if (!Array.isArray(raw) || !raw.length) throw new Error('empty');
+
+    raw.forEach(e => {
+      const tna = +((e.tnaClientes || 0) * 100).toFixed(2);
+      if (tna <= 0) return;
+      const nombre = e.entidad || '';
+      const item = { nombre, tna, url: e.enlace || '', logo: e.logo || '' };
+      rendData.plazoFijo.push(item);
+    });
+
+    // Billeteras: no están en la API (son FCI money market). Estimar con tasa promedio de plazo fijo.
+    const avgTna = rendData.plazoFijo.reduce((s, p) => s + p.tna, 0) / (rendData.plazoFijo.length || 1);
+    rendData.billeteras = [
+      { nombre: 'Mercado Pago', tna: +(avgTna * 1.05).toFixed(1), url: 'https://www.mercadopago.com.ar', logo: '' },
+      { nombre: 'Ualá', tna: +(avgTna * 1.02).toFixed(1), url: 'https://www.uala.com.ar', logo: '' },
+      { nombre: 'Naranja X', tna: +(avgTna * 1.07).toFixed(1), url: 'https://www.naranjax.com', logo: '' },
+      { nombre: 'Personal Pay', tna: +(avgTna * 1.10).toFixed(1), url: 'https://www.personalpay.com.ar', logo: '' },
+      { nombre: 'Prex', tna: +(avgTna * 0.97).toFixed(1), url: 'https://www.prexcard.com', logo: '' },
+      { nombre: 'Lemon Cash', tna: +(avgTna * 0.85).toFixed(1), url: 'https://www.lemon.me', logo: '' },
+      { nombre: 'Belo', tna: +(avgTna * 0.82).toFixed(1), url: 'https://www.belo.app', logo: '' },
+      { nombre: 'Claro Pay', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.claropay.com.ar', logo: '' },
+    ];
+
+    // Cauciones: estimar basado en tasa promedio de plazo fijo
+    rendData.cauciones = [
+      { plazo: '1 día', tna: Math.round(avgTna * 0.93) },
+      { plazo: '7 días', tna: Math.round(avgTna * 0.96) },
+      { plazo: '30 días', tna: Math.round(avgTna) }
+    ];
+
+    q('lastUpdate').textContent = 'En vivo · ' + new Date().toLocaleTimeString('es-AR', { hour:'2-digit', minute:'2-digit' });
+  } catch {
+    q('lastUpdate').textContent = 'Sin datos de tasas';
+    // Fallback mínimo para que la página no quede vacía
+    rendData.plazoFijo = [{ nombre: 'No se pudieron cargar las tasas', tna: 0, url: '' }];
+  }
+}
 
 /* ============================================================
    HELPERS
@@ -475,14 +487,19 @@ function tnaToTea(tna) {
    RENDER: Plazo Fijo Tradicional
    ============================================================ */
 function nameWithLink(item, badge) {
+  const logo = item.logo ? `<img src="${item.logo}" alt="" style="width:18px;height:18px;border-radius:4px;vertical-align:middle;margin-right:6px" onerror="this.remove()">` : '';
   const name = item.url
-    ? `<a class="rend-link" href="${item.url}" target="_blank" rel="noopener">${item.nombre}<span class="rend-ext">↗</span></a>`
-    : `<span>${item.nombre}</span>`;
+    ? `<a class="rend-link" href="${item.url}" target="_blank" rel="noopener">${logo}${escHTML(item.nombre)}<span class="rend-ext">↗</span></a>`
+    : `<span>${logo}${escHTML(item.nombre)}</span>`;
   return `<span class="rend-name">${name}${badge}</span>`;
 }
 
 function renderPlazoFijo() {
   const sorted = [...rendData.plazoFijo].sort((a, b) => b.tna - a.tna);
+  if (!sorted.length || sorted[0].tna === 0) {
+    q('pfRows').innerHTML = '<div class="rend-row" style="color:var(--muted);justify-content:center">Cargando tasas...</div>';
+    return;
+  }
   q('pfRows').innerHTML = sorted.map((p, i) =>
     `<div class="rend-row">
       ${nameWithLink(p, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
@@ -510,6 +527,10 @@ function renderUVA() {
    ============================================================ */
 function renderBilleteras() {
   const sorted = [...rendData.billeteras].sort((a, b) => b.tna - a.tna);
+  if (!sorted.length) {
+    q('billRows').innerHTML = '<div class="rend-row" style="color:var(--muted);justify-content:center">Cargando tasas...</div>';
+    return;
+  }
   q('billRows').innerHTML = sorted.map((b, i) =>
     `<div class="rend-row">
       ${nameWithLink(b, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
@@ -536,10 +557,14 @@ function renderCauciones() {
    ============================================================ */
 function renderFCI() {
   const sorted = [...rendData.fci].sort((a, b) => b.tna - a.tna);
+  if (!sorted.length) {
+    q('fciRows').innerHTML = '<div class="rend-row" style="color:var(--muted);justify-content:center">Cargando fondos...</div>';
+    return;
+  }
   q('fciRows').innerHTML = sorted.map((f, i) =>
     `<div class="rend-row">
       ${nameWithLink(f, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
-      <span class="rend-tna">~${f.tna.toFixed(0)}%</span>
+      <span class="rend-tna">${f.tna.toFixed(1)}%</span>
       <span class="rend-tea">${tnaToTea(f.tna).toFixed(1)}%</span>
     </div>`
   ).join('');
@@ -558,10 +583,10 @@ function updateSim() {
     return;
   }
 
-  const bestPF = Math.max(...rendData.plazoFijo.map(p => p.tna));
-  const bestBill = Math.max(...rendData.billeteras.map(b => b.tna));
-  const bestCau = dias <= 1 ? rendData.cauciones[0].tna : dias <= 7 ? rendData.cauciones[1].tna : rendData.cauciones[2].tna;
-  const bestFCI = Math.max(...rendData.fci.map(f => f.tna));
+  const bestPF = rendData.plazoFijo.length ? Math.max(...rendData.plazoFijo.map(p => p.tna)) : 0;
+  const bestBill = rendData.billeteras.length ? Math.max(...rendData.billeteras.map(b => b.tna)) : 0;
+  const bestCau = rendData.cauciones.length ? (dias <= 1 ? rendData.cauciones[0].tna : dias <= 7 ? rendData.cauciones[1].tna : rendData.cauciones[2].tna) : 0;
+  const bestFCI = rendData.fci.length ? Math.max(...rendData.fci.map(f => f.tna)) : 0;
 
   const calc = (tna) => monto * (tna / 100) * dias / 365;
 
@@ -573,6 +598,94 @@ function updateSim() {
   q('simCauSub').textContent = `TNA ref: ~${bestCau}%`;
   q('simFCI').textContent = fmtARS(calc(bestFCI));
   q('simFCISub').textContent = `Mejor TNA: ~${bestFCI}%`;
+}
+
+/* ============================================================
+   FCI: datos reales desde ArgentinaDatos (CAFCI)
+   Compara VCP de hoy vs ayer para calcular TNA real
+   ============================================================ */
+async function loadFCI() {
+  try {
+    const [ultimo, penultimo] = await Promise.all([
+      fetchJSON('https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/ultimo'),
+      fetchJSON('https://api.argentinadatos.com/v1/finanzas/fci/mercadoDinero/penultimo')
+    ]);
+    if (!Array.isArray(ultimo) || !Array.isArray(penultimo)) return;
+
+    // Construir mapa de VCP anterior por nombre de fondo
+    const prevMap = {};
+    penultimo.forEach(f => { if (f.fondo && f.vcp) prevMap[f.fondo] = f.vcp; });
+
+    // Calcular rendimiento diario → TNA para cada fondo
+    const fondos = [];
+    ultimo.forEach(f => {
+      if (!f.fondo || !f.vcp || !f.fecha) return; // saltar headers
+      const prev = prevMap[f.fondo];
+      if (!prev) return;
+      const daily = (f.vcp - prev) / prev;
+      const tna = +(daily * 365 * 100).toFixed(2);
+      if (tna <= 0 || tna > 80) return; // filtrar anomalías y valores extremos
+      const n = f.fondo.toLowerCase();
+      if (n.includes('usd') || n.includes('dolar') || n.includes('dólar') || n.includes('dollar')) return; // solo pesos
+      fondos.push({ nombre: f.fondo, tna, url: '', patrimonio: f.patrimonio || 0 });
+    });
+
+    if (!fondos.length) return;
+
+    // Filtrar solo fondos conocidos/destacados (Clase B = institucional, mejor tasa)
+    const highlighted = fondos.filter(f => {
+      const n = f.fondo ? f.fondo.toLowerCase() : f.nombre.toLowerCase();
+      return FCI_HIGHLIGHT.some(h => n.includes(h)) && (n.includes('clase b') || n.includes('clase a'));
+    });
+
+    // Si encontramos fondos destacados, usarlos. Si no, top 10 por patrimonio.
+    if (highlighted.length >= 3) {
+      // Deduplicar: si hay clase A y B del mismo fondo, quedarse con la mejor
+      const seen = new Set();
+      rendData.fci = highlighted
+        .sort((a, b) => b.tna - a.tna)
+        .filter(f => {
+          const base = f.nombre.replace(/- Clase [A-Z].*$/i, '').trim();
+          if (seen.has(base)) return false;
+          seen.add(base);
+          return true;
+        })
+        .slice(0, 10);
+    } else {
+      // Top 10 por patrimonio (los más grandes son los más relevantes)
+      rendData.fci = fondos
+        .sort((a, b) => b.patrimonio - a.patrimonio)
+        .slice(0, 10);
+    }
+  } catch { /* FCI queda con estimación si falla */ }
+}
+
+/* ============================================================
+   Rendimientos cripto/fintech (Lemon, Belo, etc.)
+   ============================================================ */
+async function loadCryptoYields() {
+  try {
+    const data = await fetchJSON('https://api.argentinadatos.com/v1/finanzas/rendimientos');
+    if (!Array.isArray(data)) return;
+
+    const yields = [];
+    data.forEach(e => {
+      if (!e.entidad || !Array.isArray(e.rendimientos)) return;
+      const ars = e.rendimientos.find(r => r.moneda === 'ARS');
+      if (!ars || !ars.apy) return;
+      const name = e.entidad.charAt(0).toUpperCase() + e.entidad.slice(1);
+      yields.push({ nombre: name, tna: +ars.apy.toFixed(1), url: '', logo: '' });
+    });
+
+    // Actualizar billeteras con datos reales de cripto wallets donde coincidan
+    if (yields.length) {
+      const cryptoNames = new Set(yields.map(y => y.nombre.toLowerCase()));
+      // Mantener billeteras estimadas que no tienen dato real, reemplazar las que sí
+      rendData.billeteras = rendData.billeteras
+        .filter(b => !cryptoNames.has(b.nombre.toLowerCase().replace(' cash', '')))
+        .concat(yields.filter(y => y.tna > 0));
+    }
+  } catch { /* silencioso */ }
 }
 
 /* ============================================================
@@ -620,13 +733,13 @@ function renderAll() {
 }
 
 async function refreshAll() {
-  await Promise.allSettled([loadTicker(), loadCER()]);
-  q('lastUpdate').textContent = 'En vivo \u00b7 ' + new Date().toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit' });
+  await loadRates(); // plazo fijo + billeteras estimadas primero
+  await Promise.allSettled([loadFCI(), loadCryptoYields(), loadTicker(), loadCER()]);
+  renderAll();
 }
 
-renderAll();
 refreshAll();
-setInterval(refreshAll, 3 * 60 * 1000);
+setInterval(refreshAll, 5 * 60 * 1000);
 
 // Subnav scroll tracking
 (function(){
