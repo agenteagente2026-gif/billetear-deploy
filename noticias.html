@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Noticias económicas Argentina hoy | Dólar, inflación, mercados – BilleteAR</title>
+  <title>Noticias Económicas Argentina Hoy | Dólar y Mercados – BilleteAR</title>
   <meta name="description" content="Últimas noticias económicas de Argentina: dólar, inflación, mercados, política económica. Infobae, Ámbito y más fuentes actualizadas al minuto." />
   <meta name="keywords" content="noticias economia argentina, noticias dolar hoy, inflacion argentina noticias, mercados argentina" />
   <meta property="og:title" content="Noticias económicas Argentina hoy – BilleteAR" />
   <meta property="og:description" content="Últimas noticias: dólar, inflación, mercados. Fuentes: Infobae, Ámbito, BBC." />
   <meta property="og:url" content="https://billetear.com/noticias.html" />
   <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Noticias Económicas Argentina Hoy – BilleteAR" />
+  <meta name="twitter:description" content="Últimas noticias: dólar, inflación, mercados. Fuentes: Infobae, Ámbito, Cronista." />
+  <meta name="twitter:image" content="https://billetear.com/og-image.svg" />
+  <meta property="og:image" content="https://billetear.com/og-image.svg" />
   <link rel="canonical" href="https://billetear.com/noticias.html" />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <link rel="manifest" href="/manifest.json" />
@@ -167,7 +171,26 @@
     .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
     .bn-icon{font-size:1.1rem;line-height:1}
     :focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    h2.sec-title{margin:0;font-size:inherit;font-weight:inherit;font-family:inherit}
   </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Noticias económicas de Argentina hoy",
+  "description": "Últimas noticias económicas de Argentina: dólar, inflación, mercados, política económica.",
+  "url": "https://billetear.com/noticias.html",
+  "isPartOf": { "@type": "WebSite", "name": "BilleteAR", "url": "https://billetear.com" },
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://billetear.com" },
+      { "@type": "ListItem", "position": 2, "name": "Noticias", "item": "https://billetear.com/noticias.html" }
+    ]
+  }
+}
+</script>
 </head>
 <body>
 
@@ -195,8 +218,9 @@
 </header>
 
 <main>
+<h1 class="sr-only">Noticias económicas de Argentina hoy</h1>
   <div class="section">
-    <div class="sec-header"><span class="sec-title">Últimas noticias</span><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Últimas noticias</h2><div class="sec-line"></div></div>
     <div style="display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap">
       <button class="chart-tab active" onclick="filterNews('all',this)">Todas</button>
       <button class="chart-tab" onclick="filterNews('AR',this)">Argentina</button>
