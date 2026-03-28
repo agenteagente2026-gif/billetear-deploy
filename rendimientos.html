@@ -230,7 +230,7 @@
         <span class="rend-card-icon">&#x1F4F1;</span>
         <span class="rend-card-title">Cuenta remunerada (FCI Money Market)</span>
       </div>
-      <div class="rend-head"><span>App</span><span>TNA</span><span>TEA</span></div>
+      <div class="rend-head"><span>App</span><span>L&iacute;mite</span><span>TNA</span><span>TEA</span></div>
       <div id="billRows"></div>
       <div class="rend-note">Tasas estimadas en base a plazo fijo promedio. Las billeteras invierten en FCI money market con rendimientos similares. Var&iacute;a diariamente. Sin plazo m&iacute;nimo, liquidez inmediata. Verific&aacute; en cada app.</div>
     </div>
@@ -429,8 +429,20 @@ const UVA_SPREAD = [
   { nombre: 'Brubank', tna: 5.50, url: 'https://www.brubank.com' },
   { nombre: 'Banco Macro', tna: 4.00, url: 'https://www.macro.com.ar' }
 ];
-// FCI: fondos conocidos que queremos destacar (se matchean por nombre parcial contra la API)
+// FCI: fondos conocidos con URLs (se matchean por nombre parcial contra la API)
 const FCI_HIGHLIGHT = ['fima ahorro','balanz ahorro','schroder liquidez','galileo','sbs','delta','consultatio','pellegrini','superfondo','pionero'];
+const FCI_URLS = {
+  'fima': 'https://www.fondosfima.com.ar',
+  'balanz': 'https://www.balanz.com',
+  'schroder': 'https://www.schroders.com/es-ar/',
+  'galileo': 'https://www.galileoargentina.com.ar',
+  'sbs': 'https://www.sbsfondos.com',
+  'delta': 'https://www.deltaam.com.ar',
+  'consultatio': 'https://www.consultatio.com.ar',
+  'pellegrini': 'https://www.pellegrini.com.ar',
+  'superfondo': 'https://www.superfondos.com.ar',
+  'pionero': 'https://www.pionerofondos.com',
+};
 
 /* rendData se llena desde la API; fallback a vacío */
 const rendData = { plazoFijo: [], billeteras: [], cauciones: [], fci: [] };
@@ -451,14 +463,18 @@ async function loadRates() {
     // Billeteras: no están en la API (son FCI money market). Estimar con tasa promedio de plazo fijo.
     const avgTna = rendData.plazoFijo.reduce((s, p) => s + p.tna, 0) / (rendData.plazoFijo.length || 1);
     rendData.billeteras = [
-      { nombre: 'Mercado Pago', tna: +(avgTna * 1.05).toFixed(1), url: 'https://www.mercadopago.com.ar', logo: '' },
-      { nombre: 'Ualá', tna: +(avgTna * 1.02).toFixed(1), url: 'https://www.uala.com.ar', logo: '' },
-      { nombre: 'Naranja X', tna: +(avgTna * 1.07).toFixed(1), url: 'https://www.naranjax.com', logo: '' },
-      { nombre: 'Personal Pay', tna: +(avgTna * 1.10).toFixed(1), url: 'https://www.personalpay.com.ar', logo: '' },
-      { nombre: 'Prex', tna: +(avgTna * 0.97).toFixed(1), url: 'https://www.prexcard.com', logo: '' },
-      { nombre: 'Lemon Cash', tna: +(avgTna * 0.85).toFixed(1), url: 'https://www.lemon.me', logo: '' },
-      { nombre: 'Belo', tna: +(avgTna * 0.82).toFixed(1), url: 'https://www.belo.app', logo: '' },
-      { nombre: 'Claro Pay', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.claropay.com.ar', logo: '' },
+      { nombre: 'Mercado Pago', tna: +(avgTna * 1.05).toFixed(1), url: 'https://www.mercadopago.com.ar', logo: '', limite: 'Hasta $1.000.000' },
+      { nombre: 'Ualá', tna: +(avgTna * 1.02).toFixed(1), url: 'https://www.uala.com.ar', logo: '', limite: 'Sin tope' },
+      { nombre: 'Naranja X', tna: +(avgTna * 1.07).toFixed(1), url: 'https://www.naranjax.com', logo: '', limite: 'Hasta $500.000' },
+      { nombre: 'Personal Pay', tna: +(avgTna * 1.10).toFixed(1), url: 'https://www.personalpay.com.ar', logo: '', limite: 'Hasta $500.000' },
+      { nombre: 'Prex', tna: +(avgTna * 0.97).toFixed(1), url: 'https://www.prexcard.com', logo: '', limite: 'Sin tope' },
+      { nombre: 'Lemon Cash', tna: +(avgTna * 0.85).toFixed(1), url: 'https://www.lemon.me', logo: '', limite: 'Sin tope' },
+      { nombre: 'Belo', tna: +(avgTna * 0.82).toFixed(1), url: 'https://www.belo.app', logo: '', limite: 'Sin tope' },
+      { nombre: 'Claro Pay', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.claropay.com.ar', logo: '', limite: 'Sin tope' },
+      { nombre: 'Carrefour Pay', tna: +(avgTna * 0.95).toFixed(1), url: 'https://www.micarrefour.com.ar', logo: '', limite: 'Hasta $200.000' },
+      { nombre: 'Cuenta DNI', tna: +(avgTna * 0.90).toFixed(1), url: 'https://www.bancoprovincia.com.ar', logo: '', limite: 'Hasta $500.000' },
+      { nombre: 'MODO', tna: +(avgTna * 0.98).toFixed(1), url: 'https://www.modo.com.ar', logo: '', limite: 'Según banco' },
+      { nombre: 'Tap', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.tapfinanzas.com.ar', logo: '', limite: 'Sin tope' },
     ];
 
     // Cauciones: estimar basado en tasa promedio de plazo fijo
@@ -534,6 +550,7 @@ function renderBilleteras() {
   q('billRows').innerHTML = sorted.map((b, i) =>
     `<div class="rend-row">
       ${nameWithLink(b, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
+      <span class="rend-limite" style="font-size:.72rem;color:var(--muted)">${b.limite || '–'}</span>
       <span class="rend-tna">${b.tna.toFixed(1)}%</span>
       <span class="rend-tea">${tnaToTea(b.tna).toFixed(1)}%</span>
     </div>`
@@ -627,7 +644,10 @@ async function loadFCI() {
       if (tna <= 0 || tna > 80) return; // filtrar anomalías y valores extremos
       const n = f.fondo.toLowerCase();
       if (n.includes('usd') || n.includes('dolar') || n.includes('dólar') || n.includes('dollar')) return; // solo pesos
-      fondos.push({ nombre: f.fondo, tna, url: '', patrimonio: f.patrimonio || 0 });
+      // Buscar URL del fondo por nombre parcial
+      const nl = f.fondo.toLowerCase();
+      const fciUrl = Object.entries(FCI_URLS).find(([k]) => nl.includes(k));
+      fondos.push({ nombre: f.fondo, tna, url: fciUrl ? fciUrl[1] : '', patrimonio: f.patrimonio || 0 });
     });
 
     if (!fondos.length) return;
@@ -668,13 +688,25 @@ async function loadCryptoYields() {
     const data = await fetchJSON('https://api.argentinadatos.com/v1/finanzas/rendimientos');
     if (!Array.isArray(data)) return;
 
+    const CRYPTO_URLS = {
+      fiwind: 'https://www.fiwind.io',
+      letsbit: 'https://www.letsbit.io',
+      belo: 'https://www.belo.app',
+      lemoncash: 'https://www.lemon.me',
+      ripio: 'https://www.ripio.com',
+      satoshitango: 'https://www.satoshitango.com',
+      nexo: 'https://www.nexo.com',
+      decrypto: 'https://www.decrypto.la',
+      astropay: 'https://www.astropay.com',
+      lucamoney: 'https://www.lucamoney.com',
+    };
     const yields = [];
     data.forEach(e => {
       if (!e.entidad || !Array.isArray(e.rendimientos)) return;
       const ars = e.rendimientos.find(r => r.moneda === 'ARS');
       if (!ars || !ars.apy) return;
       const name = e.entidad.charAt(0).toUpperCase() + e.entidad.slice(1);
-      yields.push({ nombre: name, tna: +ars.apy.toFixed(1), url: '', logo: '' });
+      yields.push({ nombre: name, tna: +ars.apy.toFixed(1), url: CRYPTO_URLS[e.entidad] || '', logo: '', limite: '' });
     });
 
     // Actualizar billeteras con datos reales de cripto wallets donde coincidan
