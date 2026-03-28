@@ -756,8 +756,10 @@
 const q = id => document.getElementById(id);
 
 /* ── Sparkline SVG ── */
+let _sparkUID = 0;
 function sparklineSVG(values, w=90, h=32) {
   if (!values || values.length < 2) return '';
+  const uid = 'sg-' + (++_sparkUID);
   const min = Math.min(...values), max = Math.max(...values);
   const range = max - min || 1;
   const pts = values.map((v, i) => {
@@ -771,7 +773,7 @@ function sparklineSVG(values, w=90, h=32) {
   const last = values[values.length - 1];
   const ly = h - 2 - ((last - min) / range) * (h - 4);
   return `<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}" style="display:block">
-    <defs><linearGradient id="sg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".2"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
+    <defs><linearGradient id="${uid}" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="${color}" stop-opacity=".2"/><stop offset="100%" stop-color="${color}" stop-opacity="0"/></linearGradient></defs>
     <polygon points="0,${h} ${pts} ${w},${h}" fill="${fill}"/>
     <polyline fill="none" stroke="${color}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/>
     <circle cx="${w}" cy="${ly.toFixed(1)}" r="2.5" fill="${color}"/>
@@ -874,7 +876,6 @@ function calcAll(from) {
 
 /* ── Formatters ── */
 function fmtARS(n){if(n==null)return'–';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
-function fmtM(n){if(n==null)return'–';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function relTime(s){if(!s)return'';const d=Math.floor((Date.now()-new Date(s))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
 function ago(ts){if(!ts)return'';const d=Math.floor((Date.now()-ts*1000)/60000);if(d<2)return'ahora';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
 
@@ -1011,8 +1012,10 @@ function renderCompTable(tableId, loadingId, rows) {
   const ldr = q(loadingId);
   if (!rows || !rows.length) { if(ldr)ldr.style.display='none'; return; }
 
-  // Filtrar outliers (precios razonables entre 500 y 5000 ARS por USD)
-  const sorted = [...rows].filter(r=>r.ask>500 && r.ask<5000).sort((a,b)=>a.ask-b.ask);
+  // Filtrar outliers dinámicamente basado en mediana
+  const asks = rows.filter(r=>r.ask>0).map(r=>r.ask).sort((a,b)=>a-b);
+  const median = asks.length ? asks[Math.floor(asks.length/2)] : 0;
+  const sorted = [...rows].filter(r=>r.ask>median*0.5 && r.ask<median*1.5).sort((a,b)=>a.ask-b.ask);
   if(!sorted.length){if(ldr)ldr.style.display='none';return;}
 
   const bestAsk = sorted[0].ask;
@@ -1289,21 +1292,10 @@ async function buscarFecha(){
   d.value=yesterday.toISOString().split('T')[0];
 })();
 
-/* ── Refresh ── */
-async function refreshAll(){
-  await Promise.allSettled([
-    fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
-      if(!data)return;
-      // Guardar tasas para el convertidor
-      currentDollarData = data;
-      calcAll('refresh');
-      renderDollars(data);
-      const blue=data.find(d=>d.casa==='blue');
-      if(blue)loadBlueBySource(blue).catch(()=>{});
-      const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
-      if(q('tickerTrack')) q('tickerTrack').innerHTML=tick+tick;
-    }).catch(()=>{}),
-    ...((['blue','bolsa','contadoconliqui','oficial','cripto','mayorista']).map(tipo =>
+/* ── Load historical data ONCE ── */
+async function loadHistorical(){
+  await Promise.allSettled(
+    ['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].map(tipo =>
       fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(data => {
         if (Array.isArray(data) && data.length) {
           allHistory[tipo] = data;
@@ -1319,7 +1311,37 @@ async function refreshAll(){
           }
         }
       }).catch(() => {})
-    )),
+    )
+  );
+  drawChart(currentRange);
+  // Render daily % changes now that allHistory is populated
+  renderAllDailyChanges();
+}
+
+function renderAllDailyChanges(){
+  ['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].forEach(tipo => {
+    const hist = allHistory[tipo];
+    if (!hist || hist.length < 2) return;
+    const current = hist[hist.length - 1]?.venta;
+    const chgIds = {blue:'blueChg', bolsa:'mepChg', contadoconliqui:'cclChg', oficial:'oficialChg', cripto:'criptoChg', mayorista:'mayoristaChg'};
+    if (chgIds[tipo] && current) renderMiniChg(chgIds[tipo], tipo, current);
+  });
+}
+
+/* ── Refresh (live prices only) ── */
+async function refreshAll(){
+  await Promise.allSettled([
+    fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
+      if(!data)return;
+      // Guardar tasas para el convertidor
+      currentDollarData = data;
+      calcAll('refresh');
+      renderDollars(data);
+      const blue=data.find(d=>d.casa==='blue');
+      if(blue)loadBlueBySource(blue).catch(()=>{});
+      const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
+      if(q('tickerTrack')) q('tickerTrack').innerHTML=tick+tick;
+    }).catch(()=>{}),
     // Cripto por exchange (carga directa, sin acordeón)
     fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(data=>{
       if(data) renderExchTable('usdt-table','usdt-loading',data);
@@ -1339,16 +1361,8 @@ async function refreshAll(){
       renderCompTable('comp-brokers-table','comp-brokers-loading',brokers);
     }).catch(()=>{}),
   ]);
-  // Draw chart after all data loaded
-  drawChart(currentRange);
-  // Re-render daily % changes now that allHistory is populated
-  ['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].forEach(tipo => {
-    const hist = allHistory[tipo];
-    if (!hist || hist.length < 2) return;
-    const current = hist[hist.length - 1]?.venta;
-    const chgIds = {blue:'blueChg', bolsa:'mepChg', contadoconliqui:'cclChg', oficial:'oficialChg', cripto:'criptoChg', mayorista:'mayoristaChg'};
-    if (chgIds[tipo] && current) renderMiniChg(chgIds[tipo], tipo, current);
-  });
+  // Re-render daily % changes using cached historical data
+  renderAllDailyChanges();
 }
 
 /* Scroll spy */
@@ -1361,16 +1375,17 @@ function initScrollSpy(){
 }
 
 refreshAll();
+loadHistorical();
 initScrollSpy();
 
-// Refresh cada 30s para dólares (datos más importantes)
-let refreshCountdown = 30;
+// Refresh cada 90s para precios en vivo
+let refreshCountdown = 90;
 function tickRefresh() {
   refreshCountdown--;
   const cd = q('countdown');
   if (cd) cd.textContent = `Actualiza en ${refreshCountdown}s`;
   if (refreshCountdown <= 0) {
-    refreshCountdown = 30;
+    refreshCountdown = 90;
     refreshAll();
   }
 }
@@ -1395,7 +1410,7 @@ function toggleTheme(){
 function triggerRefresh(){
   const btn=q('refreshBtn');
   if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
-  refreshCountdown=30;
+  refreshCountdown=90;
   refreshAll();
 }
 

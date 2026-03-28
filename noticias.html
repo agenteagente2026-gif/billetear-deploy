@@ -148,13 +148,6 @@
 <h1 class="sr-only">Noticias económicas de Argentina hoy</h1>
   <div class="section">
     <div class="sec-header"><h2 class="sec-title">Últimas noticias</h2><div class="sec-line"></div></div>
-    <div style="display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap">
-      <button class="chart-tab active" onclick="filterNews('all',this)">Todas</button>
-      <button class="chart-tab" onclick="filterNews('AR',this)">Argentina</button>
-      <button class="chart-tab" onclick="filterNews('MUNDO',this)">Mundo</button>
-      <button class="chart-tab" onclick="filterNews('MERCADOS',this)">Mercados</button>
-    </div>
-
     <div class="sources-bar" id="sourcesBar">
       <strong>Fuentes:</strong>
       <span><span class="src-dot loading" id="dot1"></span> Google News AR</span>
@@ -417,7 +410,7 @@ async function loadNews(manual = false) {
   const seen = new Set();
   allNews = flat
     .filter(i => {
-      const key = i.title.slice(0, 60);
+      const key = i.title.toLowerCase().slice(0, 60);
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
@@ -442,19 +435,6 @@ async function loadNews(manual = false) {
     const html = data.map(d => `<span class="t-item"><span class="t-name">USD ${d.nombre}</span><span class="t-price neu">$\u202f${Number(d.venta).toLocaleString('es-AR')}</span></span>`).join('');
     q('tickerTrack').innerHTML = html + html;
   }).catch(() => {});
-}
-
-let currentFilter = 'all';
-function filterNews(tag, btn) {
-  currentFilter = tag;
-  document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const cards = document.querySelectorAll('.news-card, .featured-card');
-  cards.forEach(c => {
-    if (tag === 'all') { c.style.display = ''; return; }
-    const cardTag = c.dataset.tag || '';
-    c.style.display = cardTag === tag ? '' : 'none';
-  });
 }
 
 loadNews();

@@ -357,9 +357,11 @@ const q=id=>document.getElementById(id);
 
 function marketStatus(){
   const now=new Date();
-  const utcH=now.getUTCHours(),utcM=now.getUTCMinutes(),day=now.getUTCDay();
-  const totalMin=utcH*60+utcM;
-  return day>=1&&day<=5&&totalMin>=810&&totalMin<1260;
+  const et=new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
+  const day=et.getDay();
+  if(day===0||day===6)return false;
+  const mins=et.getHours()*60+et.getMinutes();
+  return mins>=570&&mins<960; // 9:30 AM – 4:00 PM ET
 }
 
 function renderMarketBanner(){

@@ -259,6 +259,7 @@
 
 <script>
 const q=id=>document.getElementById(id);
+function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function fmtUSD(n){if(n==null)return'–';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});if(n>=1)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:4,maximumFractionDigits:4});}
 function fmtMktCap(n){if(!n)return'–';if(n>=1e12)return'US$'+(n/1e12).toFixed(2)+'T';if(n>=1e9)return'US$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'US$'+(n/1e6).toFixed(0)+'M';return'–';}
 function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d} min`;return`hace ${Math.floor(d/60)}h`;}
@@ -305,9 +306,9 @@ function renderTop(data){
     const sym=c.symbol.toLowerCase();
     const desc=cryptoDescriptions[sym]||defaultDesc;
     const exLinks=exchanges.map(e=>`<a href="${e.url}" target="_blank" rel="noopener noreferrer">${e.name} ↗</a>`).join('');
-    return`<div class="top-coin" data-symbol="${c.symbol}">
+    return`<div class="top-coin" data-symbol="${escHTML(c.symbol)}">
       <span class="tc-expand-icon">▼</span>
-      <div class="tc-head"><img class="tc-img" src="${c.image}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'"><div><div class="tc-symbol">${c.symbol}</div><div class="tc-name">${c.name}</div></div></div>
+      <div class="tc-head"><img class="tc-img" src="${escHTML(c.image)}" alt="${escHTML(c.symbol)}" loading="lazy" onerror="this.style.display='none'"><div><div class="tc-symbol">${escHTML(c.symbol)}</div><div class="tc-name">${escHTML(c.name)}</div></div></div>
       <div class="tc-price">${fmtUSD(c.current_price)}</div>
       <div class="tc-change ${pct>=0?'pos':'neg'}">${pct>=0?'▲':'▼'} ${Math.abs(pct).toFixed(2)}%</div>
       <div class="tc-mktcap">Cap. mercado: ${fmtMktCap(c.market_cap)}</div>
@@ -319,8 +320,8 @@ function renderTop(data){
 function renderTable(data){
   const rows=data.slice(0,20).map(c=>{
     const pct=c.price_change_percentage_24h||0;
-    return`<div class="ct-row" data-symbol="${c.symbol}">
-      <div class="ct-coin"><img class="ct-img" src="${c.image}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'"><div><div class="ct-cname">${c.name}</div><div class="ct-csym">${c.symbol}</div></div><span class="ct-expand-icon">▼</span></div>
+    return`<div class="ct-row" data-symbol="${escHTML(c.symbol)}">
+      <div class="ct-coin"><img class="ct-img" src="${escHTML(c.image)}" alt="${escHTML(c.symbol)}" loading="lazy" onerror="this.style.display='none'"><div><div class="ct-cname">${escHTML(c.name)}</div><div class="ct-csym">${escHTML(c.symbol)}</div></div><span class="ct-expand-icon">▼</span></div>
       <div class="ct-val">${fmtUSD(c.current_price)}</div>
       <div class="ct-chg ${pct>=0?'pos':'neg'}">${pct>=0?'▲':'▼'} ${Math.abs(pct).toFixed(2)}%</div>
       <div class="ct-mkt">${fmtMktCap(c.market_cap)}</div>
@@ -338,7 +339,7 @@ function renderGainersLosers(data){
     const pct=c.price_change_percentage_24h||0;
     const cls=pct>=0?'pos':'neg';
     return`<div class="gl-row">
-      <div class="gl-coin"><img class="gl-img" src="${c.image}" alt="${c.symbol}" loading="lazy" onerror="this.style.display='none'"><div><div class="gl-cname">${c.name}</div><div class="gl-csym">${c.symbol}</div></div></div>
+      <div class="gl-coin"><img class="gl-img" src="${escHTML(c.image)}" alt="${escHTML(c.symbol)}" loading="lazy" onerror="this.style.display='none'"><div><div class="gl-cname">${escHTML(c.name)}</div><div class="gl-csym">${escHTML(c.symbol)}</div></div></div>
       <div class="gl-right"><div class="gl-pct ${cls}">${pct>=0?'▲':'▼'} ${Math.abs(pct).toFixed(2)}%</div><div class="gl-price">${fmtUSD(c.current_price)}</div></div>
     </div>`;
   };
@@ -354,7 +355,7 @@ async function refreshAll(){
     renderTable(data);
     renderGainersLosers(data);
     q('lastUpdate').textContent='En vivo · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
-    const tickerHtml=data.slice(0,15).map(c=>{const pct=c.price_change_percentage_24h||0;return`<span class="t-item"><span class="t-name">${c.symbol.toUpperCase()}</span><span class="t-price ${pct>=0?'up':'down'}">${fmtUSD(c.current_price)}</span></span>`;}).join('');
+    const tickerHtml=data.slice(0,15).map(c=>{const pct=c.price_change_percentage_24h||0;return`<span class="t-item"><span class="t-name">${escHTML(c.symbol.toUpperCase())}</span><span class="t-price ${pct>=0?'up':'down'}">${fmtUSD(c.current_price)}</span></span>`;}).join('');
     q('tickerTrack').innerHTML=tickerHtml+tickerHtml;
   }catch(e){q('lastUpdate').textContent='Error al cargar datos';}
 }
