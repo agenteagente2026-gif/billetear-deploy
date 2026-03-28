@@ -513,7 +513,7 @@ function renderPlazoFijo() {
    RENDER: Plazo Fijo UVA
    ============================================================ */
 function renderUVA() {
-  const sorted = [...rendData.plazoFijoUVA].sort((a, b) => b.tna - a.tna);
+  const sorted = [...UVA_SPREAD].sort((a, b) => b.tna - a.tna);
   q('uvaRows').innerHTML = sorted.map((p, i) =>
     `<div class="explain-entry">
       ${nameWithLink(p, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
