@@ -28,6 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
+    /* AdSense: add .ad-slot{margin:2rem auto;max-width:728px} when activating ads */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--purple:#a78bfa}
     html{scroll-behavior:smooth}
@@ -196,6 +197,32 @@
     .faq-item[open] .faq-q::after{content:'−'}
     .faq-a{padding:0 1.2rem 1rem;color:var(--muted);font-size:.88rem;line-height:1.7}
     body.light .faq-item{background:var(--card);border-color:var(--border)}
+
+    /* ── Calculadora Inflación ── */
+    .infla-calc{max-width:600px}
+    .infla-desc{color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;line-height:1.6}
+    .infla-inputs{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .infla-field{flex:1;min-width:200px}
+    .infla-field label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;font-weight:600}
+    .infla-input{width:100%;padding:.7rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:1rem;font-family:inherit}
+    .infla-input:focus{outline:none;border-color:var(--sky)}
+    .infla-result{margin-top:.5rem}
+    .infla-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+    .infla-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem;text-align:center}
+    .infla-card.loss{border-color:var(--red)}
+    .infla-card-label{font-size:.78rem;color:var(--muted);margin-bottom:.4rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+    .infla-card-val{font-size:1.5rem;font-weight:700;color:var(--text);font-family:'DM Serif Display',serif}
+    .infla-card.loss .infla-card-val{color:var(--red)}
+    .infla-card-sub{font-size:.78rem;color:var(--muted);margin-top:.3rem}
+    .infla-bar-wrap{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem}
+    .infla-bar-label{font-size:.78rem;color:var(--muted);margin-bottom:.6rem;font-weight:600}
+    .infla-bar-bg{height:24px;background:rgba(239,68,68,.15);border-radius:12px;overflow:hidden}
+    .infla-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--sky));border-radius:12px;transition:width .5s ease}
+    .infla-bar-pct{text-align:right;font-size:.85rem;font-weight:700;color:var(--text);margin-top:.4rem}
+    body.light .infla-input{background:#fff;border-color:#d1d5db;color:#1f2937}
+    body.light .infla-card{background:#fff;border-color:#e5e7eb}
+    body.light .infla-bar-wrap{background:#fff;border-color:#e5e7eb}
+    @media(max-width:640px){.infla-cards{grid-template-columns:1fr}}
   </style>
 <script type="application/ld+json">
 {
@@ -386,6 +413,19 @@
     </div>
   </div>
 
+  <!-- AdSense: uncomment when approved -->
+  <!--
+  <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="XXXXXXXXXX"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  -->
+
   <!-- Glosario / info -->
   <div class="section" style="animation-delay:.17s">
     <div class="sec-header"><h2 class="sec-title">Guía de indicadores</h2><div class="sec-line"></div></div>
@@ -409,6 +449,51 @@
     </div>
   </div>
 
+  <div class="section" id="calculadora-inflacion">
+    <div class="sec-header"><h2 class="sec-title">Cuánto perdió tu plata</h2><div class="sec-line"></div></div>
+    <div class="infla-calc">
+      <p class="infla-desc">Ingresá un monto y mirá cuánto poder de compra perdiste por la inflación.</p>
+      <div class="infla-inputs">
+        <div class="infla-field">
+          <label>Monto en pesos</label>
+          <input id="inflaAmount" type="text" inputmode="numeric" value="1.000.000" class="infla-input" oninput="formatInflaInput(this);calcInflation()">
+        </div>
+        <div class="infla-field">
+          <label>Período</label>
+          <select id="inflaPeriod" class="infla-input" onchange="calcInflation()">
+            <option value="1">Hace 1 mes</option>
+            <option value="3">Hace 3 meses</option>
+            <option value="6" selected>Hace 6 meses</option>
+            <option value="12">Hace 1 año</option>
+            <option value="24">Hace 2 años</option>
+            <option value="60">Hace 5 años</option>
+          </select>
+        </div>
+      </div>
+      <div id="inflaResult" class="infla-result" style="display:none">
+        <div class="infla-cards">
+          <div class="infla-card">
+            <div class="infla-card-label">Tu plata hoy equivale a</div>
+            <div class="infla-card-val" id="inflaEquiv">--</div>
+            <div class="infla-card-sub">en poder de compra de hace <span id="inflaPeriodText">6 meses</span></div>
+          </div>
+          <div class="infla-card loss">
+            <div class="infla-card-label">Perdiste</div>
+            <div class="infla-card-val" id="inflaLoss">--</div>
+            <div class="infla-card-sub" id="inflaLossPct">--</div>
+          </div>
+        </div>
+        <div class="infla-bar-wrap">
+          <div class="infla-bar-label">Poder de compra restante</div>
+          <div class="infla-bar-bg">
+            <div class="infla-bar-fill" id="inflaBar" style="width:100%"></div>
+          </div>
+          <div class="infla-bar-pct" id="inflaBarPct">100%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="section" id="faq">
     <div class="sec-header"><h2 class="sec-title">Preguntas frecuentes</h2><div class="sec-line"></div></div>
     <div class="faq-list">
@@ -426,6 +511,19 @@
       </details>
     </div>
   </div>
+
+  <!-- AdSense: uncomment when approved -->
+  <!--
+  <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="XXXXXXXXXX"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  -->
 
 </main>
 
@@ -470,6 +568,7 @@ async function fetchJSON(url){
 // ── Chart helpers ──────────────────────────────────────────
 let inflaChart=null, riesgoChart=null, blueChart=null;
 let allInflaData=[], allRiesgoData=[], allBlueData=[];
+let inflaData=[];
 let inflaCurRange=18, riesgoCurRange=365, blueCurRange=180;
 
 function sliceByDays(data,days){
@@ -552,6 +651,51 @@ function setBlueRange(days){
   if(allBlueData.length)drawBlueChart(sliceByDays(allBlueData,days));
 }
 
+// ── Calculadora de inflación ─────────────────────────────
+function formatInflaInput(el) {
+  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
+  if (!raw) { el.value = ''; return; }
+  el.value = Number(raw).toLocaleString('es-AR');
+}
+
+function calcInflation() {
+  const amount = parseFloat((q('inflaAmount')?.value || '').replace(/\./g, '')) || 0;
+  const months = parseInt(q('inflaPeriod')?.value) || 6;
+
+  if (!amount || !inflaData.length) {
+    q('inflaResult').style.display = 'none';
+    return;
+  }
+
+  // Get last N months of inflation data
+  const recent = inflaData.slice(-months);
+  if (!recent.length) {
+    q('inflaResult').style.display = 'none';
+    return;
+  }
+
+  // Calculate accumulated inflation for the period
+  let accumulated = 1;
+  recent.forEach(m => { accumulated *= (1 + m.valor / 100); });
+
+  // What the original amount is worth now (less purchasing power)
+  const equivalent = amount / accumulated;
+  const loss = amount - equivalent;
+  const lossPct = ((1 - 1/accumulated) * 100);
+  const remaining = (1/accumulated) * 100;
+
+  // Period text
+  const periodTexts = {'1':'1 mes','3':'3 meses','6':'6 meses','12':'1 año','24':'2 años','60':'5 años'};
+
+  q('inflaEquiv').textContent = '$\u202f' + Math.round(equivalent).toLocaleString('es-AR');
+  q('inflaLoss').textContent = '-$\u202f' + Math.round(loss).toLocaleString('es-AR');
+  q('inflaLossPct').textContent = '-' + lossPct.toFixed(1) + '% de poder de compra';
+  q('inflaPeriodText').textContent = periodTexts[months] || months + ' meses';
+  q('inflaBar').style.width = Math.max(remaining, 2) + '%';
+  q('inflaBarPct').textContent = remaining.toFixed(1) + '%';
+  q('inflaResult').style.display = 'block';
+}
+
 // ── Loaders ──────────────────────────────────────────────
 async function loadInflacion(){
   const data=await fetchJSON('https://api.argentinadatos.com/v1/finanzas/indices/inflacion');
@@ -597,6 +741,8 @@ async function loadInflacion(){
 
   q('inflaTable').innerHTML=`<div class="it-header"><div>Mes</div><div>Variación</div><div>Acum. año</div></div>`+rows;
   drawInflaChart(data);
+  inflaData=data;
+  calcInflation();
 }
 
 async function loadRiesgoPais(){

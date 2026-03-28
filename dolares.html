@@ -28,6 +28,7 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
+    /* AdSense: add .ad-slot{margin:2rem auto;max-width:728px} when activating ads */
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--purple:#a78bfa;--amber:#fbbf24}
     html{scroll-behavior:smooth}
@@ -361,6 +362,30 @@
     .faq-item[open] .faq-q::after{content:'−'}
     .faq-a{padding:0 1.2rem 1rem;color:var(--muted);font-size:.88rem;line-height:1.7}
     body.light .faq-item{background:var(--card);border-color:var(--border)}
+    .tm-wrap{max-width:700px}
+    .tm-desc{color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;line-height:1.6}
+    .tm-inputs{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
+    .tm-field{flex:1;min-width:180px}
+    .tm-field label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;font-weight:600}
+    .tm-input{width:100%;padding:.7rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:1rem;font-family:inherit}
+    .tm-input:focus{outline:none;border-color:var(--sky)}
+    .tm-result{margin-top:.5rem}
+    .tm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
+    .tm-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem;text-align:center}
+    .tm-card-icon{font-size:1.5rem;margin-bottom:.4rem}
+    .tm-card-label{font-size:.72rem;color:var(--muted);margin-bottom:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+    .tm-card-val{font-size:1.3rem;font-weight:700;color:var(--text);font-family:'DM Serif Display',serif}
+    .tm-card.result .tm-card-val{color:var(--green)}
+    .tm-card.result.negative .tm-card-val{color:var(--red)}
+    .tm-card-sub{font-size:.75rem;color:var(--muted);margin-top:.3rem}
+    .tm-versus{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem;text-align:center}
+    .tm-vs-text{font-size:.85rem;color:var(--muted);margin-bottom:.3rem}
+    .tm-vs-val{font-size:1.3rem;font-weight:700;color:var(--muted);font-family:'DM Serif Display',serif;text-decoration:line-through;opacity:.7}
+    .tm-vs-sub{font-size:.72rem;color:var(--muted2);margin-top:.2rem}
+    body.light .tm-input{background:#fff;border-color:#d1d5db;color:#1f2937}
+    body.light .tm-card{background:#fff;border-color:#e5e7eb}
+    body.light .tm-versus{background:#fff;border-color:#e5e7eb}
+    @media(max-width:640px){.tm-cards{grid-template-columns:1fr}}
   </style>
 <script type="application/ld+json">
 {
@@ -466,6 +491,7 @@
     <a class="subnav-link" href="#tv-mep">MEP en vivo</a>
     <a class="subnav-link" href="#fecha">Por fecha</a>
     <a class="subnav-link" href="#mi-sueldo">Mi sueldo</a>
+    <a class="subnav-link" href="#maquina-del-tiempo">Máquina del Tiempo</a>
   </div>
 </nav>
 
@@ -512,6 +538,19 @@
     </div>
   </div>
 
+
+  <!-- AdSense: uncomment when approved -->
+  <!--
+  <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="XXXXXXXXXX"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  -->
 
   <!-- ── CRIPTO POR EXCHANGE ── -->
   <div class="section" id="cripto-detail" style="animation-delay:.11s">
@@ -630,6 +669,19 @@
     </div>
   </div>
 
+  <!-- AdSense: uncomment when approved -->
+  <!--
+  <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-slot="XXXXXXXXXX"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+  -->
+
   <!-- ── Consulta por fecha ── -->
   <div class="section" id="fecha" style="animation-delay:.19s">
     <div class="sec-header"><h2 class="sec-title">Consulta por fecha</h2><div class="sec-line"></div></div>
@@ -668,6 +720,51 @@
       <div class="sueldo-history" id="sueldoHistory" style="display:none">
         <div class="sueldo-history-title">Tu sueldo en USD Blue — últimos 12 meses</div>
         <div class="sh-chart-wrap"><canvas id="sueldoChart"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Máquina del Tiempo -->
+  <div class="section" id="maquina-del-tiempo">
+    <div class="sec-header"><h2 class="sec-title">Máquina del Tiempo</h2><div class="sec-line"></div></div>
+    <div class="tm-wrap">
+      <p class="tm-desc">¿Y si hubieras comprado dólares blue ese día? Ingresá una fecha y un monto para ver cuánto tendrías hoy.</p>
+      <div class="tm-inputs">
+        <div class="tm-field">
+          <label>Fecha</label>
+          <input id="tmDate" type="date" class="tm-input" max="" onchange="calcTimeMachine()">
+        </div>
+        <div class="tm-field">
+          <label>Tenías en pesos</label>
+          <input id="tmAmount" type="text" inputmode="numeric" value="1.000.000" class="tm-input" oninput="formatTmInput(this);calcTimeMachine()">
+        </div>
+      </div>
+      <div id="tmResult" class="tm-result" style="display:none">
+        <div class="tm-cards">
+          <div class="tm-card bought">
+            <div class="tm-card-icon">💵</div>
+            <div class="tm-card-label">Comprabas</div>
+            <div class="tm-card-val" id="tmDollars">--</div>
+            <div class="tm-card-sub" id="tmRateOld">--</div>
+          </div>
+          <div class="tm-card today">
+            <div class="tm-card-icon">📈</div>
+            <div class="tm-card-label">Hoy esos dólares valen</div>
+            <div class="tm-card-val" id="tmToday">--</div>
+            <div class="tm-card-sub" id="tmRateNow">--</div>
+          </div>
+          <div class="tm-card result" id="tmResultCard">
+            <div class="tm-card-icon" id="tmResultIcon">🚀</div>
+            <div class="tm-card-label" id="tmResultLabel">Ganancia</div>
+            <div class="tm-card-val" id="tmProfit">--</div>
+            <div class="tm-card-sub" id="tmProfitPct">--</div>
+          </div>
+        </div>
+        <div class="tm-versus">
+          <div class="tm-vs-text">Si lo dejabas en pesos, hoy seguirías teniendo</div>
+          <div class="tm-vs-val" id="tmPesos">--</div>
+          <div class="tm-vs-sub">(mismo monto, sin rendimiento)</div>
+        </div>
       </div>
     </div>
   </div>
@@ -1511,6 +1608,95 @@ renderDollars = function(data){
   _origRenderDollars(data);
   if(q('sueldoInput')?.value) calcSueldo();
 };
+
+// ── Máquina del Tiempo ──
+function formatTmInput(el) {
+  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
+  if (!raw) { el.value = ''; return; }
+  el.value = Number(raw).toLocaleString('es-AR');
+}
+
+(function initTimeMachine() {
+  const d = new Date();
+  d.setDate(d.getDate() - 1);
+  const max = d.toISOString().split('T')[0];
+  if (q('tmDate')) {
+    q('tmDate').max = max;
+    const ago = new Date();
+    ago.setFullYear(ago.getFullYear() - 1);
+    q('tmDate').value = ago.toISOString().split('T')[0];
+  }
+})();
+
+async function calcTimeMachine() {
+  const dateStr = q('tmDate')?.value;
+  const amount = parseFloat((q('tmAmount')?.value || '').replace(/\./g, '')) || 0;
+
+  if (!dateStr || !amount) {
+    q('tmResult').style.display = 'none';
+    return;
+  }
+
+  try {
+    const historical = await fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/blue/' + dateStr);
+
+    let oldRate = null;
+    if (historical && historical.venta) {
+      oldRate = historical;
+    } else if (Array.isArray(historical)) {
+      oldRate = historical[historical.length - 1];
+    }
+
+    if (!oldRate || !oldRate.venta) {
+      q('tmResult').style.display = 'none';
+      return;
+    }
+
+    let currentBlue = null;
+    if (typeof currentDollarData !== 'undefined' && currentDollarData.length) {
+      currentBlue = currentDollarData.find(d => d.casa === 'blue');
+    }
+    if (!currentBlue) {
+      const fresh = await fetchJSON('https://dolarapi.com/v1/dolares/blue');
+      currentBlue = fresh;
+    }
+
+    if (!currentBlue || !currentBlue.venta) {
+      q('tmResult').style.display = 'none';
+      return;
+    }
+
+    const dollarsYouBought = amount / oldRate.venta;
+    const todayValue = dollarsYouBought * currentBlue.venta;
+    const profit = todayValue - amount;
+    const profitPct = ((todayValue / amount) - 1) * 100;
+    const isPositive = profit >= 0;
+
+    const dateDisplay = new Date(dateStr + 'T12:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+    q('tmDollars').textContent = 'US$ ' + dollarsYouBought.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+    q('tmRateOld').textContent = 'Blue a $' + oldRate.venta.toLocaleString('es-AR') + ' el ' + dateDisplay;
+    q('tmToday').textContent = '$\u202f' + Math.round(todayValue).toLocaleString('es-AR');
+    q('tmRateNow').textContent = 'Blue hoy: $' + currentBlue.venta.toLocaleString('es-AR');
+    q('tmProfit').textContent = (isPositive ? '+' : '-') + '$\u202f' + Math.abs(Math.round(profit)).toLocaleString('es-AR');
+    q('tmProfitPct').textContent = (isPositive ? '+' : '') + profitPct.toFixed(1) + '%';
+    q('tmResultLabel').textContent = isPositive ? 'Ganancia' : 'Pérdida';
+    q('tmResultIcon').textContent = isPositive ? '🚀' : '📉';
+    q('tmPesos').textContent = '$\u202f' + Math.round(amount).toLocaleString('es-AR');
+
+    const resultCard = q('tmResultCard');
+    if (isPositive) {
+      resultCard.classList.remove('negative');
+    } else {
+      resultCard.classList.add('negative');
+    }
+
+    q('tmResult').style.display = 'block';
+  } catch (e) {
+    console.error('Time machine error:', e);
+    q('tmResult').style.display = 'none';
+  }
+}
 
 // PWA: register service worker
 if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
