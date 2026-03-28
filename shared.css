@@ -95,12 +95,12 @@ footer{border-top:1px solid var(--border);margin-top:3rem}
 @media(max-width:640px){footer>div:first-child{grid-template-columns:1fr !important}}
 
 /* ── Bottom nav (mobile) ── */
-@media(max-width:640px){.header-nav{display:none}.bottom-nav{display:block}main{padding-bottom:5rem}}
 .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:rgba(17,24,39,.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);z-index:200;padding:0 0 env(safe-area-inset-bottom,0)}
 .bn-inner{display:flex;justify-content:space-around;align-items:stretch}
 .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
 .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
 .bn-icon{font-size:1.1rem;line-height:1}
+@media(max-width:640px){.header-nav{display:none}.bottom-nav{display:block}main{padding-bottom:5rem}}
 
 /* ── FAQ (shared across multiple pages) ── */
 .faq-list{max-width:720px}
