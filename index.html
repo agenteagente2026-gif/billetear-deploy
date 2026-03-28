@@ -26,14 +26,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8647898779857303" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="shared.css">
   <style>
     /* AdSense: add .ad-slot{margin:2rem auto;max-width:728px} when activating ads */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--accent:#38bdf8}
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
-    /* ── LIGHT MODE ── */
+    /* ── Light mode overrides (index palette differs from shared) ── */
     body.light{--bg:#f5f6fa;--bg2:#eef1f6;--card:#ffffff;--card2:#f8f9fc;--border:#d0d7e2;--border2:#bcc5d4;--text:#0f172a;--text2:#334155;--muted:#475569;--muted2:#64748b}
     body.light header{background:rgba(245,246,250,.98);border-bottom-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)}
     body.light .stats-bar{background:linear-gradient(90deg,#e8ecf4,#dfe4ef,#e8ecf4);border-bottom:1px solid var(--border)}
@@ -50,31 +48,6 @@
     body.light .news-card:hover{border-color:var(--border2);box-shadow:0 4px 12px rgba(0,0,0,.08)}
     body.light .refresh-btn{background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.25);color:#2563eb}
     body.light .refresh-btn:hover{background:rgba(37,99,235,.18);border-color:rgba(37,99,235,.4)}
-    body.light .theme-btn{background:rgba(255,200,0,.15);border-color:rgba(255,200,0,.3);color:#d97706}
-    body.light footer{border-top-color:var(--border);color:var(--muted)}
-    body.light .sec-line{background:linear-gradient(90deg,transparent,var(--border),#93a3b8,var(--border),transparent)}
-
-    /* ── Header ── */
-    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:62px;display:flex;align-items:center;justify-content:space-between}
-    .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-    .logo-favicon{width:28px;height:28px}
-    .logo-text{font-family:'DM Serif Display',serif;font-size:1.75rem;font-weight:400;color:#38bdf8;letter-spacing:-.5px;text-decoration:none}
-    .logo-text em{font-style:normal;color:#7dd3fc}
-    .header-nav{display:flex;align-items:center;gap:4px;margin-left:1.5rem}
-    .header-nav .topnav-link{padding:6px 12px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:8px;transition:all .2s}
-    .header-nav .topnav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
-    .header-nav .topnav-link.active{color:var(--sky);background:rgba(56,189,248,.08)}
-    .nav-right{display:flex;align-items:center;gap:14px}
-    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
-    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
-    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
-    .refresh-btn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--sky);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1}
-    .refresh-btn:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4)}
-    .theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
-    .theme-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-    .refresh-spinning{animation:spin .55s linear}
 
     /* ── Stats bar ── */
     .stats-bar{background:linear-gradient(90deg,rgba(10,22,40,.98),rgba(13,31,60,.98),rgba(10,22,40,.98));border-bottom:1px solid rgba(56,189,248,.12);padding:5px 0;overflow-x:auto;scrollbar-width:none;white-space:nowrap;position:sticky;top:62px;z-index:90}
@@ -84,15 +57,6 @@
     .sb-item:last-child{border-right:none}
     .sb-label{font-size:.65rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
     .sb-val{font-size:.76rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums;transition:color .3s}
-
-    /* ── Main ── */
-    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
-    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
-    .sec-title{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;color:var(--text);white-space:nowrap}
-    .sec-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--border2),var(--border),transparent);opacity:.5}
-    .section+.section::before{content:'';display:block;height:1px;margin:-1.2rem auto 2.5rem;max-width:200px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
 
     /* ── Dollar cards grid ── */
     .dolar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
@@ -112,7 +76,6 @@
     .dc-price{font-size:1rem;font-weight:700;color:var(--text2);font-variant-numeric:tabular-nums}
     .dc-sell{font-size:1.6rem;font-weight:800;color:#fff!important;font-variant-numeric:tabular-nums}
     .dc-skel{height:1.6rem;width:80px;border-radius:6px;background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
     /* ── Section link cards ── */
     .sec-links-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
@@ -133,37 +96,6 @@
     .nc-src{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
     .nc-title{font-size:.86rem;font-weight:500;color:var(--text2);line-height:1.5}
     .nc-date{font-size:.68rem;color:var(--muted);margin-top:.2rem}
-    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
-
-    /* ── Footer ── */
-    footer{border-top:1px solid var(--border);margin-top:3rem}
-    .footer-inner{max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;font-size:.82rem;color:var(--muted)}
-    .footer-brand{font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem}
-    .footer-brand span{color:#7dd3fc}
-    .footer-desc{line-height:1.6;max-width:380px;margin-bottom:1rem}
-    .footer-disclaimer{font-size:.72rem;color:var(--muted2)}
-    .footer-heading{font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em}
-    .footer-links{display:flex;flex-direction:column;gap:.5rem}
-    .footer-links a{color:var(--muted);text-decoration:none;transition:color .2s}
-    .footer-links a:hover{color:var(--sky)}
-    .footer-bottom{max-width:1200px;margin:0 auto;padding:.8rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:center;font-size:.7rem;color:var(--muted2)}
-    @media(max-width:640px){.footer-inner{grid-template-columns:1fr!important}}
-
-    /* ── Mobile bottom nav ── */
-    .bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);z-index:100;padding:6px 0 env(safe-area-inset-bottom,6px)}
-    .bn-inner{display:flex;justify-content:space-around;max-width:500px;margin:0 auto}
-    .bn-item{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;font-size:.62rem;color:var(--muted);padding:4px 8px;border-radius:8px;transition:color .2s}
-    .bn-item:hover,.bn-item.active{color:var(--sky)}
-    .bn-icon{font-size:1.15rem;line-height:1}
-    @media(max-width:768px){
-      .bottom-nav{display:block}
-      body{padding-bottom:70px}
-      .header-nav{display:none}
-    }
-
-    :focus-visible{outline:2px solid var(--sky);outline-offset:2px}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    h2.sec-title{margin:0;font-size:inherit;font-weight:inherit;font-family:inherit}
   </style>
 <script type="application/ld+json">
 {
@@ -274,7 +206,7 @@
   <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
     <ins class="adsbygoogle"
       style="display:block"
-      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-client="ca-pub-8647898779857303"
       data-ad-slot="XXXXXXXXXX"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
@@ -302,7 +234,7 @@
   <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
     <ins class="adsbygoogle"
       style="display:block"
-      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-client="ca-pub-8647898779857303"
       data-ad-slot="XXXXXXXXXX"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>

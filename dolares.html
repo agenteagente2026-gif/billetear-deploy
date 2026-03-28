@@ -27,14 +27,12 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8647898779857303" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="shared.css">
   <style>
     /* AdSense: add .ad-slot{margin:2rem auto;max-width:728px} when activating ads */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    :root{--bg:#0b0f1e;--bg2:#111827;--card:#141e30;--card2:#1a2540;--border:#1f2e46;--border2:#2a3e5e;--sky:#38bdf8;--sky2:#0ea5e9;--orange:#f97316;--green:#22c55e;--red:#ef4444;--text:#f1f5f9;--text2:#cbd5e1;--muted:#8896ab;--muted2:#6b7d95;--purple:#a78bfa;--amber:#fbbf24}
-    html{scroll-behavior:smooth}
-    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
-    /* ── LIGHT MODE ── */
+    /* ── LIGHT MODE (page-specific) ── */
     body.light{--bg:#f5f6fa;--bg2:#eef1f6;--card:#ffffff;--card2:#f8f9fc;--border:#d0d7e2;--border2:#bcc5d4;--text:#0f172a;--text2:#334155;--muted:#475569;--muted2:#64748b}
     body.light header{background:rgba(245,246,250,.98);border-bottom-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)}
     body.light .stats-bar{background:linear-gradient(90deg,#e8ecf4,#dfe4ef,#e8ecf4);border-bottom:1px solid var(--border)}
@@ -68,42 +66,9 @@
     body.light .copy-toast{background:#fff;border:1px solid var(--border);color:var(--text);box-shadow:0 4px 12px rgba(0,0,0,.1)}
     body.light .best-badge{color:#15803d;background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.25)}
     body.light .worst-badge{color:#b91c1c;background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2)}
-    body.light footer{border-top-color:var(--border);color:var(--muted)}
-    .ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:9px 0;overflow:hidden;white-space:nowrap;position:relative}
-    .ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2}
-    .ticker::before{left:0;background:linear-gradient(to right,var(--bg2),transparent)}
-    .ticker::after{right:0;background:linear-gradient(to left,var(--bg2),transparent)}
-    .ticker-track{display:inline-flex;animation:ticker 60s linear infinite}
-    .ticker-track:hover{animation-play-state:paused}
-    .t-item{display:inline-flex;align-items:center;gap:6px;padding:0 28px;font-size:.76rem;border-right:1px solid var(--border)}
-    .t-name{color:var(--muted)}.t-price{font-weight:600}
-    .up{color:var(--green)}.down{color:var(--red)}.neu{color:var(--sky)}
-    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
-    .header-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;height:58px;display:flex;align-items:center;justify-content:space-between}
-    .header-nav{display:flex;align-items:center;gap:4px;margin-left:1.5rem}
-    .header-nav .topnav-link{padding:6px 12px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-radius:8px;transition:all .2s}
-    .header-nav .topnav-link:hover{color:var(--text);background:rgba(255,255,255,.05)}
-    .header-nav .topnav-link.active{color:var(--sky);background:rgba(56,189,248,.08)}
-    .logo{display:flex;align-items:center;text-decoration:none}
-    .logo-text{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;color:#38bdf8;letter-spacing:-.5px;text-decoration:none}
-    .logo-text em{font-style:normal;color:#7dd3fc}
-    .nav-right{display:flex;align-items:center;gap:14px}
-    .live-badge{display:flex;align-items:center;gap:6px;font-size:.73rem;color:var(--muted)}
-    .live-dot{width:7px;height:7px;border-radius:50%;background:var(--green);animation:livepulse 2s ease-in-out infinite}
-    @keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
-    .btn{background:var(--card);border:1px solid var(--border2);color:var(--text2);padding:6px 13px;border-radius:8px;cursor:pointer;font:500 .79rem 'DM Sans',sans-serif;transition:all .2s}
-    .btn:hover{border-color:var(--sky);color:var(--sky)}
-    .refresh-btn{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.18);color:var(--sky);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1.05rem;display:flex;align-items:center;justify-content:center;transition:all .25s;line-height:1}
-    .refresh-btn:hover{background:rgba(56,189,248,.18);border-color:rgba(56,189,248,.4)}
-    .theme-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:var(--text2);width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all .25s}
-    .theme-btn:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25)}
-    @keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-    .refresh-spinning{animation:spin .55s linear}
 
     /* ── Serif for titles ── */
     .sec-title,.hero-name,.chart-title{font-family:'DM Serif Display',serif}
-    .sec-title{font-size:1.1rem;text-transform:none;letter-spacing:0;font-weight:400;color:var(--text)}
 
     /* ── Sortable table headers ── */
     .exch-table th{cursor:pointer;user-select:none;transition:color .15s}
@@ -111,32 +76,17 @@
     .sort-arrow{font-size:.6rem;margin-left:4px;opacity:.4}
     .sort-arrow.active{opacity:1;color:var(--sky)}
 
-    /* ── Section dividers ── */
-    .sec-line{background:linear-gradient(90deg,transparent,var(--border),transparent)}
-
     /* ── Chart toggles ── */
     .chart-toggles{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
     .chart-toggle{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer;font:500 .75rem 'DM Sans',sans-serif;color:var(--muted);transition:all .2s}
     .chart-toggle.active{border-color:currentColor;color:var(--text)}
     .chart-toggle .dot{width:8px;height:8px;border-radius:50%}
 
-    .topnav{background:var(--bg2);border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none}
-    .topnav::-webkit-scrollbar{display:none}
-    .topnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
-    .topnav-link{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:.82rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
-    .topnav-link:hover{color:var(--text);border-color:var(--border2)}
-    .topnav-link.active{color:var(--sky);border-color:var(--sky)}
     .subnav{background:rgba(20,30,48,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);border-radius:16px;overflow-x:auto;scrollbar-width:none}
     .subnav::-webkit-scrollbar{display:none}
     .subnav-inner{max-width:1200px;margin:0 auto;padding:0 1.5rem;display:flex}
     .subnav-link{padding:7px 14px;font-size:.78rem;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:all .2s}
     .subnav-link:hover,.subnav-link.active{color:var(--sky);border-color:var(--sky)}
-    main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
-    .section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-    .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
-    .sec-title{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--text);white-space:nowrap}
-    .sec-line{flex:1;height:1px;background:var(--border)}
 
     /* ── Hero ── */
     .hero-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:1rem}
@@ -213,6 +163,7 @@
     .mep-side .ml{font-size:.61rem;color:var(--muted2);margin-bottom:2px}
     .mep-side .mv{font-size:1.1rem;font-weight:700}
     .mep-side .mv.b{color:var(--text2)}.mep-side .mv.s{color:var(--sky)}
+
     /* ── Diarios ── */
     .diarios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem}
     .diario-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;transition:all .2s}
@@ -235,13 +186,6 @@
     .chart-tab.active,.chart-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
     .chart-wrap{height:260px;position:relative}
 
-    /* ── Skel ── */
-    .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-    @media(max-width:640px){footer>div:first-child{grid-template-columns:1fr !important}}
-    .glass-card{transition:transform .15s,box-shadow .15s}
-    .glass-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
     @media(max-width:480px){.hp .val{font-size:2rem}}
 
     /* ── Sparklines ── */
@@ -304,24 +248,20 @@
     .insight-banner .ib-date{font-family:'DM Sans',sans-serif;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.3rem}
     body.light .insight-banner{background:linear-gradient(135deg,rgba(37,99,235,.04) 0%,rgba(167,139,250,.04) 100%);border-color:rgba(37,99,235,.15)}
 
-    /* ── EDITORIAL WARMTH PATCH ── */
-    :root{--accent:#38bdf8;--accent-bg:rgba(56,189,248,.08);--accent-border:rgba(56,189,248,.2)}
+    /* ── EDITORIAL WARMTH PATCH (page-specific overrides) ── */
     .hero-badge{color:var(--accent);background:var(--accent-bg);border-color:var(--accent-border)}
-    .sec-title{font-family:'DM Serif Display',serif;font-size:1.1rem;font-weight:400;text-transform:none;letter-spacing:0;color:var(--text);padding-left:12px;border-left:3px solid var(--accent)}
     .hero-name{font-size:2rem;letter-spacing:-.5px;background:linear-gradient(135deg,#fff 0%,#7dd3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
     .chart-title{font-size:1.25rem;letter-spacing:-.3px}
     .hp .val{font-variant-numeric:tabular-nums;letter-spacing:-1px}
-    main{padding:2.5rem 1.5rem 4rem}
-    .section{margin-bottom:3.2rem}
     #blue{margin-bottom:3.8rem}
     .hero-card{padding:2.4rem 2.2rem 2.2rem;border-radius:24px;box-shadow:0 0 60px rgba(56,189,248,.08),0 20px 40px rgba(0,0,0,.3)}
     .mep-card{border-top:2px solid var(--green);background:linear-gradient(180deg,rgba(34,197,94,.04) 0%,var(--card) 15%)}
     .chart-card{border-radius:22px;background:linear-gradient(180deg,var(--card2) 0%,var(--card) 8%);box-shadow:0 4px 20px rgba(0,0,0,.15)}
-    .sec-line{height:2px;background:linear-gradient(90deg,transparent,var(--border2),var(--accent),var(--border2),transparent);opacity:.5}
     .mini-chg{font-size:.7rem;font-weight:700;padding:2px 6px;border-radius:6px;white-space:nowrap}
     .mini-chg.up{color:var(--green);background:rgba(34,197,94,.1)}
     .mini-chg.down{color:var(--red);background:rgba(239,68,68,.1)}
     .mini-chg.neu{color:var(--muted);background:rgba(100,116,139,.1)}
+
     /* ── Dólar grid uniforme ── */
     .dolar-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem}
     @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(3,1fr)}}
@@ -340,7 +280,8 @@
     #calcARS:focus,#calcUSD:focus,#fechaInput:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(56,189,248,.15);outline:none}
     .exch-table tr{transition:background .15s ease}
     .exch-table tr:hover td{background:rgba(56,189,248,.05)}
-    .header-inner{height:64px}
+    .stats-bar{top:64px}
+
     /* ── Convertidor side-by-side ── */
     .calc-wrap{display:grid;grid-template-columns:1fr auto 1fr;gap:1rem;align-items:start}
     .calc-col{display:flex;flex-direction:column;gap:.5rem}
@@ -350,18 +291,8 @@
     .calc-result .cr-sub{font-size:.6rem;color:var(--muted);margin-left:4px}
     .calc-mid{display:flex;align-items:center;justify-content:center;padding-top:2rem;color:var(--muted);font-size:1.5rem}
     @media(max-width:640px){.calc-wrap{grid-template-columns:1fr;}.calc-mid{padding:0;transform:rotate(90deg)}}
-    header{border-bottom:2px solid transparent;border-image:linear-gradient(90deg,transparent,var(--sky),var(--amber),transparent) 1}
-    .stats-bar{top:64px}
-    :focus-visible{outline:2px solid var(--sky);outline-offset:2px}
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    h2.sec-title{margin:0;font-size:inherit;font-weight:inherit;font-family:inherit}
-    .faq-list{display:flex;flex-direction:column;gap:.8rem}
-    .faq-item{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden}
-    .faq-q{padding:1rem 1.2rem;cursor:pointer;font-weight:600;color:var(--text);font-size:.95rem;list-style:none;display:flex;align-items:center;justify-content:space-between}
-    .faq-q::after{content:'＋';font-size:1.1rem;color:var(--muted);transition:transform .2s}
-    .faq-item[open] .faq-q::after{content:'−'}
-    .faq-a{padding:0 1.2rem 1rem;color:var(--muted);font-size:.88rem;line-height:1.7}
-    body.light .faq-item{background:var(--card);border-color:var(--border)}
+
+    /* ── Time Machine ── */
     .tm-wrap{max-width:700px}
     .tm-desc{color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;line-height:1.6}
     .tm-inputs{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
@@ -544,7 +475,7 @@
   <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
     <ins class="adsbygoogle"
       style="display:block"
-      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-client="ca-pub-8647898779857303"
       data-ad-slot="XXXXXXXXXX"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
@@ -674,7 +605,7 @@
   <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
     <ins class="adsbygoogle"
       style="display:block"
-      data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+      data-ad-client="ca-pub-8647898779857303"
       data-ad-slot="XXXXXXXXXX"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
