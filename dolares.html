@@ -752,9 +752,8 @@
   </div>
 </footer>
 
+<script src="shared.js"></script>
 <script>
-const q = id => document.getElementById(id);
-
 /* ── Sparkline SVG ── */
 let _sparkUID = 0;
 function sparklineSVG(values, w=90, h=32) {
@@ -875,16 +874,8 @@ function calcAll(from) {
 }
 
 /* ── Formatters ── */
-function fmtARS(n){if(n==null)return'–';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function relTime(s){if(!s)return'';const d=Math.floor((Date.now()-new Date(s))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
 function ago(ts){if(!ts)return'';const d=Math.floor((Date.now()-ts*1000)/60000);if(d<2)return'ahora';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
-
-/* ── Fetch ── */
-async function fetchJSON(url){
-  const ps=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
-  for(const u of ps){try{const c=new AbortController();const t=setTimeout(()=>c.abort(),8000);const r=await fetch(u,{signal:c.signal});clearTimeout(t);if(r.ok)return await r.json();}catch{continue;}}
-  return null;
-}
 
 /* ── Exchange names & URLs dict (criptoya) ── */
 const EXCH_NAMES = {
@@ -924,7 +915,6 @@ const EXCH_URLS = {
   eldoradop2p:'https://eldorado.io', coinexp2p:'https://coinex.com',
   universalcoins:'https://universalcoins.com',
 };
-function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function exchName(k){return EXCH_NAMES[k]||escHTML(k.charAt(0).toUpperCase()+k.slice(1));}
 function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
 
@@ -1391,37 +1381,17 @@ function tickRefresh() {
 }
 setInterval(tickRefresh, 1000);
 
-// ── Theme toggle ──
-function toggleTheme(){
-  const light=document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme',light?'light':'dark');
-  const btn=q('themeBtn');
-  if(btn)btn.textContent=light?'☀️':'🌙';
-}
-(function initTheme(){
-  if(localStorage.getItem('billetear-theme')==='light'){
-    document.body.classList.add('light');
-    const btn=q('themeBtn');
-    if(btn)btn.textContent='☀️';
-  }
-})();
-
-// ── Refresh con animación ──
-function triggerRefresh(){
-  const btn=q('refreshBtn');
-  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
+// ── Refresh con animación (override to reset countdown) ──
+const _sharedTriggerRefresh = triggerRefresh;
+triggerRefresh = function(){
   refreshCountdown=90;
-  refreshAll();
-}
+  _sharedTriggerRefresh();
+};
 
 // ── Mi Sueldo en Dólares ──
 let sueldoChart = null;
 
-function formatSueldoInput(el) {
-  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
-  if (!raw) { el.value = ''; return; }
-  el.value = Number(raw).toLocaleString('es-AR');
-}
+const formatSueldoInput = formatNumericInput;
 
 function parseSueldoVal() {
   return parseFloat((q('sueldoInput')?.value || '').replace(/\./g, '')) || 0;
@@ -1556,11 +1526,7 @@ renderDollars = function(data){
 };
 
 // ── Máquina del Tiempo ──
-function formatTmInput(el) {
-  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
-  if (!raw) { el.value = ''; return; }
-  el.value = Number(raw).toLocaleString('es-AR');
-}
+const formatTmInput = formatNumericInput;
 
 (function initTimeMachine() {
   const d = new Date();
@@ -1644,8 +1610,6 @@ async function calcTimeMachine() {
   }
 }
 
-// PWA: register service worker
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
 
 <!-- ── Mobile bottom nav ── -->

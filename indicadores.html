@@ -467,16 +467,8 @@
   </div>
 </footer>
 
+<script src="shared.js"></script>
 <script>
-const q=id=>document.getElementById(id);
-function fmtARS(n){if(n==null)return'–';return '$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
-
-async function fetchJSON(url){
-  const proxies=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
-  for(const u of proxies){try{const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),8000);const r=await fetch(u,{signal:ctrl.signal});clearTimeout(tid);if(r.ok)return await r.json();}catch{continue;}}
-  throw new Error('fetch failed');
-}
-
 // ── Chart helpers ──────────────────────────────────────────
 let inflaChart=null, riesgoChart=null, blueChart=null;
 let allInflaData=[], allRiesgoData=[], allBlueData=[];
@@ -564,11 +556,7 @@ function setBlueRange(days){
 }
 
 // ── Calculadora de inflación ─────────────────────────────
-function formatInflaInput(el) {
-  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
-  if (!raw) { el.value = ''; return; }
-  el.value = Number(raw).toLocaleString('es-AR');
-}
+const formatInflaInput = formatNumericInput;
 
 function calcInflation() {
   const amount = parseFloat((q('inflaAmount')?.value || '').replace(/\./g, '')) || 0;
@@ -758,29 +746,6 @@ async function refreshAll(){
 refreshAll();
 setInterval(refreshAll,3*60*1000);
 
-// ── Theme toggle ──
-function toggleTheme(){
-  const light=document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme',light?'light':'dark');
-  const btn=document.getElementById('themeBtn');
-  if(btn)btn.textContent=light?'☀️':'🌙';
-}
-(function initTheme(){
-  if(localStorage.getItem('billetear-theme')==='light'){
-    document.body.classList.add('light');
-    const btn=document.getElementById('themeBtn');
-    if(btn)btn.textContent='☀️';
-  }
-})();
-
-function triggerRefresh(){
-  const btn=document.getElementById('refreshBtn');
-  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
-  refreshAll();
-}
-
-// PWA: register service worker
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
 
 <!-- Mobile bottom nav -->

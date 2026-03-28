@@ -399,6 +399,7 @@
   </div>
 </footer>
 
+<script src="shared.js"></script>
 <script>
 /* ============================================================
    RENDIMIENTOS DATA — edit these objects to update rates
@@ -450,29 +451,8 @@ const rendData = {
 /* ============================================================
    HELPERS
    ============================================================ */
-const q = id => document.getElementById(id);
-
-function fmtARS(n) {
-  if (n == null) return '\u2013';
-  return '$\u202f' + Math.round(n).toLocaleString('es-AR');
-}
-
 function tnaToTea(tna) {
   return (Math.pow(1 + (tna / 100) * 30 / 365, 365 / 30) - 1) * 100;
-}
-
-async function fetchJSON(url) {
-  const proxies = [url, `https://corsproxy.io/?url=${encodeURIComponent(url)}`, `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
-  for (const u of proxies) {
-    try {
-      const ctrl = new AbortController();
-      const tid = setTimeout(() => ctrl.abort(), 7000);
-      const r = await fetch(u, { signal: ctrl.signal });
-      clearTimeout(tid);
-      if (r.ok) return await r.json();
-    } catch { continue; }
-  }
-  throw new Error('fetch failed');
 }
 
 /* ============================================================
@@ -552,11 +532,7 @@ function renderFCI() {
 /* ============================================================
    SIMULATOR
    ============================================================ */
-function formatSimInput(el) {
-  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
-  if (!raw) { el.value = ''; return; }
-  el.value = Number(raw).toLocaleString('es-AR');
-}
+const formatSimInput = formatNumericInput;
 
 function updateSim() {
   const monto = parseFloat((q('simMonto')?.value || '').replace(/\./g, '')) || 0;
@@ -636,31 +612,6 @@ renderAll();
 refreshAll();
 setInterval(refreshAll, 3 * 60 * 1000);
 
-/* ============================================================
-   THEME TOGGLE
-   ============================================================ */
-function toggleTheme() {
-  const light = document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme', light ? 'light' : 'dark');
-  const btn = q('themeBtn');
-  if (btn) btn.textContent = light ? '\u2600\uFE0F' : '\uD83C\uDF19';
-}
-(function initTheme() {
-  if (localStorage.getItem('billetear-theme') === 'light') {
-    document.body.classList.add('light');
-    const btn = q('themeBtn');
-    if (btn) btn.textContent = '\u2600\uFE0F';
-  }
-})();
-
-function triggerRefresh() {
-  const btn = q('refreshBtn');
-  if (btn) { btn.classList.add('refresh-spinning'); setTimeout(() => btn.classList.remove('refresh-spinning'), 600); }
-  refreshAll();
-}
-
-// PWA: register service worker
-if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/sw.js').catch(() => {}); }
 </script>
 
 <!-- Mobile bottom nav -->

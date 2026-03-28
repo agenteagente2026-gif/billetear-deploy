@@ -352,9 +352,8 @@
   </div>
 </footer>
 
+<script src="shared.js"></script>
 <script>
-const q=id=>document.getElementById(id);
-
 function marketStatus(){
   const now=new Date();
   const et=new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));
@@ -386,29 +385,6 @@ function refreshAll(){
 refreshAll();
 initScrollSpy();
 
-// ── Theme toggle ──
-function toggleTheme(){
-  const light=document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme',light?'light':'dark');
-  const btn=document.getElementById('themeBtn');
-  if(btn)btn.textContent=light?'☀️':'🌙';
-}
-(function initTheme(){
-  if(localStorage.getItem('billetear-theme')==='light'){
-    document.body.classList.add('light');
-    const btn=document.getElementById('themeBtn');
-    if(btn)btn.textContent='☀️';
-  }
-})();
-
-function triggerRefresh(){
-  const btn=document.getElementById('refreshBtn');
-  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
-  refreshAll();
-}
-
-// PWA: register service worker
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
 
 <!-- Mobile bottom nav -->

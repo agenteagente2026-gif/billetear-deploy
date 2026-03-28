@@ -257,9 +257,8 @@
   </div>
 </footer>
 
+<script src="shared.js"></script>
 <script>
-const q=id=>document.getElementById(id);
-function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 function fmtUSD(n){if(n==null)return'–';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});if(n>=1)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:4,maximumFractionDigits:4});}
 function fmtMktCap(n){if(!n)return'–';if(n>=1e12)return'US$'+(n/1e12).toFixed(2)+'T';if(n>=1e9)return'US$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'US$'+(n/1e6).toFixed(0)+'M';return'–';}
 function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d} min`;return`hace ${Math.floor(d/60)}h`;}
@@ -290,12 +289,6 @@ function getDetailHTML(symbol){
     <div class="ct-detail-desc">${desc}</div>
     <div><div class="ct-detail-exchanges-title">Dónde comprar</div><div class="ct-detail-exchanges">${exLinks}</div></div>
   </div>`;
-}
-
-async function fetchJSON(url){
-  const proxies=[url,`https://corsproxy.io/?url=${encodeURIComponent(url)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
-  for(const u of proxies){try{const ctrl=new AbortController();const tid=setTimeout(()=>ctrl.abort(),7000);const r=await fetch(u,{signal:ctrl.signal});clearTimeout(tid);if(r.ok)return await r.json();}catch{continue;}}
-  throw new Error('fetch failed');
 }
 
 const TOP_IDS=['bitcoin','ethereum','solana','binancecoin'];
@@ -363,27 +356,6 @@ async function refreshAll(){
 refreshAll();
 setInterval(refreshAll,3*60*1000);
 
-// ── Theme toggle ──
-function toggleTheme(){
-  const light=document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme',light?'light':'dark');
-  const btn=q('themeBtn');
-  if(btn)btn.textContent=light?'☀️':'🌙';
-}
-(function initTheme(){
-  if(localStorage.getItem('billetear-theme')==='light'){
-    document.body.classList.add('light');
-    const btn=q('themeBtn');
-    if(btn)btn.textContent='☀️';
-  }
-})();
-
-function triggerRefresh(){
-  const btn=q('refreshBtn');
-  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
-  refreshAll();
-}
-
 // ── Toggle for crypto table rows ──
 document.addEventListener('click',function(e){
   const row=e.target.closest('.ct-row');
@@ -407,8 +379,6 @@ document.addEventListener('click',function(e){
   if(!wasOpen){detail.classList.add('open');card.classList.add('expanded');}
 });
 
-// PWA: register service worker
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
 
 <!-- Mobile bottom nav -->

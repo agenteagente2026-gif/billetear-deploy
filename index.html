@@ -282,31 +282,10 @@
   </div>
 </nav>
 
+<script src="shared.js"></script>
 <script>
-const q=id=>document.getElementById(id);
-function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-function fmtARS(n){if(n==null)return'\u2013';return'$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});}
 function fmtUSD(n){if(n==null)return'\u2013';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});}
 function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return'hace '+d+'m';const h=Math.floor(d/60);return h<24?'hace '+h+'h':new Date(str).toLocaleDateString('es-AR');}
-
-async function fetchJSON(url){
-  const proxies=[url,'https://corsproxy.io/?url='+encodeURIComponent(url),'https://api.allorigins.win/raw?url='+encodeURIComponent(url)];
-  for(const u of proxies){try{const c=new AbortController();const t=setTimeout(()=>c.abort(),7000);const r=await fetch(u,{signal:c.signal});clearTimeout(t);if(r.ok)return await r.json();}catch{continue;}}
-  throw new Error('fetch failed');
-}
-
-// Theme toggle
-function toggleTheme(){
-  const light=document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme',light?'light':'dark');
-  q('themeBtn').textContent=light?'\u2600\uFE0F':'\uD83C\uDF19';
-}
-(function initTheme(){
-  if(localStorage.getItem('billetear-theme')==='light'){
-    document.body.classList.add('light');
-    q('themeBtn').textContent='\u2600\uFE0F';
-  }
-})();
 
 // Dollar variation data (yesterday prices from argentinadatos)
 const yesterdayPrices={};
@@ -469,17 +448,8 @@ async function refreshAll(){
   ]);
 }
 
-function triggerRefresh(){
-  const btn=q('refreshBtn');
-  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
-  refreshAll();
-}
-
 refreshAll();
 setInterval(refreshAll,3*60*1000);
-
-// PWA
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
 </script>
 </body>
 </html>

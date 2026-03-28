@@ -220,11 +220,8 @@
   </div>
 </footer>
 
+<script src="shared.js"></script>
 <script>
-/* ── Utils ── */
-const q = id => document.getElementById(id);
-function escHTML(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
-
 async function fetchText(url) {
   // Intentamos 3 proxies distintos en orden
   const proxies = [
@@ -242,20 +239,6 @@ async function fetchText(url) {
         const txt = await r.text();
         if (txt && txt.length > 50) return txt; // texto real
       }
-    } catch { continue; }
-  }
-  return null;
-}
-
-async function fetchJSON(url) {
-  const proxies = [url, `https://corsproxy.io/?url=${encodeURIComponent(url)}`, `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`];
-  for (const u of proxies) {
-    try {
-      const ctrl = new AbortController();
-      const tid  = setTimeout(() => ctrl.abort(), 7000);
-      const r    = await fetch(u, { signal: ctrl.signal });
-      clearTimeout(tid);
-      if (r.ok) return await r.json();
     } catch { continue; }
   }
   return null;
@@ -440,29 +423,7 @@ async function loadNews(manual = false) {
 loadNews();
 setInterval(() => loadNews(), 5 * 60 * 1000);
 
-// ── Theme toggle ──
-function toggleTheme(){
-  const light=document.body.classList.toggle('light');
-  localStorage.setItem('billetear-theme',light?'light':'dark');
-  const btn=document.getElementById('themeBtn');
-  if(btn)btn.textContent=light?'☀️':'🌙';
-}
-(function initTheme(){
-  if(localStorage.getItem('billetear-theme')==='light'){
-    document.body.classList.add('light');
-    const btn=document.getElementById('themeBtn');
-    if(btn)btn.textContent='☀️';
-  }
-})();
-
-function triggerRefresh(){
-  const btn=document.getElementById('refreshBtn');
-  if(btn){btn.classList.add('refresh-spinning');setTimeout(()=>btn.classList.remove('refresh-spinning'),600);}
-  loadNews(true);
-}
-
-// PWA: register service worker
-if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}
+function refreshAll(){ loadNews(true); }
 </script>
 
 <!-- Mobile bottom nav -->
