@@ -364,8 +364,8 @@
       <a class="topnav-link active" href="dolares.html">Dólares</a>
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link" href="mercados.html">Mercados</a>
-      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
+      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -590,7 +590,7 @@
       <div class="sueldo-input-row">
         <div class="sueldo-field">
           <label>Tu sueldo en pesos</label>
-          <input id="sueldoInput" type="number" placeholder="Ej: 800000" oninput="calcSueldo()">
+          <input id="sueldoInput" type="text" inputmode="numeric" placeholder="Ej: 800.000" oninput="formatSueldoInput(this);calcSueldo()">
         </div>
         <button class="btn" onclick="saveSueldo()" style="padding:8px 16px;font-size:.8rem">Guardar</button>
         <span id="sueldoSaved" style="font-size:.72rem;color:var(--green);opacity:0;transition:opacity .3s"></span>
@@ -1323,13 +1323,25 @@ function triggerRefresh(){
 // ── Mi Sueldo en Dólares ──
 let sueldoChart = null;
 
+function formatSueldoInput(el) {
+  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
+  if (!raw) { el.value = ''; return; }
+  el.value = Number(raw).toLocaleString('es-AR');
+}
+
+function parseSueldoVal() {
+  return parseFloat((q('sueldoInput')?.value || '').replace(/\./g, '')) || 0;
+}
+
 (function initSueldo(){
   const saved = localStorage.getItem('billetear-sueldo');
-  if(saved && q('sueldoInput')) q('sueldoInput').value = saved;
+  if(saved && q('sueldoInput')) {
+    q('sueldoInput').value = Number(saved).toLocaleString('es-AR');
+  }
 })();
 
 function saveSueldo(){
-  const v = q('sueldoInput')?.value;
+  const v = parseSueldoVal();
   if(!v) return;
   localStorage.setItem('billetear-sueldo', v);
   // Guardar snapshot mensual para histórico
@@ -1338,8 +1350,8 @@ function saveSueldo(){
   const now = new Date();
   const monthKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
   const existing = hist.findIndex(h => h.month === monthKey);
-  if(existing >= 0) hist[existing].salary = Number(v);
-  else hist.push({ month: monthKey, salary: Number(v) });
+  if(existing >= 0) hist[existing].salary = v;
+  else hist.push({ month: monthKey, salary: v });
   // Mantener solo últimos 12 meses
   while(hist.length > 12) hist.shift();
   localStorage.setItem(key, JSON.stringify(hist));
@@ -1349,7 +1361,7 @@ function saveSueldo(){
 }
 
 function calcSueldo(){
-  const sueldo = parseFloat(q('sueldoInput')?.value);
+  const sueldo = parseSueldoVal();
   if(!sueldo || !currentDollarData.length){ q('sueldoCards').innerHTML=''; return; }
 
   const get = c => currentDollarData.find(d => d.casa === c);
@@ -1374,7 +1386,7 @@ function calcSueldo(){
   q('sueldoCards').innerHTML = cards.map(c =>
     `<div class="sueldo-card${c.usd === maxUSD ? ' best' : ''}">
       <div class="sc-type">${c.name}</div>
-      <div class="sc-usd">US$ ${c.usd.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0})}</div>
+      <div class="sc-usd">US$ ${c.usd.toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0})}</div>
       <div class="sc-rate">1 USD = $${c.rate.toLocaleString('es-AR')}</div>
     </div>`
   ).join('');

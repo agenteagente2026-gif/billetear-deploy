@@ -196,8 +196,8 @@
       <a class="topnav-link" href="dolares.html">Dólares</a>
       <a class="topnav-link active" href="cripto.html">Cripto</a>
       <a class="topnav-link" href="mercados.html">Mercados</a>
-      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
+      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -298,7 +298,7 @@
 
 <script>
 const q=id=>document.getElementById(id);
-function fmtUSD(n){if(n==null)return'–';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});if(n>=1)return'US$\u202f'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});return'US$\u202f'+Number(n).toLocaleString('en-US',{minimumFractionDigits:4,maximumFractionDigits:4});}
+function fmtUSD(n){if(n==null)return'–';if(n>=1000)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0});if(n>=1)return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:2,maximumFractionDigits:2});return'US$\u202f'+Number(n).toLocaleString('es-AR',{minimumFractionDigits:4,maximumFractionDigits:4});}
 function fmtMktCap(n){if(!n)return'–';if(n>=1e12)return'US$'+(n/1e12).toFixed(2)+'T';if(n>=1e9)return'US$'+(n/1e9).toFixed(1)+'B';if(n>=1e6)return'US$'+(n/1e6).toFixed(0)+'M';return'–';}
 function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(str))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d} min`;return`hace ${Math.floor(d/60)}h`;}
 

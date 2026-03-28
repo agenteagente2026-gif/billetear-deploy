@@ -193,8 +193,8 @@
       <a class="topnav-link" href="dolares.html">Dólares</a>
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link active" href="mercados.html">Mercados</a>
-      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
+      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -207,36 +207,20 @@
 
 <nav class="subnav">
   <div class="subnav-inner">
-    <a class="subnav-link active" href="#indices">🌐 Índices</a>
-    <a class="subnav-link" href="#argentina">Argentina</a>
-    <a class="subnav-link" href="#us">🇺🇸 EE.UU.</a>
-    <a class="subnav-link" href="#etfs">📦 ETFs</a>
-    <a class="subnav-link" href="#aprender">📚 Aprendé</a>
+    <a class="subnav-link active" href="#argentina">Argentina</a>
+    <a class="subnav-link" href="#aprender">Aprendé</a>
+    <a class="subnav-link" href="#indices">Índices</a>
+    <a class="subnav-link" href="#us">EE.UU.</a>
+    <a class="subnav-link" href="#etfs">ETFs</a>
   </div>
 </nav>
 
 <main>
 
-  <!-- Índices globales + ADRs + Tech + ETFs -->
-  <div class="section" id="indices" style="animation-delay:.05s">
-    <div class="sec-header"><span class="sec-title">Índices globales</span><div class="sec-line"></div></div>
-    <div id="marketBanner"></div>
-    <div class="index-cards" id="indexCards" style="display:none">
-
-    </div>
-
-    <!-- TradingView Market Overview: Índices, ADRs Argentina, Tech, ETFs -->
-    <div class="tradingview-widget-container" style="border-radius:16px;overflow:hidden">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"es","isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,"width":"100%","height":"580","tabs":[{"title":"Índices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:MERV","d":"Merval"},{"s":"TVC:GOLD","d":"Oro"},{"s":"TVC:USOIL","d":"Petróleo WTI"},{"s":"CBOE:VIX","d":"VIX Volatilidad"}],"originalTitle":"Indices"},{"title":"ADRs Argentina","symbols":[{"s":"NASDAQ:MELI","d":"MercadoLibre"},{"s":"NYSE:YPF","d":"YPF S.A."},{"s":"NYSE:GGAL","d":"Grupo Galicia"},{"s":"NYSE:BMA","d":"Banco Macro"},{"s":"NYSE:PAM","d":"Pampa Energía"},{"s":"NYSE:BBAR","d":"BBVA Argentina"},{"s":"NYSE:EDN","d":"Edenor"},{"s":"NYSE:TGS","d":"Trans. Gas del Sur"},{"s":"NYSE:SUPV","d":"Supervielle"},{"s":"NYSE:CEPU","d":"Central Puerto"},{"s":"NASDAQ:GLOB","d":"Globant"},{"s":"NYSE:CAAP","d":"Corp. América"}],"originalTitle":"Argentina ADRs"},{"title":"Tech EE.UU.","symbols":[{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:NVDA","d":"Nvidia"},{"s":"NASDAQ:GOOGL","d":"Alphabet"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"},{"s":"NASDAQ:TSLA","d":"Tesla"},{"s":"NASDAQ:AMD","d":"AMD"}],"originalTitle":"US Tech"},{"title":"ETFs","symbols":[{"s":"AMEX:SPY","d":"S&P 500 ETF"},{"s":"NASDAQ:QQQ","d":"Nasdaq 100 ETF"},{"s":"AMEX:GLD","d":"Gold ETF"},{"s":"AMEX:EEM","d":"Emergentes ETF"},{"s":"AMEX:IWM","d":"Small Cap ETF"},{"s":"NASDAQ:ARKK","d":"ARK Innovation"}],"originalTitle":"ETFs"}]}
-      </script>
-    </div>
-  </div>
-
   <!-- Acciones argentinas: detalle -->
-  <div class="section" id="argentina" style="animation-delay:.08s">
+  <div class="section" id="argentina" style="animation-delay:.05s">
     <div class="sec-header"><span class="sec-title">ADRs argentinos — gráfico</span><div class="sec-line"></div></div>
+    <div id="marketBanner"></div>
 
     <!-- TradingView Symbol Overview: MELI -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="ar-charts">
@@ -256,29 +240,7 @@
     <style>#ar-charts{} @media(max-width:640px){#ar-charts{grid-template-columns:1fr}}</style>
   </div>
 
-  <!-- Merval & S&P full chart -->
-  <div class="section" id="us" style="animation-delay:.11s">
-    <div class="sec-header"><span class="sec-title">S&amp;P 500 y Merval — gráfico comparativo</span><div class="sec-line"></div></div>
-    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-      {"symbols":[["S&P 500","FOREXCOM:SPXUSD|1D"],["Nasdaq 100","FOREXCOM:NSXUSD|1D"],["Merval","INDEX:MERV|1D"],["Oro","TVC:GOLD|1D"]],"chartOnly":false,"width":"100%","height":"340","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]}
-      </script>
-    </div>
-  </div>
-
-  <!-- ETFs -->
-  <div class="section" id="etfs" style="animation-delay:.14s">
-    <div class="sec-header"><span class="sec-title">📦 ETFs principales</span><div class="sec-line"></div></div>
-    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-      {"symbols":[["SPY","AMEX:SPY|1D"],["QQQ","NASDAQ:QQQ|1D"],["GLD","AMEX:GLD|1D"],["EEM","AMEX:EEM|1D"]],"chartOnly":false,"width":"100%","height":"300","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
-      </script>
-    </div>
-  </div>
-
-  <div class="section" id="aprender" style="animation-delay:.17s">
+  <div class="section" id="aprender" style="animation-delay:.08s">
     <div class="sec-header"><span class="sec-title">Aprendé a invertir</span><div class="sec-line"></div></div>
     <div class="edu-grid">
       <div class="edu-card" onclick="this.classList.toggle('open')">
@@ -361,6 +323,40 @@
           <p><strong>Tip:</strong> Los Money Market son ideales para principiantes — rendís más que una caja de ahorro con riesgo mínimo.</p>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- Índices globales -->
+  <div class="section" id="indices" style="animation-delay:.11s">
+    <div class="sec-header"><span class="sec-title">Índices globales</span><div class="sec-line"></div></div>
+    <div class="index-cards" id="indexCards" style="display:none"></div>
+    <div class="tradingview-widget-container" style="border-radius:16px;overflow:hidden">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"es","isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,"width":"100%","height":"580","tabs":[{"title":"Índices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:MERV","d":"Merval"},{"s":"TVC:GOLD","d":"Oro"},{"s":"TVC:USOIL","d":"Petróleo WTI"},{"s":"CBOE:VIX","d":"VIX Volatilidad"}],"originalTitle":"Indices"},{"title":"ADRs Argentina","symbols":[{"s":"NASDAQ:MELI","d":"MercadoLibre"},{"s":"NYSE:YPF","d":"YPF S.A."},{"s":"NYSE:GGAL","d":"Grupo Galicia"},{"s":"NYSE:BMA","d":"Banco Macro"},{"s":"NYSE:PAM","d":"Pampa Energía"},{"s":"NYSE:BBAR","d":"BBVA Argentina"},{"s":"NYSE:EDN","d":"Edenor"},{"s":"NYSE:TGS","d":"Trans. Gas del Sur"},{"s":"NYSE:SUPV","d":"Supervielle"},{"s":"NYSE:CEPU","d":"Central Puerto"},{"s":"NASDAQ:GLOB","d":"Globant"},{"s":"NYSE:CAAP","d":"Corp. América"}],"originalTitle":"Argentina ADRs"},{"title":"Tech EE.UU.","symbols":[{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:NVDA","d":"Nvidia"},{"s":"NASDAQ:GOOGL","d":"Alphabet"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"},{"s":"NASDAQ:TSLA","d":"Tesla"},{"s":"NASDAQ:AMD","d":"AMD"}],"originalTitle":"US Tech"},{"title":"ETFs","symbols":[{"s":"AMEX:SPY","d":"S&P 500 ETF"},{"s":"NASDAQ:QQQ","d":"Nasdaq 100 ETF"},{"s":"AMEX:GLD","d":"Gold ETF"},{"s":"AMEX:EEM","d":"Emergentes ETF"},{"s":"AMEX:IWM","d":"Small Cap ETF"},{"s":"NASDAQ:ARKK","d":"ARK Innovation"}],"originalTitle":"ETFs"}]}
+      </script>
+    </div>
+  </div>
+
+  <!-- Merval & S&P full chart -->
+  <div class="section" id="us" style="animation-delay:.14s">
+    <div class="sec-header"><span class="sec-title">S&amp;P 500 y Merval — gráfico comparativo</span><div class="sec-line"></div></div>
+    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+      {"symbols":[["S&P 500","FOREXCOM:SPXUSD|1D"],["Nasdaq 100","FOREXCOM:NSXUSD|1D"],["Merval","INDEX:MERV|1D"],["Oro","TVC:GOLD|1D"]],"chartOnly":false,"width":"100%","height":"340","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]}
+      </script>
+    </div>
+  </div>
+
+  <!-- ETFs -->
+  <div class="section" id="etfs" style="animation-delay:.17s">
+    <div class="sec-header"><span class="sec-title">ETFs principales</span><div class="sec-line"></div></div>
+    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
+      <div class="tradingview-widget-container__widget"></div>
+      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+      {"symbols":[["SPY","AMEX:SPY|1D"],["QQQ","NASDAQ:QQQ|1D"],["GLD","AMEX:GLD|1D"],["EEM","AMEX:EEM|1D"]],"chartOnly":false,"width":"100%","height":"300","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
+      </script>
     </div>
   </div>
 

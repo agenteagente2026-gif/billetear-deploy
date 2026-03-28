@@ -97,7 +97,12 @@
     .rend-row{display:grid;grid-template-columns:1fr auto auto;gap:.5rem;padding:.65rem 1.2rem;border-top:1px solid var(--border);align-items:center;font-size:.82rem;transition:background .15s}
     .rend-row:hover{background:var(--card2)}
     .rend-head{display:grid;grid-template-columns:1fr auto auto;gap:.5rem;padding:.5rem 1.2rem;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-top:1px solid var(--border)}
-    .rend-name{color:var(--text);font-weight:500}
+    .rend-name{color:var(--text);font-weight:500;display:flex;align-items:center;gap:.3rem}
+.rend-logo{font-size:.95rem;line-height:1}
+.rend-link{color:var(--text);text-decoration:none;display:inline-flex;align-items:center;gap:.25rem;transition:color .15s}
+.rend-link:hover{color:var(--sky)}
+.rend-ext{font-size:.7rem;color:var(--muted);transition:color .15s}
+.rend-link:hover .rend-ext{color:var(--sky)}
     .rend-tna{color:var(--green);font-weight:700;font-size:.9rem;text-align:right}
     .rend-tea{color:var(--muted);font-size:.72rem;text-align:right}
     .rend-badge{display:inline-flex;align-items:center;gap:4px;font-size:.62rem;padding:2px 8px;border-radius:10px;font-weight:600}
@@ -166,8 +171,8 @@
       <a class="topnav-link" href="dolares.html">D&oacute;lares</a>
       <a class="topnav-link" href="cripto.html">Cripto</a>
       <a class="topnav-link" href="mercados.html">Mercados</a>
-      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link active" href="rendimientos.html">Rendimientos</a>
+      <a class="topnav-link" href="indicadores.html">Indicadores</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -270,7 +275,7 @@
       <div class="sim-inputs">
         <div class="sim-field">
           <span class="sim-label">Monto $</span>
-          <input id="simMonto" type="number" value="1000000" class="sim-input" oninput="updateSim()">
+          <input id="simMonto" type="text" inputmode="numeric" value="1.000.000" class="sim-input" oninput="formatSimInput(this);updateSim()">
         </div>
         <div class="sim-field">
           <span class="sim-label">D&iacute;as</span>
@@ -358,45 +363,45 @@
    ============================================================ */
 const rendData = {
   plazoFijo: [
-    { nombre: 'Banco Naci\u00f3n', tna: 29.50 },
-    { nombre: 'Banco Provincia', tna: 30.00 },
-    { nombre: 'Banco Galicia', tna: 28.00 },
-    { nombre: 'Banco Macro', tna: 28.50 },
-    { nombre: 'Banco BBVA', tna: 27.50 },
-    { nombre: 'Banco Santander', tna: 28.00 },
-    { nombre: 'Banco ICBC', tna: 27.00 },
-    { nombre: 'Brubank', tna: 30.00 },
-    { nombre: 'Banco Supervielle', tna: 28.00 },
-    { nombre: 'Banco Hipotecario', tna: 29.00 }
+    { nombre: 'Banco Nación', tna: 29.50, url: 'https://www.bna.com.ar', logo: '🏦' },
+    { nombre: 'Banco Provincia', tna: 30.00, url: 'https://www.bancoprovincia.com.ar', logo: '🏦' },
+    { nombre: 'Banco Galicia', tna: 28.00, url: 'https://www.galicia.ar', logo: '🏦' },
+    { nombre: 'Banco Macro', tna: 28.50, url: 'https://www.macro.com.ar', logo: '🏦' },
+    { nombre: 'Banco BBVA', tna: 27.50, url: 'https://www.bbva.com.ar', logo: '🏦' },
+    { nombre: 'Banco Santander', tna: 28.00, url: 'https://www.santander.com.ar', logo: '🏦' },
+    { nombre: 'Banco ICBC', tna: 27.00, url: 'https://www.icbc.com.ar', logo: '🏦' },
+    { nombre: 'Brubank', tna: 30.00, url: 'https://www.brubank.com', logo: '📱' },
+    { nombre: 'Banco Supervielle', tna: 28.00, url: 'https://www.supervielle.com.ar', logo: '🏦' },
+    { nombre: 'Banco Hipotecario', tna: 29.00, url: 'https://www.hipotecario.com.ar', logo: '🏦' }
   ],
   plazoFijoUVA: [
-    { nombre: 'Banco Naci\u00f3n', tna: 4.00 },
-    { nombre: 'Banco Galicia', tna: 5.00 },
-    { nombre: 'Banco Provincia', tna: 4.50 },
-    { nombre: 'Brubank', tna: 5.50 },
-    { nombre: 'Banco Macro', tna: 4.00 }
+    { nombre: 'Banco Nación', tna: 4.00, url: 'https://www.bna.com.ar', logo: '🏦' },
+    { nombre: 'Banco Galicia', tna: 5.00, url: 'https://www.galicia.ar', logo: '🏦' },
+    { nombre: 'Banco Provincia', tna: 4.50, url: 'https://www.bancoprovincia.com.ar', logo: '🏦' },
+    { nombre: 'Brubank', tna: 5.50, url: 'https://www.brubank.com', logo: '📱' },
+    { nombre: 'Banco Macro', tna: 4.00, url: 'https://www.macro.com.ar', logo: '🏦' }
   ],
   billeteras: [
-    { nombre: 'Mercado Pago', tna: 31.40 },
-    { nombre: 'Ual\u00e1', tna: 30.50 },
-    { nombre: 'Naranja X', tna: 32.00 },
-    { nombre: 'Personal Pay', tna: 33.00 },
-    { nombre: 'Prex', tna: 29.00 },
-    { nombre: 'Lemon Cash', tna: 25.00 },
-    { nombre: 'Belo', tna: 24.00 },
-    { nombre: 'Claro Pay', tna: 30.00 }
+    { nombre: 'Mercado Pago', tna: 31.40, url: 'https://www.mercadopago.com.ar', logo: '💙' },
+    { nombre: 'Ualá', tna: 30.50, url: 'https://www.uala.com.ar', logo: '💜' },
+    { nombre: 'Naranja X', tna: 32.00, url: 'https://www.naranjax.com', logo: '🧡' },
+    { nombre: 'Personal Pay', tna: 33.00, url: 'https://www.personalpay.com.ar', logo: '📱' },
+    { nombre: 'Prex', tna: 29.00, url: 'https://www.prexcard.com', logo: '💚' },
+    { nombre: 'Lemon Cash', tna: 25.00, url: 'https://www.lemon.me', logo: '🍋' },
+    { nombre: 'Belo', tna: 24.00, url: 'https://www.belo.app', logo: '🟣' },
+    { nombre: 'Claro Pay', tna: 30.00, url: 'https://www.claropay.com.ar', logo: '🔴' }
   ],
   cauciones: [
-    { plazo: '1 d\u00eda', tna: 28 },
-    { plazo: '7 d\u00edas', tna: 29 },
-    { plazo: '30 d\u00edas', tna: 30 }
+    { plazo: '1 día', tna: 28 },
+    { plazo: '7 días', tna: 29 },
+    { plazo: '30 días', tna: 30 }
   ],
   fci: [
-    { nombre: 'Balanz Ahorro', tna: 30 },
-    { nombre: 'Galileo Premium', tna: 29 },
-    { nombre: 'SBS Pesos Plus', tna: 28 },
-    { nombre: 'Delta Pesos', tna: 31 },
-    { nombre: 'Consultatio Ahorro', tna: 29 }
+    { nombre: 'Balanz Ahorro', tna: 30, url: 'https://www.balanz.com', logo: '📊' },
+    { nombre: 'Galileo Premium', tna: 29, url: 'https://www.galileoargentina.com.ar', logo: '📊' },
+    { nombre: 'SBS Pesos Plus', tna: 28, url: 'https://www.sbsfondos.com', logo: '📊' },
+    { nombre: 'Delta Pesos', tna: 31, url: 'https://www.deltaam.com.ar', logo: '📊' },
+    { nombre: 'Consultatio Ahorro', tna: 29, url: 'https://www.consultatio.com.ar', logo: '📊' }
   ]
 };
 
@@ -431,11 +436,19 @@ async function fetchJSON(url) {
 /* ============================================================
    RENDER: Plazo Fijo Tradicional
    ============================================================ */
+function nameWithLink(item, badge) {
+  const logo = item.logo ? `<span class="rend-logo">${item.logo}</span>` : '';
+  const name = item.url
+    ? `<a class="rend-link" href="${item.url}" target="_blank" rel="noopener">${logo}${item.nombre}<span class="rend-ext">↗</span></a>`
+    : `${logo}<span>${item.nombre}</span>`;
+  return `<span class="rend-name">${name}${badge}</span>`;
+}
+
 function renderPlazoFijo() {
   const sorted = [...rendData.plazoFijo].sort((a, b) => b.tna - a.tna);
   q('pfRows').innerHTML = sorted.map((p, i) =>
     `<div class="rend-row">
-      <span class="rend-name">${p.nombre}${i === 0 ? ' <span class="rend-badge best">Mejor</span>' : ''}</span>
+      ${nameWithLink(p, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
       <span class="rend-tna">${p.tna.toFixed(1)}%</span>
       <span class="rend-tea">${tnaToTea(p.tna).toFixed(1)}%</span>
     </div>`
@@ -449,7 +462,7 @@ function renderUVA() {
   const sorted = [...rendData.plazoFijoUVA].sort((a, b) => b.tna - a.tna);
   q('uvaRows').innerHTML = sorted.map((p, i) =>
     `<div class="explain-entry">
-      <span class="explain-entry-name">${p.nombre}${i === 0 ? ' <span class="rend-badge best">Mejor</span>' : ''}</span>
+      ${nameWithLink(p, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
       <span class="explain-entry-val">TNA ${p.tna.toFixed(2)}% + UVA</span>
     </div>`
   ).join('');
@@ -462,7 +475,7 @@ function renderBilleteras() {
   const sorted = [...rendData.billeteras].sort((a, b) => b.tna - a.tna);
   q('billRows').innerHTML = sorted.map((b, i) =>
     `<div class="rend-row">
-      <span class="rend-name">${b.nombre}${i === 0 ? ' <span class="rend-badge best">Mejor</span>' : ''}</span>
+      ${nameWithLink(b, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
       <span class="rend-tna">${b.tna.toFixed(1)}%</span>
       <span class="rend-tea">${tnaToTea(b.tna).toFixed(1)}%</span>
     </div>`
@@ -488,7 +501,7 @@ function renderFCI() {
   const sorted = [...rendData.fci].sort((a, b) => b.tna - a.tna);
   q('fciRows').innerHTML = sorted.map((f, i) =>
     `<div class="rend-row">
-      <span class="rend-name">${f.nombre}${i === 0 ? ' <span class="rend-badge best">Mejor</span>' : ''}</span>
+      ${nameWithLink(f, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
       <span class="rend-tna">~${f.tna.toFixed(0)}%</span>
       <span class="rend-tea">${tnaToTea(f.tna).toFixed(1)}%</span>
     </div>`
@@ -498,8 +511,14 @@ function renderFCI() {
 /* ============================================================
    SIMULATOR
    ============================================================ */
+function formatSimInput(el) {
+  const raw = el.value.replace(/\./g, '').replace(/[^0-9]/g, '');
+  if (!raw) { el.value = ''; return; }
+  el.value = Number(raw).toLocaleString('es-AR');
+}
+
 function updateSim() {
-  const monto = parseFloat(q('simMonto')?.value) || 0;
+  const monto = parseFloat((q('simMonto')?.value || '').replace(/\./g, '')) || 0;
   const dias = parseInt(q('simDias')?.value) || 30;
   if (!monto) {
     ['simPF', 'simBill', 'simCau', 'simFCI'].forEach(id => { q(id).textContent = '--'; });
