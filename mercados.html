@@ -136,13 +136,8 @@
 </head>
 <body>
 
-<!-- TradingView Ticker Tape -->
-<div class="tradingview-widget-container" style="height:44px;overflow:hidden">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-  {"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq 100"},{"proName":"INDEX:MERV","title":"Merval"},{"proName":"NYSE:YPF","title":"YPF"},{"proName":"NASDAQ:MELI","title":"MercadoLibre"},{"proName":"NYSE:GGAL","title":"Galicia"},{"proName":"NYSE:PAM","title":"Pampa"},{"proName":"TVC:GOLD","title":"Oro"},{"proName":"TVC:USOIL","title":"Petróleo"},{"proName":"NASDAQ:NVDA","title":"Nvidia"},{"proName":"NASDAQ:TSLA","title":"Tesla"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":"dark","locale":"es"}
-  </script>
-</div>
+<!-- TradingView Ticker Tape (dynamic theme) -->
+<div id="tv-ticker-wrap" style="height:44px;overflow:hidden"></div>
 
 <header>
   <div class="header-inner">
@@ -166,6 +161,10 @@
   </div>
 </header>
 
+<div id="staleWarning" style="display:none;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:#fbbf24;text-align:center;padding:.5rem;font-size:.78rem">
+  ⚠️ Datos desactualizados (hace <span class="stale-mins">10</span> min) · <button onclick="location.reload()" style="background:none;border:none;color:var(--sky);cursor:pointer;text-decoration:underline;font-size:.78rem">Actualizar</button>
+</div>
+
 <nav class="subnav">
   <div class="subnav-inner">
     <a class="subnav-link active" href="#argentina">Argentina</a>
@@ -184,22 +183,13 @@
     <div class="sec-header"><h2 class="sec-title">ADRs argentinos — gráfico</h2><div class="sec-line"></div></div>
     <div id="marketBanner"></div>
 
-    <!-- TradingView Symbol Overview: MELI -->
+    <!-- TradingView Symbol Overview: ADRs (dynamic theme) -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem" id="ar-charts">
-      <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-        {"symbols":[["NASDAQ:MELI|1D"],["NYSE:YPF|1D"],["NYSE:GGAL|1D"],["NYSE:PAM|1D"]],"chartOnly":false,"width":"100%","height":"250","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
-        </script>
-      </div>
-      <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
-        <div class="tradingview-widget-container__widget"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-        {"symbols":[["NYSE:BMA|1D"],["NYSE:BBAR|1D"],["NYSE:SUPV|1D"],["NASDAQ:GLOB|1D"]],"chartOnly":false,"width":"100%","height":"250","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
-        </script>
-      </div>
+      <div id="tv-adr1-wrap" style="border-radius:14px;overflow:hidden"></div>
+      <div id="tv-adr2-wrap" style="border-radius:14px;overflow:hidden"></div>
     </div>
     <style>#ar-charts{} @media(max-width:640px){#ar-charts{grid-template-columns:1fr}}</style>
+    <p style="font-size:.68rem;color:var(--muted2);margin-top:.6rem">Fuente: TradingView</p>
   </div>
 
   <!-- AdSense -->
@@ -307,34 +297,19 @@
   <div class="section" id="indices" style="animation-delay:.11s">
     <div class="sec-header"><h2 class="sec-title">Índices globales</h2><div class="sec-line"></div></div>
     <div class="index-cards" id="indexCards" style="display:none"></div>
-    <div class="tradingview-widget-container" style="border-radius:16px;overflow:hidden">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
-      {"colorTheme":"dark","dateRange":"1D","showChart":true,"locale":"es","isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,"width":"100%","height":"580","tabs":[{"title":"Índices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:MERV","d":"Merval"},{"s":"TVC:GOLD","d":"Oro"},{"s":"TVC:USOIL","d":"Petróleo WTI"},{"s":"CBOE:VIX","d":"VIX Volatilidad"}],"originalTitle":"Indices"},{"title":"ADRs Argentina","symbols":[{"s":"NASDAQ:MELI","d":"MercadoLibre"},{"s":"NYSE:YPF","d":"YPF S.A."},{"s":"NYSE:GGAL","d":"Grupo Galicia"},{"s":"NYSE:BMA","d":"Banco Macro"},{"s":"NYSE:PAM","d":"Pampa Energía"},{"s":"NYSE:BBAR","d":"BBVA Argentina"},{"s":"NYSE:EDN","d":"Edenor"},{"s":"NYSE:TGS","d":"Trans. Gas del Sur"},{"s":"NYSE:SUPV","d":"Supervielle"},{"s":"NYSE:CEPU","d":"Central Puerto"},{"s":"NASDAQ:GLOB","d":"Globant"},{"s":"NYSE:CAAP","d":"Corp. América"}],"originalTitle":"Argentina ADRs"},{"title":"Tech EE.UU.","symbols":[{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:NVDA","d":"Nvidia"},{"s":"NASDAQ:GOOGL","d":"Alphabet"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"},{"s":"NASDAQ:TSLA","d":"Tesla"},{"s":"NASDAQ:AMD","d":"AMD"}],"originalTitle":"US Tech"},{"title":"ETFs","symbols":[{"s":"AMEX:SPY","d":"S&P 500 ETF"},{"s":"NASDAQ:QQQ","d":"Nasdaq 100 ETF"},{"s":"AMEX:GLD","d":"Gold ETF"},{"s":"AMEX:EEM","d":"Emergentes ETF"},{"s":"AMEX:IWM","d":"Small Cap ETF"},{"s":"NASDAQ:ARKK","d":"ARK Innovation"}],"originalTitle":"ETFs"}]}
-      </script>
-    </div>
+    <div id="tv-market-overview-wrap" style="border-radius:16px;overflow:hidden"></div>
   </div>
 
   <!-- Merval & S&P full chart -->
   <div class="section" id="us" style="animation-delay:.14s">
     <div class="sec-header"><h2 class="sec-title">S&amp;P 500 y Merval — gráfico comparativo</h2><div class="sec-line"></div></div>
-    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-      {"symbols":[["S&P 500","FOREXCOM:SPXUSD|1D"],["Nasdaq 100","FOREXCOM:NSXUSD|1D"],["Merval","INDEX:MERV|1D"],["Oro","TVC:GOLD|1D"]],"chartOnly":false,"width":"100%","height":"340","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]}
-      </script>
-    </div>
+    <div id="tv-sp-merval-wrap" style="border-radius:14px;overflow:hidden"></div>
   </div>
 
   <!-- ETFs -->
   <div class="section" id="etfs" style="animation-delay:.17s">
     <div class="sec-header"><h2 class="sec-title">ETFs principales</h2><div class="sec-line"></div></div>
-    <div class="tradingview-widget-container" style="border-radius:14px;overflow:hidden">
-      <div class="tradingview-widget-container__widget"></div>
-      <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-      {"symbols":[["SPY","AMEX:SPY|1D"],["QQQ","NASDAQ:QQQ|1D"],["GLD","AMEX:GLD|1D"],["EEM","AMEX:EEM|1D"]],"chartOnly":false,"width":"100%","height":"300","locale":"es","colorTheme":"dark","isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]}
-      </script>
-    </div>
+    <div id="tv-etfs-wrap" style="border-radius:14px;overflow:hidden"></div>
   </div>
 
   <div class="section" style="animation-delay:.20s">
@@ -351,6 +326,7 @@
       <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem">Billete<span style="color:#7dd3fc">AR</span></div>
       <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">Información financiera de Argentina en tiempo real. Dólar blue, MEP, CCL, criptomonedas, acciones y más. Simple, rápido y actualizado al minuto.</p>
       <p style="font-size:.72rem;color:var(--muted2)">Los datos se obtienen de fuentes públicas (DolarAPI, ArgentinaDatos, CoinGecko, Bluelytics, TradingView). BilleteAR no garantiza la exactitud de los precios.</p>
+      <p style="font-size:.72rem;color:var(--muted2);margin-top:.6rem"><strong style="color:var(--muted)">Quiénes somos:</strong> BilleteAR es un proyecto independiente que reúne datos financieros de fuentes públicas para que cualquier argentino pueda seguir el pulso de la economía. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
     </div>
     <div>
       <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Legal</div>
@@ -375,6 +351,66 @@
 
 <script src="shared.js"></script>
 <script>
+/* ── TradingView dynamic theme widgets ── */
+function tvTheme(){ return document.body.classList.contains('light') ? 'light' : 'dark'; }
+
+function createTVWidget(containerId, src, config){
+  const wrap = document.getElementById(containerId);
+  if(!wrap) return;
+  wrap.innerHTML = '';
+  const outer = document.createElement('div');
+  outer.className = 'tradingview-widget-container';
+  if(config.height) outer.style.height = config.height + 'px';
+  const inner = document.createElement('div');
+  inner.className = 'tradingview-widget-container__widget';
+  outer.appendChild(inner);
+  const s = document.createElement('script');
+  s.type = 'text/javascript';
+  s.src = src;
+  s.async = true;
+  s.textContent = JSON.stringify(config);
+  outer.appendChild(s);
+  wrap.appendChild(outer);
+}
+
+function initTVWidgets(){
+  const theme = tvTheme();
+  // Ticker tape
+  createTVWidget('tv-ticker-wrap','https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js',{"symbols":[{"proName":"FOREXCOM:SPXUSD","title":"S&P 500"},{"proName":"FOREXCOM:NSXUSD","title":"Nasdaq 100"},{"proName":"INDEX:MERV","title":"Merval"},{"proName":"NYSE:YPF","title":"YPF"},{"proName":"NASDAQ:MELI","title":"MercadoLibre"},{"proName":"NYSE:GGAL","title":"Galicia"},{"proName":"NYSE:PAM","title":"Pampa"},{"proName":"TVC:GOLD","title":"Oro"},{"proName":"TVC:USOIL","title":"Petróleo"},{"proName":"NASDAQ:NVDA","title":"Nvidia"},{"proName":"NASDAQ:TSLA","title":"Tesla"}],"showSymbolLogo":false,"isTransparent":true,"displayMode":"adaptive","colorTheme":theme,"locale":"es"});
+  // ADR chart 1
+  createTVWidget('tv-adr1-wrap','https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js',{"symbols":[["NASDAQ:MELI|1D"],["NYSE:YPF|1D"],["NYSE:GGAL|1D"],["NYSE:PAM|1D"]],"chartOnly":false,"width":"100%","height":"250","locale":"es","colorTheme":theme,"isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]});
+  // ADR chart 2
+  createTVWidget('tv-adr2-wrap','https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js',{"symbols":[["NYSE:BMA|1D"],["NYSE:BBAR|1D"],["NYSE:SUPV|1D"],["NASDAQ:GLOB|1D"]],"chartOnly":false,"width":"100%","height":"250","locale":"es","colorTheme":theme,"isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]});
+  // Market overview
+  createTVWidget('tv-market-overview-wrap','https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js',{"colorTheme":theme,"dateRange":"1D","showChart":true,"locale":"es","isTransparent":true,"showSymbolLogo":true,"showFloatingTooltip":false,"width":"100%","height":"580","tabs":[{"title":"Índices","symbols":[{"s":"FOREXCOM:SPXUSD","d":"S&P 500"},{"s":"FOREXCOM:NSXUSD","d":"Nasdaq 100"},{"s":"FOREXCOM:DJI","d":"Dow Jones"},{"s":"INDEX:MERV","d":"Merval"},{"s":"TVC:GOLD","d":"Oro"},{"s":"TVC:USOIL","d":"Petróleo WTI"},{"s":"CBOE:VIX","d":"VIX Volatilidad"}],"originalTitle":"Indices"},{"title":"ADRs Argentina","symbols":[{"s":"NASDAQ:MELI","d":"MercadoLibre"},{"s":"NYSE:YPF","d":"YPF S.A."},{"s":"NYSE:GGAL","d":"Grupo Galicia"},{"s":"NYSE:BMA","d":"Banco Macro"},{"s":"NYSE:PAM","d":"Pampa Energía"},{"s":"NYSE:BBAR","d":"BBVA Argentina"},{"s":"NYSE:EDN","d":"Edenor"},{"s":"NYSE:TGS","d":"Trans. Gas del Sur"},{"s":"NYSE:SUPV","d":"Supervielle"},{"s":"NYSE:CEPU","d":"Central Puerto"},{"s":"NASDAQ:GLOB","d":"Globant"},{"s":"NYSE:CAAP","d":"Corp. América"}],"originalTitle":"Argentina ADRs"},{"title":"Tech EE.UU.","symbols":[{"s":"NASDAQ:AAPL","d":"Apple"},{"s":"NASDAQ:MSFT","d":"Microsoft"},{"s":"NASDAQ:NVDA","d":"Nvidia"},{"s":"NASDAQ:GOOGL","d":"Alphabet"},{"s":"NASDAQ:AMZN","d":"Amazon"},{"s":"NASDAQ:META","d":"Meta"},{"s":"NASDAQ:TSLA","d":"Tesla"},{"s":"NASDAQ:AMD","d":"AMD"}],"originalTitle":"US Tech"},{"title":"ETFs","symbols":[{"s":"AMEX:SPY","d":"S&P 500 ETF"},{"s":"NASDAQ:QQQ","d":"Nasdaq 100 ETF"},{"s":"AMEX:GLD","d":"Gold ETF"},{"s":"AMEX:EEM","d":"Emergentes ETF"},{"s":"AMEX:IWM","d":"Small Cap ETF"},{"s":"NASDAQ:ARKK","d":"ARK Innovation"}],"originalTitle":"ETFs"}]});
+  // S&P vs Merval
+  createTVWidget('tv-sp-merval-wrap','https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js',{"symbols":[["S&P 500","FOREXCOM:SPXUSD|1D"],["Nasdaq 100","FOREXCOM:NSXUSD|1D"],["Merval","INDEX:MERV|1D"],["Oro","TVC:GOLD|1D"]],"chartOnly":false,"width":"100%","height":"340","locale":"es","colorTheme":theme,"isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W","all|1M"]});
+  // ETFs
+  createTVWidget('tv-etfs-wrap','https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js',{"symbols":[["SPY","AMEX:SPY|1D"],["QQQ","NASDAQ:QQQ|1D"],["GLD","AMEX:GLD|1D"],["EEM","AMEX:EEM|1D"]],"chartOnly":false,"width":"100%","height":"300","locale":"es","colorTheme":theme,"isTransparent":true,"autosize":false,"showVolume":false,"showMA":false,"hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false,"scalePosition":"right","scaleMode":"Normal","fontFamily":"DM Sans, sans-serif","fontSize":"10","noTimeScale":false,"valuesTracking":"1","changeMode":"price-and-percent","chartType":"area","lineWidth":2,"lineType":0,"dateRanges":["1d|1","1m|30","3m|60","12m|1D","60m|1W"]});
+}
+initTVWidgets();
+
+// Reload TradingView widgets on theme change
+const _origToggle = window.toggleTheme;
+window.toggleTheme = function(){
+  if(_origToggle) _origToggle();
+  setTimeout(initTVWidgets, 100);
+};
+
+/* ── Staleness detection ── */
+let lastFetchTime = Date.now();
+setInterval(() => {
+  const mins = Math.round((Date.now() - lastFetchTime) / 60000);
+  const el = document.getElementById('staleWarning');
+  if (!el) return;
+  if (mins >= 10) {
+    el.style.display = 'block';
+    el.querySelector('.stale-mins').textContent = mins;
+  } else {
+    el.style.display = 'none';
+  }
+}, 60000);
+
 function marketStatus(){
   const now=new Date();
   const et=new Date(now.toLocaleString('en-US',{timeZone:'America/New_York'}));

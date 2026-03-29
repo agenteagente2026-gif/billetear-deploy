@@ -413,6 +413,10 @@
   </div>
 </header>
 
+<div id="staleWarning" style="display:none;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:#fbbf24;text-align:center;padding:.5rem;font-size:.78rem">
+  ⚠️ Datos desactualizados (hace <span class="stale-mins">10</span> min) · <button onclick="location.reload()" style="background:none;border:none;color:var(--sky);cursor:pointer;text-decoration:underline;font-size:.78rem">Actualizar</button>
+</div>
+
 <!-- ── Stats bar persistente ── -->
 <div class="stats-bar">
   <div class="stats-bar-inner">
@@ -443,7 +447,7 @@
 
   <!-- ── Dólares grid uniforme ── -->
   <div class="section" id="blue" style="animation-delay:.05s">
-    <div class="sec-header"><h2 class="sec-title">Dólares</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Dólares</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: DolarAPI</span></div>
     <div class="dolar-grid" id="dolarGrid">
       <div class="dolar-card" id="card-blue" onclick="document.getElementById('medios').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
       <div class="dolar-card" id="card-mep" onclick="document.getElementById('mep-brokers').scrollIntoView({behavior:'smooth'})"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
@@ -487,7 +491,7 @@
     <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-8647898779857303"
-      data-ad-slot="3029845442"
+      data-ad-slot="4698150332"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -495,7 +499,7 @@
 
   <!-- ── CRIPTO POR EXCHANGE ── -->
   <div class="section" id="cripto-detail" style="animation-delay:.11s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Cripto por exchange</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar Cripto por exchange</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CriptoYa</span></div>
     <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
       Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local. Compra, venta y spread de cada plataforma.
     </p>
@@ -528,7 +532,7 @@
 
   <!-- ── Dólar Oficial (Bancos) ── -->
   <div class="section" id="oficial-bancos" style="animation-delay:.12s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Oficial por banco</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar Oficial por banco</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ComparaDolar</span></div>
     <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Cotización del dólar oficial en los principales bancos argentinos.</p>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
       <div class="exch-loading" id="comp-banks-loading">Cargando precios de bancos...</div>
@@ -538,7 +542,7 @@
 
   <!-- ── Dólar MEP (Brokers) ── -->
   <div class="section" id="mep-brokers" style="animation-delay:.13s">
-    <div class="sec-header"><h2 class="sec-title">Dólar MEP por broker</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar MEP por broker</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ComparaDolar</span></div>
     <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Cotización del dólar MEP en brokers y fintechs argentinas.</p>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
       <div class="exch-loading" id="comp-brokers-loading">Cargando precios de brokers...</div>
@@ -548,7 +552,7 @@
 
   <!-- ── Blue según cada medio ── -->
   <div class="section" id="medios" style="animation-delay:.14s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Blue según cada medio</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar Blue según cada medio</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: Bluelytics</span></div>
     <div id="blueMediaGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.6rem">
       <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div class="skel" style="height:1rem;width:80%"></div></div>
       <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div class="skel" style="height:1rem;width:80%"></div></div>
@@ -558,7 +562,7 @@
 
   <!-- ── Histórico ── -->
   <div class="section" id="historico" style="animation-delay:.17s">
-    <div class="sec-header"><h2 class="sec-title">Evolución histórica</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Evolución histórica</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ArgentinaDatos</span></div>
     <div class="chart-card">
       <div class="chart-header">
         <div><div class="chart-title">Evolución histórica</div><div class="chart-sub">Comparación histórica · argentinadatos.com</div></div>
@@ -583,7 +587,7 @@
 
   <!-- ── TradingView MEP en vivo ── -->
   <div class="section" id="tv-mep">
-    <div class="sec-header"><h2 class="sec-title">Dólar MEP en vivo · BYMA</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar MEP en vivo · BYMA</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: TradingView</span></div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:500px">
       <div class="tradingview-widget-container" style="height:100%;width:100%">
         <div id="tradingview_mep" style="height:100%;width:100%"></div>
@@ -594,16 +598,16 @@
           "symbol": "BYMA:AL30/BYMA:AL30D",
           "interval": "D",
           "timezone": "America/Argentina/Buenos_Aires",
-          "theme": "dark",
+          "theme": document.body.classList.contains('light') ? 'light' : 'dark',
           "style": "1",
           "locale": "es",
-          "toolbar_bg": "#0b0f1e",
+          "toolbar_bg": document.body.classList.contains('light') ? '#f5f6fa' : '#0b0f1e',
           "enable_publishing": false,
           "hide_top_toolbar": false,
           "hide_legend": false,
           "save_image": false,
           "container_id": "tradingview_mep",
-          "backgroundColor": "#141e30"
+          "backgroundColor": document.body.classList.contains('light') ? '#ffffff' : '#141e30'
         });
         </script>
       </div>
@@ -615,7 +619,7 @@
     <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-8647898779857303"
-      data-ad-slot="3029845442"
+      data-ad-slot="4698150332"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -738,6 +742,7 @@
       <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem">Billete<span style="color:#7dd3fc">AR</span></div>
       <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">Información financiera de Argentina en tiempo real. Dólar blue, MEP, CCL, criptomonedas, acciones y más. Simple, rápido y actualizado al minuto.</p>
       <p style="font-size:.72rem;color:var(--muted2)">Los datos se obtienen de fuentes públicas (DolarAPI, ArgentinaDatos, CoinGecko, Bluelytics, TradingView). BilleteAR no garantiza la exactitud de los precios.</p>
+      <p style="font-size:.72rem;color:var(--muted2);margin-top:.6rem"><strong style="color:var(--muted)">Quiénes somos:</strong> BilleteAR es un proyecto independiente que reúne datos financieros de fuentes públicas para que cualquier argentino pueda seguir el pulso de la economía. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
     </div>
     <div>
       <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Legal</div>
@@ -762,6 +767,20 @@
 
 <script src="shared.js"></script>
 <script>
+/* ── Staleness detection ── */
+let lastFetchTime = Date.now();
+setInterval(() => {
+  const mins = Math.round((Date.now() - lastFetchTime) / 60000);
+  const el = document.getElementById('staleWarning');
+  if (!el) return;
+  if (mins >= 10) {
+    el.style.display = 'block';
+    el.querySelector('.stale-mins').textContent = mins;
+  } else {
+    el.style.display = 'none';
+  }
+}, 60000);
+
 /* ── Sparkline SVG ── */
 let _sparkUID = 0;
 function sparklineSVG(values, w=90, h=32) {
@@ -1361,6 +1380,7 @@ async function refreshAll(){
   ]);
   // Re-render daily % changes using cached historical data
   renderAllDailyChanges();
+  lastFetchTime = Date.now();
 }
 
 /* Scroll spy */

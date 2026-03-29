@@ -105,6 +105,21 @@
     .info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.2rem}
     .info-card-title{font-size:.82rem;font-weight:700;color:var(--text2);margin-bottom:.5rem}
     .info-card-body{font-size:.79rem;color:var(--muted);line-height:1.6}
+
+    /* -- Estimated data markers -- */
+    .est-badge{display:inline-flex;align-items:center;font-size:.65rem;padding:1px 6px;border-radius:8px;border:1px dashed var(--amber,#f59e0b);color:var(--amber,#f59e0b);font-weight:600;margin-left:4px;white-space:nowrap;cursor:help;vertical-align:middle;line-height:1.4}
+    .est-warning{background:rgba(245,158,11,.07);border-left:3px solid var(--amber,#f59e0b);border-radius:8px;padding:.7rem 1rem;margin-bottom:.8rem;font-size:.78rem;color:var(--muted);line-height:1.55;display:flex;align-items:flex-start;gap:8px}
+    .est-warning-icon{font-size:1rem;flex-shrink:0;line-height:1}
+    .est-rate{color:var(--amber,#f59e0b)!important;opacity:.9}
+
+    /* -- Source labels -- */
+    .source-label{font-size:.72rem;color:var(--muted2);margin-top:-.5rem;margin-bottom:.8rem}
+
+    /* -- Staleness warning banner -- */
+    .stale-warning{display:none;align-items:center;justify-content:center;gap:10px;background:rgba(245,158,11,.1);border:1px solid var(--amber,#f59e0b);border-radius:12px;padding:.7rem 1.2rem;margin:0 auto 1.2rem;max-width:1200px;font-size:.82rem;color:var(--amber,#f59e0b);text-align:center}
+    .stale-warning.visible{display:flex}
+    .stale-warning button{background:var(--amber,#f59e0b);color:#000;border:none;border-radius:6px;padding:4px 14px;font:600 .78rem 'DM Sans',sans-serif;cursor:pointer;transition:opacity .15s}
+    .stale-warning button:hover{opacity:.85}
   </style>
 <script type="application/ld+json">
 {
@@ -204,11 +219,13 @@
 </nav>
 
 <main>
+<div class="stale-warning" id="staleBanner">&#x26A0;&#xFE0F; Los datos pueden estar desactualizados. &Uacute;ltima actualizaci&oacute;n: <span id="staleTime">hace ? minutos</span> <button onclick="triggerRefresh();refreshAll()">Actualizar</button></div>
 <h1 class="sr-only">Rendimientos en Argentina – Plazo fijo, billeteras virtuales, cauciones y FCI</h1>
 
   <!-- 1. Plazo Fijo Tradicional -->
   <div class="section" id="plazo-fijo" style="animation-delay:.05s">
     <div class="sec-header"><h2 class="sec-title">Plazo Fijo Tradicional</h2><div class="sec-line"></div></div>
+    <div class="source-label">Fuente: ArgentinaDatos (BCRA)</div>
     <div class="rend-card">
       <div class="rend-card-header">
         <span class="rend-card-icon">&#x1F3E6;</span>
@@ -236,6 +253,8 @@
   <!-- 3. Billeteras Virtuales -->
   <div class="section" id="billeteras" style="animation-delay:.11s">
     <div class="sec-header"><h2 class="sec-title">Billeteras Virtuales</h2><div class="sec-line"></div></div>
+    <div class="source-label">Estimaci&oacute;n basada en promedio de mercado</div>
+    <div class="est-warning"><span class="est-warning-icon">&#x26A0;&#xFE0F;</span><span>Las tasas de billeteras virtuales son estimaciones basadas en promedios del mercado. No son datos oficiales. Verific&aacute; siempre en cada app.</span></div>
     <div class="rend-card">
       <div class="rend-card-header">
         <span class="rend-card-icon">&#x1F4F1;</span>
@@ -250,6 +269,8 @@
   <!-- 4. Cauciones Bursatiles -->
   <div class="section" id="cauciones" style="animation-delay:.14s">
     <div class="sec-header"><h2 class="sec-title">Cauciones Burs&aacute;tiles</h2><div class="sec-line"></div></div>
+    <div class="source-label">Estimaci&oacute;n basada en promedio de mercado</div>
+    <div class="est-warning"><span class="est-warning-icon">&#x26A0;&#xFE0F;</span><span>Las tasas de cauciones son estimaciones basadas en promedios del mercado. Las tasas reales var&iacute;an seg&uacute;n oferta y demanda. Consult&aacute; en tu broker.</span></div>
     <div class="explain-card">
       <div class="explain-title">&#x1F4B0; Pr&eacute;stamos a corto plazo en el mercado burs&aacute;til</div>
       <div class="explain-body">
@@ -263,6 +284,7 @@
   <!-- 5. FCI -->
   <div class="section" id="fci" style="animation-delay:.17s">
     <div class="sec-header"><h2 class="sec-title">Fondos Comunes de Inversi&oacute;n (FCI)</h2><div class="sec-line"></div></div>
+    <div class="source-label">Fuente: CAFCI v&iacute;a ArgentinaDatos</div>
     <div class="rend-card">
       <div class="rend-card-header">
         <span class="rend-card-icon">&#x1F4CA;</span>
@@ -398,7 +420,7 @@
   <div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;font-size:.82rem;color:var(--muted)">
     <div>
       <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem">Billete<span style="color:#7dd3fc">AR</span></div>
-      <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">Informaci&oacute;n financiera de Argentina en tiempo real. D&oacute;lar blue, MEP, CCL, criptomonedas, acciones y m&aacute;s. Simple, r&aacute;pido y actualizado al minuto.</p>
+      <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">BilleteAR es un proyecto independiente que re&uacute;ne datos financieros de fuentes p&uacute;blicas para que cualquier argentino pueda seguir el pulso de la econom&iacute;a. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
       <p style="font-size:.72rem;color:var(--muted2)">Los datos se obtienen de fuentes p&uacute;blicas (DolarAPI, ArgentinaDatos, CoinGecko, Bluelytics, TradingView). BilleteAR no garantiza la exactitud de los precios.</p>
     </div>
     <div>
@@ -470,18 +492,18 @@ async function loadRates() {
     // Billeteras: no están en la API (son FCI money market). Estimar con tasa promedio de plazo fijo.
     const avgTna = rendData.plazoFijo.reduce((s, p) => s + p.tna, 0) / (rendData.plazoFijo.length || 1);
     rendData.billeteras = [
-      { nombre: 'Mercado Pago', tna: +(avgTna * 1.05).toFixed(1), url: 'https://www.mercadopago.com.ar', logo: '', limite: 'Hasta $1.000.000' },
-      { nombre: 'Ualá', tna: +(avgTna * 1.02).toFixed(1), url: 'https://www.uala.com.ar', logo: '', limite: 'Sin tope' },
-      { nombre: 'Naranja X', tna: +(avgTna * 1.07).toFixed(1), url: 'https://www.naranjax.com', logo: '', limite: 'Hasta $500.000' },
-      { nombre: 'Personal Pay', tna: +(avgTna * 1.10).toFixed(1), url: 'https://www.personalpay.com.ar', logo: '', limite: 'Hasta $500.000' },
-      { nombre: 'Prex', tna: +(avgTna * 0.97).toFixed(1), url: 'https://www.prexcard.com', logo: '', limite: 'Sin tope' },
-      { nombre: 'Lemon Cash', tna: +(avgTna * 0.85).toFixed(1), url: 'https://www.lemon.me', logo: '', limite: 'Sin tope' },
-      { nombre: 'Belo', tna: +(avgTna * 0.82).toFixed(1), url: 'https://www.belo.app', logo: '', limite: 'Sin tope' },
-      { nombre: 'Claro Pay', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.claropay.com.ar', logo: '', limite: 'Sin tope' },
-      { nombre: 'Carrefour Pay', tna: +(avgTna * 0.95).toFixed(1), url: 'https://www.micarrefour.com.ar', logo: '', limite: 'Hasta $200.000' },
-      { nombre: 'Cuenta DNI', tna: +(avgTna * 0.90).toFixed(1), url: 'https://www.bancoprovincia.com.ar', logo: '', limite: 'Hasta $500.000' },
-      { nombre: 'MODO', tna: +(avgTna * 0.98).toFixed(1), url: 'https://www.modo.com.ar', logo: '', limite: 'Según banco' },
-      { nombre: 'Tap', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.tapfinanzas.com.ar', logo: '', limite: 'Sin tope' },
+      { nombre: 'Mercado Pago', tna: +(avgTna * 1.05).toFixed(1), url: 'https://www.mercadopago.com.ar', logo: '', limite: 'Hasta $1.000.000', estimated: true },
+      { nombre: 'Ualá', tna: +(avgTna * 1.02).toFixed(1), url: 'https://www.uala.com.ar', logo: '', limite: 'Sin tope', estimated: true },
+      { nombre: 'Naranja X', tna: +(avgTna * 1.07).toFixed(1), url: 'https://www.naranjax.com', logo: '', limite: 'Hasta $500.000', estimated: true },
+      { nombre: 'Personal Pay', tna: +(avgTna * 1.10).toFixed(1), url: 'https://www.personalpay.com.ar', logo: '', limite: 'Hasta $500.000', estimated: true },
+      { nombre: 'Prex', tna: +(avgTna * 0.97).toFixed(1), url: 'https://www.prexcard.com', logo: '', limite: 'Sin tope', estimated: true },
+      { nombre: 'Lemon Cash', tna: +(avgTna * 0.85).toFixed(1), url: 'https://www.lemon.me', logo: '', limite: 'Sin tope', estimated: true },
+      { nombre: 'Belo', tna: +(avgTna * 0.82).toFixed(1), url: 'https://www.belo.app', logo: '', limite: 'Sin tope', estimated: true },
+      { nombre: 'Claro Pay', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.claropay.com.ar', logo: '', limite: 'Sin tope', estimated: true },
+      { nombre: 'Carrefour Pay', tna: +(avgTna * 0.95).toFixed(1), url: 'https://www.micarrefour.com.ar', logo: '', limite: 'Hasta $200.000', estimated: true },
+      { nombre: 'Cuenta DNI', tna: +(avgTna * 0.90).toFixed(1), url: 'https://www.bancoprovincia.com.ar', logo: '', limite: 'Hasta $500.000', estimated: true },
+      { nombre: 'MODO', tna: +(avgTna * 0.98).toFixed(1), url: 'https://www.modo.com.ar', logo: '', limite: 'Según banco', estimated: true },
+      { nombre: 'Tap', tna: +(avgTna * 1.00).toFixed(1), url: 'https://www.tapfinanzas.com.ar', logo: '', limite: 'Sin tope', estimated: true },
     ];
 
     // Cauciones: estimar basado en tasa promedio de plazo fijo
@@ -554,14 +576,18 @@ function renderBilleteras() {
     q('billRows').innerHTML = '<div class="rend-row" style="color:var(--muted);justify-content:center">Cargando tasas...</div>';
     return;
   }
-  q('billRows').innerHTML = sorted.map((b, i) =>
-    `<div class="rend-row">
-      ${nameWithLink(b, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
+  q('billRows').innerHTML = sorted.map((b, i) => {
+    const isEst = !!b.estimated;
+    const estBadge = isEst ? ' <span class="est-badge" title="Tasa estimada, no oficial">Est.</span>' : '';
+    const tnaClass = isEst ? 'rend-tna est-rate' : 'rend-tna';
+    const teaClass = isEst ? 'rend-tea est-rate' : 'rend-tea';
+    return `<div class="rend-row">
+      ${nameWithLink(b, (i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '') + estBadge)}
       <span class="rend-limite" style="font-size:.72rem;color:var(--muted)">${b.limite || '–'}</span>
-      <span class="rend-tna">${b.tna.toFixed(1)}%</span>
-      <span class="rend-tea">${tnaToTea(b.tna).toFixed(1)}%</span>
-    </div>`
-  ).join('');
+      <span class="${tnaClass}">${b.tna.toFixed(1)}%</span>
+      <span class="${teaClass}">${tnaToTea(b.tna).toFixed(1)}%</span>
+    </div>`;
+  }).join('');
 }
 
 /* ============================================================
@@ -570,8 +596,8 @@ function renderBilleteras() {
 function renderCauciones() {
   q('caucionRows').innerHTML = rendData.cauciones.map(c =>
     `<div class="explain-entry">
-      <span class="explain-entry-name">${c.plazo}</span>
-      <span class="explain-entry-val">~${c.tna}% TNA</span>
+      <span class="explain-entry-name">${c.plazo} <span class="est-badge" title="Tasa estimada, no oficial">Est.</span></span>
+      <span class="explain-entry-val est-rate">~${c.tna}% TNA</span>
     </div>`
   ).join('');
 }
@@ -771,14 +797,37 @@ function renderAll() {
   updateSim();
 }
 
+let lastDataTimestamp = null;
+
 async function refreshAll() {
   await loadRates(); // plazo fijo + billeteras estimadas primero
   await Promise.allSettled([loadFCI(), loadCryptoYields(), loadTicker(), loadCER()]);
   renderAll();
+  lastDataTimestamp = Date.now();
+  hideStaleBanner();
+}
+
+function checkStaleness() {
+  if (!lastDataTimestamp) return;
+  const elapsed = Date.now() - lastDataTimestamp;
+  const minutes = Math.floor(elapsed / 60000);
+  if (minutes >= 10) {
+    const el = q('staleBanner');
+    if (el) {
+      q('staleTime').textContent = 'hace ' + minutes + ' minutos';
+      el.classList.add('visible');
+    }
+  }
+}
+
+function hideStaleBanner() {
+  const el = q('staleBanner');
+  if (el) el.classList.remove('visible');
 }
 
 refreshAll();
 setInterval(refreshAll, 5 * 60 * 1000);
+setInterval(checkStaleness, 60 * 1000);
 
 // Subnav scroll tracking
 (function(){

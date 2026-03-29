@@ -145,12 +145,12 @@
 <!-- Stats bar -->
 <div class="stats-bar">
   <div class="stats-bar-inner">
-    <div class="sb-item"><span class="sb-label">Blue</span>&nbsp;<span class="sb-val" id="sb-blue">&ndash;</span></div>
-    <div class="sb-item"><span class="sb-label">MEP</span>&nbsp;<span class="sb-val" id="sb-mep">&ndash;</span></div>
-    <div class="sb-item"><span class="sb-label">CCL</span>&nbsp;<span class="sb-val" id="sb-ccl">&ndash;</span></div>
+    <div class="sb-item" title="Dólar informal que se compra en cuevas y arbolitos" style="cursor:help"><span class="sb-label">Blue</span>&nbsp;<span class="sb-val" id="sb-blue">&ndash;</span></div>
+    <div class="sb-item" title="Dólar Bolsa — se obtiene comprando y vendiendo bonos en pesos y dólares" style="cursor:help"><span class="sb-label">MEP</span>&nbsp;<span class="sb-val" id="sb-mep">&ndash;</span></div>
+    <div class="sb-item" title="Contado con Liquidación — similar al MEP pero se liquida en cuenta en el exterior" style="cursor:help"><span class="sb-label">CCL</span>&nbsp;<span class="sb-val" id="sb-ccl">&ndash;</span></div>
     <div class="sb-item"><span class="sb-label">Oficial</span>&nbsp;<span class="sb-val" id="sb-oficial">&ndash;</span></div>
-    <div class="sb-item"><span class="sb-label">Brecha</span>&nbsp;<span class="sb-val" id="sb-brecha" style="color:var(--orange)">&ndash;</span></div>
-    <div class="sb-item"><span class="sb-label">Riesgo Pais</span>&nbsp;<span class="sb-val" id="sb-riesgo" style="color:var(--orange)">&ndash;</span></div>
+    <div class="sb-item" title="Diferencia porcentual entre el dólar blue y el oficial" style="cursor:help"><span class="sb-label">Brecha</span>&nbsp;<span class="sb-val" id="sb-brecha" style="color:var(--orange)">&ndash;</span></div>
+    <div class="sb-item" title="Índice EMBI+ de JP Morgan — mide el riesgo de default de Argentina" style="cursor:help"><span class="sb-label">Riesgo Pais</span>&nbsp;<span class="sb-val" id="sb-riesgo" style="color:var(--orange)">&ndash;</span></div>
     <div class="sb-item"><span class="sb-label">BTC</span>&nbsp;<span class="sb-val" id="sb-btc" style="color:var(--muted)">&ndash;</span></div>
   </div>
 </div>
@@ -159,6 +159,16 @@
 
 <h1 class="sr-only">Dólar blue hoy y cotizaciones en tiempo real – Argentina</h1>
 
+<div style="text-align:center;padding:1.2rem 1rem .5rem;max-width:600px;margin:0 auto">
+  <p style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:.3rem">Toda la economía argentina, en tiempo real</p>
+  <p style="font-size:.78rem;color:var(--muted)">Dólar, cripto, inversiones, mercados y noticias — actualizado cada minuto</p>
+</div>
+
+<!-- Stale data warning -->
+<div id="staleWarning" style="display:none;background:rgba(251,191,36,.1);border:1px solid rgba(251,191,36,.3);color:var(--amber);text-align:center;padding:.5rem;font-size:.78rem">
+  ⚠️ Los datos pueden estar desactualizados · <button onclick="location.reload()" style="background:none;border:none;color:var(--sky);cursor:pointer;text-decoration:underline;font-size:.78rem">Actualizar</button>
+</div>
+
   <!-- Dollar cards -->
   <div class="section" style="animation-delay:.05s">
     <div class="sec-header">
@@ -166,6 +176,7 @@
       <div class="sec-line"></div>
       <a href="dolares.html" style="font-size:.75rem;color:var(--sky);text-decoration:none;white-space:nowrap">Ver detalle &rarr;</a>
     </div>
+    <span style="font-size:.7rem;color:var(--muted2)">Fuente: DolarAPI / Bluelytics</span>
     <div class="dolar-grid" id="dolarGrid">
       <!-- Skeleton cards while loading -->
       <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Blue</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
@@ -217,7 +228,7 @@
     <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-8647898779857303"
-      data-ad-slot="3029845442"
+      data-ad-slot="9922353599"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -230,6 +241,7 @@
       <div class="sec-line"></div>
       <a href="noticias.html" style="font-size:.75rem;color:var(--sky);text-decoration:none;white-space:nowrap">Ver todas &rarr;</a>
     </div>
+    <span style="font-size:.7rem;color:var(--muted2)">Fuente: Google News, Infobae, Ámbito, BBC, Cronista, La Nación, Reuters, El País</span>
     <div class="news-grid" id="newsGrid">
       <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
       <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
@@ -243,7 +255,7 @@
     <ins class="adsbygoogle"
       style="display:block"
       data-ad-client="ca-pub-8647898779857303"
-      data-ad-slot="3029845442"
+      data-ad-slot="9922353599"
       data-ad-format="auto"
       data-full-width-responsive="true"></ins>
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
@@ -255,7 +267,7 @@
   <div class="footer-inner">
     <div>
       <div class="footer-brand">Billete<span>AR</span></div>
-      <p class="footer-desc">Información financiera de Argentina en tiempo real. Dólar blue, MEP, CCL, oficial y cripto. Simple, rápido y actualizado al minuto.</p>
+      <p class="footer-desc">BilleteAR es un proyecto independiente que reúne datos financieros de fuentes públicas para que cualquier argentino pueda seguir el pulso de la economía. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
       <p class="footer-disclaimer">Los datos se obtienen de fuentes publicas (DolarAPI, ArgentinaDatos, CoinGecko). BilleteAR no garantiza la exactitud de los precios. No constituye asesoramiento financiero.</p>
     </div>
     <div>
@@ -456,8 +468,28 @@ async function refreshAll(){
   ]);
 }
 
+window._lastFetchTime = null;
+
+const _origRefreshAll = refreshAll;
+refreshAll = async function() {
+  await _origRefreshAll();
+  window._lastFetchTime = Date.now();
+  const warn = document.getElementById('staleWarning');
+  if (warn) warn.style.display = 'none';
+};
+
 refreshAll();
-setInterval(refreshAll,3*60*1000);
+setInterval(refreshAll, 3 * 60 * 1000);
+
+// Staleness check every 60s
+setInterval(function() {
+  if (!window._lastFetchTime) return;
+  const age = Date.now() - window._lastFetchTime;
+  const warn = document.getElementById('staleWarning');
+  if (warn) {
+    warn.style.display = age > 10 * 60 * 1000 ? 'block' : 'none';
+  }
+}, 60 * 1000);
 </script>
 </body>
 </html>
