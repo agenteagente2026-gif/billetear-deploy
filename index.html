@@ -430,23 +430,45 @@ async function loadNews(){
   }).join('');
 }
 
+// Load yesterday's prices ONCE (not on every refresh) with localStorage cache
+let yesterdayLoaded=false;
+async function loadYesterdayPrices(){
+  if(yesterdayLoaded)return;
+  // Try localStorage cache (valid 4 hours)
+  try{
+    const c=JSON.parse(localStorage.getItem('billetear_yesterday')||'null');
+    if(c&&Date.now()-c.ts<4*3600*1000&&Object.keys(c.data).length>=3){
+      Object.assign(yesterdayPrices,c.data);
+      yesterdayLoaded=true;
+      if(window._lastDollarData)renderDollarCards(window._lastDollarData);
+      return;
+    }
+  }catch{}
+  // Fetch from API (heavy — full history, so only do once)
+  const today=new Date().toISOString().split('T')[0];
+  await Promise.allSettled(['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].map(tipo=>
+    fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/'+tipo).then(hist=>{
+      if(Array.isArray(hist)&&hist.length>=2){
+        const lastDate=hist[hist.length-1].fecha;
+        // If last entry is today, yesterday = second-to-last
+        // If last entry is a past date, that IS yesterday/last trading day
+        yesterdayPrices[tipo]=lastDate===today?hist[hist.length-2].venta:hist[hist.length-1].venta;
+      }
+    }).catch(()=>{})
+  ));
+  if(Object.keys(yesterdayPrices).length>0){
+    yesterdayLoaded=true;
+    try{localStorage.setItem('billetear_yesterday',JSON.stringify({data:yesterdayPrices,ts:Date.now()}));}catch{}
+  }
+  if(window._lastDollarData)renderDollarCards(window._lastDollarData);
+}
+
 async function refreshAll(){
   await Promise.allSettled([
     // Dollar prices
     fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
       renderDollarCards(data);
     }).catch(()=>{}),
-
-    // Yesterday's prices for daily variation
-    Promise.allSettled(['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].map(tipo=>
-      fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/'+tipo).then(hist=>{
-        if(Array.isArray(hist)&&hist.length>=2){
-          yesterdayPrices[tipo]=hist[hist.length-2].venta;
-        }
-      }).catch(()=>{})
-    )).then(()=>{
-      if(window._lastDollarData)renderDollarCards(window._lastDollarData);
-    }),
 
     // Crypto for stats bar
     fetchJSON('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin&order=market_cap_desc&per_page=1&sparkline=false&price_change_percentage=24h').then(data=>{
@@ -480,6 +502,7 @@ refreshAll = async function() {
 };
 
 refreshAll();
+loadYesterdayPrices(); // heavy API call, only once
 setInterval(refreshAll, 3 * 60 * 1000);
 
 // Staleness check every 60s

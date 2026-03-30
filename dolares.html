@@ -1080,7 +1080,11 @@ function flashEl(id, newVal, prevVal) {
 function renderMiniChg(elId, tipo, currentPrice) {
   const hist = allHistory[tipo];
   if (!hist || hist.length < 2 || !currentPrice) return;
-  const yesterday = hist[hist.length - 2]?.venta || hist[hist.length - 1]?.venta;
+  // Smart comparison: if last historical entry is today, compare vs second-to-last
+  // If last entry is a past date, compare live price vs that entry (= yesterday)
+  const today = new Date().toISOString().split('T')[0];
+  const lastDate = hist[hist.length - 1]?.fecha;
+  const yesterday = (lastDate === today) ? hist[hist.length - 2]?.venta : hist[hist.length - 1]?.venta;
   if (!yesterday) return;
   const pct = ((currentPrice - yesterday) / yesterday * 100);
   const el = q(elId);
@@ -1335,10 +1339,13 @@ async function loadHistorical(){
 }
 
 function renderAllDailyChanges(){
+  const liveData = currentDollarData || [];
   ['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].forEach(tipo => {
     const hist = allHistory[tipo];
     if (!hist || hist.length < 2) return;
-    const current = hist[hist.length - 1]?.venta;
+    // Use live DolarAPI price when available, fall back to last historical
+    const live = liveData.find(d => d.casa === tipo);
+    const current = live?.venta || hist[hist.length - 1]?.venta;
     const chgIds = {blue:'blueChg', bolsa:'mepChg', contadoconliqui:'cclChg', oficial:'oficialChg', cripto:'criptoChg', mayorista:'mayoristaChg'};
     if (chgIds[tipo] && current) renderMiniChg(chgIds[tipo], tipo, current);
   });
@@ -1353,6 +1360,8 @@ async function refreshAll(){
       currentDollarData = data;
       calcAll('refresh');
       renderDollars(data);
+      // Re-render daily changes with live prices (if historical already loaded)
+      if(allHistory.blue&&allHistory.blue.length)renderAllDailyChanges();
       const blue=data.find(d=>d.casa==='blue');
       if(blue)loadBlueBySource(blue).catch(()=>{});
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
