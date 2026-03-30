@@ -180,7 +180,7 @@
 
   <!-- Acciones argentinas: detalle -->
   <div class="section" id="argentina" style="animation-delay:.05s">
-    <div class="sec-header"><h2 class="sec-title">ADRs argentinos — gráfico</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title" title="American Depositary Receipts — acciones argentinas que cotizan en Wall Street" style="cursor:help">ADRs argentinos — gráfico</h2><div class="sec-line"></div></div>
     <div id="marketBanner"></div>
 
     <!-- TradingView Symbol Overview: ADRs (dynamic theme) -->
@@ -302,7 +302,7 @@
 
   <!-- Merval & S&P full chart -->
   <div class="section" id="us" style="animation-delay:.14s">
-    <div class="sec-header"><h2 class="sec-title">S&amp;P 500 y Merval — gráfico comparativo</h2><div class="sec-line"></div></div>
+    <div class="sec-header"><h2 class="sec-title"><span title="Standard & Poor's 500 — índice de las 500 mayores empresas de EE.UU." style="cursor:help">S&amp;P 500</span> y <span title="Índice Merval — las acciones más negociadas de la Bolsa de Buenos Aires" style="cursor:help">Merval</span> — gráfico comparativo</h2><div class="sec-line"></div></div>
     <div id="tv-sp-merval-wrap" style="border-radius:14px;overflow:hidden"></div>
   </div>
 
@@ -320,32 +320,31 @@
 
 </main>
 
-<footer style="border-top:1px solid var(--border);margin-top:3rem">
-  <div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;font-size:.82rem;color:var(--muted)">
+<footer>
+  <div class="footer-grid">
     <div>
-      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem">Billete<span style="color:#7dd3fc">AR</span></div>
-      <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">Información financiera de Argentina en tiempo real. Dólar blue, MEP, CCL, criptomonedas, acciones y más. Simple, rápido y actualizado al minuto.</p>
-      <p style="font-size:.72rem;color:var(--muted2)">Los datos se obtienen de fuentes públicas (DolarAPI, ArgentinaDatos, CoinGecko, Bluelytics, TradingView). BilleteAR no garantiza la exactitud de los precios.</p>
-      <p style="font-size:.72rem;color:var(--muted2);margin-top:.6rem"><strong style="color:var(--muted)">Quiénes somos:</strong> BilleteAR es un proyecto independiente que reúne datos financieros de fuentes públicas para que cualquier argentino pueda seguir el pulso de la economía. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
+      <div class="footer-brand">Billete<span>AR</span></div>
+      <p class="footer-desc">BilleteAR es un proyecto independiente que re&uacute;ne datos financieros de fuentes p&uacute;blicas para que cualquier argentino pueda seguir el pulso de la econom&iacute;a. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
+      <p class="footer-source">Fuentes: TradingView, IOL. BilleteAR no garantiza la exactitud de los precios.</p>
     </div>
     <div>
-      <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Legal</div>
-      <div style="display:flex;flex-direction:column;gap:.5rem">
-        <a href="disclaimer.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Disclaimer</a>
-        <a href="terminos.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Términos y condiciones</a>
-        <a href="privacidad.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Política de privacidad</a>
+      <div class="footer-heading">Legal</div>
+      <div class="footer-links">
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="terminos.html">T&eacute;rminos y condiciones</a>
+        <a href="privacidad.html">Pol&iacute;tica de privacidad</a>
       </div>
     </div>
     <div>
-      <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Contacto</div>
-      <div style="display:flex;flex-direction:column;gap:.5rem">
-        <a href="mailto:contacto@billetear.com" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">contacto@billetear.com</a>
+      <div class="footer-heading">Contacto</div>
+      <div class="footer-links">
+        <a href="mailto:contacto@billetear.com">contacto@billetear.com</a>
       </div>
     </div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:.8rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem;color:var(--muted2)">
+  <div class="footer-bottom">
     <div>&copy; 2026 BilleteAR. Todos los derechos reservados.</div>
-    <div>No constituye asesoramiento financiero ni recomendación de inversión.</div>
+    <div>No constituye asesoramiento financiero ni recomendaci&oacute;n de inversi&oacute;n.</div>
   </div>
 </footer>
 

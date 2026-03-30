@@ -179,12 +179,12 @@
     <span style="font-size:.7rem;color:var(--muted2)">Fuente: DolarAPI / Bluelytics</span>
     <div class="dolar-grid" id="dolarGrid">
       <!-- Skeleton cards while loading -->
-      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Blue</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">MEP</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">CCL</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Oficial</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Cripto</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
-      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Mayorista</span><span class="dc-var neu">&mdash;</span></div><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Blue</span><span class="dc-var neu">&mdash;</span></div><span class="dc-desc">Informal, sin regulaci&oacute;n. El m&aacute;s usado como referencia</span><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">MEP</span><span class="dc-var neu">&mdash;</span></div><span class="dc-desc">D&oacute;lar Bolsa: se compra con bonos. Legal y sin l&iacute;mite</span><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">CCL</span><span class="dc-var neu">&mdash;</span></div><span class="dc-desc">Contado con Liquidaci&oacute;n: similar al MEP, se cobra en el exterior</span><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Oficial</span><span class="dc-var neu">&mdash;</span></div><span class="dc-desc">Regulado por el Banco Central. Se compra en bancos</span><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Cripto</span><span class="dc-var neu">&mdash;</span></div><span class="dc-desc">Se obtiene comprando USDT en exchanges de criptomonedas</span><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
+      <div class="dolar-card" ><div class="dc-top"><span class="dc-name">Mayorista</span><span class="dc-var neu">&mdash;</span></div><span class="dc-desc">Para comercio exterior y grandes operaciones</span><div class="dc-prices"><div class="dc-col"><span class="dc-label">Compra</span><div class="dc-skel"></div></div><div class="dc-col"><span class="dc-label">Venta</span><div class="dc-skel"></div></div></div></div>
     </div>
   </div>
 
@@ -311,12 +311,12 @@ function relTime(str){if(!str)return'';const d=Math.floor((Date.now()-new Date(s
 const yesterdayPrices={};
 
 const DOLAR_CONFIG=[
-  {casa:'blue',name:'Blue',color:'#facc15',anchor:'#blue'},
-  {casa:'bolsa',name:'MEP',color:'#38bdf8',anchor:'#mep'},
-  {casa:'contadoconliqui',name:'CCL',color:'#f97316',anchor:'#ccl'},
-  {casa:'oficial',name:'Oficial',color:'#22c55e',anchor:'#oficial'},
-  {casa:'cripto',name:'Cripto',color:'#a78bfa',anchor:'#cripto'},
-  {casa:'mayorista',name:'Mayorista',color:'#6b7d95',anchor:'#mayorista'},
+  {casa:'blue',name:'Blue',color:'#facc15',anchor:'#blue',desc:'Informal, sin regulación. El más usado como referencia'},
+  {casa:'bolsa',name:'MEP',color:'#38bdf8',anchor:'#mep',desc:'Dólar Bolsa: se compra con bonos. Legal y sin límite'},
+  {casa:'contadoconliqui',name:'CCL',color:'#f97316',anchor:'#ccl',desc:'Contado con Liquidación: similar al MEP, se cobra en el exterior'},
+  {casa:'oficial',name:'Oficial',color:'#22c55e',anchor:'#oficial',desc:'Regulado por el Banco Central. Se compra en bancos'},
+  {casa:'cripto',name:'Cripto',color:'#a78bfa',anchor:'#cripto',desc:'Se obtiene comprando USDT en exchanges de criptomonedas'},
+  {casa:'mayorista',name:'Mayorista',color:'#6b7d95',anchor:'#mayorista',desc:'Para comercio exterior y grandes operaciones'},
 ];
 
 function renderDollarCards(data){
@@ -343,6 +343,7 @@ function renderDollarCards(data){
 
     return '<a class="dolar-card" href="dolares.html'+cfg.anchor+'" >'+
       '<div class="dc-top"><span class="dc-name">'+cfg.name+'</span>'+varHtml+'</div>'+
+      '<span class="dc-desc">'+escHTML(cfg.desc)+'</span>'+
       '<div class="dc-prices">'+
         '<div class="dc-col"><span class="dc-label">Compra</span><span class="dc-price">'+compra+'</span></div>'+
         '<div class="dc-col"><span class="dc-label">Venta</span><span class="dc-sell">'+venta+'</span></div>'+

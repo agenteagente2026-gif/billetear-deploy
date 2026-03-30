@@ -231,7 +231,7 @@
         <span class="rend-card-icon">&#x1F3E6;</span>
         <span class="rend-card-title">Tasas de plazo fijo a 30 d&iacute;as</span>
       </div>
-      <div class="rend-head"><span>Entidad</span><span>TNA</span><span>TEA</span></div>
+      <div class="rend-head"><span>Entidad</span><span title="Tasa Nominal Anual — la tasa base sin capitalización" style="cursor:help">TNA</span><span title="Tasa Efectiva Anual — lo que realmente ganás reinvirtiendo" style="cursor:help">TEA</span></div>
       <div id="pfRows"></div>
       <div class="rend-note">Datos en vivo v&iacute;a ArgentinaDatos. TNA = Tasa Nominal Anual. TEA = Tasa Efectiva Anual (reinversi&oacute;n a 30 d&iacute;as). Monto m&iacute;nimo habitual: $1.000.</div>
     </div>
@@ -260,7 +260,7 @@
         <span class="rend-card-icon">&#x1F4F1;</span>
         <span class="rend-card-title">Cuenta remunerada (FCI Money Market)</span>
       </div>
-      <div class="rend-head"><span>App</span><span>L&iacute;mite</span><span>TNA</span><span>TEA</span></div>
+      <div class="rend-head"><span>App</span><span>L&iacute;mite</span><span title="Tasa Nominal Anual" style="cursor:help">TNA</span><span title="Tasa Efectiva Anual" style="cursor:help">TEA</span></div>
       <div id="billRows"></div>
       <div class="rend-note">Tasas estimadas en base a plazo fijo promedio. Las billeteras invierten en FCI money market con rendimientos similares. Var&iacute;a diariamente. Sin plazo m&iacute;nimo, liquidez inmediata. Verific&aacute; en cada app.</div>
     </div>
@@ -290,7 +290,7 @@
         <span class="rend-card-icon">&#x1F4CA;</span>
         <span class="rend-card-title">FCI de renta fija en pesos</span>
       </div>
-      <div class="rend-head"><span>Fondo</span><span>TNA aprox.</span><span>TEA</span></div>
+      <div class="rend-head"><span>Fondo</span><span title="Tasa Nominal Anual aproximada" style="cursor:help">TNA aprox.</span><span title="Tasa Efectiva Anual" style="cursor:help">TEA</span></div>
       <div id="fciRows"></div>
       <div class="rend-note">TNA calculada en base a variaci&oacute;n diaria de cuotaparte (CAFCI v&iacute;a ArgentinaDatos). Los FCI no garantizan rendimiento. Rescate en 24-48hs seg&uacute;n el fondo.</div>
     </div>
@@ -416,29 +416,29 @@
 
 </main>
 
-<footer style="border-top:1px solid var(--border);margin-top:3rem">
-  <div style="max-width:1200px;margin:0 auto;padding:2.5rem 1.5rem 1.5rem;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2rem;font-size:.82rem;color:var(--muted)">
+<footer>
+  <div class="footer-grid">
     <div>
-      <div style="font-family:'DM Serif Display',serif;font-size:1.3rem;color:var(--sky);margin-bottom:.8rem">Billete<span style="color:#7dd3fc">AR</span></div>
-      <p style="line-height:1.6;max-width:380px;margin-bottom:1rem">BilleteAR es un proyecto independiente que re&uacute;ne datos financieros de fuentes p&uacute;blicas para que cualquier argentino pueda seguir el pulso de la econom&iacute;a. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
-      <p style="font-size:.72rem;color:var(--muted2)">Los datos se obtienen de fuentes p&uacute;blicas (DolarAPI, ArgentinaDatos, CoinGecko, Bluelytics, TradingView). BilleteAR no garantiza la exactitud de los precios.</p>
+      <div class="footer-brand">Billete<span>AR</span></div>
+      <p class="footer-desc">BilleteAR es un proyecto independiente que re&uacute;ne datos financieros de fuentes p&uacute;blicas para que cualquier argentino pueda seguir el pulso de la econom&iacute;a. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
+      <p class="footer-source">Fuentes: ArgentinaDatos (BCRA, INDEC), DolarAPI, CoinGecko. BilleteAR no garantiza la exactitud de los precios.</p>
     </div>
     <div>
-      <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Legal</div>
-      <div style="display:flex;flex-direction:column;gap:.5rem">
-        <a href="disclaimer.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Disclaimer</a>
-        <a href="terminos.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">T&eacute;rminos y condiciones</a>
-        <a href="privacidad.html" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">Pol&iacute;tica de privacidad</a>
+      <div class="footer-heading">Legal</div>
+      <div class="footer-links">
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="terminos.html">T&eacute;rminos y condiciones</a>
+        <a href="privacidad.html">Pol&iacute;tica de privacidad</a>
       </div>
     </div>
     <div>
-      <div style="font-weight:700;color:var(--text2);margin-bottom:.8rem;font-size:.75rem;text-transform:uppercase;letter-spacing:.05em">Contacto</div>
-      <div style="display:flex;flex-direction:column;gap:.5rem">
-        <a href="mailto:contacto@billetear.com" style="color:var(--muted);text-decoration:none;transition:color .2s" onmouseover="this.style.color='var(--sky)'" onmouseout="this.style.color='var(--muted)'">contacto@billetear.com</a>
+      <div class="footer-heading">Contacto</div>
+      <div class="footer-links">
+        <a href="mailto:contacto@billetear.com">contacto@billetear.com</a>
       </div>
     </div>
   </div>
-  <div style="max-width:1200px;margin:0 auto;padding:.8rem 1.5rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;flex-wrap:wrap;gap:.5rem;font-size:.7rem;color:var(--muted2)">
+  <div class="footer-bottom">
     <div>&copy; 2026 BilleteAR. Todos los derechos reservados.</div>
     <div>No constituye asesoramiento financiero ni recomendaci&oacute;n de inversi&oacute;n.</div>
   </div>
