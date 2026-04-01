@@ -60,6 +60,9 @@
     .macro-card.inflacion::before{background:radial-gradient(circle,rgba(34,197,94,.1),transparent 70%)}
     .macro-card.anual{background:linear-gradient(135deg,#1a0e2a 0%,#0d0715 100%);border:1px solid rgba(56,189,248,.2)}
     .macro-card.anual::before{background:radial-gradient(circle,rgba(56,189,248,.1),transparent 70%)}
+    .macro-card.reservas{background:linear-gradient(135deg,#0a1f2e 0%,#061018 100%);border:1px solid rgba(250,204,21,.2)}
+    .macro-card.reservas::before{background:radial-gradient(circle,rgba(250,204,21,.1),transparent 70%)}
+    .macro-card.reservas .macro-value{color:var(--amber,#fbbf24)}
     .macro-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.6rem}
     .macro-value{font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:.4rem}
     .macro-card.brecha .macro-value{color:var(--purple)}
@@ -232,7 +235,7 @@
 
   <!-- Big 4 macro cards -->
   <div class="section" style="animation-delay:.05s">
-    <div class="sec-header"><h2 class="sec-title">Indicadores clave</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuentes: DolarAPI, ArgentinaDatos (INDEC)</span></div>
+    <div class="sec-header"><h2 class="sec-title">Indicadores clave</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuentes: DolarAPI, ArgentinaDatos (INDEC), BCRA</span></div>
     <div class="macro-grid">
       <div class="macro-card brecha">
         <div class="macro-label">Brecha cambiaria</div>
@@ -254,6 +257,12 @@
         <div class="macro-label">Inflación anual</div>
         <div class="macro-value" id="inflaAnual">—</div>
         <div class="macro-sub" id="inflaAnualSub">variación interanual</div>
+      </div>
+      <div class="macro-card reservas" title="Reservas internacionales del Banco Central (BCRA) en millones de dólares" style="cursor:help">
+        <div class="macro-label">Reservas BCRA</div>
+        <div class="macro-value" id="reservasVal">—</div>
+        <div class="macro-sub" id="reservasSub">millones de dólares</div>
+        <div id="reservasTrend" style="margin-top:.5rem"></div>
       </div>
     </div>
   </div>
@@ -341,6 +350,33 @@
     </div>
   </div>
 
+  <!-- Reservas BCRA chart -->
+  <div class="section" style="animation-delay:.17s">
+    <div class="sec-header"><h2 class="sec-title">Reservas internacionales BCRA</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: BCRA</span></div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div>
+          <div class="chart-title">Reservas internacionales</div>
+          <div class="chart-sub">Fuente: Banco Central (BCRA) &middot; Millones de d&oacute;lares</div>
+        </div>
+        <div class="range-btns" id="reservasBtns">
+          <button class="range-btn" onclick="setReservasRange(30)">1M</button>
+          <button class="range-btn" onclick="setReservasRange(90)">3M</button>
+          <button class="range-btn active" onclick="setReservasRange(180)">6M</button>
+          <button class="range-btn" onclick="setReservasRange(365)">1A</button>
+          <button class="range-btn" onclick="setReservasRange(0)">Todo</button>
+        </div>
+      </div>
+      <div class="riesgo-history" id="reservasStats">
+        <div class="rh-item"><div class="rh-label">Actual</div><div class="rh-val skel" id="resNow" style="color:var(--amber,#fbbf24)">&nbsp;</div></div>
+        <div class="rh-item"><div class="rh-label">Hace 1 mes</div><div class="rh-val skel" id="res1m" style="color:var(--amber,#fbbf24)">&nbsp;</div></div>
+        <div class="rh-item"><div class="rh-label">M&aacute;x. 1 a&ntilde;o</div><div class="rh-val skel" id="resMax" style="color:var(--amber,#fbbf24)">&nbsp;</div></div>
+        <div class="rh-item"><div class="rh-label">M&iacute;n. 1 a&ntilde;o</div><div class="rh-val skel" id="resMin" style="color:var(--amber,#fbbf24)">&nbsp;</div></div>
+      </div>
+      <div class="chart-wrap-lg" style="margin-top:.8rem"><canvas id="reservasChart"></canvas></div>
+    </div>
+  </div>
+
   <!-- AdSense -->
   <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
     <ins class="adsbygoogle"
@@ -371,6 +407,10 @@
       <div class="info-card">
         <div class="info-card-title">Dólar Blue</div>
         <div class="info-card-body">El dólar "blue" es el tipo de cambio en el mercado informal o paralelo en Argentina. No es el oficial del Banco Central. Se usa como referencia de la demanda real de divisas. La brecha entre el blue y el oficial es un termómetro económico clave.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">Reservas internacionales</div>
+        <div class="info-card-body">Son los activos en moneda extranjera que posee el Banco Central (BCRA). Incluyen dólares, oro, DEGs del FMI y otros. Sirven para respaldar la moneda, pagar deuda y defender el tipo de cambio. Se expresan en millones de dólares y se actualizan diariamente.</div>
       </div>
     </div>
   </div>
@@ -456,7 +496,7 @@
     <div>
       <div class="footer-brand">Billete<span>AR</span></div>
       <p class="footer-desc">BilleteAR es un proyecto independiente que re&uacute;ne datos financieros de fuentes p&uacute;blicas para que cualquier argentino pueda seguir el pulso de la econom&iacute;a. No somos asesores financieros ni estamos asociados a ninguna entidad bancaria o financiera.</p>
-      <p class="footer-source">Fuentes: ArgentinaDatos (INDEC, BCRA), DolarAPI. BilleteAR no garantiza la exactitud de los precios.</p>
+      <p class="footer-source">Fuentes: ArgentinaDatos (INDEC), DolarAPI, BCRA. BilleteAR no garantiza la exactitud de los precios.</p>
     </div>
     <div>
       <div class="footer-heading">Legal</div>
@@ -746,6 +786,78 @@ setInterval(() => {
   }
 }, 60000);
 
+/* ============================================================
+   RESERVAS BCRA — API oficial del Banco Central v4.0
+   ============================================================ */
+let reservasData=[];
+let reservasChart=null;
+let reservasRange=180;
+
+async function loadReservas(){
+  try{
+    // Fetch last 2 years of data
+    const desde=new Date(Date.now()-730*864e5).toISOString().split('T')[0];
+    const hasta=new Date().toISOString().split('T')[0];
+    const url=`https://api.bcra.gob.ar/estadisticas/v4.0/Monetarias/1?Desde=${desde}&Hasta=${hasta}&Limit=800`;
+    const res=await fetch(url);
+    if(!res.ok)throw new Error('BCRA API error');
+    const json=await res.json();
+    if(!json.results||!json.results.length||!json.results[0].detalle)return;
+    // API returns {results:[{idVariable:1, detalle:[{fecha,valor},...]}]}
+    reservasData=json.results[0].detalle.map(d=>({fecha:d.fecha.split('T')[0],valor:d.valor})).sort((a,b)=>a.fecha.localeCompare(b.fecha));
+    // Render card
+    const last=reservasData[reservasData.length-1];
+    const fmtM=v=>'US$ '+Number(v).toLocaleString('es-AR',{maximumFractionDigits:0})+' M';
+    q('reservasVal').textContent=fmtM(last.valor);
+    q('reservasSub').textContent=`al ${new Date(last.fecha+'T12:00:00').toLocaleDateString('es-AR',{day:'numeric',month:'short',year:'numeric'})}`;
+    // Trend vs previous day
+    if(reservasData.length>=2){
+      const prev=reservasData[reservasData.length-2].valor;
+      const diff=last.valor-prev;
+      const pct=((diff/prev)*100).toFixed(2);
+      const cls=diff>=0?'up':'down';
+      const arrow=diff>=0?'▲':'▼';
+      q('reservasTrend').innerHTML=`<span class="macro-trend ${cls}">${arrow} ${Math.abs(diff).toLocaleString('es-AR')} M (${diff>=0?'+':''}${pct}%)</span>`;
+    }
+    // Stats
+    const y1=reservasData.filter(d=>d.fecha>=new Date(Date.now()-365*864e5).toISOString().split('T')[0]);
+    const m1Date=new Date(Date.now()-30*864e5).toISOString().split('T')[0];
+    const m1=reservasData.filter(d=>d.fecha<=m1Date);
+    q('resNow').textContent=fmtM(last.valor);q('resNow').classList.remove('skel');
+    q('res1m').textContent=m1.length?fmtM(m1[m1.length-1].valor):'—';q('res1m').classList.remove('skel');
+    const vals1y=y1.map(d=>d.valor);
+    q('resMax').textContent=vals1y.length?fmtM(Math.max(...vals1y)):'—';q('resMax').classList.remove('skel');
+    q('resMin').textContent=vals1y.length?fmtM(Math.min(...vals1y)):'—';q('resMin').classList.remove('skel');
+    drawReservasChart(reservasRange);
+  }catch(e){console.warn('Reservas BCRA:',e);}
+}
+
+function setReservasRange(days){
+  reservasRange=days;
+  document.querySelectorAll('#reservasBtns .range-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  drawReservasChart(days);
+}
+
+function drawReservasChart(days){
+  if(!reservasData.length)return;
+  const slice=days?reservasData.slice(-days):reservasData;
+  const labels=slice.map(d=>d.fecha);
+  const values=slice.map(d=>d.valor);
+  const ctx=q('reservasChart')?.getContext('2d');
+  if(!ctx)return;
+  if(reservasChart)reservasChart.destroy();
+  reservasChart=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{data:values,borderColor:'#fbbf24',backgroundColor:'rgba(251,191,36,.08)',fill:true,tension:.3,pointRadius:0,borderWidth:2}]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},tooltip:{mode:'index',intersect:false,callbacks:{label:c=>'US$ '+Number(c.raw).toLocaleString('es-AR')+' M'}}},
+      scales:{x:{ticks:{maxTicksLimit:6,font:{size:10},color:'#64748b'},grid:{display:false}},y:{ticks:{font:{size:10},color:'#64748b',callback:v=>'$'+v.toLocaleString('es-AR')},grid:{color:'rgba(255,255,255,.04)'}}}
+    }
+  });
+}
+
 async function refreshAll(){
   await Promise.allSettled([
     fetchJSON('https://dolarapi.com/v1/dolares').then(data=>{
@@ -762,6 +874,7 @@ async function refreshAll(){
     loadRiesgoPais().catch(()=>{}),
     loadInflacion().catch(()=>{}),
     loadBlue().catch(()=>{}),
+    loadReservas().catch(()=>{}),
   ]);
   q('lastUpdate').textContent='En vivo · '+new Date().toLocaleTimeString('es-AR',{hour:'2-digit',minute:'2-digit'});
   lastFetchTime = Date.now();
