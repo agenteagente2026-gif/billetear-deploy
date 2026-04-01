@@ -577,12 +577,10 @@ function renderBilleteras() {
     return;
   }
   q('billRows').innerHTML = sorted.map((b, i) => {
-    const isEst = !!b.estimated;
-    const estBadge = isEst ? ' <span class="est-badge" title="Tasa estimada, no oficial">Est.</span>' : '';
-    const tnaClass = isEst ? 'rend-tna est-rate' : 'rend-tna';
-    const teaClass = isEst ? 'rend-tea est-rate' : 'rend-tea';
+    const tnaClass = 'rend-tna';
+    const teaClass = 'rend-tea';
     return `<div class="rend-row">
-      ${nameWithLink(b, (i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '') + estBadge)}
+      ${nameWithLink(b, i === 0 ? ' <span class="rend-badge best">Mejor</span>' : '')}
       <span class="rend-limite" style="font-size:.72rem;color:var(--muted)">${b.limite || '–'}</span>
       <span class="${tnaClass}">${b.tna.toFixed(1)}%</span>
       <span class="${teaClass}">${tnaToTea(b.tna).toFixed(1)}%</span>
@@ -596,7 +594,7 @@ function renderBilleteras() {
 function renderCauciones() {
   q('caucionRows').innerHTML = rendData.cauciones.map(c =>
     `<div class="explain-entry">
-      <span class="explain-entry-name">${c.plazo} <span class="est-badge" title="Tasa estimada, no oficial">Est.</span></span>
+      <span class="explain-entry-name">${c.plazo}</span>
       <span class="explain-entry-val est-rate">~${c.tna}% TNA</span>
     </div>`
   ).join('');
