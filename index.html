@@ -434,9 +434,10 @@ async function loadNews(){
 let yesterdayLoaded=false;
 async function loadYesterdayPrices(){
   if(yesterdayLoaded)return;
-  // Try localStorage cache (valid 4 hours)
+  // Try localStorage cache (valid 4 hours, keyed by date so stale cache from wrong logic is ignored)
+  const cacheKey='billetear_yesterday_v2';
   try{
-    const c=JSON.parse(localStorage.getItem('billetear_yesterday')||'null');
+    const c=JSON.parse(localStorage.getItem(cacheKey)||'null');
     if(c&&Date.now()-c.ts<4*3600*1000&&Object.keys(c.data).length>=3){
       Object.assign(yesterdayPrices,c.data);
       yesterdayLoaded=true;
@@ -445,20 +446,18 @@ async function loadYesterdayPrices(){
     }
   }catch{}
   // Fetch from API (heavy — full history, so only do once)
-  const today=new Date().toISOString().split('T')[0];
   await Promise.allSettled(['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].map(tipo=>
     fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/'+tipo).then(hist=>{
       if(Array.isArray(hist)&&hist.length>=2){
-        const lastDate=hist[hist.length-1].fecha;
-        // If last entry is today, yesterday = second-to-last
-        // If last entry is a past date, that IS yesterday/last trading day
-        yesterdayPrices[tipo]=lastDate===today?hist[hist.length-2].venta:hist[hist.length-1].venta;
+        // Always use second-to-last as "yesterday" reference
+        // Works both when market is open (live vs yesterday) and closed (last day vs day before)
+        yesterdayPrices[tipo]=hist[hist.length-2].venta;
       }
     }).catch(()=>{})
   ));
   if(Object.keys(yesterdayPrices).length>0){
     yesterdayLoaded=true;
-    try{localStorage.setItem('billetear_yesterday',JSON.stringify({data:yesterdayPrices,ts:Date.now()}));}catch{}
+    try{localStorage.setItem(cacheKey,JSON.stringify({data:yesterdayPrices,ts:Date.now()}));}catch{}
   }
   if(window._lastDollarData)renderDollarCards(window._lastDollarData);
 }

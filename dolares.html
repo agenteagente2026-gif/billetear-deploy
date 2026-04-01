@@ -1080,11 +1080,9 @@ function flashEl(id, newVal, prevVal) {
 function renderMiniChg(elId, tipo, currentPrice) {
   const hist = allHistory[tipo];
   if (!hist || hist.length < 2 || !currentPrice) return;
-  // Smart comparison: if last historical entry is today, compare vs second-to-last
-  // If last entry is a past date, compare live price vs that entry (= yesterday)
-  const today = new Date().toISOString().split('T')[0];
-  const lastDate = hist[hist.length - 1]?.fecha;
-  const yesterday = (lastDate === today) ? hist[hist.length - 2]?.venta : hist[hist.length - 1]?.venta;
+  // Always compare against second-to-last entry (= yesterday/previous trading day)
+  // Works when market is open (live vs yesterday) and closed (last close vs day before)
+  const yesterday = hist[hist.length - 2]?.venta;
   if (!yesterday) return;
   const pct = ((currentPrice - yesterday) / yesterday * 100);
   const el = q(elId);
