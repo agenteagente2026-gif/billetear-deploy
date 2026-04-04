@@ -66,17 +66,17 @@ header{background:rgba(11,15,30,.95);backdrop-filter:blur(12px);border-bottom:2p
 .topnav-link.active{color:var(--sky);border-color:var(--sky)}
 
 /* ── Main layout ── */
-main{max-width:1200px;margin:0 auto;padding:1.8rem 1.5rem 3rem}
-.section{margin-bottom:2.5rem;animation:fadeUp .5s ease both}
+main{max-width:1200px;margin:0 auto;padding:2rem 1.5rem 3rem}
+.section{margin-bottom:2.8rem;animation:fadeUp .5s ease both}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .sec-header{display:flex;align-items:center;gap:12px;margin-bottom:1rem}
 .sec-title{font-family:'DM Serif Display',serif;font-size:.88rem;color:var(--sky);padding-left:12px;border-left:3px solid var(--sky);white-space:nowrap;text-transform:none;letter-spacing:0;font-weight:400}
 .sec-line{flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--border2),var(--sky),var(--border2),transparent);opacity:.5}
-.section+.section::before{content:'';display:block;height:1px;margin:-1.2rem auto 2.5rem;max-width:200px;background:linear-gradient(90deg,transparent,var(--border2),transparent)}
+.section+.section::before{content:'';display:block;height:1px;margin:-1rem auto 2.5rem;max-width:120px;background:linear-gradient(90deg,transparent,var(--border2),var(--sky),var(--border2),transparent);opacity:.4}
 
 /* ── Cards & skeleton ── */
-.glass-card{border-radius:20px;transition:transform .15s,box-shadow .15s}
-.glass-card:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,.15)}
+.glass-card{border-radius:22px;transition:transform .25s cubic-bezier(.4,0,.2,1),box-shadow .25s cubic-bezier(.4,0,.2,1)}
+.glass-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08)}
 .skel{background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
@@ -108,7 +108,8 @@ footer{border-top:1px solid var(--border);margin-top:3rem}
 .bn-inner{display:flex;justify-content:space-around;align-items:stretch}
 .bn-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:.55rem .3rem .45rem;text-decoration:none;color:var(--muted);font-size:.6rem;font-weight:600;gap:3px;transition:color .15s;border-top:2px solid transparent}
 .bn-item.active,.bn-item:hover{color:var(--sky);border-top-color:var(--sky)}
-.bn-icon{font-size:1.1rem;line-height:1}
+.bn-icon{display:flex;align-items:center;justify-content:center;width:20px;height:20px}
+.bn-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 @media(max-width:640px){.header-nav{display:none}.bottom-nav{display:block}main{padding-bottom:5rem}}
 
 /* ── FAQ (shared across multiple pages) ── */
