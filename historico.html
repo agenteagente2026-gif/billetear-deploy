@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S1ZTKVZH4E"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-S1ZTKVZH4E');</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Histórico del Dólar Blue, MEP y CCL en Argentina – BilleteAR</title>
+  <meta name="description" content="Gráfico histórico del dólar blue, MEP, CCL y oficial en Argentina. Comparación multi-dólar, consulta por fecha y evolución desde 2011." />
+  <meta name="keywords" content="historico dolar blue, grafico dolar argentina, evolucion dolar mep, dolar ccl historico" />
+  <meta property="og:title" content="Histórico del Dólar en Argentina – BilleteAR" />
+  <meta property="og:description" content="Gráfico histórico del dólar blue, MEP, CCL y oficial. Evolución y consulta por fecha." />
+  <meta property="og:url" content="https://billetear.com/historico" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_AR" />
+  <meta property="og:site_name" content="BilleteAR" />
+  <meta property="og:image" content="https://billetear.com/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Histórico del Dólar – BilleteAR" />
+  <meta name="twitter:description" content="Gráfico histórico multi-dólar y consulta por fecha." />
+  <meta name="twitter:image" content="https://billetear.com/og-image.png" />
+  <meta name="twitter:site" content="@billetear_ar" />
+  <link rel="canonical" href="https://billetear.com/historico" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#0b0f1e" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="shared.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8647898779857303" crossorigin="anonymous"></script>
+  <style>
+    .sec-title,.chart-title{font-family:'DM Serif Display',serif}
+    .chart-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:1.5rem;background:linear-gradient(180deg,var(--card2) 0%,var(--card) 8%);box-shadow:0 4px 20px rgba(0,0,0,.15)}
+    .chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
+    .chart-title{font-size:1.25rem;letter-spacing:-.3px}
+    .chart-sub{font-size:.73rem;color:var(--muted);margin-top:2px}
+    .chart-stat .val{font-size:1.6rem;font-weight:700;color:var(--sky);text-align:right}
+    .chart-stat .lbl{font-size:.65rem;color:var(--muted);text-align:right}
+    .chart-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+    .chart-tab{background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:10px;font:600 .75rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .chart-tab.active,.chart-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
+    .chart-wrap{height:350px;position:relative}
+    .chart-toggles{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
+    .chart-toggle{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer;font:500 .75rem 'DM Sans',sans-serif;color:var(--muted);transition:all .2s}
+    .chart-toggle.active{border-color:currentColor;color:var(--text)}
+    .chart-toggle .dot{width:8px;height:8px;border-radius:50%}
+    .ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:.8rem}
+    .ex-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;transition:all .2s}
+    .ex-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+    .ex-name{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.6rem}
+    .ex-row{display:flex;justify-content:space-between}
+    .ex-side .l{font-size:.62rem;color:var(--muted2);margin-bottom:2px}
+    .ex-side .v{font-size:1rem;font-weight:700}
+    .ex-side .v.b{color:var(--text2)}.ex-side .v.s{color:var(--sky)}
+    .calc-select{width:auto;min-width:170px;background:var(--card2);border:1px solid var(--border2);border-radius:10px;padding:.55rem .9rem;color:var(--text);font:500 .88rem 'DM Sans',sans-serif;outline:none;cursor:pointer}
+    .calc-select:focus{border-color:var(--sky)}
+    .back-link{font-size:.82rem;color:var(--sky);text-decoration:none;display:inline-flex;align-items:center;gap:4px;margin-bottom:1rem}
+    .back-link:hover{text-decoration:underline}
+    body.light .chart-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebPage","name":"Histórico del Dólar en Argentina","description":"Gráfico histórico del dólar blue, MEP, CCL y oficial en Argentina.","url":"https://billetear.com/historico","isPartOf":{"@type":"WebSite","name":"BilleteAR","url":"https://billetear.com"},"breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://billetear.com"},{"@type":"ListItem","position":2,"name":"Dólar","item":"https://billetear.com/dolares"},{"@type":"ListItem","position":3,"name":"Histórico","item":"https://billetear.com/historico"}]}}
+  </script>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a class="logo" href="index.html">
+      <img src="/favicon.svg" alt="" width="28" height="28" style="margin-right:8px" />
+      <span class="logo-text">Billete<em>AR</em></span>
+    </a>
+    <div class="header-nav">
+      <a class="topnav-link active" href="dolares.html">Dólar</a>
+      <a class="topnav-link" href="cripto.html">Cripto</a>
+      <a class="topnav-link" href="mercados.html">Bolsa</a>
+      <a class="topnav-link" href="rendimientos.html">Invertir</a>
+      <a class="topnav-link" href="indicadores.html">Economía</a>
+      <a class="topnav-link" href="noticias.html">Noticias</a>
+    </div>
+    <div class="nav-right">
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Cambiar tema" aria-label="Cambiar tema"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <a class="back-link" href="dolares.html">← Volver a Dólar</a>
+  <h1 class="sr-only">Histórico del dólar en Argentina</h1>
+
+  <div class="section">
+    <div class="sec-header"><h2 class="sec-title">Evolución histórica</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ArgentinaDatos</span></div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div><div class="chart-title">Evolución histórica</div><div class="chart-sub">Comparación histórica · argentinadatos.com</div></div>
+        <div class="chart-stat"><div class="val" id="chartCurrentVal">—</div><div class="lbl">blue actual</div></div>
+      </div>
+      <div class="chart-toggles">
+        <button class="chart-toggle active" onclick="toggleSeries('blue',this)" style="--c:#38bdf8"><span class="dot" style="background:#38bdf8"></span>Blue</button>
+        <button class="chart-toggle active" onclick="toggleSeries('bolsa',this)" style="--c:#22c55e"><span class="dot" style="background:#22c55e"></span>MEP</button>
+        <button class="chart-toggle active" onclick="toggleSeries('contadoconliqui',this)" style="--c:#f97316"><span class="dot" style="background:#f97316"></span>CCL</button>
+        <button class="chart-toggle" onclick="toggleSeries('oficial',this)" style="--c:#a78bfa"><span class="dot" style="background:#a78bfa"></span>Oficial</button>
+      </div>
+      <div class="chart-tabs">
+        <button class="chart-tab active" onclick="setRange(30,this)">1M</button>
+        <button class="chart-tab" onclick="setRange(90,this)">3M</button>
+        <button class="chart-tab" onclick="setRange(180,this)">6M</button>
+        <button class="chart-tab" onclick="setRange(365,this)">1A</button>
+        <button class="chart-tab" onclick="setRange(9999,this)">Todo</button>
+      </div>
+      <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="section" id="fecha">
+    <div class="sec-header"><h2 class="sec-title">Consulta por fecha</h2><div class="sec-line"></div></div>
+    <div class="chart-card">
+      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
+        <div>
+          <label style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:.4rem">Fecha</label>
+          <input type="date" id="fechaInput" class="calc-select" />
+        </div>
+        <button class="btn" style="align-self:flex-end;padding:8px 18px" onclick="buscarFecha()">Ver cotización</button>
+      </div>
+      <div id="fechaResult" style="display:none">
+        <div style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem" id="fechaLabel"></div>
+        <div class="ex-grid" id="fechaGrid"></div>
+      </div>
+      <div id="fechaEmpty" style="display:none;text-align:center;padding:1.5rem;color:var(--muted);font-size:.85rem">
+        No hay datos para la fecha seleccionada. Probá con otro día hábil.
+      </div>
+    </div>
+  </div>
+
+  <!-- AdSense -->
+  <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
+    <ins class="adsbygoogle"
+      style="display:block"
+      data-ad-client="ca-pub-8647898779857303"
+      data-ad-slot="4698150332"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">Billete<span>AR</span></div>
+      <p class="footer-desc">Datos financieros de fuentes p&uacute;blicas para seguir el pulso de la econom&iacute;a argentina.</p>
+      <p class="footer-source">Fuentes: DolarAPI, ArgentinaDatos, Bluelytics.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Legal</div>
+      <div class="footer-links">
+        <a href="disclaimer.html">Disclaimer</a>
+        <a href="terminos.html">T&eacute;rminos</a>
+        <a href="privacidad.html">Privacidad</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Contacto</div>
+      <div class="footer-links"><a href="mailto:contacto@billetear.com">contacto@billetear.com</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>&copy; 2026 BilleteAR. Todos los derechos reservados.</div>
+    <div>No constituye asesoramiento financiero.</div>
+  </div>
+</footer>
+
+<nav class="bottom-nav">
+  <div class="bn-inner">
+    <a class="bn-item active" href="dolares.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span>Dólar</span></a>
+    <a class="bn-item" href="cripto.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-6.083-1.072m6.083 1.072.347-1.971M7.116 11.07l-1.257-.222m7.206-5.86-1.257-.222m-.838 4.75 6.083 1.072"/></svg></span><span>Cripto</span></a>
+    <a class="bn-item" href="mercados.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span>Bolsa</span></a>
+    <a class="bn-item" href="rendimientos.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M16 16l2 2 4-4" stroke-width="2"/></svg></span><span>Invertir</span></a>
+    <a class="bn-item" href="indicadores.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Economía</span></a>
+    <a class="bn-item" href="noticias.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span><span>Noticias</span></a>
+  </div>
+</nav>
+
+<script src="shared.js"></script>
+<script>
+const CHART_COLORS = {blue:'#38bdf8', bolsa:'#22c55e', contadoconliqui:'#f97316', oficial:'#a78bfa'};
+const CHART_LABELS = {blue:'Blue', bolsa:'MEP', contadoconliqui:'CCL', oficial:'Oficial'};
+let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[]};
+let activeSeries = new Set(['blue','bolsa','contadoconliqui']);
+let currentRange = 30;
+let blueChartInstance = null;
+
+function toggleSeries(key, btn) {
+  if (activeSeries.has(key)) { activeSeries.delete(key); btn.classList.remove('active'); }
+  else { activeSeries.add(key); btn.classList.add('active'); }
+  drawChart(currentRange);
+}
+
+function drawChart(days) {
+  currentRange = days;
+  const ctx = document.getElementById('blueChart').getContext('2d');
+  if (blueChartInstance) blueChartInstance.destroy();
+
+  const datasets = [];
+  for (const key of activeSeries) {
+    const data = allHistory[key];
+    if (!data || !data.length) continue;
+    const slice = days >= 9999 ? data : data.slice(-days);
+    const color = CHART_COLORS[key];
+    datasets.push({
+      label: CHART_LABELS[key],
+      data: slice.map(d => ({x: d.fecha, y: d.venta})),
+      borderColor: color, borderWidth: 2, backgroundColor: 'transparent',
+      fill: false, tension: 0.4, pointRadius: 0,
+      pointHoverRadius: 5, pointHoverBackgroundColor: color
+    });
+  }
+  if (datasets.length > 0) {
+    const g = ctx.createLinearGradient(0, 0, 0, 280);
+    const c = datasets[0].borderColor;
+    let r=56,gr2=189,b=248;
+    if(c&&c.startsWith('#')&&c.length===7){r=parseInt(c.slice(1,3),16);gr2=parseInt(c.slice(3,5),16);b=parseInt(c.slice(5,7),16);}
+    g.addColorStop(0, 'rgba('+r+','+gr2+','+b+',.18)');
+    g.addColorStop(1, 'transparent');
+    datasets[0].backgroundColor = g;
+    datasets[0].fill = true;
+  }
+  if (allHistory.blue && allHistory.blue.length) {
+    q('chartCurrentVal').textContent = fmtARS(allHistory.blue[allHistory.blue.length - 1].venta);
+  }
+
+  blueChartInstance = new Chart(ctx, {
+    type: 'line', data: { datasets },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: {mode: 'index', intersect: false},
+      plugins: {
+        legend: {display: true, position: 'top', labels: {color: '#64748b', font: {family: 'DM Sans', size: 11}, boxWidth: 12, padding: 12}},
+        tooltip: {
+          backgroundColor: '#1a2540', borderColor: '#2a3e5e', borderWidth: 1,
+          titleColor: '#64748b', bodyColor: '#f1f5f9',
+          bodyFont: {family: 'DM Sans', size: 13, weight: '600'},
+          callbacks: {label: ctx2 => ' ' + ctx2.dataset.label + ': ' + fmtARS(ctx2.parsed.y)}
+        }
+      },
+      scales: {
+        x: {type: 'category', grid: {color: 'rgba(255,255,255,.04)'}, ticks: {color: '#475569', font: {family: 'DM Sans', size: 11}, maxTicksLimit: 7, maxRotation: 0, callback: function(val) { const d = new Date(this.getLabelForValue(val) + 'T12:00:00'); return d.toLocaleDateString('es-AR', {day:'numeric', month:'short'}); }}},
+        y: {position: 'right', grid: {color: 'rgba(255,255,255,.04)'}, ticks: {color: '#475569', font: {family: 'DM Sans', size: 11}, callback: v => '$' + Number(v).toLocaleString('es-AR')}}
+      }
+    }
+  });
+}
+
+function setRange(days, btn) {
+  document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  drawChart(days);
+}
+
+async function loadHistorical(){
+  await Promise.allSettled(
+    ['blue','bolsa','contadoconliqui','oficial'].map(tipo =>
+      fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/'+tipo).then(data => {
+        if (Array.isArray(data) && data.length) allHistory[tipo] = data;
+      }).catch(() => {})
+    )
+  );
+  drawChart(currentRange);
+}
+
+// Consulta por fecha
+async function buscarFecha(){
+  const input=q('fechaInput').value;
+  if(!input)return;
+  q('fechaResult').style.display='none';
+  q('fechaEmpty').style.display='none';
+  const tipos=['blue','oficial','bolsa','contadoconliqui','cripto','tarjeta','mayorista'];
+  const LABELS={blue:'Blue',oficial:'Oficial',bolsa:'MEP (Bolsa)',contadoconliqui:'CCL',cripto:'Cripto',tarjeta:'Tarjeta',mayorista:'Mayorista'};
+  const results=[];
+  await Promise.allSettled(tipos.map(async tipo=>{
+    const data=await fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/'+tipo);
+    if(!Array.isArray(data))return;
+    const match=data.find(d=>d.fecha===input);
+    if(match)results.push({tipo,label:LABELS[tipo]||tipo,compra:match.compra,venta:match.venta});
+  }));
+  if(!results.length){q('fechaEmpty').style.display='block';return;}
+  const dt=new Date(input+'T12:00:00');
+  const formatted=dt.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  q('fechaLabel').textContent='Cotizaciones del '+formatted;
+  q('fechaGrid').innerHTML=results.map(r=>'<div class="ex-card"><div class="ex-name">'+r.label+'</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">'+(r.compra?fmtARS(r.compra):'–')+'</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">'+fmtARS(r.venta)+'</div></div></div></div>').join('');
+  q('fechaResult').style.display='block';
+}
+
+(function(){
+  const d=q('fechaInput');if(!d)return;
+  const today=new Date();d.max=today.toISOString().split('T')[0];
+  const yesterday=new Date();yesterday.setDate(yesterday.getDate()-1);
+  if(yesterday.getDay()===0)yesterday.setDate(yesterday.getDate()-2);
+  if(yesterday.getDay()===6)yesterday.setDate(yesterday.getDate()-1);
+  d.value=yesterday.toISOString().split('T')[0];
+})();
+
+loadHistorical();
+</script>
+</body>
+</html>

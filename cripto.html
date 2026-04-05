@@ -109,6 +109,34 @@
     .tc-detail{max-height:0;overflow:hidden;transition:max-height .35s ease,opacity .3s ease;opacity:0}
     .tc-detail.open{max-height:300px;opacity:1}
     .tc-detail-inner{padding-top:.7rem;border-top:1px solid var(--border);margin-top:.6rem;display:flex;flex-direction:column;gap:.6rem}
+
+    /* ── Cripto exchange tabs ── */
+    .cripto-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+    .cripto-tab{background:var(--card2);border:1px solid var(--border);padding:6px 16px;border-radius:8px;font:600 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .cripto-tab.active,.cripto-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
+    .cripto-panel{display:none}
+    .cripto-panel.active{display:block}
+
+    /* ── Exchange table ── */
+    .exch-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
+    .exch-table th{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:.65rem 1.2rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card2);cursor:pointer;user-select:none;transition:color .15s}
+    .exch-table th:hover{color:var(--sky)}
+    .exch-table td{padding:.7rem 1.2rem;border-bottom:1px solid var(--border);font-size:.87rem;transition:background .12s}
+    .exch-table tr:last-child td{border-bottom:none}
+    .exch-table tr:hover td{background:var(--card2)}
+    .exch-name{font-weight:600;color:var(--text2)}
+    .exch-link{color:var(--sky);text-decoration:none;font-weight:600;transition:color .15s}
+    .exch-link:hover{color:#7dd3fc;text-decoration:underline}
+    .exch-link .ext{font-size:.65rem;opacity:.5;margin-left:3px}
+    .exch-buy{color:var(--text2)}
+    .exch-sell{color:var(--sky);font-weight:700}
+    .exch-spread{font-size:.75rem;color:var(--muted)}
+    .exch-time{font-size:.68rem;color:var(--muted2)}
+    .exch-loading{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem}
+    .best-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+    .worst-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.25);padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
+    .sort-arrow{font-size:.6rem;margin-left:4px;opacity:.4}
+    .sort-arrow.active{opacity:1;color:var(--sky)}
   </style>
 <script type="application/ld+json">
 {
@@ -116,13 +144,13 @@
   "@type": "WebPage",
   "name": "Bitcoin y criptomonedas hoy",
   "description": "Precio de Bitcoin, Ethereum, Solana y criptomonedas en tiempo real en USD y pesos argentinos.",
-  "url": "https://billetear.com/cripto.html",
+  "url": "https://billetear.com/cripto",
   "isPartOf": { "@type": "WebSite", "name": "BilleteAR", "url": "https://billetear.com" },
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://billetear.com" },
-      { "@type": "ListItem", "position": 2, "name": "Cripto", "item": "https://billetear.com/cripto.html" }
+      { "@type": "ListItem", "position": 2, "name": "Cripto", "item": "https://billetear.com/cripto" }
     ]
   }
 }
@@ -146,11 +174,11 @@
       <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="header-nav">
-      <a class="topnav-link" href="dolares.html">Dólares</a>
+      <a class="topnav-link" href="dolares.html">Dólar</a>
       <a class="topnav-link active" href="cripto.html">Cripto</a>
-      <a class="topnav-link" href="mercados.html">Mercados</a>
-      <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
-      <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="mercados.html">Bolsa</a>
+      <a class="topnav-link" href="rendimientos.html">Invertir</a>
+      <a class="topnav-link" href="indicadores.html">Economía</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -225,6 +253,39 @@
           <div class="gl-row" style="pointer-events:none"><div class="skel" style="height:.85rem;width:55%"></div><div class="skel" style="height:.85rem;width:25%"></div></div>
           <div class="gl-row" style="pointer-events:none"><div class="skel" style="height:.85rem;width:55%"></div><div class="skel" style="height:.85rem;width:25%"></div></div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Dólar Cripto por Exchange ── -->
+  <div class="section" id="exchanges" style="animation-delay:.18s">
+    <div class="sec-header"><h2 class="sec-title">Dólar Cripto por exchange</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CriptoYa</span></div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
+      Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local. Compra, venta y spread de cada plataforma.
+    </p>
+
+    <div class="cripto-tabs">
+      <button class="cripto-tab active" onclick="switchCriptoTab('usdt',this)">USDT</button>
+      <button class="cripto-tab" onclick="switchCriptoTab('usdc',this)">USDC</button>
+      <button class="cripto-tab" onclick="switchCriptoTab('btc',this)">BTC</button>
+    </div>
+
+    <div class="cripto-panel active" id="panel-usdt">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="usdt-loading">Cargando precios...</div>
+        <table class="exch-table" id="usdt-table" style="display:none"></table>
+      </div>
+    </div>
+    <div class="cripto-panel" id="panel-usdc">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="usdc-loading">Cargando precios...</div>
+        <table class="exch-table" id="usdc-table" style="display:none"></table>
+      </div>
+    </div>
+    <div class="cripto-panel" id="panel-btc">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="btc-loading">Cargando precios...</div>
+        <table class="exch-table" id="btc-table" style="display:none"></table>
       </div>
     </div>
   </div>
@@ -413,16 +474,62 @@ document.addEventListener('click',function(e){
   if(!wasOpen){detail.classList.add('open');card.classList.add('expanded');}
 });
 
+// ── Exchange names & URLs (CriptoYa) ──
+const EXCH_NAMES={letsbit:'Letsbit',buenbit:'Buenbit',lemoncash:'Lemon Cash',lemoncashp2p:'Lemon P2P',ripio:'Ripio',ripioexchange:'Ripio Exchange',satoshitango:'Satoshi Tango',bitso:'Bitso',bybit:'Bybit',bybitp2p:'Bybit P2P',fiwind:'Fiwind',argenbtc:'ArgenBTC',tiendacrypto:'Tienda Crypto',binancep2p:'Binance P2P',binance:'Binance',decrypto:'Decrypto',belo:'Belo',kriptonmarket:'Krypton',qubit:'Qubit',cambioar:'CambioAr',cryptomkt:'CryptoMKT',cryptomktpro:'CryptoMKT Pro',bitmarket:'BitMarket',pluscrypto:'PlusCrypto',okexp2p:'OKX P2P',vitawallet:'Vitawallet',kucoinp2p:'KuCoin P2P',saldo:'Saldo',astropay:'Astropay',bitgetp2p:'Bitget P2P',eluter:'Eluter',paydecep2p:'Paydece P2P',eldoradop2p:'Eldorado P2P',trubit:'Trubit',bingxp2p:'BingX P2P',bitsoalpha:'Bitso Alpha',cocoscrypto:'Cocos Crypto',coinexp2p:'CoinEx P2P',wallbit:'Wallbit',mexcp2p:'MEXC P2P',weexp2p:'WEEX P2P',mexc:'MEXC',peanut:'Peanut',universalcoins:'Universal Coins'};
+const EXCH_URLS={letsbit:'https://letsbit.io',buenbit:'https://buenbit.com',lemoncash:'https://lemon.me',lemoncashp2p:'https://lemon.me',ripio:'https://ripio.com',ripioexchange:'https://ripio.com',satoshitango:'https://satoshitango.com',bitso:'https://bitso.com',bitsoalpha:'https://bitso.com',bybit:'https://bybit.com',bybitp2p:'https://bybit.com',fiwind:'https://fiwind.io',argenbtc:'https://argenbtc.com',tiendacrypto:'https://tiendacrypto.com',binancep2p:'https://p2p.binance.com',binance:'https://binance.com',decrypto:'https://decrypto.la',belo:'https://belo.app',kriptonmarket:'https://kriptonmarket.com',cryptomkt:'https://cryptomkt.com',cryptomktpro:'https://cryptomkt.com',okexp2p:'https://okx.com',vitawallet:'https://vitawallet.io',kucoinp2p:'https://kucoin.com',astropay:'https://astropay.com',bitgetp2p:'https://bitget.com',bingxp2p:'https://bingx.com',cocoscrypto:'https://cocos.capital',wallbit:'https://wallbit.io',mexcp2p:'https://mexc.com',weexp2p:'https://weex.com',mexc:'https://mexc.com',peanut:'https://peanut.trade',pluscrypto:'https://pluscrypto.com.ar',eldoradop2p:'https://eldorado.io',coinexp2p:'https://coinex.com',universalcoins:'https://universalcoins.com'};
+function exchName(k){return EXCH_NAMES[k]||escHTML(k.charAt(0).toUpperCase()+k.slice(1));}
+function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
+function ago(ts){if(!ts)return'';const d=Math.floor((Date.now()-ts*1000)/60000);if(d<2)return'ahora';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
+
+function sortTable(tableId,colIdx,type){
+  const tbl=q(tableId);if(!tbl)return;
+  const tbody=tbl.querySelector('tbody');if(!tbody)return;
+  const rows=Array.from(tbody.querySelectorAll('tr'));
+  const th=tbl.querySelectorAll('th')[colIdx];
+  const asc=th.dataset.sort!=='asc';
+  tbl.querySelectorAll('th').forEach(h=>{h.dataset.sort='';});
+  th.dataset.sort=asc?'asc':'desc';
+  tbl.querySelectorAll('.sort-arrow').forEach(a=>a.classList.remove('active'));
+  const arrow=th.querySelector('.sort-arrow');
+  if(arrow){arrow.classList.add('active');arrow.textContent=asc?'▲':'▼';}
+  rows.sort((a,b)=>{let va=a.cells[colIdx]?.textContent.trim()||'';let vb=b.cells[colIdx]?.textContent.trim()||'';if(type==='num'){va=parseFloat(va.replace(/[^0-9.,-]/g,'').replace('.','').replace(',','.'))||0;vb=parseFloat(vb.replace(/[^0-9.,-]/g,'').replace('.','').replace(',','.'))||0;}return asc?(va>vb?1:-1):(va<vb?1:-1);});
+  rows.forEach(r=>tbody.appendChild(r));
+}
+
+function renderExchTable(tableId,loadingId,data){
+  const tbl=q(tableId);const ldr=q(loadingId);
+  if(!data){if(ldr)ldr.style.display='none';return;}
+  const rows=Object.entries(data).filter(([k,v])=>v&&typeof v.ask==='number'&&v.ask>0).map(([k,v])=>({key:k,name:exchName(k),buy:v.bid||null,sell:v.ask,time:v.time})).sort((a,b)=>a.sell-b.sell);
+  if(!rows.length){if(ldr)ldr.style.display='none';return;}
+  tbl.innerHTML=`<thead><tr><th onclick="sortTable('${tableId}',0,'alpha')">Exchange <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',1,'num')">Compra <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',2,'num')">Venta <span class="sort-arrow active">▲</span></th><th onclick="sortTable('${tableId}',3,'num')">Spread <span class="sort-arrow">▼</span></th><th>Actualizado</th></tr></thead><tbody>${rows.map((r,i)=>{const spread=r.buy?((r.sell-r.buy)/r.buy*100).toFixed(1)+'%':'–';const badge=i===0?'<span class="best-badge">mejor venta</span>':i===rows.length-1?'<span class="worst-badge">más caro</span>':'';return`<tr><td>${exchLink(r.key,r.name)}${badge}</td><td class="exch-buy">${r.buy?fmtARS(r.buy):'–'}</td><td class="exch-sell">${fmtARS(r.sell)}</td><td class="exch-spread">${spread}</td><td class="exch-time">${ago(r.time)}</td></tr>`;}).join('')}</tbody>`;
+  if(ldr)ldr.style.display='none';tbl.style.display='table';
+}
+
+function switchCriptoTab(coin,btn){
+  document.querySelectorAll('.cripto-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cripto-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel=q('panel-'+coin);if(panel)panel.classList.add('active');
+}
+
+// Load exchange data
+function loadExchanges(){
+  fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(d=>{if(d)renderExchTable('usdt-table','usdt-loading',d);}).catch(()=>{});
+  fetchJSON('https://criptoya.com/api/usdc/ars/0.1').then(d=>{if(d)renderExchTable('usdc-table','usdc-loading',d);}).catch(()=>{});
+  fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(d=>{if(d)renderExchTable('btc-table','btc-loading',d);}).catch(()=>{});
+}
+loadExchanges();
+
 </script>
 
 <!-- Mobile bottom nav -->
 <nav class="bottom-nav">
   <div class="bn-inner">
-    <a class="bn-item" href="dolares.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span>Dólares</span></a>
+    <a class="bn-item" href="dolares.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span>Dólar</span></a>
     <a class="bn-item active" href="cripto.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-6.083-1.072m6.083 1.072.347-1.971M7.116 11.07l-1.257-.222m7.206-5.86-1.257-.222m-.838 4.75 6.083 1.072"/></svg></span><span>Cripto</span></a>
-    <a class="bn-item" href="mercados.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span>Mercados</span></a>
-    <a class="bn-item" href="rendimientos.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M16 16l2 2 4-4" stroke-width="2"/></svg></span><span>Rend.</span></a>
-    <a class="bn-item" href="indicadores.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Indicadores</span></a>
+    <a class="bn-item" href="mercados.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span>Bolsa</span></a>
+    <a class="bn-item" href="rendimientos.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M16 16l2 2 4-4" stroke-width="2"/></svg></span><span>Invertir</span></a>
+    <a class="bn-item" href="indicadores.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Economía</span></a>
     <a class="bn-item" href="noticias.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span><span>Noticias</span></a>
   </div>
 </nav>

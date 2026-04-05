@@ -37,7 +37,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&display=swap" rel="stylesheet" />
-  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8647898779857303" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="shared.css">
   <style>
@@ -64,7 +63,6 @@
     body.light .mini:hover{border-color:var(--border2);box-shadow:0 3px 8px rgba(0,0,0,.08)}
     body.light .ex-card,body.light .mep-card,body.light .diario-card{background:var(--card);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
     body.light .ex-card:hover,body.light .mep-card:hover,body.light .diario-card:hover{border-color:var(--border2);box-shadow:0 4px 12px rgba(0,0,0,.08)}
-    body.light .chart-card{background:var(--card);border:1px solid var(--border);box-shadow:0 1px 4px rgba(0,0,0,.06)}
     body.light .sec-title{color:#1e40af}
     body.light .sec-line{background:linear-gradient(90deg,transparent,var(--border),#93a3b8,var(--border),transparent)}
     body.light .refresh-btn{background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.25);color:#2563eb}
@@ -79,7 +77,7 @@
     body.light .worst-badge{color:#b91c1c;background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2)}
 
     /* ── Serif for titles ── */
-    .sec-title,.hero-name,.chart-title{font-family:'DM Serif Display',serif}
+    .sec-title,.hero-name{font-family:'DM Serif Display',serif}
 
     /* ── Sortable table headers ── */
     .exch-table th{cursor:pointer;user-select:none;transition:color .15s}
@@ -87,11 +85,14 @@
     .sort-arrow{font-size:.6rem;margin-left:4px;opacity:.4}
     .sort-arrow.active{opacity:1;color:var(--sky)}
 
-    /* ── Chart toggles ── */
-    .chart-toggles{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.8rem}
-    .chart-toggle{display:flex;align-items:center;gap:5px;padding:4px 12px;border-radius:8px;border:1px solid var(--border);background:var(--card2);cursor:pointer;font:500 .75rem 'DM Sans',sans-serif;color:var(--muted);transition:all .2s}
-    .chart-toggle.active{border-color:currentColor;color:var(--text)}
-    .chart-toggle .dot{width:8px;height:8px;border-radius:50%}
+    /* ── Tool link cards ── */
+    .tool-card{display:flex;flex-direction:column;gap:.5rem;padding:1.4rem;background:var(--card);border:1px solid var(--border);border-radius:18px;text-decoration:none;transition:all .25s cubic-bezier(.4,0,.2,1)}
+    .tool-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.2);border-color:var(--border2)}
+    .tc-icon{margin-bottom:.2rem}
+    .tc-title{font-family:'DM Serif Display',serif;font-size:1rem;color:var(--text);font-weight:400}
+    .tc-desc{font-size:.78rem;color:var(--muted);line-height:1.55}
+    body.light .tool-card{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+    body.light .tool-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.1)}
 
     .subnav{background:rgba(20,30,48,.8);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);border-radius:16px;overflow-x:auto;scrollbar-width:none}
     .subnav::-webkit-scrollbar{display:none}
@@ -129,13 +130,6 @@
     .ex-side .v{font-size:1rem;font-weight:700}
     .ex-side .v.b{color:var(--text2)}.ex-side .v.s{color:var(--sky)}
     .spread-tag{display:inline-block;font-size:.61rem;color:var(--muted);border:1px solid var(--border);border-radius:20px;padding:2px 7px;margin-top:.5rem}
-
-    /* ── Cripto tabs ── */
-    .cripto-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
-    .cripto-tab{background:var(--card2);border:1px solid var(--border);padding:6px 16px;border-radius:8px;font:600 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
-    .cripto-tab.active,.cripto-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
-    .cripto-panel{display:none}
-    .cripto-panel.active{display:block}
 
     /* ── Comparadolar section ── */
     .comp-tabs{display:flex;gap:.4rem;margin-bottom:1rem}
@@ -185,17 +179,6 @@
     .diario-side .dv{font-size:1rem;font-weight:700}
     .diario-side .dv.b{color:var(--text2)}.diario-side .dv.s{color:var(--sky)}
 
-    /* ── Chart ── */
-    .chart-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.5rem}
-    .chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem;flex-wrap:wrap;gap:.5rem}
-    .chart-title{font-size:1rem;font-weight:700}
-    .chart-sub{font-size:.73rem;color:var(--muted);margin-top:2px}
-    .chart-stat .val{font-size:1.6rem;font-weight:700;color:var(--sky);text-align:right}
-    .chart-stat .lbl{font-size:.65rem;color:var(--muted);text-align:right}
-    .chart-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
-    .chart-tab{background:var(--card2);border:1px solid var(--border);padding:4px 12px;border-radius:10px;font:600 .75rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
-    .chart-tab.active,.chart-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
-    .chart-wrap{height:260px;position:relative}
 
     @media(max-width:480px){.hp .val{font-size:2rem}}
 
@@ -225,27 +208,6 @@
     .sb-label{font-size:.65rem;color:var(--muted);font-weight:500;text-transform:uppercase;letter-spacing:.04em}
     .sb-val{font-size:.76rem;font-weight:700;color:var(--text);font-variant-numeric:tabular-nums}
 
-    /* ── Mi Sueldo en Dólares ── */
-    .sueldo-wrap{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.8rem;position:relative;overflow:hidden}
-    .sueldo-wrap::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(56,189,248,.06),transparent 70%);pointer-events:none}
-    .sueldo-input-row{display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.5rem}
-    .sueldo-field{display:flex;align-items:center;gap:8px}
-    .sueldo-field label{font-size:.78rem;color:var(--muted);white-space:nowrap}
-    .sueldo-field input{background:var(--card2);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:10px;font:600 1rem 'DM Sans',sans-serif;width:180px;transition:border-color .2s}
-    .sueldo-field input:focus{outline:none;border-color:var(--sky)}
-    .sueldo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.8rem}
-    .sueldo-card{background:var(--card2);border:1px solid var(--border);border-radius:14px;padding:1rem;text-align:center;transition:all .2s}
-    .sueldo-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-    .sueldo-card .sc-type{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.4rem}
-    .sueldo-card .sc-usd{font-size:1.6rem;font-weight:700;color:var(--sky);line-height:1.1;margin-bottom:.2rem}
-    .sueldo-card .sc-rate{font-size:.68rem;color:var(--muted2)}
-    .sueldo-card.best{border-color:rgba(34,197,94,.4);background:linear-gradient(180deg,rgba(34,197,94,.06) 0%,var(--card2) 40%)}
-    .sueldo-card.best .sc-usd{color:var(--green)}
-    .sueldo-history{margin-top:1.5rem}
-    .sueldo-history-title{font-size:.75rem;color:var(--muted);margin-bottom:.8rem;font-weight:600}
-    .sh-chart-wrap{height:200px;position:relative}
-    body.light .sueldo-wrap{background:var(--card);border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.05)}
-    body.light .sueldo-card{background:var(--card);border-color:var(--border)}
 
     /* ── Price flash ── */
     @keyframes flashUp{0%{background:rgba(34,197,94,.22);border-radius:6px}100%{background:transparent}}
@@ -262,12 +224,10 @@
     /* ── EDITORIAL WARMTH PATCH (page-specific overrides) ── */
     .hero-badge{color:var(--accent);background:var(--accent-bg);border-color:var(--accent-border)}
     .hero-name{font-size:2rem;letter-spacing:-.5px;background:linear-gradient(135deg,#fff 0%,#7dd3fc 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-    .chart-title{font-size:1.25rem;letter-spacing:-.3px}
     .hp .val{font-variant-numeric:tabular-nums;letter-spacing:-1px}
     #blue{margin-bottom:3.8rem}
     .hero-card{padding:2.4rem 2.2rem 2.2rem;border-radius:24px;box-shadow:0 0 60px rgba(56,189,248,.08),0 20px 40px rgba(0,0,0,.3)}
     .mep-card{border-top:2px solid var(--green);background:linear-gradient(180deg,rgba(34,197,94,.04) 0%,var(--card) 15%)}
-    .chart-card{border-radius:22px;background:linear-gradient(180deg,var(--card2) 0%,var(--card) 8%);box-shadow:0 4px 20px rgba(0,0,0,.15)}
     .mini-chg{font-size:.7rem;font-weight:700;padding:2px 6px;border-radius:6px;white-space:nowrap}
     .mini-chg.up{color:var(--green);background:rgba(34,197,94,.1)}
     .mini-chg.down{color:var(--red);background:rgba(239,68,68,.1)}
@@ -288,7 +248,7 @@
     .dc-chg{margin-top:.2rem}
     .ex-card,.mep-card,.diario-card,.mini{transition:all .25s cubic-bezier(.4,0,.2,1)}
     .refresh-btn:hover{transform:scale(1.1);box-shadow:0 0 16px rgba(56,189,248,.3)}
-    #calcARS:focus,#calcUSD:focus,#fechaInput:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(56,189,248,.15);outline:none}
+    #calcARS:focus,#calcUSD:focus{border-color:var(--sky);box-shadow:0 0 0 3px rgba(56,189,248,.15);outline:none}
     .exch-table tr{transition:background .15s ease}
     .exch-table tr:hover td{background:rgba(56,189,248,.05)}
     .stats-bar{top:64px}
@@ -303,31 +263,6 @@
     .calc-mid{display:flex;align-items:center;justify-content:center;padding-top:2rem;color:var(--muted);font-size:1.5rem}
     @media(max-width:640px){.calc-wrap{grid-template-columns:1fr;}.calc-mid{padding:0;transform:rotate(90deg)}}
 
-    /* ── Time Machine ── */
-    .tm-wrap{max-width:700px}
-    .tm-desc{color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;line-height:1.6}
-    .tm-inputs{display:flex;gap:1rem;margin-bottom:1.5rem;flex-wrap:wrap}
-    .tm-field{flex:1;min-width:180px}
-    .tm-field label{display:block;font-size:.78rem;color:var(--muted);margin-bottom:.4rem;font-weight:600}
-    .tm-input{width:100%;padding:.7rem 1rem;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:1rem;font-family:inherit}
-    .tm-input:focus{outline:none;border-color:var(--sky)}
-    .tm-result{margin-top:.5rem}
-    .tm-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.5rem}
-    .tm-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem;text-align:center}
-    .tm-card-icon{font-size:1.5rem;margin-bottom:.4rem}
-    .tm-card-label{font-size:.72rem;color:var(--muted);margin-bottom:.3rem;font-weight:600;text-transform:uppercase;letter-spacing:.03em}
-    .tm-card-val{font-size:1.3rem;font-weight:700;color:var(--text);font-family:'DM Serif Display',serif}
-    .tm-card.result .tm-card-val{color:var(--green)}
-    .tm-card.result.negative .tm-card-val{color:var(--red)}
-    .tm-card-sub{font-size:.75rem;color:var(--muted);margin-top:.3rem}
-    .tm-versus{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.2rem;text-align:center}
-    .tm-vs-text{font-size:.85rem;color:var(--muted);margin-bottom:.3rem}
-    .tm-vs-val{font-size:1.3rem;font-weight:700;color:var(--muted);font-family:'DM Serif Display',serif;text-decoration:line-through;opacity:.7}
-    .tm-vs-sub{font-size:.72rem;color:var(--muted2);margin-top:.2rem}
-    body.light .tm-input{background:#fff;border-color:#d1d5db;color:#1f2937}
-    body.light .tm-card{background:#fff;border-color:#e5e7eb}
-    body.light .tm-versus{background:#fff;border-color:#e5e7eb}
-    @media(max-width:640px){.tm-cards{grid-template-columns:1fr}}
   </style>
 <script type="application/ld+json">
 {
@@ -397,11 +332,11 @@
       <span class="logo-text">Billete<em>AR</em></span>
     </a>
     <div class="header-nav">
-      <a class="topnav-link active" href="dolares.html">Dólares</a>
+      <a class="topnav-link active" href="dolares.html">Dólar</a>
       <a class="topnav-link" href="cripto.html">Cripto</a>
-      <a class="topnav-link" href="mercados.html">Mercados</a>
-      <a class="topnav-link" href="rendimientos.html">Rendimientos</a>
-      <a class="topnav-link" href="indicadores.html">Indicadores</a>
+      <a class="topnav-link" href="mercados.html">Bolsa</a>
+      <a class="topnav-link" href="rendimientos.html">Invertir</a>
+      <a class="topnav-link" href="indicadores.html">Economía</a>
       <a class="topnav-link" href="noticias.html">Noticias</a>
     </div>
     <div class="nav-right">
@@ -431,14 +366,11 @@
 <nav class="subnav">
   <div class="subnav-inner">
     <a class="subnav-link active" href="#calculadora">Convertidor</a>
-    <a class="subnav-link" href="#cripto-detail">Cripto</a>
     <a class="subnav-link" href="#oficial-bancos">Bancos</a>
     <a class="subnav-link" href="#mep-brokers">Brokers</a>
-    <a class="subnav-link" href="#historico">Histórico</a>
-    <a class="subnav-link" href="#tv-mep">MEP en vivo</a>
-    <a class="subnav-link" href="#fecha">Por fecha</a>
-    <a class="subnav-link" href="#mi-sueldo">Mi sueldo</a>
-    <a class="subnav-link" href="#maquina-del-tiempo">Máquina del Tiempo</a>
+    <a class="subnav-link" href="#medios">Blue por medio</a>
+    <a class="subnav-link" href="#herramientas">Herramientas</a>
+    <a class="subnav-link" href="#faq">FAQ</a>
   </div>
 </nav>
 
@@ -497,39 +429,6 @@
     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
   </div>
 
-  <!-- ── CRIPTO POR EXCHANGE ── -->
-  <div class="section" id="cripto-detail" style="animation-delay:.11s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Cripto por exchange</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CriptoYa</span></div>
-    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
-      Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local. Compra, venta y spread de cada plataforma.
-    </p>
-
-    <div class="cripto-tabs">
-      <button class="cripto-tab active" onclick="switchCriptoTab('usdt',this)">USDT</button>
-      <button class="cripto-tab" onclick="switchCriptoTab('usdc',this)">USDC</button>
-      <button class="cripto-tab" onclick="switchCriptoTab('btc',this)">BTC</button>
-    </div>
-
-    <div class="cripto-panel active" id="panel-usdt">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="usdt-loading">Cargando precios...</div>
-        <table class="exch-table" id="usdt-table" style="display:none"></table>
-      </div>
-    </div>
-    <div class="cripto-panel" id="panel-usdc">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="usdc-loading">Cargando precios...</div>
-        <table class="exch-table" id="usdc-table" style="display:none"></table>
-      </div>
-    </div>
-    <div class="cripto-panel" id="panel-btc">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="btc-loading">Cargando precios...</div>
-        <table class="exch-table" id="btc-table" style="display:none"></table>
-      </div>
-    </div>
-  </div>
-
   <!-- ── Dólar Oficial (Bancos) ── -->
   <div class="section" id="oficial-bancos" style="animation-delay:.12s">
     <div class="sec-header"><h2 class="sec-title">Dólar Oficial por banco</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ComparaDolar</span></div>
@@ -560,155 +459,30 @@
     </div>
   </div>
 
-  <!-- ── Histórico ── -->
-  <div class="section" id="historico" style="animation-delay:.17s">
-    <div class="sec-header"><h2 class="sec-title">Evolución histórica</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ArgentinaDatos</span></div>
-    <div class="chart-card">
-      <div class="chart-header">
-        <div><div class="chart-title">Evolución histórica</div><div class="chart-sub">Comparación histórica · argentinadatos.com</div></div>
-        <div class="chart-stat"><div class="val" id="chartCurrentVal">—</div><div class="lbl">blue actual</div></div>
-      </div>
-      <div class="chart-toggles">
-        <button class="chart-toggle active" onclick="toggleSeries('blue',this)" style="--c:#38bdf8"><span class="dot" style="background:#38bdf8"></span>Blue</button>
-        <button class="chart-toggle active" onclick="toggleSeries('bolsa',this)" style="--c:#22c55e"><span class="dot" style="background:#22c55e"></span>MEP</button>
-        <button class="chart-toggle active" onclick="toggleSeries('contadoconliqui',this)" style="--c:#f97316"><span class="dot" style="background:#f97316"></span>CCL</button>
-        <button class="chart-toggle" onclick="toggleSeries('oficial',this)" style="--c:#a78bfa"><span class="dot" style="background:#a78bfa"></span>Oficial</button>
-      </div>
-      <div class="chart-tabs">
-        <button class="chart-tab active" onclick="setRange(30,this)">1M</button>
-        <button class="chart-tab" onclick="setRange(90,this)">3M</button>
-        <button class="chart-tab" onclick="setRange(180,this)">6M</button>
-        <button class="chart-tab" onclick="setRange(365,this)">1A</button>
-        <button class="chart-tab" onclick="setRange(9999,this)">Todo</button>
-      </div>
-      <div class="chart-wrap"><canvas id="blueChart"></canvas></div>
-    </div>
-  </div>
-
-  <!-- ── TradingView MEP en vivo ── -->
-  <div class="section" id="tv-mep">
-    <div class="sec-header"><h2 class="sec-title">Dólar MEP en vivo · BYMA</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: TradingView</span></div>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;height:500px">
-      <div class="tradingview-widget-container" style="height:100%;width:100%">
-        <div id="tradingview_mep" style="height:100%;width:100%"></div>
-        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-        <script type="text/javascript">
-        new TradingView.widget({
-          "autosize": true,
-          "symbol": "BYMA:AL30/BYMA:AL30D",
-          "interval": "D",
-          "timezone": "America/Argentina/Buenos_Aires",
-          "theme": document.body.classList.contains('light') ? 'light' : 'dark',
-          "style": "1",
-          "locale": "es",
-          "toolbar_bg": document.body.classList.contains('light') ? '#f5f6fa' : '#0b0f1e',
-          "enable_publishing": false,
-          "hide_top_toolbar": false,
-          "hide_legend": false,
-          "save_image": false,
-          "container_id": "tradingview_mep",
-          "backgroundColor": document.body.classList.contains('light') ? '#ffffff' : '#141e30'
-        });
-        </script>
-      </div>
-    </div>
-  </div>
-
-  <!-- AdSense -->
-  <div class="ad-slot" style="text-align:center;margin:2rem auto;max-width:728px">
-    <ins class="adsbygoogle"
-      style="display:block"
-      data-ad-client="ca-pub-8647898779857303"
-      data-ad-slot="4698150332"
-      data-ad-format="auto"
-      data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-  </div>
-
-  <!-- ── Consulta por fecha ── -->
-  <div class="section" id="fecha" style="animation-delay:.19s">
-    <div class="sec-header"><h2 class="sec-title">Consulta por fecha</h2><div class="sec-line"></div></div>
-    <div class="chart-card">
-      <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1rem">
-        <div>
-          <label style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);display:block;margin-bottom:.4rem">Fecha</label>
-          <input type="date" id="fechaInput" class="calc-select" style="width:auto;min-width:170px" />
-        </div>
-        <button class="btn" style="align-self:flex-end;padding:8px 18px" onclick="buscarFecha()">Ver cotización</button>
-      </div>
-      <div id="fechaResult" style="display:none">
-        <div style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem" id="fechaLabel"></div>
-        <div class="ex-grid" id="fechaGrid"></div>
-      </div>
-      <div id="fechaEmpty" style="display:none;text-align:center;padding:1.5rem;color:var(--muted);font-size:.85rem">
-        No hay datos para la fecha seleccionada. Probá con otro día hábil.
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Mi Sueldo en Dólares -->
-  <div class="section" id="mi-sueldo">
-    <div class="sec-header"><h2 class="sec-title">Mi sueldo en dólares</h2><div class="sec-line"></div></div>
-    <div class="sueldo-wrap">
-      <div class="sueldo-input-row">
-        <div class="sueldo-field">
-          <label>Tu sueldo en pesos</label>
-          <input id="sueldoInput" type="text" inputmode="numeric" placeholder="Ej: 800.000" oninput="formatSueldoInput(this);calcSueldo()">
-        </div>
-        <button class="btn" onclick="saveSueldo()" style="padding:8px 16px;font-size:.8rem">Guardar</button>
-        <span id="sueldoSaved" style="font-size:.72rem;color:var(--green);opacity:0;transition:opacity .3s"></span>
-      </div>
-      <div id="sueldoCards" class="sueldo-grid"></div>
-      <div class="sueldo-history" id="sueldoHistory" style="display:none">
-        <div class="sueldo-history-title">Tu sueldo en USD Blue — últimos 12 meses</div>
-        <div class="sh-chart-wrap"><canvas id="sueldoChart"></canvas></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Máquina del Tiempo -->
-  <div class="section" id="maquina-del-tiempo">
-    <div class="sec-header"><h2 class="sec-title">Máquina del Tiempo</h2><div class="sec-line"></div></div>
-    <div class="tm-wrap">
-      <p class="tm-desc">¿Y si hubieras comprado dólares blue ese día? Ingresá una fecha y un monto para ver cuánto tendrías hoy.</p>
-      <div class="tm-inputs">
-        <div class="tm-field">
-          <label>Fecha</label>
-          <input id="tmDate" type="date" class="tm-input" max="" onchange="calcTimeMachine()">
-        </div>
-        <div class="tm-field">
-          <label>Tenías en pesos</label>
-          <input id="tmAmount" type="text" inputmode="numeric" value="1.000.000" class="tm-input" oninput="formatTmInput(this);calcTimeMachine()">
-        </div>
-      </div>
-      <div id="tmResult" class="tm-result" style="display:none">
-        <div class="tm-cards">
-          <div class="tm-card bought">
-            <div class="tm-card-icon">💵</div>
-            <div class="tm-card-label">Comprabas</div>
-            <div class="tm-card-val" id="tmDollars">--</div>
-            <div class="tm-card-sub" id="tmRateOld">--</div>
-          </div>
-          <div class="tm-card today">
-            <div class="tm-card-icon">📈</div>
-            <div class="tm-card-label">Hoy esos dólares valen</div>
-            <div class="tm-card-val" id="tmToday">--</div>
-            <div class="tm-card-sub" id="tmRateNow">--</div>
-          </div>
-          <div class="tm-card result" id="tmResultCard">
-            <div class="tm-card-icon" id="tmResultIcon">🚀</div>
-            <div class="tm-card-label" id="tmResultLabel">Ganancia</div>
-            <div class="tm-card-val" id="tmProfit">--</div>
-            <div class="tm-card-sub" id="tmProfitPct">--</div>
-          </div>
-        </div>
-        <div class="tm-versus">
-          <div class="tm-vs-text">Si lo dejabas en pesos, hoy seguirías teniendo</div>
-          <div class="tm-vs-val" id="tmPesos">--</div>
-          <div class="tm-vs-sub">(mismo monto, sin rendimiento)</div>
-        </div>
-      </div>
+  <!-- ── Herramientas (link cards a sub-páginas) ── -->
+  <div class="section" id="herramientas">
+    <div class="sec-header"><h2 class="sec-title">Herramientas</h2><div class="sec-line"></div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+      <a href="convertidor.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--sky)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="tc-title">Convertidor completo</div>
+        <div class="tc-desc">Convertí pesos a dólares con todos los tipos de cambio. Calculadora detallada con cards de cotización.</div>
+      </a>
+      <a href="historico.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="tc-title">Histórico multi-dólar</div>
+        <div class="tc-desc">Gráfico comparativo Blue vs MEP vs CCL vs Oficial. Consultá cualquier fecha pasada.</div>
+      </a>
+      <a href="mi-sueldo.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg></div>
+        <div class="tc-title">Mi sueldo en dólares</div>
+        <div class="tc-desc">Calculá cuánto vale tu sueldo en cada tipo de dólar. Guardá y seguí la evolución mes a mes.</div>
+      </a>
+      <a href="maquina-del-tiempo.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="tc-title">Máquina del Tiempo</div>
+        <div class="tc-desc">¿Y si hubieras comprado dólares ese día? Simulá con cualquier fecha y monto.</div>
+      </a>
     </div>
   </div>
 
@@ -903,47 +677,6 @@ function calcAll(from) {
 function relTime(s){if(!s)return'';const d=Math.floor((Date.now()-new Date(s))/60000);if(d<1)return'hace un momento';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
 function ago(ts){if(!ts)return'';const d=Math.floor((Date.now()-ts*1000)/60000);if(d<2)return'ahora';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
 
-/* ── Exchange names & URLs dict (criptoya) ── */
-const EXCH_NAMES = {
-  letsbit:'Letsbit', buenbit:'Buenbit', lemoncash:'Lemon Cash', lemoncashp2p:'Lemon P2P',
-  ripio:'Ripio', ripioexchange:'Ripio Exchange', satoshitango:'Satoshi Tango', bitso:'Bitso',
-  bybit:'Bybit', bybitp2p:'Bybit P2P', fiwind:'Fiwind', argenbtc:'ArgenBTC',
-  tiendacrypto:'Tienda Crypto', binancep2p:'Binance P2P', binance:'Binance',
-  decrypto:'Decrypto', belo:'Belo', kriptonmarket:'Krypton',
-  qubit:'Qubit', cambioar:'CambioAr', cryptomkt:'CryptoMKT', cryptomktpro:'CryptoMKT Pro',
-  bitmarket:'BitMarket', coingoBtc:'Coingo', plusCrypto:'PlusCrypto', pluscrypto:'PlusCrypto',
-  anbazoCrypto:'Anbazo', okexp2p:'OKX P2P', vitawallet:'Vitawallet',
-  huobip2p:'Huobi P2P', kucoinp2p:'KuCoin P2P', saldo:'Saldo', astropay:'Astropay',
-  bitgetp2p:'Bitget P2P', eluter:'Eluter', paydecep2p:'Paydece P2P',
-  eldoradop2p:'Eldorado P2P', trubit:'Trubit', bingxp2p:'BingX P2P',
-  bitsoalpha:'Bitso Alpha', cocoscrypto:'Cocos Crypto', coinexp2p:'CoinEx P2P',
-  wallbit:'Wallbit', mexcp2p:'MEXC P2P', weexp2p:'WEEX P2P', mexc:'MEXC',
-  peanut:'Peanut', universalcoins:'Universal Coins',
-};
-const EXCH_URLS = {
-  letsbit:'https://letsbit.io', buenbit:'https://buenbit.com',
-  lemoncash:'https://lemon.me', lemoncashp2p:'https://lemon.me',
-  ripio:'https://ripio.com', ripioexchange:'https://ripio.com',
-  satoshitango:'https://satoshitango.com', bitso:'https://bitso.com', bitsoalpha:'https://bitso.com',
-  bybit:'https://bybit.com', bybitp2p:'https://bybit.com',
-  fiwind:'https://fiwind.io', argenbtc:'https://argenbtc.com',
-  tiendacrypto:'https://tiendacrypto.com',
-  binancep2p:'https://p2p.binance.com', binance:'https://binance.com',
-  decrypto:'https://decrypto.la', belo:'https://belo.app',
-  kriptonmarket:'https://kriptonmarket.com',
-  cryptomkt:'https://cryptomkt.com', cryptomktpro:'https://cryptomkt.com',
-  okexp2p:'https://okx.com', vitawallet:'https://vitawallet.io',
-  kucoinp2p:'https://kucoin.com', astropay:'https://astropay.com',
-  bitgetp2p:'https://bitget.com', bingxp2p:'https://bingx.com',
-  cocoscrypto:'https://cocos.capital', wallbit:'https://wallbit.io',
-  mexcp2p:'https://mexc.com', weexp2p:'https://weex.com', mexc:'https://mexc.com',
-  peanut:'https://peanut.trade', pluscrypto:'https://pluscrypto.com.ar',
-  eldoradop2p:'https://eldorado.io', coinexp2p:'https://coinex.com',
-  universalcoins:'https://universalcoins.com',
-};
-function exchName(k){return EXCH_NAMES[k]||escHTML(k.charAt(0).toUpperCase()+k.slice(1));}
-function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
-
 /* ── Sortable tables ── */
 function sortTable(tableId, colIdx, type) {
   const tbl = q(tableId);
@@ -972,46 +705,6 @@ function sortTable(tableId, colIdx, type) {
   rows.forEach(r => tbody.appendChild(r));
 }
 
-/* ── Render exchange table ── */
-function renderExchTable(tableId, loadingId, data) {
-  const tbl = q(tableId);
-  const ldr = q(loadingId);
-  if (!data) { if(ldr)ldr.style.display='none'; return; }
-
-  const rows = Object.entries(data)
-    .filter(([k, v]) => v && typeof v.ask === 'number' && v.ask > 0)
-    .map(([k, v]) => ({ key:k, name: exchName(k), buy: v.bid || null, sell: v.ask, time: v.time }))
-    .sort((a, b) => a.sell - b.sell);
-
-  if (!rows.length) { if(ldr)ldr.style.display='none'; return; }
-
-  tbl.innerHTML = `<thead><tr>
-    <th onclick="sortTable('${tableId}',0,'alpha')">Exchange <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',1,'num')">Compra <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',2,'num')">Venta <span class="sort-arrow active">▲</span></th><th onclick="sortTable('${tableId}',3,'num')">Spread <span class="sort-arrow">▼</span></th><th>Actualizado</th>
-  </tr></thead><tbody>${rows.map((r, i) => {
-    const spread = r.buy ? ((r.sell - r.buy) / r.buy * 100).toFixed(1) + '%' : '–';
-    const badge  = i === 0 ? '<span class="best-badge">mejor venta</span>' :
-                   i === rows.length - 1 ? '<span class="worst-badge">más caro</span>' : '';
-    return `<tr>
-      <td>${exchLink(r.key, r.name)}${badge}</td>
-      <td class="exch-buy">${r.buy ? fmtARS(r.buy) : '–'}</td>
-      <td class="exch-sell">${fmtARS(r.sell)}</td>
-      <td class="exch-spread">${spread}</td>
-      <td class="exch-time">${ago(r.time)}</td>
-    </tr>`;
-  }).join('')}</tbody>`;
-
-  if(ldr)ldr.style.display = 'none';
-  tbl.style.display = 'table';
-}
-
-/* ── Cripto tabs ── */
-function switchCriptoTab(coin, btn) {
-  document.querySelectorAll('.cripto-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.cripto-panel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  const panel = q('panel-'+coin);
-  if(panel) panel.classList.add('active');
-}
 
 /* ── Comparadolar tabs ── */
 function switchCompTab(type, btn) {
@@ -1063,7 +756,6 @@ function renderCompTable(tableId, loadingId, rows) {
 /* ── Datos dolarapi ── */
 const NAMES={oficial:'Oficial',blue:'Blue',bolsa:'MEP (Bolsa)',contadoconliqui:'CCL',mayorista:'Mayorista',cripto:'Cripto',tarjeta:'Tarjeta'};
 const ORDER=['oficial','blue','bolsa','contadoconliqui','cripto','tarjeta','mayorista'];
-let blueChartInstance=null;
 let prevPrices={};
 
 function flashEl(id, newVal, prevVal) {
@@ -1184,155 +876,20 @@ async function loadBlueBySource(base){
   grid.innerHTML=unique.map(s=>`<div class="diario-card"><div class="diario-name">${s.nombre}</div><div class="diario-row"><div class="diario-side"><div class="dl">Compra</div><div class="dv b">${s.compra?fmtARS(s.compra):'–'}</div></div><div class="diario-side" style="text-align:right"><div class="dl">Venta</div><div class="dv s">${fmtARS(s.venta)}</div></div></div></div>`).join('');
 }
 
-/* ── Multi-dollar chart ── */
-const CHART_COLORS = {blue:'#38bdf8', bolsa:'#22c55e', contadoconliqui:'#f97316', oficial:'#a78bfa'};
-const CHART_LABELS = {blue:'Blue', bolsa:'MEP', contadoconliqui:'CCL', oficial:'Oficial'};
+/* ── Historical data for daily % changes ── */
 let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[], cripto:[], mayorista:[]};
-let activeSeries = new Set(['blue','bolsa','contadoconliqui']);
-let currentRange = 30;
 
-function toggleSeries(key, btn) {
-  if (activeSeries.has(key)) { activeSeries.delete(key); btn.classList.remove('active'); }
-  else { activeSeries.add(key); btn.classList.add('active'); }
-  drawChart(currentRange);
-}
-
-function drawChart(days) {
-  currentRange = days;
-  const ctx = document.getElementById('blueChart').getContext('2d');
-  if (blueChartInstance) blueChartInstance.destroy();
-
-  const datasets = [];
-  for (const key of activeSeries) {
-    const data = allHistory[key];
-    if (!data || !data.length) continue;
-    const slice = days >= 9999 ? data : data.slice(-days);
-    const color = CHART_COLORS[key];
-    datasets.push({
-      label: CHART_LABELS[key],
-      data: slice.map(d => ({x: d.fecha, y: d.venta})),
-      borderColor: color,
-      borderWidth: 2,
-      backgroundColor: 'transparent',
-      fill: false,
-      tension: 0.4,
-      pointRadius: 0,
-      pointHoverRadius: 5,
-      pointHoverBackgroundColor: color
-    });
-  }
-
-  // Fill the first dataset for visual effect
-  if (datasets.length > 0) {
-    const g = ctx.createLinearGradient(0, 0, 0, 200);
-    const c = datasets[0].borderColor;
-    // Convert hex color to rgba for gradient
-    let rgba = 'rgba(56,189,248,.18)';
-    if (c && c.startsWith('#') && c.length === 7) {
-      const r = parseInt(c.slice(1,3),16), gr = parseInt(c.slice(3,5),16), b = parseInt(c.slice(5,7),16);
-      rgba = `rgba(${r},${gr},${b},.18)`;
-    } else if (c && c.startsWith('rgb')) {
-      rgba = c.replace(')', ',.18)').replace('rgb', 'rgba');
-    }
-    g.addColorStop(0, rgba);
-    g.addColorStop(1, 'transparent');
-    datasets[0].backgroundColor = g;
-    datasets[0].fill = true;
-  }
-
-  // Update current value display
-  if (allHistory.blue && allHistory.blue.length) {
-    const last = allHistory.blue[allHistory.blue.length - 1].venta;
-    q('chartCurrentVal').textContent = fmtARS(last);
-  }
-
-  blueChartInstance = new Chart(ctx, {
-    type: 'line',
-    data: { datasets },
-    options: {
-      responsive: true, maintainAspectRatio: false,
-      interaction: {mode: 'index', intersect: false},
-      plugins: {
-        legend: {display: true, position: 'top', labels: {color: '#64748b', font: {family: 'DM Sans', size: 11}, boxWidth: 12, padding: 12}},
-        tooltip: {
-          backgroundColor: '#1a2540', borderColor: '#2a3e5e', borderWidth: 1,
-          titleColor: '#64748b', bodyColor: '#f1f5f9',
-          bodyFont: {family: 'DM Sans', size: 13, weight: '600'},
-          callbacks: {label: ctx => ' ' + ctx.dataset.label + ': ' + fmtARS(ctx.parsed.y)}
-        }
-      },
-      scales: {
-        x: {type: 'category', grid: {color: 'rgba(255,255,255,.04)'}, ticks: {color: '#475569', font: {family: 'DM Sans', size: 11}, maxTicksLimit: 7, maxRotation: 0, callback: function(val) { const d = new Date(this.getLabelForValue(val) + 'T12:00:00'); return d.toLocaleDateString('es-AR', {day:'numeric', month:'short'}); }}},
-        y: {position: 'right', grid: {color: 'rgba(255,255,255,.04)'}, ticks: {color: '#475569', font: {family: 'DM Sans', size: 11}, callback: v => '$' + Number(v).toLocaleString('es-AR')}}
-      }
-    }
-  });
-}
-
-function setRange(days, btn) {
-  document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  drawChart(days);
-}
-
-/* ── Consulta por fecha ── */
-async function buscarFecha(){
-  const input=q('fechaInput').value;
-  if(!input)return;
-  q('fechaResult').style.display='none';
-  q('fechaEmpty').style.display='none';
-  const tipos=['blue','oficial','bolsa','contadoconliqui','cripto','tarjeta','mayorista'];
-  const LABELS={blue:'Blue',oficial:'Oficial',bolsa:'MEP (Bolsa)',contadoconliqui:'CCL',cripto:'Cripto',tarjeta:'Tarjeta',mayorista:'Mayorista'};
-  const results=[];
-  await Promise.allSettled(tipos.map(async tipo=>{
-    const data=await fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`);
-    if(!Array.isArray(data))return;
-    const match=data.find(d=>d.fecha===input);
-    if(match)results.push({tipo,label:LABELS[tipo]||tipo,compra:match.compra,venta:match.venta});
-  }));
-  if(!results.length){q('fechaEmpty').style.display='block';return;}
-  const dt=new Date(input+'T12:00:00');
-  const formatted=dt.toLocaleDateString('es-AR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  q('fechaLabel').textContent='Cotizaciones del '+formatted;
-  q('fechaGrid').innerHTML=results.map(r=>`<div class="ex-card"><div class="ex-name">${r.label}</div><div class="ex-row"><div class="ex-side"><div class="l">Compra</div><div class="v b">${r.compra?fmtARS(r.compra):'–'}</div></div><div class="ex-side" style="text-align:right"><div class="l">Venta</div><div class="v s">${fmtARS(r.venta)}</div></div></div></div>`).join('');
-  q('fechaResult').style.display='block';
-}
-// Set default date to yesterday (skip weekends) and max to today
-(function(){
-  const d=q('fechaInput');
-  if(!d)return;
-  const today=new Date();
-  d.max=today.toISOString().split('T')[0];
-  const yesterday=new Date();
-  yesterday.setDate(yesterday.getDate()-1);
-  if(yesterday.getDay()===0) yesterday.setDate(yesterday.getDate()-2);
-  if(yesterday.getDay()===6) yesterday.setDate(yesterday.getDate()-1);
-  d.value=yesterday.toISOString().split('T')[0];
-})();
-
-/* ── Load historical data ONCE ── */
+/* ── Load historical data ONCE (for daily % changes) ── */
 async function loadHistorical(){
   await Promise.allSettled(
     ['blue','bolsa','contadoconliqui','oficial','cripto','mayorista'].map(tipo =>
       fetchJSON(`https://api.argentinadatos.com/v1/cotizaciones/dolares/${tipo}`).then(data => {
         if (Array.isArray(data) && data.length) {
           allHistory[tipo] = data;
-          if (tipo === 'blue') {
-            const slice = data.slice(-14).map(d => d.venta);
-            const sparkEl = q('blue-spark');
-            const sparkWrap = q('blue-spark-wrap');
-            if (sparkEl && slice.length >= 2) {
-              sparkEl.innerHTML = sparklineSVG(slice);
-              renderSparkDelta('blue-spark-delta', slice);
-              sparkWrap.style.display = 'flex';
-            }
-          }
         }
       }).catch(() => {})
     )
   );
-  drawChart(currentRange);
-  // Render daily % changes now that allHistory is populated
   renderAllDailyChanges();
 }
 
@@ -1365,16 +922,6 @@ async function refreshAll(){
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
       if(q('tickerTrack')) q('tickerTrack').innerHTML=tick+tick;
     }).catch(()=>{}),
-    // Cripto por exchange (carga directa, sin acordeón)
-    fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(data=>{
-      if(data) renderExchTable('usdt-table','usdt-loading',data);
-    }).catch(()=>{}),
-    fetchJSON('https://criptoya.com/api/usdc/ars/0.1').then(data=>{
-      if(data) renderExchTable('usdc-table','usdc-loading',data);
-    }).catch(()=>{}),
-    fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(data=>{
-      if(data) renderExchTable('btc-table','btc-loading',data);
-    }).catch(()=>{}),
     // Comparadolar: bancos y brokers
     fetchJSON('https://api.comparadolar.ar/usd').then(data=>{
       if(!Array.isArray(data))return;
@@ -1392,7 +939,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['calculadora','cripto-detail','oficial-bancos','mep-brokers','historico','tv-mep','fecha','medios'];
+  const ids=['calculadora','oficial-bancos','mep-brokers','medios','herramientas','faq'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
@@ -1422,238 +969,17 @@ triggerRefresh = function(){
   _sharedTriggerRefresh();
 };
 
-// ── Mi Sueldo en Dólares ──
-let sueldoChart = null;
-
-const formatSueldoInput = formatNumericInput;
-
-function parseSueldoVal() {
-  return parseFloat((q('sueldoInput')?.value || '').replace(/\./g, '')) || 0;
-}
-
-(function initSueldo(){
-  const saved = localStorage.getItem('billetear-sueldo');
-  if(saved && q('sueldoInput')) {
-    q('sueldoInput').value = Number(saved).toLocaleString('es-AR');
-  }
-})();
-
-function saveSueldo(){
-  const v = parseSueldoVal();
-  if(!v) return;
-  localStorage.setItem('billetear-sueldo', v);
-  // Guardar snapshot mensual para histórico
-  const key = 'billetear-sueldo-history';
-  const hist = JSON.parse(localStorage.getItem(key) || '[]');
-  const now = new Date();
-  const monthKey = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0');
-  const existing = hist.findIndex(h => h.month === monthKey);
-  if(existing >= 0) hist[existing].salary = v;
-  else hist.push({ month: monthKey, salary: v });
-  // Mantener solo últimos 12 meses
-  while(hist.length > 12) hist.shift();
-  localStorage.setItem(key, JSON.stringify(hist));
-  const badge = q('sueldoSaved');
-  if(badge){ badge.textContent = 'Guardado'; badge.style.opacity = '1'; setTimeout(()=> badge.style.opacity='0', 2000); }
-  calcSueldo();
-}
-
-function calcSueldo(){
-  const sueldo = parseSueldoVal();
-  if(!sueldo || !currentDollarData.length){ q('sueldoCards').innerHTML=''; return; }
-
-  const get = c => currentDollarData.find(d => d.casa === c);
-  const types = [
-    { key: 'blue', name: 'Blue', color: 'var(--sky)' },
-    { key: 'bolsa', name: 'MEP', color: 'var(--green)' },
-    { key: 'contadoconliqui', name: 'CCL', color: 'var(--orange)' },
-    { key: 'oficial', name: 'Oficial', color: 'var(--purple)' },
-    { key: 'cripto', name: 'Cripto', color: 'var(--sky2)' }
-  ];
-
-  let cards = [];
-  let maxUSD = 0;
-  types.forEach(t => {
-    const d = get(t.key);
-    if(!d || !d.venta) return;
-    const usd = sueldo / d.venta;
-    if(usd > maxUSD) maxUSD = usd;
-    cards.push({ ...t, usd, rate: d.venta });
-  });
-
-  q('sueldoCards').innerHTML = cards.map(c =>
-    `<div class="sueldo-card${c.usd === maxUSD ? ' best' : ''}">
-      <div class="sc-type">${c.name}</div>
-      <div class="sc-usd">US$ ${c.usd.toLocaleString('es-AR',{minimumFractionDigits:0,maximumFractionDigits:0})}</div>
-      <div class="sc-rate">1 USD = $${c.rate.toLocaleString('es-AR')}</div>
-    </div>`
-  ).join('');
-
-  renderSueldoHistory();
-}
-
-function renderSueldoHistory(){
-  const hist = JSON.parse(localStorage.getItem('billetear-sueldo-history') || '[]');
-  if(hist.length < 2 || !allHistory.blue?.length){
-    q('sueldoHistory').style.display = 'none';
-    return;
-  }
-  q('sueldoHistory').style.display = '';
-
-  // Para cada mes guardado, buscar el blue promedio de ese mes
-  const points = hist.map(h => {
-    const [y,m] = h.month.split('-').map(Number);
-    const monthData = allHistory.blue.filter(d => {
-      const dt = new Date(d.fecha);
-      return dt.getFullYear() === y && dt.getMonth()+1 === m;
-    });
-    if(!monthData.length) return null;
-    const avgBlue = monthData.reduce((s,d) => s + (d.venta||d.valor||0), 0) / monthData.length;
-    if(!avgBlue) return null;
-    return { month: h.month, usd: h.salary / avgBlue };
-  }).filter(Boolean);
-
-  if(points.length < 2){ q('sueldoHistory').style.display = 'none'; return; }
-
-  const labels = points.map(p => {
-    const [y,m] = p.month.split('-');
-    const months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-    return months[Number(m)-1] + ' ' + y.slice(2);
-  });
-  const data = points.map(p => Math.round(p.usd));
-
-  if(sueldoChart) sueldoChart.destroy();
-  const ctx = q('sueldoChart').getContext('2d');
-  const isLight = document.body.classList.contains('light');
-  sueldoChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Sueldo en USD Blue',
-        data,
-        borderColor: '#38bdf8',
-        backgroundColor: 'rgba(56,189,248,.1)',
-        fill: true,
-        tension: .3,
-        pointRadius: 4,
-        pointBackgroundColor: '#38bdf8'
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        x: { ticks: { color: isLight?'#475569':'#8896ab', font:{size:11} }, grid: { display:false } },
-        y: { ticks: { color: isLight?'#475569':'#8896ab', font:{size:11}, callback:v=>'US$'+v }, grid: { color: isLight?'rgba(0,0,0,.06)':'rgba(255,255,255,.06)' } }
-      }
-    }
-  });
-}
-
-// Recalcular sueldo cuando se actualizan los datos
-const _origRenderDollars = renderDollars;
-renderDollars = function(data){
-  _origRenderDollars(data);
-  if(q('sueldoInput')?.value) calcSueldo();
-};
-
-// ── Máquina del Tiempo ──
-const formatTmInput = formatNumericInput;
-
-(function initTimeMachine() {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  const max = d.toISOString().split('T')[0];
-  if (q('tmDate')) {
-    q('tmDate').max = max;
-    const ago = new Date();
-    ago.setFullYear(ago.getFullYear() - 1);
-    q('tmDate').value = ago.toISOString().split('T')[0];
-  }
-})();
-
-async function calcTimeMachine() {
-  const dateStr = q('tmDate')?.value;
-  const amount = parseFloat((q('tmAmount')?.value || '').replace(/\./g, '')) || 0;
-
-  if (!dateStr || !amount) {
-    q('tmResult').style.display = 'none';
-    return;
-  }
-
-  try {
-    const historical = await fetchJSON('https://api.argentinadatos.com/v1/cotizaciones/dolares/blue/' + dateStr);
-
-    let oldRate = null;
-    if (historical && historical.venta) {
-      oldRate = historical;
-    } else if (Array.isArray(historical)) {
-      oldRate = historical[historical.length - 1];
-    }
-
-    if (!oldRate || !oldRate.venta) {
-      q('tmResult').style.display = 'none';
-      return;
-    }
-
-    let currentBlue = null;
-    if (typeof currentDollarData !== 'undefined' && currentDollarData.length) {
-      currentBlue = currentDollarData.find(d => d.casa === 'blue');
-    }
-    if (!currentBlue) {
-      const fresh = await fetchJSON('https://dolarapi.com/v1/dolares/blue');
-      currentBlue = fresh;
-    }
-
-    if (!currentBlue || !currentBlue.venta) {
-      q('tmResult').style.display = 'none';
-      return;
-    }
-
-    const dollarsYouBought = amount / oldRate.venta;
-    const todayValue = dollarsYouBought * currentBlue.venta;
-    const profit = todayValue - amount;
-    const profitPct = ((todayValue / amount) - 1) * 100;
-    const isPositive = profit >= 0;
-
-    const dateDisplay = new Date(dateStr + 'T12:00:00').toLocaleDateString('es-AR', { day: 'numeric', month: 'long', year: 'numeric' });
-
-    q('tmDollars').textContent = 'US$ ' + dollarsYouBought.toLocaleString('es-AR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-    q('tmRateOld').textContent = 'Blue a $' + oldRate.venta.toLocaleString('es-AR') + ' el ' + dateDisplay;
-    q('tmToday').textContent = '$\u202f' + Math.round(todayValue).toLocaleString('es-AR');
-    q('tmRateNow').textContent = 'Blue hoy: $' + currentBlue.venta.toLocaleString('es-AR');
-    q('tmProfit').textContent = (isPositive ? '+' : '-') + '$\u202f' + Math.abs(Math.round(profit)).toLocaleString('es-AR');
-    q('tmProfitPct').textContent = (isPositive ? '+' : '') + profitPct.toFixed(1) + '%';
-    q('tmResultLabel').textContent = isPositive ? 'Ganancia' : 'Pérdida';
-    q('tmResultIcon').textContent = isPositive ? '🚀' : '📉';
-    q('tmPesos').textContent = '$\u202f' + Math.round(amount).toLocaleString('es-AR');
-
-    const resultCard = q('tmResultCard');
-    if (isPositive) {
-      resultCard.classList.remove('negative');
-    } else {
-      resultCard.classList.add('negative');
-    }
-
-    q('tmResult').style.display = 'block';
-  } catch (e) {
-    console.error('Time machine error:', e);
-    q('tmResult').style.display = 'none';
-  }
-}
 
 </script>
 
 <!-- ── Mobile bottom nav ── -->
 <nav class="bottom-nav">
   <div class="bn-inner">
-    <a class="bn-item active" href="dolares.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span>Dólares</span></a>
+    <a class="bn-item active" href="dolares.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span>Dólar</span></a>
     <a class="bn-item" href="cripto.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M11.767 19.089c4.924.868 6.14-6.025 1.216-6.894m-1.216 6.894L5.86 18.047m5.908 1.042-.347 1.97m1.563-8.864c4.924.869 6.14-6.025 1.215-6.893m-1.215 6.893-6.083-1.072m6.083 1.072.347-1.971M7.116 11.07l-1.257-.222m7.206-5.86-1.257-.222m-.838 4.75 6.083 1.072"/></svg></span><span>Cripto</span></a>
-    <a class="bn-item" href="mercados.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span>Mercados</span></a>
-    <a class="bn-item" href="rendimientos.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M16 16l2 2 4-4" stroke-width="2"/></svg></span><span>Rend.</span></a>
-    <a class="bn-item" href="indicadores.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Indicadores</span></a>
+    <a class="bn-item" href="mercados.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></span><span>Bolsa</span></a>
+    <a class="bn-item" href="rendimientos.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/><path d="M16 16l2 2 4-4" stroke-width="2"/></svg></span><span>Invertir</span></a>
+    <a class="bn-item" href="indicadores.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></span><span>Economía</span></a>
     <a class="bn-item" href="noticias.html"><span class="bn-icon"><svg viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span><span>Noticias</span></a>
   </div>
 </nav>
