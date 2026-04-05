@@ -110,33 +110,6 @@
     .tc-detail.open{max-height:300px;opacity:1}
     .tc-detail-inner{padding-top:.7rem;border-top:1px solid var(--border);margin-top:.6rem;display:flex;flex-direction:column;gap:.6rem}
 
-    /* ── Cripto exchange tabs ── */
-    .cripto-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
-    .cripto-tab{background:var(--card2);border:1px solid var(--border);padding:6px 16px;border-radius:8px;font:600 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
-    .cripto-tab.active,.cripto-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
-    .cripto-panel{display:none}
-    .cripto-panel.active{display:block}
-
-    /* ── Exchange table ── */
-    .exch-table{width:100%;border-collapse:collapse;border-radius:14px;overflow:hidden}
-    .exch-table th{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);padding:.65rem 1.2rem;text-align:left;border-bottom:1px solid var(--border);background:var(--card2);cursor:pointer;user-select:none;transition:color .15s}
-    .exch-table th:hover{color:var(--sky)}
-    .exch-table td{padding:.7rem 1.2rem;border-bottom:1px solid var(--border);font-size:.87rem;transition:background .12s}
-    .exch-table tr:last-child td{border-bottom:none}
-    .exch-table tr:hover td{background:var(--card2)}
-    .exch-name{font-weight:600;color:var(--text2)}
-    .exch-link{color:var(--sky);text-decoration:none;font-weight:600;transition:color .15s}
-    .exch-link:hover{color:#7dd3fc;text-decoration:underline}
-    .exch-link .ext{font-size:.65rem;opacity:.5;margin-left:3px}
-    .exch-buy{color:var(--text2)}
-    .exch-sell{color:var(--sky);font-weight:700}
-    .exch-spread{font-size:.75rem;color:var(--muted)}
-    .exch-time{font-size:.68rem;color:var(--muted2)}
-    .exch-loading{text-align:center;padding:2rem;color:var(--muted);font-size:.85rem}
-    .best-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3);padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
-    .worst-badge{display:inline-block;font-size:.58rem;font-weight:700;text-transform:uppercase;background:rgba(239,68,68,.12);color:var(--red);border:1px solid rgba(239,68,68,.25);padding:1px 6px;border-radius:10px;margin-left:6px;vertical-align:middle}
-    .sort-arrow{font-size:.6rem;margin-left:4px;opacity:.4}
-    .sort-arrow.active{opacity:1;color:var(--sky)}
   </style>
 <script type="application/ld+json">
 {
@@ -197,7 +170,7 @@
 <h1 class="sr-only">Precio de Bitcoin y criptomonedas hoy en pesos argentinos</h1>
 
   <div class="section" style="animation-delay:.05s">
-    <div class="sec-header"><h2 class="sec-title">Top criptomonedas</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CoinGecko</span></div>
+    <div class="sec-header"><h2 class="sec-title">Top criptomonedas</h2><div class="sec-line"></div></div>
     <div class="top-coins" id="topCoins">
       <div class="top-coin"><div class="skel" style="height:36px;width:36px;border-radius:50%"></div><div class="skel" style="height:1.4rem;width:60%;margin-top:.5rem"></div><div class="skel" style="height:.7rem;width:40%"></div></div>
       <div class="top-coin"><div class="skel" style="height:36px;width:36px;border-radius:50%"></div><div class="skel" style="height:1.4rem;width:60%;margin-top:.5rem"></div><div class="skel" style="height:.7rem;width:40%"></div></div>
@@ -218,7 +191,7 @@
   </div>
 
   <div class="section" style="animation-delay:.1s">
-    <div class="sec-header"><h2 class="sec-title">Todas las criptomonedas</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CoinGecko</span></div>
+    <div class="sec-header"><h2 class="sec-title">Todas las criptomonedas</h2><div class="sec-line"></div></div>
     <div class="crypto-table" id="cryptoTable">
       <div class="ct-header"><div>Moneda</div><div>Precio</div><div>24h</div><div title="Capitalización de mercado — valor total de todas las monedas en circulación" style="cursor:help">Market Cap</div></div>
       <div class="ct-row" style="pointer-events:none"><div class="skel" style="height:.9rem;width:80%"></div><div class="skel" style="height:.9rem;width:70%"></div><div class="skel" style="height:.9rem;width:50%"></div><div class="skel" style="height:.9rem;width:60%"></div></div>
@@ -232,7 +205,7 @@
 
   <!-- Gainers & Losers -->
   <div class="section" style="animation-delay:.15s">
-    <div class="sec-header"><h2 class="sec-title">Ganadoras y perdedoras del día</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted)">Top 50 por capitalización · variación 24h</span><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CoinGecko</span></div>
+    <div class="sec-header"><h2 class="sec-title">Ganadoras y perdedoras del día</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted)">Top 50 por capitalización · variación 24h</span></div>
     <div class="gl-grid">
       <div class="gl-panel gainers">
         <div class="gl-panel-header">Más ganadoras (24h)</div>
@@ -253,39 +226,6 @@
           <div class="gl-row" style="pointer-events:none"><div class="skel" style="height:.85rem;width:55%"></div><div class="skel" style="height:.85rem;width:25%"></div></div>
           <div class="gl-row" style="pointer-events:none"><div class="skel" style="height:.85rem;width:55%"></div><div class="skel" style="height:.85rem;width:25%"></div></div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── Dólar Cripto por Exchange ── -->
-  <div class="section" id="exchanges" style="animation-delay:.18s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Cripto por exchange</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: CriptoYa</span></div>
-    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
-      Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local. Compra, venta y spread de cada plataforma.
-    </p>
-
-    <div class="cripto-tabs">
-      <button class="cripto-tab active" onclick="switchCriptoTab('usdt',this)">USDT</button>
-      <button class="cripto-tab" onclick="switchCriptoTab('usdc',this)">USDC</button>
-      <button class="cripto-tab" onclick="switchCriptoTab('btc',this)">BTC</button>
-    </div>
-
-    <div class="cripto-panel active" id="panel-usdt">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="usdt-loading">Cargando precios...</div>
-        <table class="exch-table" id="usdt-table" style="display:none"></table>
-      </div>
-    </div>
-    <div class="cripto-panel" id="panel-usdc">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="usdc-loading">Cargando precios...</div>
-        <table class="exch-table" id="usdc-table" style="display:none"></table>
-      </div>
-    </div>
-    <div class="cripto-panel" id="panel-btc">
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
-        <div class="exch-loading" id="btc-loading">Cargando precios...</div>
-        <table class="exch-table" id="btc-table" style="display:none"></table>
       </div>
     </div>
   </div>
@@ -474,51 +414,6 @@ document.addEventListener('click',function(e){
   if(!wasOpen){detail.classList.add('open');card.classList.add('expanded');}
 });
 
-// ── Exchange names & URLs (CriptoYa) ──
-const EXCH_NAMES={letsbit:'Letsbit',buenbit:'Buenbit',lemoncash:'Lemon Cash',lemoncashp2p:'Lemon P2P',ripio:'Ripio',ripioexchange:'Ripio Exchange',satoshitango:'Satoshi Tango',bitso:'Bitso',bybit:'Bybit',bybitp2p:'Bybit P2P',fiwind:'Fiwind',argenbtc:'ArgenBTC',tiendacrypto:'Tienda Crypto',binancep2p:'Binance P2P',binance:'Binance',decrypto:'Decrypto',belo:'Belo',kriptonmarket:'Krypton',qubit:'Qubit',cambioar:'CambioAr',cryptomkt:'CryptoMKT',cryptomktpro:'CryptoMKT Pro',bitmarket:'BitMarket',pluscrypto:'PlusCrypto',okexp2p:'OKX P2P',vitawallet:'Vitawallet',kucoinp2p:'KuCoin P2P',saldo:'Saldo',astropay:'Astropay',bitgetp2p:'Bitget P2P',eluter:'Eluter',paydecep2p:'Paydece P2P',eldoradop2p:'Eldorado P2P',trubit:'Trubit',bingxp2p:'BingX P2P',bitsoalpha:'Bitso Alpha',cocoscrypto:'Cocos Crypto',coinexp2p:'CoinEx P2P',wallbit:'Wallbit',mexcp2p:'MEXC P2P',weexp2p:'WEEX P2P',mexc:'MEXC',peanut:'Peanut',universalcoins:'Universal Coins'};
-const EXCH_URLS={letsbit:'https://letsbit.io',buenbit:'https://buenbit.com',lemoncash:'https://lemon.me',lemoncashp2p:'https://lemon.me',ripio:'https://ripio.com',ripioexchange:'https://ripio.com',satoshitango:'https://satoshitango.com',bitso:'https://bitso.com',bitsoalpha:'https://bitso.com',bybit:'https://bybit.com',bybitp2p:'https://bybit.com',fiwind:'https://fiwind.io',argenbtc:'https://argenbtc.com',tiendacrypto:'https://tiendacrypto.com',binancep2p:'https://p2p.binance.com',binance:'https://binance.com',decrypto:'https://decrypto.la',belo:'https://belo.app',kriptonmarket:'https://kriptonmarket.com',cryptomkt:'https://cryptomkt.com',cryptomktpro:'https://cryptomkt.com',okexp2p:'https://okx.com',vitawallet:'https://vitawallet.io',kucoinp2p:'https://kucoin.com',astropay:'https://astropay.com',bitgetp2p:'https://bitget.com',bingxp2p:'https://bingx.com',cocoscrypto:'https://cocos.capital',wallbit:'https://wallbit.io',mexcp2p:'https://mexc.com',weexp2p:'https://weex.com',mexc:'https://mexc.com',peanut:'https://peanut.trade',pluscrypto:'https://pluscrypto.com.ar',eldoradop2p:'https://eldorado.io',coinexp2p:'https://coinex.com',universalcoins:'https://universalcoins.com'};
-function exchName(k){return EXCH_NAMES[k]||escHTML(k.charAt(0).toUpperCase()+k.slice(1));}
-function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
-function ago(ts){if(!ts)return'';const d=Math.floor((Date.now()-ts*1000)/60000);if(d<2)return'ahora';if(d<60)return`hace ${d}m`;return`hace ${Math.floor(d/60)}h`;}
-
-function sortTable(tableId,colIdx,type){
-  const tbl=q(tableId);if(!tbl)return;
-  const tbody=tbl.querySelector('tbody');if(!tbody)return;
-  const rows=Array.from(tbody.querySelectorAll('tr'));
-  const th=tbl.querySelectorAll('th')[colIdx];
-  const asc=th.dataset.sort!=='asc';
-  tbl.querySelectorAll('th').forEach(h=>{h.dataset.sort='';});
-  th.dataset.sort=asc?'asc':'desc';
-  tbl.querySelectorAll('.sort-arrow').forEach(a=>a.classList.remove('active'));
-  const arrow=th.querySelector('.sort-arrow');
-  if(arrow){arrow.classList.add('active');arrow.textContent=asc?'▲':'▼';}
-  rows.sort((a,b)=>{let va=a.cells[colIdx]?.textContent.trim()||'';let vb=b.cells[colIdx]?.textContent.trim()||'';if(type==='num'){va=parseFloat(va.replace(/[^0-9.,-]/g,'').replace('.','').replace(',','.'))||0;vb=parseFloat(vb.replace(/[^0-9.,-]/g,'').replace('.','').replace(',','.'))||0;}return asc?(va>vb?1:-1):(va<vb?1:-1);});
-  rows.forEach(r=>tbody.appendChild(r));
-}
-
-function renderExchTable(tableId,loadingId,data){
-  const tbl=q(tableId);const ldr=q(loadingId);
-  if(!data){if(ldr)ldr.style.display='none';return;}
-  const rows=Object.entries(data).filter(([k,v])=>v&&typeof v.ask==='number'&&v.ask>0).map(([k,v])=>({key:k,name:exchName(k),buy:v.bid||null,sell:v.ask,time:v.time})).sort((a,b)=>a.sell-b.sell);
-  if(!rows.length){if(ldr)ldr.style.display='none';return;}
-  tbl.innerHTML=`<thead><tr><th onclick="sortTable('${tableId}',0,'alpha')">Exchange <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',1,'num')">Compra <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',2,'num')">Venta <span class="sort-arrow active">▲</span></th><th onclick="sortTable('${tableId}',3,'num')">Spread <span class="sort-arrow">▼</span></th><th>Actualizado</th></tr></thead><tbody>${rows.map((r,i)=>{const spread=r.buy?((r.sell-r.buy)/r.buy*100).toFixed(1)+'%':'–';const badge=i===0?'<span class="best-badge">mejor venta</span>':i===rows.length-1?'<span class="worst-badge">más caro</span>':'';return`<tr><td>${exchLink(r.key,r.name)}${badge}</td><td class="exch-buy">${r.buy?fmtARS(r.buy):'–'}</td><td class="exch-sell">${fmtARS(r.sell)}</td><td class="exch-spread">${spread}</td><td class="exch-time">${ago(r.time)}</td></tr>`;}).join('')}</tbody>`;
-  if(ldr)ldr.style.display='none';tbl.style.display='table';
-}
-
-function switchCriptoTab(coin,btn){
-  document.querySelectorAll('.cripto-tab').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.cripto-panel').forEach(p=>p.classList.remove('active'));
-  btn.classList.add('active');
-  const panel=q('panel-'+coin);if(panel)panel.classList.add('active');
-}
-
-// Load exchange data
-function loadExchanges(){
-  fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(d=>{if(d)renderExchTable('usdt-table','usdt-loading',d);}).catch(()=>{});
-  fetchJSON('https://criptoya.com/api/usdc/ars/0.1').then(d=>{if(d)renderExchTable('usdc-table','usdc-loading',d);}).catch(()=>{});
-  fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(d=>{if(d)renderExchTable('btc-table','btc-loading',d);}).catch(()=>{});
-}
-loadExchanges();
 
 </script>
 

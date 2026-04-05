@@ -85,6 +85,13 @@
     .sort-arrow{font-size:.6rem;margin-left:4px;opacity:.4}
     .sort-arrow.active{opacity:1;color:var(--sky)}
 
+    /* ── Cripto tabs ── */
+    .cripto-tabs{display:flex;gap:.4rem;margin-bottom:1rem;flex-wrap:wrap}
+    .cripto-tab{background:var(--card2);border:1px solid var(--border);padding:6px 16px;border-radius:8px;font:600 .8rem 'DM Sans',sans-serif;color:var(--muted);cursor:pointer;transition:all .2s}
+    .cripto-tab.active,.cripto-tab:hover{background:var(--sky);border-color:var(--sky);color:#000}
+    .cripto-panel{display:none}
+    .cripto-panel.active{display:block}
+
     /* ── Tool link cards ── */
     .tool-card{display:flex;flex-direction:column;gap:.5rem;padding:1.4rem;background:var(--card);border:1px solid var(--border);border-radius:18px;text-decoration:none;transition:all .25s cubic-bezier(.4,0,.2,1)}
     .tool-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.2);border-color:var(--border2)}
@@ -169,15 +176,6 @@
     .mep-side .mv{font-size:1.1rem;font-weight:700}
     .mep-side .mv.b{color:var(--text2)}.mep-side .mv.s{color:var(--sky)}
 
-    /* ── Diarios ── */
-    .diarios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.8rem}
-    .diario-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1rem;transition:all .2s}
-    .diario-card:hover{border-color:var(--border2)}
-    .diario-name{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:.6rem}
-    .diario-row{display:flex;justify-content:space-between}
-    .diario-side .dl{font-size:.62rem;color:var(--muted2);margin-bottom:2px}
-    .diario-side .dv{font-size:1rem;font-weight:700}
-    .diario-side .dv.b{color:var(--text2)}.diario-side .dv.s{color:var(--sky)}
 
 
     @media(max-width:480px){.hp .val{font-size:2rem}}
@@ -365,11 +363,11 @@
 
 <nav class="subnav">
   <div class="subnav-inner">
-    <a class="subnav-link active" href="#calculadora">Convertidor</a>
+    <a class="subnav-link active" href="#herramientas">Herramientas</a>
+    <a class="subnav-link" href="#calculadora">Convertidor</a>
     <a class="subnav-link" href="#oficial-bancos">Bancos</a>
     <a class="subnav-link" href="#mep-brokers">Brokers</a>
-    <a class="subnav-link" href="#medios">Blue por medio</a>
-    <a class="subnav-link" href="#herramientas">Herramientas</a>
+    <a class="subnav-link" href="#cripto-detail">Cripto</a>
     <a class="subnav-link" href="#faq">FAQ</a>
   </div>
 </nav>
@@ -379,7 +377,7 @@
 
   <!-- ── Dólares grid uniforme ── -->
   <div class="section" id="blue" style="animation-delay:.05s">
-    <div class="sec-header"><h2 class="sec-title">Dólares</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: DolarAPI</span></div>
+    <div class="sec-header"><h2 class="sec-title">Dólares</h2><div class="sec-line"></div></div>
     <div class="dolar-grid" id="dolarGrid">
       <div class="dolar-card" id="card-blue" onclick="document.getElementById('medios').scrollIntoView({behavior:'smooth'})"><div class="dc-name">Blue</div><div class="dc-prices"><span class="dc-buy" id="blueCompra">–</span><span class="dc-sell" id="blueVenta">–</span></div><div class="dc-chg" id="blueChg"></div></div>
       <div class="dolar-card" id="card-mep" onclick="document.getElementById('mep-brokers').scrollIntoView({behavior:'smooth'})"><div class="dc-name">MEP</div><div class="dc-prices"><span class="dc-buy" id="mepC2">–</span><span class="dc-sell" id="mepV">–</span></div><div class="dc-chg" id="mepChg"></div></div>
@@ -395,6 +393,33 @@
   <div class="insight-banner" id="insightBanner" style="display:none">
     <div class="ib-date" id="insightDate"></div>
     <div id="insightText"></div>
+  </div>
+
+  <!-- ── Herramientas (link cards a sub-páginas) ── -->
+  <div class="section" id="herramientas">
+    <div class="sec-header"><h2 class="sec-title">Herramientas</h2><div class="sec-line"></div></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
+      <a href="convertidor.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--sky)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+        <div class="tc-title">Convertidor completo</div>
+        <div class="tc-desc">Convertí pesos a dólares con todos los tipos de cambio.</div>
+      </a>
+      <a href="historico.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="tc-title">Histórico multi-dólar</div>
+        <div class="tc-desc">Gráfico comparativo y consulta por fecha.</div>
+      </a>
+      <a href="mi-sueldo.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg></div>
+        <div class="tc-title">Mi sueldo en dólares</div>
+        <div class="tc-desc">Tu sueldo en Blue, MEP, CCL y Oficial.</div>
+      </a>
+      <a href="maquina-del-tiempo.html" class="tool-card glass-card">
+        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="tc-title">Máquina del Tiempo</div>
+        <div class="tc-desc">¿Y si hubieras comprado dólares ese día?</div>
+      </a>
+    </div>
   </div>
 
   <!-- ── Convertidor multi-tipo ── -->
@@ -431,7 +456,7 @@
 
   <!-- ── Dólar Oficial (Bancos) ── -->
   <div class="section" id="oficial-bancos" style="animation-delay:.12s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Oficial por banco</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ComparaDolar</span></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar Oficial por banco</h2><div class="sec-line"></div></div>
     <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Cotización del dólar oficial en los principales bancos argentinos.</p>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
       <div class="exch-loading" id="comp-banks-loading">Cargando precios de bancos...</div>
@@ -441,7 +466,7 @@
 
   <!-- ── Dólar MEP (Brokers) ── -->
   <div class="section" id="mep-brokers" style="animation-delay:.13s">
-    <div class="sec-header"><h2 class="sec-title">Dólar MEP por broker</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: ComparaDolar</span></div>
+    <div class="sec-header"><h2 class="sec-title">Dólar MEP por broker</h2><div class="sec-line"></div></div>
     <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;line-height:1.5">Cotización del dólar MEP en brokers y fintechs argentinas.</p>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
       <div class="exch-loading" id="comp-brokers-loading">Cargando precios de brokers...</div>
@@ -449,40 +474,34 @@
     </div>
   </div>
 
-  <!-- ── Blue según cada medio ── -->
-  <div class="section" id="medios" style="animation-delay:.14s">
-    <div class="sec-header"><h2 class="sec-title">Dólar Blue según cada medio</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuente: Bluelytics</span></div>
-    <div id="blueMediaGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.6rem">
-      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div class="skel" style="height:1rem;width:80%"></div></div>
-      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div class="skel" style="height:1rem;width:80%"></div></div>
-      <div class="diario-card"><div class="skel" style="height:.6rem;width:60%;margin-bottom:.6rem"></div><div class="skel" style="height:1rem;width:80%"></div></div>
+  <!-- ── CRIPTO POR EXCHANGE ── -->
+  <div class="section" id="cripto-detail" style="animation-delay:.15s">
+    <div class="sec-header"><h2 class="sec-title">Dólar Cripto por exchange</h2><div class="sec-line"></div></div>
+    <p style="font-size:.83rem;color:var(--muted);margin-bottom:1.2rem;line-height:1.6">
+      Precios de <strong>USDT</strong>, <strong>USDC</strong> y <strong>BTC</strong> en pesos argentinos en cada exchange local.
+    </p>
+    <div class="cripto-tabs">
+      <button class="cripto-tab active" onclick="switchCriptoTab('usdt',this)">USDT</button>
+      <button class="cripto-tab" onclick="switchCriptoTab('usdc',this)">USDC</button>
+      <button class="cripto-tab" onclick="switchCriptoTab('btc',this)">BTC</button>
     </div>
-  </div>
-
-  <!-- ── Herramientas (link cards a sub-páginas) ── -->
-  <div class="section" id="herramientas">
-    <div class="sec-header"><h2 class="sec-title">Herramientas</h2><div class="sec-line"></div></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem">
-      <a href="convertidor.html" class="tool-card glass-card">
-        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--sky)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="tc-title">Convertidor completo</div>
-        <div class="tc-desc">Convertí pesos a dólares con todos los tipos de cambio. Calculadora detallada con cards de cotización.</div>
-      </a>
-      <a href="historico.html" class="tool-card glass-card">
-        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--green)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
-        <div class="tc-title">Histórico multi-dólar</div>
-        <div class="tc-desc">Gráfico comparativo Blue vs MEP vs CCL vs Oficial. Consultá cualquier fecha pasada.</div>
-      </a>
-      <a href="mi-sueldo.html" class="tool-card glass-card">
-        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--purple)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3v4M8 3v4M2 11h20"/></svg></div>
-        <div class="tc-title">Mi sueldo en dólares</div>
-        <div class="tc-desc">Calculá cuánto vale tu sueldo en cada tipo de dólar. Guardá y seguí la evolución mes a mes.</div>
-      </a>
-      <a href="maquina-del-tiempo.html" class="tool-card glass-card">
-        <div class="tc-icon"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
-        <div class="tc-title">Máquina del Tiempo</div>
-        <div class="tc-desc">¿Y si hubieras comprado dólares ese día? Simulá con cualquier fecha y monto.</div>
-      </a>
+    <div class="cripto-panel active" id="panel-usdt">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="usdt-loading">Cargando precios...</div>
+        <table class="exch-table" id="usdt-table" style="display:none"></table>
+      </div>
+    </div>
+    <div class="cripto-panel" id="panel-usdc">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="usdc-loading">Cargando precios...</div>
+        <table class="exch-table" id="usdc-table" style="display:none"></table>
+      </div>
+    </div>
+    <div class="cripto-panel" id="panel-btc">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden">
+        <div class="exch-loading" id="btc-loading">Cargando precios...</div>
+        <table class="exch-table" id="btc-table" style="display:none"></table>
+      </div>
     </div>
   </div>
 
@@ -706,6 +725,28 @@ function sortTable(tableId, colIdx, type) {
 }
 
 
+/* ── Exchange names & URLs (CriptoYa) ── */
+const EXCH_NAMES={letsbit:'Letsbit',buenbit:'Buenbit',lemoncash:'Lemon Cash',lemoncashp2p:'Lemon P2P',ripio:'Ripio',ripioexchange:'Ripio Exchange',satoshitango:'Satoshi Tango',bitso:'Bitso',bybit:'Bybit',bybitp2p:'Bybit P2P',fiwind:'Fiwind',argenbtc:'ArgenBTC',tiendacrypto:'Tienda Crypto',binancep2p:'Binance P2P',binance:'Binance',decrypto:'Decrypto',belo:'Belo',kriptonmarket:'Krypton',qubit:'Qubit',cambioar:'CambioAr',cryptomkt:'CryptoMKT',pluscrypto:'PlusCrypto',okexp2p:'OKX P2P',vitawallet:'Vitawallet',kucoinp2p:'KuCoin P2P',saldo:'Saldo',astropay:'Astropay',bitgetp2p:'Bitget P2P',bingxp2p:'BingX P2P',bitsoalpha:'Bitso Alpha',cocoscrypto:'Cocos Crypto',coinexp2p:'CoinEx P2P',wallbit:'Wallbit',mexcp2p:'MEXC P2P',weexp2p:'WEEX P2P',mexc:'MEXC',peanut:'Peanut',universalcoins:'Universal Coins'};
+const EXCH_URLS={letsbit:'https://letsbit.io',buenbit:'https://buenbit.com',lemoncash:'https://lemon.me',ripio:'https://ripio.com',satoshitango:'https://satoshitango.com',bitso:'https://bitso.com',bitsoalpha:'https://bitso.com',bybit:'https://bybit.com',bybitp2p:'https://bybit.com',fiwind:'https://fiwind.io',argenbtc:'https://argenbtc.com',tiendacrypto:'https://tiendacrypto.com',binancep2p:'https://p2p.binance.com',binance:'https://binance.com',decrypto:'https://decrypto.la',belo:'https://belo.app',kriptonmarket:'https://kriptonmarket.com',cryptomkt:'https://cryptomkt.com',okexp2p:'https://okx.com',vitawallet:'https://vitawallet.io',kucoinp2p:'https://kucoin.com',astropay:'https://astropay.com',bitgetp2p:'https://bitget.com',bingxp2p:'https://bingx.com',cocoscrypto:'https://cocos.capital',wallbit:'https://wallbit.io',mexcp2p:'https://mexc.com',weexp2p:'https://weex.com',mexc:'https://mexc.com',peanut:'https://peanut.trade',pluscrypto:'https://pluscrypto.com.ar',eldoradop2p:'https://eldorado.io',coinexp2p:'https://coinex.com',universalcoins:'https://universalcoins.com'};
+function exchName(k){return EXCH_NAMES[k]||escHTML(k.charAt(0).toUpperCase()+k.slice(1));}
+function exchLink(k,name){const url=EXCH_URLS[k];return url?`<a class="exch-link" href="${url}" target="_blank" rel="noopener">${name}<span class="ext">↗</span></a>`:`<span class="exch-name">${name}</span>`;}
+
+function renderExchTable(tableId,loadingId,data){
+  const tbl=q(tableId);const ldr=q(loadingId);
+  if(!data){if(ldr)ldr.style.display='none';return;}
+  const rows=Object.entries(data).filter(([k,v])=>v&&typeof v.ask==='number'&&v.ask>0).map(([k,v])=>({key:k,name:exchName(k),buy:v.bid||null,sell:v.ask,time:v.time})).sort((a,b)=>a.sell-b.sell);
+  if(!rows.length){if(ldr)ldr.style.display='none';return;}
+  tbl.innerHTML=`<thead><tr><th onclick="sortTable('${tableId}',0,'alpha')">Exchange <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',1,'num')">Compra <span class="sort-arrow">▼</span></th><th onclick="sortTable('${tableId}',2,'num')">Venta <span class="sort-arrow active">▲</span></th><th onclick="sortTable('${tableId}',3,'num')">Spread <span class="sort-arrow">▼</span></th><th>Actualizado</th></tr></thead><tbody>${rows.map((r,i)=>{const spread=r.buy?((r.sell-r.buy)/r.buy*100).toFixed(1)+'%':'–';const badge=i===0?'<span class="best-badge">mejor venta</span>':i===rows.length-1?'<span class="worst-badge">más caro</span>':'';return`<tr><td>${exchLink(r.key,r.name)}${badge}</td><td class="exch-buy">${r.buy?fmtARS(r.buy):'–'}</td><td class="exch-sell">${fmtARS(r.sell)}</td><td class="exch-spread">${spread}</td><td class="exch-time">${ago(r.time)}</td></tr>`;}).join('')}</tbody>`;
+  if(ldr)ldr.style.display='none';tbl.style.display='table';
+}
+
+function switchCriptoTab(coin,btn){
+  document.querySelectorAll('.cripto-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.cripto-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const panel=q('panel-'+coin);if(panel)panel.classList.add('active');
+}
+
 /* ── Comparadolar tabs ── */
 function switchCompTab(type, btn) {
   document.querySelectorAll('.comp-tab').forEach(b=>b.classList.remove('active'));
@@ -853,28 +894,6 @@ function renderDollars(data){
 
 }
 
-async function loadBlueBySource(base){
-  const sources=[];
-  if(base) sources.push({nombre:'DolarAPI',compra:base.compra,venta:base.venta});
-  // Ámbito
-  try{const a=await fetchJSON('https://mercados.ambito.com/dolar/informal/variacion');if(a?.venta)sources.push({nombre:'Ámbito',compra:parseFloat((a.compra||'').toString().replace(',','.')),venta:parseFloat(a.venta.toString().replace(',','.'))});}catch{}
-  // Bluelytics (agrega promedio de múltiples fuentes)
-  try{const b=await fetchJSON('https://api.bluelytics.com.ar/v2/latest');if(b?.blue?.value_sell)sources.push({nombre:'Bluelytics',compra:b.blue.value_buy,venta:b.blue.value_sell});}catch{}
-  // DolarHoy
-  try{const d=await fetchJSON('https://api.bluelytics.com.ar/v2/evolution.json?days=1');if(Array.isArray(d)&&d.length){const last=d[d.length-1];if(last?.value_sell)sources.push({nombre:'DolarHoy',compra:last.value_buy,venta:last.value_sell});}}catch{}
-  // Infobae (via dolarapi casas)
-  try{const c=await fetchJSON('https://dolarapi.com/v1/ambito/dolares/informal');if(c?.venta)sources.push({nombre:'Infobae/CriptoYa',compra:c.compra,venta:c.venta});}catch{}
-  // CronistA
-  try{const cr=await fetchJSON('https://mercados.ambito.com/dolar/informal/cierre');if(cr?.venta)sources.push({nombre:'Cronista',compra:parseFloat((cr.compra||'').toString().replace(',','.')),venta:parseFloat(cr.venta.toString().replace(',','.'))});}catch{}
-
-  const grid=q('blueMediaGrid');
-  if(!grid) return;
-  if(!sources.length){grid.innerHTML='<div style="color:var(--muted);font-size:.85rem;padding:1rem">No se pudieron cargar las fuentes</div>';return;}
-  // Dedup por nombre
-  const seen=new Set();
-  const unique=sources.filter(s=>{if(!s.venta||seen.has(s.nombre))return false;seen.add(s.nombre);return true;});
-  grid.innerHTML=unique.map(s=>`<div class="diario-card"><div class="diario-name">${s.nombre}</div><div class="diario-row"><div class="diario-side"><div class="dl">Compra</div><div class="dv b">${s.compra?fmtARS(s.compra):'–'}</div></div><div class="diario-side" style="text-align:right"><div class="dl">Venta</div><div class="dv s">${fmtARS(s.venta)}</div></div></div></div>`).join('');
-}
 
 /* ── Historical data for daily % changes ── */
 let allHistory = {blue:[], bolsa:[], contadoconliqui:[], oficial:[], cripto:[], mayorista:[]};
@@ -918,10 +937,13 @@ async function refreshAll(){
       // Re-render daily changes with live prices (if historical already loaded)
       if(allHistory.blue&&allHistory.blue.length)renderAllDailyChanges();
       const blue=data.find(d=>d.casa==='blue');
-      if(blue)loadBlueBySource(blue).catch(()=>{});
       const tick=data.map(d=>`<span class="t-item"><span class="t-name">USD ${NAMES[d.casa]||d.nombre}</span><span class="t-price neu">${fmtARS(d.venta)}</span></span>`).join('');
       if(q('tickerTrack')) q('tickerTrack').innerHTML=tick+tick;
     }).catch(()=>{}),
+    // Cripto por exchange
+    fetchJSON('https://criptoya.com/api/usdt/ars/0.1').then(d=>{if(d)renderExchTable('usdt-table','usdt-loading',d);}).catch(()=>{}),
+    fetchJSON('https://criptoya.com/api/usdc/ars/0.1').then(d=>{if(d)renderExchTable('usdc-table','usdc-loading',d);}).catch(()=>{}),
+    fetchJSON('https://criptoya.com/api/btc/ars/0.1').then(d=>{if(d)renderExchTable('btc-table','btc-loading',d);}).catch(()=>{}),
     // Comparadolar: bancos y brokers
     fetchJSON('https://api.comparadolar.ar/usd').then(data=>{
       if(!Array.isArray(data))return;
@@ -939,7 +961,7 @@ async function refreshAll(){
 /* Scroll spy */
 function initScrollSpy(){
   const links=document.querySelectorAll('.subnav-link');
-  const ids=['calculadora','oficial-bancos','mep-brokers','medios','herramientas','faq'];
+  const ids=['herramientas','calculadora','oficial-bancos','mep-brokers','cripto-detail','faq'];
   const sections=ids.map(id=>document.getElementById(id)).filter(Boolean);
   const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.remove('active'));const a=document.querySelector(`.subnav-link[href="#${e.target.id}"]`);if(a)a.classList.add('active');}});},{rootMargin:'-40% 0px -55% 0px'});
   sections.forEach(s=>obs.observe(s));
