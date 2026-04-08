@@ -52,26 +52,10 @@
     @media(max-width:1100px){.macro-grid{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:700px){.macro-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:480px){.macro-grid{grid-template-columns:1fr}}
-    .macro-card{border-radius:22px;padding:1.8rem;position:relative;overflow:hidden;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.1)}
-    .macro-card::before{content:'';position:absolute;bottom:-30px;right:-30px;width:120px;height:120px;border-radius:50%;pointer-events:none}
-    .macro-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.4)}
-    .macro-card.brecha{background:linear-gradient(135deg,#1a1a3e 0%,#0e0e25 100%);border:1px solid rgba(167,139,250,.25)}
-    .macro-card.brecha::before{background:radial-gradient(circle,rgba(167,139,250,.12),transparent 70%)}
-    .macro-card.riesgo{background:linear-gradient(135deg,#1f1206 0%,#0f0903 100%);border:1px solid rgba(249,115,22,.25)}
-    .macro-card.riesgo::before{background:radial-gradient(circle,rgba(249,115,22,.12),transparent 70%)}
-    .macro-card.inflacion{background:linear-gradient(135deg,#0f2a1a 0%,#061510 100%);border:1px solid rgba(34,197,94,.2)}
-    .macro-card.inflacion::before{background:radial-gradient(circle,rgba(34,197,94,.1),transparent 70%)}
-    .macro-card.anual{background:linear-gradient(135deg,#1a0e2a 0%,#0d0715 100%);border:1px solid rgba(56,189,248,.2)}
-    .macro-card.anual::before{background:radial-gradient(circle,rgba(56,189,248,.1),transparent 70%)}
-    .macro-card.reservas{background:linear-gradient(135deg,#0a1f2e 0%,#061018 100%);border:1px solid rgba(250,204,21,.2)}
-    .macro-card.reservas::before{background:radial-gradient(circle,rgba(250,204,21,.1),transparent 70%)}
-    .macro-card.reservas .macro-value{color:var(--amber,#fbbf24)}
+    .macro-card{border-radius:22px;padding:1.8rem;position:relative;overflow:hidden;transition:all .25s;box-shadow:0 2px 10px rgba(0,0,0,.1);background:var(--card);border:1px solid var(--border)}
+    .macro-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,.25);border-color:var(--border2)}
     .macro-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.6rem}
-    .macro-value{font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:.4rem}
-    .macro-card.brecha .macro-value{color:var(--purple)}
-    .macro-card.riesgo .macro-value{color:var(--orange)}
-    .macro-card.inflacion .macro-value{color:var(--green)}
-    .macro-card.anual .macro-value{color:var(--sky)}
+    .macro-value{font-size:2.8rem;font-weight:700;line-height:1;margin-bottom:.4rem;color:var(--text)}
     .macro-sub{font-size:.75rem;color:var(--muted);line-height:1.4}
     .macro-trend{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;margin-top:.5rem;padding:3px 8px;border-radius:20px}
     .macro-trend.up{background:rgba(34,197,94,.12);color:var(--green)}
@@ -108,7 +92,7 @@
     .riesgo-history{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.6rem;margin-top:.8rem}
     .rh-item{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:.7rem .9rem;text-align:center}
     .rh-label{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem}
-    .rh-val{font-size:1.05rem;font-weight:700;color:var(--orange)}
+    .rh-val{font-size:1.05rem;font-weight:700;color:var(--text)}
     @media(max-width:500px){.riesgo-history{grid-template-columns:1fr 1fr}}
 
     /* ── Blue history mini stat ── */
@@ -240,28 +224,28 @@
   <div class="section" style="animation-delay:.05s">
     <div class="sec-header"><h2 class="sec-title">Indicadores clave</h2><div class="sec-line"></div><span style="font-size:.68rem;color:var(--muted2);margin-left:auto">Fuentes: DolarAPI, ArgentinaDatos (INDEC), BCRA</span></div>
     <div class="macro-grid">
-      <div class="macro-card brecha">
+      <div class="macro-card">
         <div class="macro-label">Brecha cambiaria</div>
         <div class="macro-value" id="brechaVal">—</div>
         <div class="macro-sub" id="brechaSub">Blue vs Oficial</div>
       </div>
-      <div class="macro-card riesgo">
+      <div class="macro-card">
         <div class="macro-label">Riesgo País</div>
         <div class="macro-value" id="riesgoVal">—</div>
         <div class="macro-sub" id="riesgoSub">puntos básicos (EMBI+)</div>
         <div id="riesgoTrend" style="margin-top:.5rem"></div>
       </div>
-      <div class="macro-card inflacion">
+      <div class="macro-card">
         <div class="macro-label">Inflación mensual</div>
         <div class="macro-value" id="inflaVal">—</div>
         <div class="macro-sub" id="inflaSub">último dato INDEC</div>
       </div>
-      <div class="macro-card anual">
+      <div class="macro-card">
         <div class="macro-label">Inflación anual</div>
         <div class="macro-value" id="inflaAnual">—</div>
         <div class="macro-sub" id="inflaAnualSub">variación interanual</div>
       </div>
-      <div class="macro-card reservas" title="Reservas internacionales del Banco Central (BCRA) en millones de dólares" style="cursor:help">
+      <div class="macro-card" title="Reservas internacionales del Banco Central (BCRA) en millones de dólares" style="cursor:help">
         <div class="macro-label">Reservas BCRA</div>
         <div class="macro-value" id="reservasVal">—</div>
         <div class="macro-sub" id="reservasSub">millones de dólares</div>
@@ -463,6 +447,32 @@
     </div>
   </div>
 
+  <!-- Editorial: contexto macro -->
+  <div class="section" id="contexto-macro">
+    <div class="sec-header"><h2 class="sec-title">Cómo leer la economía argentina</h2><div class="sec-line"></div></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem 2rem;font-size:.92rem;color:var(--text2);line-height:1.75">
+      <p style="margin:0 0 1rem">La economía argentina tiene un vocabulario propio que cualquier ciudadano necesita entender para tomar decisiones financieras informadas. Inflación, riesgo país, reservas, brecha cambiaria, base monetaria: son palabras que aparecen todos los días en los titulares y que terminan afectando el bolsillo de cada persona, ya sea por el precio del supermercado, la cotización del dólar, la tasa del plazo fijo o la posibilidad de tomar un crédito hipotecario. Esta sección recorre los indicadores más importantes y explica qué significan, cómo se calculan y por qué importan.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Inflación: el indicador que define todo lo demás</h3>
+      <p style="margin:0 0 1rem">La inflación mide cuánto suben en promedio los precios de los bienes y servicios que consumen los hogares. En Argentina la calcula el INDEC a través del IPC (Índice de Precios al Consumidor), publicado mensualmente. Se mide tomando una canasta representativa de cientos de productos, relevando precios en supermercados, comercios y servicios de todo el país. Una inflación mensual del 4% significa que, en promedio, el costo de vida subió un 4% respecto al mes anterior. Cuando se acumulan varios meses de inflación alta, el resultado es una pérdida significativa del poder adquisitivo del salario, lo que explica por qué los argentinos buscan constantemente formas de proteger su dinero.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Riesgo país: el termómetro de la confianza</h3>
+      <p style="margin:0 0 1rem">El riesgo país es elaborado por J.P. Morgan a través del índice EMBI+ y mide la sobretasa que tiene que pagar la deuda argentina por encima de los bonos del Tesoro de EE.UU., considerados los más seguros del mundo. Se expresa en puntos básicos: 100 puntos básicos equivalen a 1% adicional de tasa. Si el riesgo país argentino está en 1.500 puntos, significa que el mercado le exige a la Argentina pagar 15% por encima de la tasa estadounidense para financiarse. Cuanto más alto el indicador, más cara es la deuda y menor la posibilidad de que el país pueda salir a tomar crédito internacional. Es uno de los números más mirados por inversores, analistas y funcionarios.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Reservas del BCRA: el colchón de divisas</h3>
+      <p style="margin:0 0 1rem">Las reservas internacionales son las divisas (principalmente dólares, oro y otras monedas duras) que el Banco Central tiene disponibles para intervenir en el mercado cambiario, pagar deuda externa y respaldar la moneda local. Hay distinciones técnicas importantes: las reservas brutas incluyen todo el stock declarado, mientras que las reservas netas restan los depósitos en dólares, los swaps con China y otras obligaciones, dando un número generalmente mucho más bajo. Cuando las reservas netas son negativas, el país está vendiendo dólares que no tiene, lo que suele anticipar episodios de tensión cambiaria.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Brecha cambiaria: la fiebre del cepo</h3>
+      <p style="margin:0 0 1rem">La brecha cambiaria es la diferencia porcentual entre los dólares paralelos (blue, MEP, CCL) y el dólar oficial. En contextos de cepo cambiario estricto, donde el acceso al dólar oficial está restringido, la brecha puede crecer fuerte porque los argentinos buscan dolarizar a través de canales alternativos. Una brecha alta es síntoma de desequilibrios y desconfianza; cuando la brecha se achica o desaparece, suele indicar normalización del mercado cambiario. Históricamente, brechas mayores al 100% han precedido a devaluaciones significativas o ajustes de política económica.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Base monetaria y emisión: el motor inflacionario</h3>
+      <p style="margin:0 0 1rem">La base monetaria es el total de pesos que el Banco Central pone en circulación, ya sea como billetes físicos o como depósitos de los bancos comerciales en el BCRA. Históricamente, en Argentina la emisión monetaria descontrolada para financiar el déficit fiscal ha sido una de las principales causas de la inflación crónica. Cuando hay más pesos persiguiendo la misma cantidad de bienes, los precios suben. Por eso los economistas siguen de cerca la evolución de la base monetaria y los pasivos remunerados del BCRA (como las Leliq y los Pases) que son el otro gran componente del balance del Central.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Cómo se conectan todos los indicadores</h3>
+      <p style="margin:0 0 1rem">Los indicadores no funcionan de forma aislada: se influencian mutuamente y cuentan, en conjunto, una historia coherente sobre el estado de la economía. Una inflación alta erosiona el valor del peso y empuja a los ahorristas hacia el dólar, lo que agranda la brecha y presiona las reservas. Reservas bajas debilitan al BCRA y hacen subir el riesgo país. Riesgo país alto encarece el crédito y reduce la inversión, lo que afecta el crecimiento y, eventualmente, vuelve a impactar en los precios. Entender este círculo es clave para no caer en lecturas simplistas y para anticipar movimientos del mercado antes de que aparezcan en los titulares.</p>
+    </div>
+  </div>
+
   <div class="section" id="faq">
     <div class="sec-header"><h2 class="sec-title">Preguntas frecuentes</h2><div class="sec-line"></div></div>
     <div class="faq-list">
@@ -477,6 +487,18 @@
       <details class="faq-item">
         <summary class="faq-q">¿Qué es la brecha cambiaria y por qué importa?</summary>
         <div class="faq-a">La brecha cambiaria es la diferencia porcentual entre el dólar blue (o paralelo) y el dólar oficial. Históricamente, una brecha alta refleja restricciones cambiarias (cepo) y desconfianza en la política económica. Cuando la brecha se reduce, suele indicar mayor estabilidad y confianza en el peso.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Qué diferencia hay entre reservas brutas y reservas netas?</summary>
+        <div class="faq-a">Las reservas brutas son el total de divisas que figuran en el balance del BCRA, incluyendo dólares, oro, swaps con otros países y depósitos en dólares de bancos comerciales. Las reservas netas restan todos los pasivos en moneda extranjera, dando un número que refleja con más precisión cuántos dólares tiene realmente disponibles el Central para usar libremente. Las netas suelen ser muy inferiores a las brutas y son las que importan en momentos de tensión cambiaria.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Por qué importa la inflación núcleo además de la general?</summary>
+        <div class="faq-a">La inflación núcleo excluye los precios más volátiles (como alimentos estacionales y combustibles) y los regulados (como tarifas de servicios públicos y transporte). Refleja la tendencia "estructural" de los precios y ayuda a entender qué parte de la inflación es transitoria y qué parte es persistente. Cuando la núcleo se acelera, suele ser señal de que el proceso inflacionario está más arraigado.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q">¿Qué pasa cuando el riesgo país baja fuerte?</summary>
+        <div class="faq-a">Una caída sostenida del riesgo país suele reflejar mayor confianza del mercado en la capacidad de pago del país. Esto abarata el costo del financiamiento, sube el precio de los bonos soberanos, fortalece a los ADRs argentinos y, en general, mejora el clima económico. Es uno de los principales termómetros del éxito de un programa económico cuando el país está intentando recuperar acceso al crédito internacional.</div>
       </details>
     </div>
   </div>

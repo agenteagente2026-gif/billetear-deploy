@@ -42,6 +42,30 @@
   <style>
     .ad-slot{margin:2rem auto;max-width:728px}
 
+    /* ── Animated background ── */
+    @keyframes bgShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    body::before{content:'';position:fixed;inset:0;background:linear-gradient(135deg,rgba(56,189,248,.03) 0%,transparent 40%,rgba(139,92,246,.03) 70%,transparent 100%);background-size:400% 400%;animation:bgShift 15s ease infinite;pointer-events:none;z-index:0}
+    body>*{position:relative;z-index:1}
+
+    /* ── Hero ── */
+    .hero-section{text-align:center;padding:2.5rem 1rem 1.5rem;max-width:650px;margin:0 auto;position:relative}
+    .hero-section::before{content:'';position:absolute;top:50%;left:50%;width:500px;height:500px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(56,189,248,.1) 0%,transparent 70%);pointer-events:none;animation:heroPulse 4s ease-in-out infinite}
+    @keyframes heroPulse{0%,100%{opacity:.4;transform:translate(-50%,-50%) scale(.85)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}}
+    .hero-title{font-family:'DM Serif Display',serif;font-size:1.8rem;color:var(--text);margin-bottom:.5rem;line-height:1.3;background:linear-gradient(135deg,var(--text) 30%,var(--sky) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:.82rem;color:var(--muted);line-height:1.5}
+
+    /* ── Animated shine on cards ── */
+    @keyframes cardShine{0%{left:-100%}100%{left:200%}}
+    .dolar-card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(56,189,248,.05),transparent);transform:skewX(-15deg);pointer-events:none}
+    .dolar-card:hover::before{animation:cardShine .7s ease}
+
+    /* ── Glow pulse on Blue card ── */
+    @keyframes bluePulse{0%,100%{box-shadow:0 2px 8px rgba(0,0,0,.1),0 0 15px rgba(56,189,248,.06)}50%{box-shadow:0 4px 16px rgba(0,0,0,.15),0 0 30px rgba(56,189,248,.15)}}
+
+    /* ── Stats bar glow ── */
+    .sb-val[data-flash]{animation:valFlash .6s ease}
+    @keyframes valFlash{0%{color:var(--sky);text-shadow:0 0 8px rgba(56,189,248,.5)}100%{color:var(--text);text-shadow:none}}
+
     /* ── Light mode overrides (index palette differs from shared) ── */
     body.light{--bg:#f5f6fa;--bg2:#eef1f6;--card:#ffffff;--card2:#f8f9fc;--border:#d0d7e2;--border2:#bcc5d4;--text:#0f172a;--text2:#334155;--muted:#475569;--muted2:#64748b}
     body.light header{background:rgba(245,246,250,.98);border-bottom-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.06)}
@@ -73,8 +97,9 @@
     .dolar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
     @media(max-width:900px){.dolar-grid{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:500px){.dolar-grid{grid-template-columns:1fr}}
-    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.3rem 1.4rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
-    .dolar-card:hover{border-color:var(--border2);transform:translateY(-3px) scale(1.01);box-shadow:0 12px 36px rgba(0,0,0,.3)}
+    .dolar-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:1.3rem 1.4rem;text-decoration:none;color:inherit;transition:all .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:.6rem;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+    .dolar-card:hover{border-color:rgba(56,189,248,.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.3),0 0 0 1px rgba(56,189,248,.1)}
+    .dolar-card:first-child{border-color:rgba(56,189,248,.25);background:linear-gradient(135deg,var(--card) 50%,rgba(56,189,248,.06) 100%);animation:bluePulse 3s ease-in-out infinite}
     .dc-top{display:flex;align-items:center;justify-content:space-between}
     .dc-name{font-size:1rem;font-weight:700;color:var(--text)}
     .dc-var{font-size:.82rem;font-weight:700;padding:2px 8px;border-radius:6px}
@@ -85,20 +110,23 @@
     .dc-col{display:flex;flex-direction:column;gap:2px}
     .dc-label{font-size:.62rem;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
     .dc-price{font-size:1rem;font-weight:700;color:var(--text2);font-variant-numeric:tabular-nums}
-    .dc-sell{font-size:1.6rem;font-weight:800;color:#fff!important;font-variant-numeric:tabular-nums}
+    .dc-sell{font-size:1.7rem;font-weight:800;color:#fff!important;font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(56,189,248,.15)}
     .dc-skel{height:1.6rem;width:80px;border-radius:6px;background:linear-gradient(90deg,var(--card2) 25%,var(--border2) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
 
     /* ── Section link cards ── */
-    .sec-links-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem}
-    @media(max-width:800px){.sec-links-grid{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:450px){.sec-links-grid{grid-template-columns:1fr}}
-    .sec-link-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.3rem 1.4rem;text-decoration:none;color:inherit;transition:all .25s;display:flex;flex-direction:column;gap:.5rem;position:relative;overflow:hidden}
-    .sec-link-card::after{content:'\2192';position:absolute;bottom:1rem;right:1.2rem;font-size:.85rem;color:var(--muted);transition:all .2s}
-    .sec-link-card:hover{border-color:rgba(56,189,248,.3);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
-    .sec-link-card:hover::after{color:var(--sky);transform:translateX(3px)}
-    .slc-icon{font-size:1.8rem;line-height:1;filter:drop-shadow(0 0 8px rgba(56,189,248,.3))}
-    .slc-title{font-size:1.05rem;font-weight:700;color:var(--text)}
-    .slc-desc{font-size:.77rem;color:var(--muted);line-height:1.5}
+    .sec-links-grid{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center}
+    .sec-link-card{flex:0 0 calc(33.333% - .6rem)}
+    @media(max-width:800px){.sec-link-card{flex:0 0 calc(50% - .45rem)}}
+    @media(max-width:450px){.sec-link-card{flex:0 0 100%}}
+    .sec-link-card{background:linear-gradient(135deg,var(--card) 40%,rgba(56,189,248,.04) 100%);border:1px solid var(--border);border-radius:18px;padding:1.5rem 1.6rem 2.2rem;text-decoration:none;color:inherit;transition:all .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;gap:.4rem;position:relative;overflow:hidden}
+    .sec-link-card::before{content:'';position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(56,189,248,.06),transparent);transform:skewX(-15deg);pointer-events:none}
+    .sec-link-card:hover::before{animation:cardShine .8s ease}
+    .sec-link-card::after{content:'\2192';position:absolute;bottom:1rem;right:1.3rem;font-size:1rem;color:var(--muted2);transition:all .3s;transform:translateX(0)}
+    .sec-link-card:hover{border-color:rgba(56,189,248,.4);transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.35),0 0 20px rgba(56,189,248,.08);background:linear-gradient(135deg,var(--card) 20%,rgba(56,189,248,.1) 100%)}
+    .sec-link-card:hover::after{color:var(--sky);transform:translateX(4px)}
+    .sec-link-card:hover .slc-title{color:var(--sky)}
+    .slc-title{font-family:'DM Serif Display',serif;font-size:1.2rem;font-weight:400;color:var(--text);transition:color .3s;letter-spacing:-.01em}
+    .slc-desc{font-size:.78rem;color:var(--muted);line-height:1.55;margin-bottom:.2rem}
 
     /* ── News ── */
     .news-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:.85rem}
@@ -149,8 +177,7 @@
     <div class="sb-item" title="Dólar Bolsa — se obtiene comprando y vendiendo bonos en pesos y dólares" style="cursor:help"><span class="sb-label">MEP</span>&nbsp;<span class="sb-val" id="sb-mep">&ndash;</span></div>
     <div class="sb-item" title="Contado con Liquidación — similar al MEP pero se liquida en cuenta en el exterior" style="cursor:help"><span class="sb-label">CCL</span>&nbsp;<span class="sb-val" id="sb-ccl">&ndash;</span></div>
     <div class="sb-item"><span class="sb-label">Oficial</span>&nbsp;<span class="sb-val" id="sb-oficial">&ndash;</span></div>
-    <div class="sb-item" title="Diferencia porcentual entre el dólar blue y el oficial" style="cursor:help"><span class="sb-label">Brecha</span>&nbsp;<span class="sb-val" id="sb-brecha" style="color:var(--orange)">&ndash;</span></div>
-    <div class="sb-item" title="Índice EMBI+ de JP Morgan — mide el riesgo de default de Argentina" style="cursor:help"><span class="sb-label">Riesgo Pais</span>&nbsp;<span class="sb-val" id="sb-riesgo" style="color:var(--orange)">&ndash;</span></div>
+    <div class="sb-item" title="Índice EMBI+ de JP Morgan — mide el riesgo de default de Argentina" style="cursor:help"><span class="sb-label">Riesgo País</span>&nbsp;<span class="sb-val" id="sb-riesgo" style="color:var(--orange)">&ndash;</span></div>
     <div class="sb-item"><span class="sb-label">BTC</span>&nbsp;<span class="sb-val" id="sb-btc" style="color:var(--muted)">&ndash;</span></div>
   </div>
 </div>
@@ -159,9 +186,9 @@
 
 <h1 class="sr-only">Dólar blue hoy y cotizaciones en tiempo real – Argentina</h1>
 
-<div style="text-align:center;padding:1.2rem 1rem .5rem;max-width:600px;margin:0 auto">
-  <p style="font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--text);margin-bottom:.3rem">Toda la economía argentina, en tiempo real</p>
-  <p style="font-size:.78rem;color:var(--muted)">Dólar, cripto, inversiones, mercados y noticias — actualizado cada minuto</p>
+<div class="hero-section">
+  <p class="hero-title">Toda la economía argentina, en tiempo real</p>
+  <p class="hero-sub">Dólar, cripto, inversiones, mercados y noticias — actualizado cada minuto</p>
 </div>
 
 <!-- Stale data warning -->
@@ -195,27 +222,22 @@
     </div>
     <div class="sec-links-grid">
       <a class="sec-link-card" href="cripto.html">
-        <span class="slc-icon">&#8383;</span>
-        <span class="slc-title">Criptomonedas</span>
-        <span class="slc-desc">Bitcoin, Ethereum, Solana y mas. Precios en USD y ARS en tiempo real.</span>
+        <span class="slc-title">Cripto</span>
+        <span class="slc-desc">Bitcoin, Ethereum, Solana y más. Precios en USD y ARS en tiempo real.</span>
       </a>
       <a class="sec-link-card" href="mercados.html">
-        <span class="slc-icon">&#x1F4C8;</span>
-        <span class="slc-title">Mercados</span>
+        <span class="slc-title">Bolsa</span>
         <span class="slc-desc">Acciones argentinas, CEDEARs, bonos y mercados internacionales.</span>
       </a>
       <a class="sec-link-card" href="rendimientos.html">
-        <span class="slc-icon">&#x1F4B0;</span>
-        <span class="slc-title">Rendimientos</span>
+        <span class="slc-title">Invertir</span>
         <span class="slc-desc">Plazo fijo, billeteras y más. Compará tasas y simulá ganancias.</span>
       </a>
       <a class="sec-link-card" href="indicadores.html">
-        <span class="slc-icon">&#x1F4CA;</span>
-        <span class="slc-title">Indicadores</span>
+        <span class="slc-title">Economía</span>
         <span class="slc-desc">Inflación, riesgo país, tasas, reservas del BCRA y más datos clave.</span>
       </a>
       <a class="sec-link-card" href="noticias.html">
-        <span class="slc-icon">&#x1F4F0;</span>
         <span class="slc-title">Noticias</span>
         <span class="slc-desc">Últimas noticias de economía, finanzas y mercados de Argentina.</span>
       </a>
@@ -245,6 +267,25 @@
       <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
       <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
       <div class="news-card" style="pointer-events:none"><div class="skel" style="height:.6rem;width:50px;margin-bottom:.5rem"></div><div class="skel" style="height:.85rem;width:100%;margin-bottom:.3rem"></div><div class="skel" style="height:.85rem;width:75%;margin-bottom:.5rem"></div><div class="skel" style="height:.65rem;width:40%"></div></div>
+    </div>
+  </div>
+
+  <!-- Editorial: about + value prop -->
+  <div class="section" id="sobre" style="animation-delay:.18s">
+    <div class="sec-header"><h2 class="sec-title">Qué es BilleteAR</h2><div class="sec-line"></div></div>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:1.8rem 2rem;font-size:.92rem;color:var(--text2);line-height:1.75">
+      <p style="margin:0 0 1rem">BilleteAR es un panel de control de la economía argentina pensado para personas comunes. La idea nació de una observación simple: los datos económicos relevantes para los argentinos están dispersos en decenas de sitios distintos. El dólar blue en uno, el riesgo país en otro, las cotizaciones de cripto en un tercero, las tasas de plazo fijo en un cuarto, las acciones del Merval en un quinto. Para tomar una decisión informada (¿conviene hacer un plazo fijo o comprar dólares? ¿el blue está caro o barato comparado con su historia?) había que abrir cinco pestañas y hacer cálculos a mano.</p>
+
+      <p style="margin:0 0 1rem">Este sitio reúne todo eso en un solo lugar, con datos en tiempo real obtenidos de fuentes oficiales y APIs públicas confiables: DolarAPI y Bluelytics para las cotizaciones del dólar, ArgentinaDatos para inflación y riesgo país (basado en datos del INDEC y BCRA), CriptoYa para precios de cripto en pesos, CoinGecko para Bitcoin global, CAFCI para los Fondos Comunes de Inversión, y feeds RSS de los principales medios económicos para las noticias. Todo se actualiza automáticamente, sin intervención humana, y se presenta con el contexto histórico necesario para entender si un valor está alto o bajo respecto de su tendencia.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Qué vas a encontrar acá</h3>
+      <p style="margin:0 0 1rem">Cada sección de BilleteAR responde a una pregunta concreta. <strong>Dólares</strong> muestra todas las cotizaciones del peso (blue, MEP, CCL, oficial, mayorista, tarjeta, cripto) con histórico interactivo y guía completa sobre por qué existen tantos tipos de dólar. <strong>Cripto</strong> compara precios de Bitcoin, USDT, USDC y otras monedas en exchanges argentinos para encontrar la mejor oferta del momento. <strong>Invertir</strong> reúne las tasas vigentes de plazo fijo, billeteras virtuales, cauciones bursátiles y FCI, con un simulador para comparar rendimientos. <strong>Bolsa</strong> trae cotizaciones en vivo de ADRs, CEDEARs, índices globales y el Merval. <strong>Economía</strong> agrupa los indicadores macro clave: inflación, riesgo país, reservas y brecha cambiaria. Y <strong>Noticias</strong> agrega los titulares económicos más recientes de los principales medios.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Para quién es</h3>
+      <p style="margin:0 0 1rem">BilleteAR es para cualquier persona que quiera entender mejor lo que pasa con su plata. No requiere conocimientos previos de finanzas: cada concepto está explicado en lenguaje claro, con guías y preguntas frecuentes en cada sección. Sirve tanto para alguien que recién empieza a interesarse por el dólar y los plazos fijos, como para alguien con experiencia que quiere tener un solo lugar donde ver todo el panorama económico de un vistazo. La promesa es simple: información útil, gratuita, sin promociones encubiertas y con la rigurosidad de fuentes oficiales.</p>
+
+      <h3 style="font-family:'DM Serif Display',Georgia,serif;font-size:1.25rem;color:var(--text);margin:1.5rem 0 .6rem;font-weight:400">Aviso importante</h3>
+      <p style="margin:0">BilleteAR no ofrece asesoramiento financiero ni recomendaciones de inversión. Todo el contenido del sitio es educativo e informativo. Las decisiones sobre tu dinero deberían basarse en tu situación personal, tu tolerancia al riesgo y, cuando sea necesario, en la consulta con un profesional matriculado. Los datos pueden tener demoras técnicas y los precios pueden variar por la propia dinámica del mercado.</p>
     </div>
   </div>
 
@@ -358,10 +399,6 @@ function renderDollarCards(data){
   if(mep)q('sb-mep').textContent=fmtARS(mep.venta);
   if(ccl)q('sb-ccl').textContent=fmtARS(ccl.venta);
   if(oficial)q('sb-oficial').textContent=fmtARS(oficial.venta);
-  if(blue&&oficial&&oficial.venta&&blue.venta){
-    const brecha=((blue.venta-oficial.venta)/oficial.venta*100).toFixed(1);
-    q('sb-brecha').textContent='+'+brecha+'%';
-  }
   q('lastUpdate').textContent='En vivo \u00B7 '+relTime(blue?.fechaActualizacion);
 }
 
@@ -511,6 +548,23 @@ setInterval(function() {
     warn.style.display = age > 10 * 60 * 1000 ? 'block' : 'none';
   }
 }, 60 * 1000);
+
+// Auto-shine: periodically trigger shine animation on random cards
+(function autoShine() {
+  const cards = document.querySelectorAll('.dolar-card, .sec-link-card');
+  if (!cards.length) return;
+  function shine() {
+    const card = cards[Math.floor(Math.random() * cards.length)];
+    const before = card.querySelector(':scope > *') || card;
+    card.style.setProperty('--shine', '1');
+    const pseudo = document.createElement('div');
+    pseudo.style.cssText = 'position:absolute;top:0;left:-100%;width:50%;height:100%;background:linear-gradient(90deg,transparent,rgba(56,189,248,.06),transparent);transform:skewX(-15deg);pointer-events:none;z-index:1';
+    card.appendChild(pseudo);
+    pseudo.animate([{left:'-100%'},{left:'200%'}], {duration:800, easing:'ease'});
+    setTimeout(() => pseudo.remove(), 800);
+  }
+  setInterval(shine, 3000);
+})();
 </script>
 </body>
 </html>
